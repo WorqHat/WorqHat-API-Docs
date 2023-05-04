@@ -4,12 +4,20 @@
   "advanced": "Advanced (A Folder)",
   "about": {
     "title": "About",
-    "type": "page"
+    "type": "page",
+    "href": "https://www.worqhat.com/",
+    "newWindow": true
   },
   "contact": {
-    "title": "Contact ↗",
+    "title": "Contact",
     "type": "page",
-    "href": "https://twitter.com/shuding_",
+    "href": "https://www.worqhat.com/contact-us",
+    "newWindow": true
+  },
+  "blog": {
+    "title": "Blog",
+    "type": "page",
+    "href": "https://www.blog.worqhat.com/",
     "newWindow": true
   }
 }
