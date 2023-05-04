@@ -1,0 +1,32 @@
+import { Callout } from "nextra-theme-docs";
+
+# Rate Limits
+
+## What are rate limits?
+
+In the context of our API, rate limiting is an important mechanism that helps to ensure the stability, reliability, and fair usage of our services. A rate limit is a restriction that we impose on the number of requests that a user or client can make within a specified time period. This is to prevent any single user or client from overwhelming our servers with too many requests, which could cause downtime or other disruptions in service.
+
+By implementing rate limiting, we can ensure that our resources are utilized in a fair and efficient manner, and that all users of our API have a consistent level of access to our services. Our rate limiting algorithms are designed to balance the needs of different users and clients, and to prevent any single user from monopolizing our resources. This helps to ensure that our API remains stable, responsive, and reliable, even under heavy usage or traffic spikes.
+
+To help our users understand and work with our rate limiting mechanisms, we provide detailed documentation on our API rate limits, including the number of requests allowed within a given time period, the error codes that are returned when a user exceeds their rate limit, and tips for optimizing API usage to avoid hitting the rate limit. By working with our rate-limiting mechanisms and following best practices for API usage, our users can ensure a smooth and uninterrupted experience when working with our services.
+
+## Why do we need rate limits?
+
+Rate limits are a common mechanism used by APIs to restrict the number of requests a user or application can make in a given period of time. WorqHat AI, like many other APIs, has rate limits in place for several reasons.
+
+Firstly, rate limits help to protect the API from abuse or misuse. Without rate limits, a malicious user or bot could send an excessive number of requests to the API in a short period of time, potentially causing disruptions in service or overloading the API. By setting rate limits, WorqHat AI can prevent such activities and ensure that the API remains available to all users.
+
+Secondly, rate limits help to ensure that everyone has fair access to the API. Without limits, a single user or application could make an excessive number of requests, monopolizing the API's resources and causing slowdowns or poor performance for others. By throttling the number of requests that a single user can make, WorqHat AI can ensure that all users have an opportunity to use the API without experiencing issues.
+
+Thirdly, rate limits help to manage the overall load on WorqHat AI's infrastructure. If there is a sudden increase in the number of requests to the API, it could tax the servers and cause performance issues. By setting rate limits, WorqHat AI can help maintain a smooth and consistent experience for all users, even during periods of high demand.
+
+## What are the rate limits for our API?
+
+The rate limits for our API are as follows:
+
+- 10 requests per minute
+
+<Callout type="warning" emoji="⚠️">
+  During the BETA period, we will be adjusting rate limits as needed based on BETA usage. We will
+  notify users of any changes to the rate limits.
+</Callout>

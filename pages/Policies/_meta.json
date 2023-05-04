@@ -1,0 +1,27 @@
+{
+  "TermsofServices": {
+    "title": "Terms of Services",
+    "type": "page",
+    "href": "https://www.worqhat.com/terms-of-service",
+    "newWindow": true
+  },
+  "PrivacyPolicy": {
+    "title": "Privacy Policy",
+    "type": "page",
+    "href": "https://www.worqhat.com/privacy-policy",
+    "newWindow": true
+  },
+  "UsagePolicy": {
+    "title": "Usage Policy",
+    "type": "page",
+    "href": "https://docs.worqhat.com/en/articles/7039550-usage-policies",
+    "newWindow": true
+  },
+  "DataUsagePolicy": {
+    "title": "Data Usage Policy",
+    "type": "page",
+    "href": "https://docs.worqhat.com/en/articles/7045427-data-usage-policies",
+    "newWindow": true
+  },
+  "vulnerability": "Bugs Disclosure Policy"
+}

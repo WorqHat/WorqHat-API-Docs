@@ -1,0 +1,58 @@
+import { Callout } from "nextra-theme-docs";
+
+# Getting Started
+
+## Base URL
+
+Right now, the API is only available on the `https://api.worqhat.com` domain. This is the only
+official domain that is applicable for all API Calls to the Application.
+
+The WorqHat API is organized around REST. Our API has predictable resource-oriented URLs, accepts form-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes, authentication, and verbs. The API key you use to authenticate the request determines whether the request you are sending as a user is based on which Organization as all our Billings are rerouted to the Organization you are using the API keys for. The WorqHat API doesn't support bulk updates. You can work on only one object per request. The WorqHat API differs for every account as we release new versions and tailor functionality. These docs are customized to your version of the API.
+
+If you're using a version of the API that is older than the latest version, you may see older endpoints and outdated response schemas. We recommend that you use the latest version of the API whenever possible. We release new versions of the API frequently, so you may need to update your API integration periodically. We also send out email notifications about new versions of the API. You can subscribe to these notifications in your WorqHat account settings.
+
+#### Base URL for all API calls
+````bash copy
+https://api.worqhat.com/
+````
+
+<Callout type="info" emoji="ℹ️">
+  **Not a Developer** Use WorqHat's [no-code Workspace](https://worqhat.com) options to get started
+  with
+  WorqHat and to do more with
+  your WorqHat apps - without a single line of Code
+</Callout>
+
+## Authentication
+
+If you're an Existing Customer but do not have access to the API Tokens screen, please contact
+our Support Assistance. You can visit https://docs.worqhat.com or reach out to us at
+support@worqhat.com and we will set you up with an Account. This is possible as we are slowly
+rolling out the API to our customers so
+you may not have access to the Workspace Admin Panel yet. We are trying to make this process as
+seamless as possible.
+
+In order to use WorqHat's API, you will need to authenticate every request. We rely on
+``x-api-key`` and ``x-org-key`` tokens to authenticate API requests.
+
+````bash showLineNumbers copy filename="get"
+curl
+  --location --request GET 'https://api.worqhat.com/$endpoint' \
+    --header 'x-api-key: $YOUR_API_KEY' \
+    --header 'x-org-key: $YOUR_ORG_KEY' \
+````
+
+Tokens are scoped to an admin's permission settings and your workspace. Only workspace admins
+can enable API Access for the members of the workspace. Once the access has been enabled, you can
+generate API tokens in your workspace.
+
+Security is of utmost importance when working with API keys. Your API keys carry many privileges,
+so it's crucial to keep them secure. As part of our security measures, we require you to
+whitelist your Apps before you can use the API keys. However, once your Apps are whitelisted,
+you can use these API keys anywhere, including in your client-side code. We only serve valid
+requests from the endpoints listed in your App's whitelist. If you don't have any endpoints
+listed, requests to the API will fail.
+
+To ensure that your requests are authenticated and authorized to access our API, you must send both the ``x-api-key`` and ``x-org-key`` with every request that you send. Additionally, you have the option to set a per-request key, which is often useful for Connect applications that use multiple API keys during the lifetime of a process. Methods on the returned object reuse the same API key.
+
+Finally, it's important to note that all API requests must be made over HTTPS. Calls made over plain HTTP will fail, and API requests without authentication will also fail. By following these best practices, you can help keep your API requests secure and prevent unauthorized access to your data.
