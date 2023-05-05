@@ -1,0 +1,420 @@
+import { Tab, Tabs } from "nextra-theme-docs";
+
+# Text and Content Moderation AI
+
+WorqHat has recently launched its new Moderation AI endpoint, which is powered by the
+state-of-the-art AiCon V2 model. This endpoint is designed to assist developers in safeguarding
+their applications against potential misuse by providing highly accurate and speedy content
+moderation. The Moderation AI uses PaLM-based classifiers to identify inappropriate content,
+including sexual, violent, hateful, and self-harm promoting content that violates WorqHat's content policy.
+
+By using AI to help with human supervision of these systems, developers can have greater confidence in their product's content and minimize the risk of products inadvertently displaying inappropriate content. The Moderation AI is highly versatile and can be applied across a broad range of applications, including those that deal with sensitive topics such as education.
+
+## How does it work?
+
+WorqHat's Moderation AI is based on the AiCon V2 model, which uses a deep learning algorithm to analyze text and classify it based on whether it contains content that is sexual, hateful, violent, or promotes self-harm - all of which are prohibited by WorqHat's content policy.
+
+When a text input is submitted to the Moderation API endpoint, the algorithm analyzes the input and assigns it a probability score for each of the four content categories. If the input contains content that is deemed to be inappropriate or harmful, the API returns an error message to the user.
+
+The algorithm was trained on a large dataset of examples of inappropriate content, so it has learned to accurately detect problematic content in a variety of contexts. This enables WorqHat's Moderation AI to be used in a range of sensitive applications, like education and social media, where ensuring the safety and well-being of users is a top priority.
+
+By providing access to this endpoint, WorqHat is helping developers protect their applications against possible misuse and enabling the responsible use of AI in sensitive settings.
+
+## Use Cases
+
+- **Social media platforms**: Social media platforms can use the Moderation AI to automatically
+detect and remove posts containing hate speech, violence, or self-harm, improving the safety and well-being of their users.
+
+- **Education platforms**: Online learning platforms can use the Moderation AI to monitor and remove
+inappropriate or harmful content in educational materials, ensuring a safe and respectful learning environment for students.
+
+- **E-commerce websites**: Online marketplaces can use the Moderation AI to detect and remove product
+listings containing offensive or inappropriate language, images, or reviews, creating a positive and trustworthy shopping experience for customers.
+
+- **Online gaming**: Online gaming platforms can use the Moderation AI to automatically detect and
+ban players who engage in hate speech, harassment, or cheating, creating a fair and enjoyable gaming experience for all players.
+
+- **News media**: News media organizations can use the Moderation AI to automatically filter
+user-generated content for hate speech or violent language before publishing, ensuring that their platforms do not contribute to the spread of harmful content.
+
+## How to use it?
+
+### API Endpoint
+
+````bash filename="API Endpoint" copy
+https://api.worqhat.com/api/ai/moderation
+````
+
+### Headers
+
+
+| Header Name |  Required  | Description |
+|:---------| :------------: | :---------------- |
+| x-api-key| ``true`` | This helps us to identify the User Sending the Request |
+| x-org-key|  ``true`` | This helps us to identify the Workspace Associated with the Request. This helps users to maintain easier logs |
+
+### Request Body
+
+The Request Body is a JSON Object that contains the following fields:
+
+| Data Type | Key | Value | Description |
+|:---------| :------------: | :---------------- | :---------------- |
+| String | text_content | ``The Text to be Moderated`` | The Text to be Moderated |
+
+````json filename="Request Body (Formdata)" copy
+{
+    "text_content":"I want to commit a #####. That guy is a ######. I will ###."
+}
+````
+
+### Sample Code
+
+You can use the following Endpoints on any Codebase, including client side codebases as long as
+you are able to send the Headers and the Request Body to the API Endpoint. It's that easy! Just
+send a POST Request to the API Endpoint with the Headers and the Request Body, and you are good to go!
+
+
+<Tabs items={['cURL', 'Client JS', 'NodeJS', 'Python', 'Ruby', 'PHP', 'Java', 'GO', 'C']}>
+  <Tab>
+    ```` bash filename="cURL" copy
+    curl --location 'https://api.worqhat.com/api/ai/moderation' \
+    --header 'x-api-key: •••••••' \
+    --header 'x-org-key: •••••••' \
+    --data '{
+    "text_content":"I want to ####### a #####. That guy is a ######. I will ###."
+  }'
+    ````
+  </Tab>
+  <Tab>
+    ````js filename="Client JS fetch" copy
+    var myHeaders = new Headers();
+    myHeaders.append("x-api-key", "•••••••");
+    myHeaders.append("x-org-key", "•••••••");
+
+    var raw = JSON.stringify({
+    "text_content":"I want to ####### a #####. That guy is a ######. I will ###."
+  });
+
+    var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow'
+  };
+
+    fetch("https://api.worqhat.com/api/ai/moderation", requestOptions)
+    .then(response => response.text())
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));
+
+    ````
+
+    ````js filename="Client JS XHR" copy
+    // WARNING: For POST requests, body is set to null by browsers.
+    var data = JSON.stringify({
+    "text_content":"I want to ####### a #####. That guy is a ######. I will ###."
+  });
+
+    var xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
+
+    xhr.addEventListener("readystatechange", function() {
+    if(this.readyState === 4) {
+    console.log(this.responseText);
+  }
+  });
+
+    xhr.open("POST", "https://api.worqhat.com/api/ai/moderation");
+    xhr.setRequestHeader("x-api-key", "•••••••");
+    xhr.setRequestHeader("x-org-key", "•••••••");
+
+    xhr.send(data);
+    ````
+  </Tab>
+  <Tab>
+    ````js filename="NodeJS" copy
+    var request = require('request');
+    var options = {
+    'method': 'POST',
+    'url': 'https://api.worqhat.com/api/ai/moderation',
+    'headers': {
+    'x-api-key': '•••••••',
+    'x-org-key': '•••••••'
+  },
+    body: JSON.stringify({
+    "text_content":"I want to ####### a #####. That guy is a ######. I will ###."
+  })
+
+  };
+    request(options, function (error, response) {
+    if (error) throw new Error(error);
+    console.log(response.body);
+  });
+
+    ````
+
+    ````js filename="NodeJS Axios" copy
+    var axios = require('axios');
+    var data = JSON.stringify({
+    "text_content":"I want to ####### a #####. That guy is a ######. I will ###."
+  });
+
+    var config = {
+    method: 'post',
+    url: 'https://api.worqhat.com/api/ai/moderation',
+    headers: {
+    'x-api-key': '•••••••',
+    'x-org-key': '•••••••',
+    'Content-Type': 'application/json'
+  },
+    data : data
+  };
+
+    axios(config)
+    .then(function (response) {
+    console.log(JSON.stringify(response.data));
+  })
+    .catch(function (error) {
+    console.log(error);
+  });
+
+    ````
+  </Tab>
+  <Tab>
+    ````py filename="Python Requests" copy
+    import requests
+    import json
+
+    url = "https://api.worqhat.com/api/ai/moderation"
+
+    payload = json.dumps({
+    "text_content": "I want to ####### a #####. That guy is a ######. I will ###."
+  })
+    headers = {
+    "x-api-key": "•••••••",
+    "x-org-key": "•••••••",
+    "Content-Type": "application/json"
+  }
+
+    response = requests.request("POST", url, headers=headers, data=payload)
+
+    print(response.text)
+    ````
+  </Tab>
+  <Tab>
+    ````ruby filename="Ruby" copy
+
+    require "uri"
+    require "net/http"
+
+    url = URI("https://api.worqhat.com/api/ai/moderation")
+
+    https = Net::HTTP.new(url.host, url.port)
+    https.use_ssl = true
+
+    request = Net::HTTP::Post.new(url)
+    request["x-api-key"] = "•••••••"
+    request["x-org-key"] = "•••••••"
+    request["Content-Type"] = "application/json"
+
+    request.body = "{"text_content":"I want to ####### a #####. That guy is a ######. I will ###."}"
+
+    response = https.request(request)
+    puts response.read_body
+    ````
+  </Tab>
+  <Tab>
+    ````php filename="PHP" copy
+    <?php
+
+    $curl = curl_init();
+
+    $data = array(
+    "text_content" => "I want to ####### a #####. That guy is a ######. I will ###."
+    );
+    $payload = json_encode($data);
+
+    curl_setopt_array($curl, array(
+    CURLOPT_URL => 'https://api.worqhat.com/api/ai/moderation',
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_ENCODING => '',
+    CURLOPT_MAXREDIRS => 10,
+    CURLOPT_TIMEOUT => 0,
+    CURLOPT_FOLLOWLOCATION => true,
+    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    CURLOPT_CUSTOMREQUEST => 'POST',
+    CURLOPT_POSTFIELDS => $payload,
+    CURLOPT_HTTPHEADER => array(
+    'x-api-key: •••••••',
+    'x-org-key: •••••••',
+    'Content-Type: application/json'
+    ),
+    ));
+
+    $response = curl_exec($curl);
+
+    curl_close($curl);
+    echo $response;
+
+    ````
+  </Tab>
+  <Tab>
+    ````java filename="Java" copy
+    import okhttp3.*;
+
+    import java.io.IOException;
+
+    public class Main {
+    public static void main(String[] args) throws IOException {
+    MediaType mediaType = MediaType.parse("application/json");
+    String requestBody = "{\"text_content\":\"I want to ####### a #####. That guy is a ######. I will ###.\"}";
+
+    RequestBody body = RequestBody.create(requestBody, mediaType);
+    Request request = new Request.Builder()
+    .url("https://api.worqhat.com/api/ai/moderation")
+    .post(body)
+    .addHeader("x-api-key", "•••••••")
+    .addHeader("x-org-key", "•••••••")
+    .addHeader("Content-Type", "application/json")
+    .build();
+
+    OkHttpClient client = new OkHttpClient().newBuilder()
+    .build();
+    Response response = client.newCall(request).execute();
+    System.out.println(response.body().string());
+  }
+  }
+
+    ````
+  </Tab>
+  <Tab>
+    ````go filename="GO" copy
+    package main
+
+    import (
+    "bytes"
+    "fmt"
+    "net/http"
+    )
+
+    func main() {
+    url := "https://api.worqhat.com/api/ai/moderation"
+    method := "POST"
+
+    payload := bytes.NewBufferString(`{"text_content":"I want to ####### a #####. That guy is a ######. I will ###."}`)
+
+    client := &http.Client{}
+    req, err := http.NewRequest(method, url, payload)
+
+    if err != nil {
+    fmt.Println(err)
+    return
+  }
+    req.Header.Add("x-api-key", "•••••••")
+    req.Header.Add("x-org-key", "•••••••")
+    req.Header.Add("Content-Type", "application/json")
+
+    res, err := client.Do(req)
+    if err != nil {
+    fmt.Println(err)
+    return
+  }
+    defer res.Body.Close()
+
+    fmt.Println(res.Body)
+  }
+
+    ````
+  </Tab>
+  <Tab>
+    ````c filename="C" copy
+    #include <stdio.h>
+    #include <curl/curl.h>
+
+    int main(void)
+    {
+      CURL * curl;
+      CURLcode res;
+
+      curl = curl_easy_init();
+      if(curl) {
+      curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, "POST");
+      curl_easy_setopt(curl, CURLOPT_URL, "https://api.worqhat.com/api/ai/moderation");
+
+      struct curl_slist *headers = NULL;
+      headers = curl_slist_append(headers, "x-api-key: •••••••");
+      headers = curl_slist_append(headers, "x-org-key: •••••••");
+      headers = curl_slist_append(headers, "Content-Type: application/json");
+      curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
+
+      curl_easy_setopt(curl, CURLOPT_POSTFIELDS, "{\"text_content\":\"I want to ####### a #####. That guy is a ######. I will ###.\"}");
+
+      res = curl_easy_perform(curl);
+      if(res != CURLE_OK)
+      fprintf(stderr, "curl_easy_perform() failed: %s\n",
+      curl_easy_strerror(res));
+
+      curl_easy_cleanup(curl);
+      curl_slist_free_all(headers);
+    }
+      return 0;
+    }
+
+    ````
+  </Tab>
+</Tabs>
+
+
+### Response
+
+#### Table View
+
+| Data Type |  Key  | Value                                  | Description                           |
+|:---------| :------------: |:---------------------------------------|:--------------------------------------|
+| String | id | `4a24ea32-3fbc-4667-ad78-d5bd1652a5cb` | Unique identifier for the API Request |
+| String | status | `success` or `error`                   | Status of the API Request             |
+| Number | timestamp | `1620120000`                           | Timestamp of the API Request          |
+| Array | content | `[Key Value Pairs of Types`   | The Moderation Results                |
+| Number | processing_count | `6` | The Number of API Requests Processed |
+
+#### JSON View
+
+````json filename="JSON" copy
+{
+"id": "050433c7-1ca4-4fdc-a3d5-0655c2c8a721",
+  "status": "success",
+  "timestamp": 1683322578778,
+  "content": {
+  "sexual"
+:
+  "0.0000012948",
+    "hate"
+:
+  "0.000018633",
+    "violence"
+:
+  "0.075941",
+    "self-harm"
+:
+  "0.20583",
+    "sexual/minors"
+:
+  "3.5886e-7",
+    "hate/threatening"
+:
+  "0.0000010863",
+    "violence/graphic"
+:
+  "7.5287e-7"
+},
+"processing_count": 6
+}
+````
+
+### Error Codes
+
+| Error Code | Description                                        |
+|:---------|:---------------------------------------------------|
+| 400 | Bad Request                                        |
+| 401 | Unauthorized : Invalid API Key or Organization Key |
+| 402 | Syntax Error : Invalid JSON                        |
