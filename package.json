@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "update-contrib": "weallcontribute -o . && git add CONTRIBUTING.md && git commit -m 'docs:Update CONTRIBUTING.md'"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,7 @@
   },
   "devDependencies": {
     "@types/node": "20.0.0",
-    "typescript": "^5.0.4"
+    "typescript": "^5.0.4",
+    "weallcontribute": "^1.0.9"
   }
 }
