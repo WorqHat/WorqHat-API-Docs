@@ -2,37 +2,33 @@ import { Tab, Tabs } from "nextra-theme-docs";
 
 # AI to Extract Content from Web Pages
 
-PDF Extract AI is a REST API Endpoint that allows you to extract content from PDFs. It uses machine
-learning to identify the structure of a PDF and extract the text, tables, and other content from it.
+With the growing amount of information on the internet, it can be overwhelming to manually extract and process relevant data from web pages. This is where AI-powered content extraction comes in handy. Content extraction is the process of automatically identifying and extracting relevant information from web pages, such as text, images, and tables, and converting them into structured data that can be easily analyzed and processed. AI-powered content extraction algorithms use machine learning and natural language processing techniques to understand the layout and structure of a web page and extract the most relevant and useful content. This technology has numerous applications, from automated data mining and research to e-commerce and customer analytics.
 
 ## How does it work?
 
-PDF Extract AI is a machine learning (ML) service that automatically extracts text, handwriting,
-and data from scanned documents. It goes beyond simple optical character recognition (OCR) to
-identify, understand, and extract data from forms and tables. Today, many companies manually
-extract data from scanned documents such as PDFs, images, tables, and forms, or through simple
-OCR software that requires manual configuration (which often must be updated when the form
-changes). To overcome these manual and expensive processes, WorqHat AI uses ML to read and process
-any type of document, accurately extracting text, handwriting, tables, and other data with no
-manual effort. You can quickly automate document processing and act on the information extracted,
-whether you’re automating loans processing or extracting information from invoices and receipts.
-PDF Extract AI can extract the data in minutes instead of hours or days.
+
+Web Extract AI works by using machine learning algorithms to analyze the structure and content of web pages. The algorithm is trained on a large dataset of web pages to learn how to recognize and extract relevant information. It uses natural language processing techniques to understand the semantic meaning of the text and the relationship between different elements on the page. The algorithm can identify important elements such as headlines, paragraphs, images, and tables and extract them into a structured format such as JSON. It can also clean and normalize the extracted data to make it easier to analyze and process. The result is a structured dataset that can be used for a wide range of applications, including data mining, research, and analysis. AI-powered content extraction is a powerful tool for organizations looking to gain insights from the vast amount of data available on the web.
 
 ## Use Cases
 
-- Accurately extract critical business data such as mortgage rates, applicant names, and invoice
-totals across a variety of financial forms to process loan and mortgage applications in minutes.
+Here are some potential use cases for AI-powered content extraction:
 
-- Better serve your patients and insurers by extracting important patient data from health intake forms, insurance claims, and pre-authorization forms. Keep data organized and in its original context, and eliminate manual review of output.
+- **Market research**: AI-powered content extraction can help businesses gather and analyze information about competitors, industry trends, and customer sentiment. By automatically extracting data from a large number of sources, businesses can gain insights into market opportunities and make informed decisions.
 
-- Extract data from a variety of forms and documents to automate the processing of invoices, receipts, and other documents.
+- **E-commerce**: Product information extraction is a popular use case for AI-powered content extraction in e-commerce. By automatically extracting product information from manufacturer websites, businesses can quickly create comprehensive product catalogs and keep them up-to-date.
+
+- **News aggregation**: AI-powered content extraction can be used to automatically gather and summarize news articles from multiple sources. This can be useful for media companies looking to keep up with breaking news or for individuals who want to stay informed on a particular topic.
+
+- **Social media monitoring**: AI-powered content extraction can be used to monitor social media platforms for mentions of a particular brand or topic. This can help businesses track their reputation, identify customer needs and concerns, and respond to customer inquiries and complaints in a timely manner.
+
+- **Academic research**: Researchers can use AI-powered content extraction to gather and analyze information from a large number of academic papers and publications. This can help researchers identify trends, gaps in knowledge, and potential research topics.
 
 ## How to use it?
 
 ### API Endpoint
 
 ```bash filename="API Endpoint" copy
-https://api.worqhat.com/api/ai/v2/pdf-extract
+https://api.worqhat.com/api/ai/v2/web-extract
 ```
 
 ### Headers
@@ -159,44 +155,279 @@ var options = {
   },
   body: JSON.stringify({
     "url_path": "<url>",
-
+      "headline": false,
+      "inline_code" : false,
+      "code_blocks" : true,
+      "references" : false,
+      "tables" : false
+	  });
+	  
+	 request(options, function (error, response) {
+		if (error) throw new Error(error);
+		console.log(response.body);
+	});
+	  
+	  
     ```
 
     ```js filename="NodeJS Axios" copy
+var axios = require('axios');
+var data = JSON.stringify({
+    "url_path": "<url>",
+      "headline": false,
+      "inline_code" : false,
+      "code_blocks" : true,
+      "references" : false,
+      "tables" : false
+});
 
+var config = {
+	method: 'post',
+	maxBodyLength: Infinity,
+	url: 'https://api.worqhat.com/api/ai/v2/web-extract',
+	headers: { 
+		'x-api-key': '•••••••', 
+		'x-org-key': '•••••••', 
+		'Content-Type': 'application/json'
+	},
+	data : data
+};
+
+axios(config)
+.then(function (response) {
+  console.log(JSON.stringify(response.data));
+})
+.catch(function (error) {
+  console.log(error);
+});
     ```
   </Tab>
   <Tab>
-    ```py filename="Python Requests" copy
+    ```py filename="Python http.client" copy
+import http.client
+import json
 
+conn = http.client.HTTPSConnection("api.worqhat.com")
+payload = json.dumps({
+    "url_path": "<url>",
+      "headline": False,
+      "inline_code" : False,
+      "code_blocks" : True,
+      "references" : False,
+      "tables" : False
+})
+headers = {
+  'x-api-key': '•••••••',
+  'x-org-key': '•••••••',
+  'Content-Type': 'application/json'
+}
+conn.request("POST", "/api/ai/v2/web-extract", payload, headers)
+res = conn.getresponse()
+data = res.read()
+print(data.decode("utf-8"))
     ```
 
-    ```py filename="Python http.client" copy
+    ```py filename="Python Requests" copy
+import http.client
+import json
 
+conn = http.client.HTTPSConnection("api.worqhat.com")
+payload = json.dumps({
+    "url_path": "<url>",
+      "headline": False,
+      "inline_code" : False,
+      "code_blocks" : True,
+      "references" : False,
+      "tables" : False
+})
+headers = {
+  'x-api-key': '•••••••',
+  'x-org-key': '•••••••',
+  'Content-Type': 'application/json'
+}
+conn.request("POST", "/api/ai/v2/web-extract", payload, headers)
+res = conn.getresponse()
+data = res.read()
+print(data.decode("utf-8"))
     ```
   </Tab>
   <Tab>
     ```ruby filename="Ruby" copy
+import requests
 
+url = "https://api.worqhat.com/api/ai/v2/web-extract"
+
+payload = {    
+"url_path": "<url>",
+      "headline": false,
+      "inline_code" : false,
+      "code_blocks" : true,
+      "references" : false,
+      "tables" : false
+	  }
+headers = {
+    "x-api-key": "{{x-api-key}}",
+    "x-org-key": "{{x-org-key}}"
+}
+
+response = requests.post(url, json=payload, headers=headers)
+
+print(response.text)
     ```
   </Tab>
   <Tab>
     ```php filename="PHP" copy
+<?php
 
+$curl = curl_init();
+
+curl_setopt_array($curl, [
+  CURLOPT_URL => "https://api.worqhat.com/api/ai/v2/web-extract",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "POST",
+  CURLOPT_POSTFIELDS => "{    
+"url_path": "<url>",
+      "headline": false,
+      "inline_code" : false,
+      "code_blocks" : true,
+      "references" : false,
+      "tables" : false
+	  }",
+  CURLOPT_HTTPHEADER => [
+    "x-api-key: {{x-api-key}}",
+    "x-org-key: {{x-org-key}}"
+  ],
+]);
+
+$response = curl_exec($curl);
+$err = curl_error($curl);
+
+curl_close($curl);
+
+if ($err) {
+  echo "cURL Error #:" . $err;
+} else {
+  echo $response;
+}
     ```
   </Tab>
   <Tab>
     ```java filename="Java" copy
-
+HttpResponse<String> response = Unirest.post("https://api.worqhat.com/api/ai/v2/web-extract")
+  .header("x-api-key", "{{x-api-key}}")
+  .header("x-org-key", "{{x-org-key}}")
+  .body("{    
+"url_path": "<url>",
+      "headline": false,
+      "inline_code" : false,
+      "code_blocks" : true,
+      "references" : false,
+      "tables" : false
+	  }")
+  .asString();
     ```
   </Tab>
   <Tab>
     ```go filename="GO" copy
+package main
+
+import (
+	"bytes"
+	"fmt"
+	"net/http"
+)
+
+func main() {
+	url := "https://api.worqhat.com/api/ai/v2/web-extract"
+	method := "POST"
+
+	payload := []byte(`{
+		"url_path": "https://worqhat.com",
+		"headline": false,
+		"inline_code": false,
+		"code_blocks": true,
+		"references": false,
+		"tables": false
+	}`)
+
+	client := &http.Client{}
+	req, err := http.NewRequest(method, url, bytes.NewBuffer(payload))
+
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	req.Header.Add("x-api-key", "•••••••")
+	req.Header.Add("x-org-key", "•••••••")
+
+	res, err := client.Do(req)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	defer res.Body.Close()
+
+	buf := new(bytes.Buffer)
+	buf.ReadFrom(res.Body)
+	bodyStr := buf.String()
+
+	fmt.Println(bodyStr)
+}
 
     ```
   </Tab>
   <Tab>
     ```c filename="C" copy
+#include <stdio.h>
+#include <stdlib.h>
+#include <curl/curl.h>
+
+int main()
+{
+    CURL *curl;
+    CURLcode res;
+    struct curl_slist *headers = NULL;
+
+    char *url = "https://api.worqhat.com/api/ai/v2/web-extract";
+    char *raw_data = "{\n"
+                     "\"url_path\": \"https://worqhat.com\",\n"
+                     "\"headline\": false,\n"
+                     "\"inline_code\": false,\n"
+                     "\"code_blocks\": true,\n"
+                     "\"references\": false,\n"
+                     "\"tables\": false\n"
+                     "}";
+
+    curl_global_init(CURL_GLOBAL_ALL);
+
+    curl = curl_easy_init();
+
+    if(curl) {
+        headers = curl_slist_append(headers, "x-api-key: •••••••");
+        headers = curl_slist_append(headers, "x-org-key: •••••••");
+        headers = curl_slist_append(headers, "Content-Type: application/json");
+
+        curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
+        curl_easy_setopt(curl, CURLOPT_URL, url);
+        curl_easy_setopt(curl, CURLOPT_POSTFIELDS, raw_data);
+
+        res = curl_easy_perform(curl);
+
+        if(res != CURLE_OK)
+            fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
+
+        curl_easy_cleanup(curl);
+    }
+
+    curl_global_cleanup();
+
+    return 0;
+}
 
     ```
   </Tab>
@@ -212,7 +443,8 @@ var options = {
 | String | id | `4a24ea32-3fbc-4667-ad78-d5bd1652a5cb` | Unique identifier for the API Request |
 | String | status | `success` or `error` | Status of the API Request             |
 | Number | timestamp | `1620120000` | Timestamp of the API Request          |
-| String | content | `Lorem ipsum dolor...` | Extracted text from the PDF           |
+| String | content => text_content | `Lorem ipsum dolor...` | Extracted text from the Web           |
+| String | content => tags | `language`, `thumbnail`, `title` | The different tags present in the Extracted Web Content          |
 | Number | Processing Count  | `223` | Number of Words Extracted |
 
 #### JSON View
