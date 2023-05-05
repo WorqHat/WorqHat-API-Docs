@@ -1,0 +1,490 @@
+import { Callout, Tab, Tabs } from "nextra-theme-docs";
+
+# Text to Image Generation API V2
+
+Text to image generation models are a type of artificial intelligence that can create images based on textual descriptions. These models use machine learning algorithms to learn the relationship between text and images, and can generate realistic-looking images that match the textual description.
+
+## How does it work?
+
+The AI Image Generator from WorqHat uses a combination of text encoding, image encoding, and image decoding to generate images based on a textual prompt. The process begins by inputting a text prompt into a text encoder, which maps the prompt to a representation space. Next, a model called the prior maps the text encoding to an image encoding that captures the semantic information of the prompt contained in the text encoding. Finally, an image decoder generates a stochastic image based on the semantic information captured in the image encoding. While this high-level overview provides a general idea of how the AI Image Generator works, there are many interesting implementation details to consider. Nonetheless, it's clear that the AI Image Generator has many potential applications, ranging from generating product images for e-commerce websites to creating visual representations of text-based data.
+
+## Use Cases
+
+- **E-commerce product images**: The AI Image Generator can be used to create high-quality product
+images for e-commerce websites, reducing the need for costly and time-consuming photo shoots.
+
+- **Visualizing data**: The AI Image Generator can be used to create visual representations of
+text-based data, such as graphs and charts, which can be useful for presentations and reports.
+
+- **Book covers**: The AI Image Generator can be used to create visually striking book covers that
+capture the essence of the story and attract potential readers.
+
+- **Video game design**: The AI Image Generator can be used to generate images for use in video games,
+such as landscapes and character designs.
+
+- **Architecture and interior design**: The AI Image Generator can be used to create visual
+representations of proposed architecture and interior design projects, providing a realistic preview of what the finished project will look like.
+
+- **Marketing materials**: The AI Image Generator can be used to create eye-catching marketing
+materials, such as banners and social media posts, that stand out from the crowd and help to promote a brand or product.
+
+## How to use it?
+
+### API Endpoint
+
+```bash filename="API Endpoint" copy
+https://api.worqhat.com/api/ai/images/generate/v2
+```
+
+### Headers
+
+
+| Header Name |  Required  | Description |
+|:---------| :------------: | :---------------- |
+| x-api-key| ``true`` | This helps us to identify the User Sending the Request |
+| x-org-key|  ``true`` | This helps us to identify the Workspace Associated with the Request. This helps users to maintain easier logs |
+
+### Request Body
+
+The Request Body is a Raw JSON Object. The following are the keys that are required to be sent in the Request Body.
+
+| Data Type |  Key  | Value | Description                           |
+|:---------| :------------: | :---------------- |:--------------------------------------|
+| Number | height | `512` or `768` | Height of the Image to be generated |
+| Number | width | `512` or `768` | Width of the Image to be generated |
+| Array | prompt | `["<prompts>"]` | The Prompt to be used to generate the Image |
+| String | image_style | `"<image_style>"`| The Image Style to be used to generate the Image |
+| String | output_type | `url` or `blob` | The Output Type of the Image to be generated |
+
+
+
+```json filename="Request Body (Formdata)" copy
+{
+    "height": 512,
+    "width": 512,
+    "prompt": [
+        "A digital Illustration of the a purely mechanical television, 4k, detailed, fantasy vivid colors"
+    ],
+    "image_style": "Digital Drawing",
+    "output_type": "url"
+}
+```
+
+
+
+### Sample Code
+
+You can use the following Endpoints on any Codebase, including client side codebases as long as
+you are able to send the Headers and the Request Body to the API Endpoint. It's that easy! Just
+send a POST Request to the API Endpoint with the Headers and the Request Body, and you are good to go!
+
+
+<Tabs items={['cURL', 'Client JS', 'NodeJS', 'Python', 'Ruby', 'PHP', 'Java', 'GO', 'C']}>
+  <Tab>
+    ``` bash filename="cURL" copy
+    curl --location 'https://api.worqhat.com/api/ai/images/generate/v2' \
+    --header 'x-api-key: •••••••' \
+    --header 'x-org-key: •••••••' \
+    --data '{
+    "height": 512,
+    "width": 512,
+    "prompt": [
+    "Pixar style little girl, 4k, 8k, unreal engine, octane render photorealistic by cosmicwonder, hdr, photography by cosmicwonder, high definition, symmetrical face, volumetric lighting, dusty haze, photo, octane render, 24mm, 4k, 24mm, DSLR, high quality, 60 fps, ultra realistic"
+    ],
+    "image_style": "Pixar Cartoon",
+    "output_type": "url"
+  }'
+    ```
+  </Tab>
+  <Tab>
+    ```js filename="Client JS fetch" copy
+    var myHeaders = new Headers();
+    myHeaders.append("x-api-key", "•••••••");
+    myHeaders.append("x-org-key", "•••••••");
+
+    var raw = JSON.stringify({
+    "height": 512,
+    "width": 512,
+    "prompt": ["Pixar style little girl, 4k, 8k, unreal engine, octane render photorealistic by cosmicwonder, hdr, photography by cosmicwonder, high definition, symmetrical face, volumetric lighting, dusty haze, photo, octane render, 24mm, 4k, 24mm, DSLR, high quality, 60 fps, ultra realistic", "The girl should be short"],
+    "image_style": "Pixar Cartoon",
+    "output_type": "blob"
+  });
+
+    var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow'
+  };
+
+    fetch("https://api.worqhat.com/api/ai/images/generate/v2", requestOptions)
+    .then(response => response.blob())
+    .then(result => {
+    console.log(result);
+  }).catch(error => console.log('error', error));
+    ```
+
+    ```js filename="Client JS xhr" copy
+
+    var xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
+
+    xhr.addEventListener("readystatechange", function() {
+    if(this.readyState === 4) {
+    console.log(this.responseText);
+  }
+  });
+
+    xhr.open("POST", "https://api.worqhat.com/api/ai/images/generate/v2");
+
+    xhr.setRequestHeader("x-api-key", "•••••••");
+    xhr.setRequestHeader("x-org-key", "•••••••");
+    xhr.setRequestHeader("Content-Type", "application/json");
+
+    var raw = JSON.stringify({
+    "height": 512,
+    "width": 512,
+    "prompt": ["Pixar style little girl, 4k, 8k, unreal engine, octane render photorealistic by cosmicwonder, hdr, photography by cosmicwonder, high definition, symmetrical face, volumetric lighting, dusty haze, photo, octane render, 24mm, 4k, 24mm, DSLR, high quality, 60 fps, ultra realistic", "The girl should be short"],
+    "image_style": "Pixar Cartoon",
+    "output_type": "URL"
+  });
+
+    xhr.send(raw);
+
+
+    ```
+  </Tab>
+  <Tab>
+    ```js filename="NodeJS" copy
+    var request = require('request');
+
+    var options = {
+    method: 'POST',
+    url: 'https://api.worqhat.com/api/ai/images/generate/v2',
+    headers: {
+    'x-api-key': '•••••••',
+    'x-org-key': '•••••••',
+    'Content-Type': 'application/json'
+  },
+    body: {
+    height: 512,
+    width: 512,
+    prompt: ['Pixar style little girl, 4k, 8k, unreal engine, octane render photorealistic by cosmicwonder, hdr, photography by cosmicwonder, high definition, symmetrical face, volumetric lighting, dusty haze, photo, octane render, 24mm, 4k, 24mm, DSLR, high quality, 60 fps, ultra realistic', 'The girl should be short'],
+    image_style: 'Pixar Cartoon',
+    output_type: 'blob'
+  },
+    json: true
+  };
+
+    request(options, function (error, response, body) {
+    if (error) throw new Error(error);
+
+    console.log(body);
+  });
+
+    ```
+
+    ```js filename="NodeJS Axios" copy
+    const axios = require('axios');
+
+    const options = {
+    method: 'POST',
+    url: 'https://api.worqhat.com/api/ai/images/generate/v2',
+    headers: {
+    'x-api-key': '•••••••',
+    'x-org-key': '•••••••',
+    'Content-Type': 'application/json'
+  },
+    data: {
+    height: 512,
+    width: 512,
+    prompt: ['Pixar style little girl, 4k, 8k, unreal engine, octane render photorealistic by cosmicwonder, hdr, photography by cosmicwonder, high definition, symmetrical face, volumetric lighting, dusty haze, photo, octane render, 24mm, 4k, 24mm, DSLR, high quality, 60 fps, ultra realistic', 'The girl should be short'],
+    image_style: 'Pixar Cartoon',
+    output_type: 'URL'
+  }
+  };
+
+    axios(options)
+    .then(function (response) {
+    console.log(response.data);
+  })
+    .catch(function (error) {
+    console.log(error);
+  });
+
+    ```
+  </Tab>
+  <Tab>
+    ```py filename="Python Requests" copy
+    import requests
+    import json
+
+    url = "https://api.worqhat.com/api/ai/images/generate/v2"
+
+    payload = {
+    "height": 512,
+    "width": 512,
+    "prompt": [
+    "Pixar style little girl, 4k, 8k, unreal engine, octane render photorealistic by cosmicwonder, hdr, photography by cosmicwonder, high definition, symmetrical face, volumetric lighting, dusty haze, photo, octane render, 24mm, 4k, 24mm, DSLR, high quality, 60 fps, ultra realistic",
+    "The girl should be short"
+    ],
+    "image_style": "Pixar Cartoon",
+    "output_type": "blob"
+  }
+    headers = {
+    "x-api-key": "•••••••",
+    "x-org-key": "•••••••",
+    "Content-Type": "application/json"
+  }
+
+    response = requests.post(url, headers=headers, data=json.dumps(payload))
+    print(response.content)
+
+    ````
+  </Tab>
+  <Tab>
+    ````ruby filename="Ruby" copy
+    require 'uri'
+    require 'net/http'
+
+    url = URI("https://api.worqhat.com/api/ai/images/generate/v2")
+
+    http = Net::HTTP.new(url.host, url.port)
+    http.use_ssl = true
+
+    request = Net::HTTP::Post.new(url)
+    request["x-api-key"] = "•••••••"
+    request["x-org-key"] = "•••••••"
+    request["Content-Type"] = "application/json"
+    request.body =
+    "{\"height\":512,\"width\":512,\"prompt\":[\"Pixar style little girl, 4k, 8k, unreal engine, octane render photorealistic by cosmicwonder, hdr, photography by cosmicwonder, high definition, symmetrical face, volumetric lighting, dusty haze, photo, octane render, 24mm, 4k, 24mm, DSLR, high quality, 60 fps, ultra realistic\",\"The girl should be short\"],\"image_style\":\"Pixar Cartoon\",\"output_type\":\"blob\"}"
+
+    response = http.request(request)
+    puts response.read_body
+
+    ````
+    </Tab>
+    <Tab>
+    ````php filename="PHP" copy
+    <?php
+
+    $curl = curl_init();
+
+    curl_setopt_array($curl, array(
+      CURLOPT_URL => 'https://api.worqhat.com/api/ai/images/generate/v2',
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_ENCODING => '',
+      CURLOPT_MAXREDIRS => 10,
+      CURLOPT_TIMEOUT => 0,
+      CURLOPT_FOLLOWLOCATION => true,
+      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+      CURLOPT_CUSTOMREQUEST => 'POST',
+      CURLOPT_POSTFIELDS => '{"height":512,"width":512,"prompt":["Pixar style little girl, 4k, 8k, unreal engine, octane render photorealistic by cosmicwonder, hdr, photography by cosmicwonder, high definition, symmetrical face, volumetric lighting, dusty haze, photo, octane render, 24mm, 4k, 24mm, DSLR, high quality, 60 fps, ultra realistic","The girl should be short"],"image_style":"Pixar Cartoon","output_type":"blob"}',
+      CURLOPT_HTTPHEADER => array(
+        'x-api-key: •••••••',
+        'x-org-key: •••••••',
+        'Content-Type: application/json'
+      ),
+    ));
+
+    $response = curl_exec($curl);
+
+    curl_close($curl);
+    echo $response;
+
+    ?>
+
+    ````
+    </Tab>
+    <Tab>
+    ````java filename="Java" copy
+    import java.net.http.HttpClient;
+    import java.net.http.HttpRequest;
+    import java.net.http.HttpResponse;
+    import java.net.URI;
+
+    public class WorqhatAPITest {
+    public static void main(String[] args) {
+    HttpClient client = HttpClient.newHttpClient();
+    String url = "https://api.worqhat.com/api/ai/images/generate/v2";
+    String apiKey = "•••••••";
+    String orgKey = "•••••••";
+
+    String requestBody = "{\n"
+    + "   \"height\": 512,\n"
+    + "   \"width\": 512,\n"
+    + "   \"prompt\": [\"Pixar style little girl, 4k, 8k, unreal engine, octane render photorealistic by cosmicwonder, hdr, photography by cosmicwonder, high definition, symmetrical face, volumetric lighting, dusty haze, photo, octane render, 24mm, 4k, 24mm, DSLR, high quality, 60 fps, ultra realistic\", \"The girl should be short\"],\n"
+    + "   \"image_style\": \"Pixar Cartoon\",\n"
+    + "   \"output_type\": \"blob\"\n"
+    + "}";
+
+    HttpRequest request = HttpRequest.newBuilder()
+    .uri(URI.create(url))
+    .header("x-api-key", apiKey)
+    .header("x-org-key", orgKey)
+    .header("Content-Type", "application/json")
+    .POST(HttpRequest.BodyPublishers.ofString(requestBody))
+    .build();
+
+    client.sendAsync(request, HttpResponse.BodyHandlers.ofByteArray())
+    .thenApply(HttpResponse::body)
+    .thenAccept(System.out::println)
+    .join();
+  }
+  }
+
+    ````
+  </Tab>
+  <Tab>
+    ````go filename="GO" copy
+    package main
+
+    import (
+    "bytes"
+    "fmt"
+    "io/ioutil"
+    "net/http"
+    )
+
+    func main() {
+    url := "https://api.worqhat.com/api/ai/images/generate/v2"
+    method := "POST"
+
+    payload := bytes.NewBuffer([]byte(`{
+   "height": 512,
+   "width": 512,
+   "prompt": ["Pixar style little girl, 4k, 8k, unreal engine, octane render photorealistic by cosmicwonder, hdr, photography by cosmicwonder, high definition, symmetrical face, volumetric lighting, dusty haze, photo, octane render, 24mm, 4k, 24mm, DSLR, high quality, 60 fps, ultra realistic", "The girl should be short"],
+   "image_style": "Pixar Cartoon",
+   "output_type": "blob"
+}`))
+
+    client := &http.Client{}
+    req, err := http.NewRequest(method, url, payload)
+
+    if err != nil {
+    fmt.Println(err)
+    return
+  }
+    req.Header.Add("x-api-key", "•••••••")
+    req.Header.Add("x-org-key", "•••••••")
+
+    res, err := client.Do(req)
+    defer res.Body.Close()
+    body, err := ioutil.ReadAll(res.Body)
+
+    if err != nil {
+    fmt.Println(err)
+    return
+  }
+    fmt.Println(string(body))
+  }
+
+    ````
+  </Tab>
+  <Tab>
+    ````c filename="C" copy
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <string.h>
+    #include <curl/curl.h>
+    #include <cJSON.h>
+
+    int main(void)
+    {
+      CURL * curl;
+      CURLcode res;
+      char *url = "https://api.worqhat.com/api/ai/images/generate/v2";
+      char *api_key = "•••••••";
+      char *org_key = "•••••••";
+      char *json_data = "{\"height\":512,\"width\":512,\"prompt\":[\"Pixar style little girl, 4k, 8k, unreal engine, octane render photorealistic by cosmicwonder, hdr, photography by cosmicwonder, high definition, symmetrical face, volumetric lighting, dusty haze, photo, octane render, 24mm, 4k, 24mm, DSLR, high quality, 60 fps, ultra realistic\",\"The girl should be short\"],\"image_style\":\"Pixar Cartoon\",\"output_type\":\"blob\"}";
+
+      struct curl_slist *headers = NULL;
+      headers = curl_slist_append(headers, "Content-Type: application/json");
+      char auth_header[100];
+      sprintf(auth_header, "x-api-key: %s", api_key);
+      headers = curl_slist_append(headers, auth_header);
+      char org_header[100];
+      sprintf(org_header, "x-org-key: %s", org_key);
+      headers = curl_slist_append(headers, org_header);
+
+      curl_global_init(CURL_GLOBAL_ALL);
+      curl = curl_easy_init();
+      if (curl) {
+      curl_easy_setopt(curl, CURLOPT_URL, url);
+      curl_easy_setopt(curl, CURLOPT_POST, 1L);
+      curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
+      curl_easy_setopt(curl, CURLOPT_POSTFIELDS, json_data);
+      curl_easy_setopt(curl, CURLOPT_POSTFIELDSIZE, (long)strlen(json_data));
+
+      FILE *fp = fopen("output.jpg", "wb");
+      if (!fp) {
+      printf("Error opening output file!\n");
+      return 1;
+    }
+      curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
+
+      res = curl_easy_perform(curl);
+      if (res != CURLE_OK) {
+      printf("Error performing request: %s\n", curl_easy_strerror(res));
+    }
+
+      fclose(fp);
+      curl_easy_cleanup(curl);
+    }
+      curl_global_cleanup();
+
+      return 0;
+    }
+
+    ````
+  </Tab>
+</Tabs>
+
+### Response
+
+#### Table View
+
+| Data Type |  Key  | Value | Description                           |
+|:---------| :------------: | :---------------- |:--------------------------------------|
+| String | id | `4a24ea32-3fbc-4667-ad78-d5bd1652a5cb` | Unique identifier for the API Request |
+| String | status | `success` or `error` | Status of the API Request             |
+| Number | timestamp | `1620120000` | Timestamp of the API Request          |
+| String | content | `blob` or `URL` | The Output of the API Request         |
+| Number | Processing Count  | `1` | Number of Images Processed                            |
+
+#### JSON View
+
+<Tabs items={['URL', 'blob']}>
+  <Tab>
+    ```json filename="JSON" copy
+    {
+      "id": "f7539998-e8ba-45b0-92da-58be65772316",
+      "status": "success",
+      "timestamp": "1683195942787",
+      "content": "https://worqhat.s3.amazonaws.com/outputs/1683195935137.png",
+      "processing_count": "1"
+    }
+    ```
+  </Tab>
+  <Tab>
+    ```json filename="JSON" copy
+    {
+      "id": "f7539998-e8ba-45b0-92da-58be65772316",
+      "status": "success",
+      "timestamp": "1683195942787",
+      "content": "iVBORw0KGgoAAAANSUhEUgAABgAAAAYACAIAAAA/jBQ8AAEAAElEQVR4nIz9W9bkOq...........",
+      "processing_count": "1"
+    }
+    ```
+  </Tab>
+</Tabs>
+
+
+
+### Error Codes
+
+| Error Code | Description                                        |
+|:---------|:---------------------------------------------------|
+| 400 | Bad Request                                        |
+| 401 | Unauthorized : Invalid API Key or Organization Key |
+| 402 | Syntax Error : Invalid JSON                        |
