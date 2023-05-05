@@ -1,5 +1,3 @@
 {
-  "baseUrl": "Getting Started",
-  "versioning": "Versioning",
-  "rateLimits": "Rate Limits"
+  "textExtraction": "Speech to Text AI"
 }
