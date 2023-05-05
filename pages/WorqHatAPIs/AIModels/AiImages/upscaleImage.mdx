@@ -1,0 +1,200 @@
+import { Callout, Tab, Tabs } from "nextra-theme-docs";
+
+# AI Image Upscaling API V3
+
+The Image Upscaling API is the latest addition to WorqHat AI’s existing set of image generation and
+editing APIs, like the popular text-to-image and image-to-image APIs. Upscaling adds to those
+popular tools by expanding small images into larger ones while maintaining – or even improving –
+their level of detail.
+
+## How does it work?
+
+If you have a crappy image and you want to upscale it with some help from AI, you have a much better chance of getting a better result. When building an AI photo & video upscaler, we first have to teach it where and how to draw pixels. This is a complex process (yawn) that takes a lot of time and effort (yawn), and we won’t bore you with the details (yay!) …unless you want to know, in which case you’ll find a little more info in the next section. Yay for everyone!
+
+The term sounds fancy, doesn’t it? Combined with the term ‘artificial intelligence’, it sounds like we’re basically designing sentient robots. We aren’t, but the process is just as fascinating. It’s a step we need to go through to make our AI capable of understanding where and how to draw in more pixels.
+
+For this process, we use datasets that contain thousands of images or hundreds of hours of video footage. This training process can take around a week, and is completed in many different steps, all of which contain fancy terms like approximation project and network architecture, and it gets worse from there! But we’ll spare you the details.
+
+## Use Cases
+
+- **E-commerce**: Online retailers can use image upscaling API to enhance the resolution and quality
+of product images, making them more visually appealing to customers and increasing the likelihood of sales.
+
+- **Photography**: Photographers can use image upscaling API to improve the quality of old or
+low-resolution photos, allowing them to restore and preserve important memories.
+
+- **Video games**: Video game developers can use image upscaling API to increase the visual fidelity
+of their games, making them more immersive and engaging for players.
+
+- **Surveillance**: Law enforcement agencies can use image upscaling API to enhance the resolution of
+surveillance footage, making it easier to identify suspects and gather evidence.
+
+- **Medical imaging**: Healthcare providers can use image upscaling API to improve the resolution and
+quality of medical images, allowing for more accurate diagnoses and treatment planning.
+
+- **Satellite imagery**: Governments and private companies can use image upscaling API to enhance
+satellite imagery, allowing for more detailed analysis of geographic features and land use patterns.
+
+- **Art restoration**: Museums and art restoration experts can use image upscaling API to restore and
+enhance old or damaged artwork, bringing it back to its original condition.
+
+## How to use it?
+
+### API Endpoint
+
+```bash filename="API Endpoint" copy
+https://api.worqhat.com/api/ai/images/upscale/v3
+```
+
+### Headers
+
+
+| Header Name |  Required  | Description |
+|:---------| :------------: | :---------------- |
+| x-api-key| ``true`` | This helps us to identify the User Sending the Request |
+| x-org-key|  ``true`` | This helps us to identify the Workspace Associated with the Request. This helps users to maintain easier logs |
+
+### Request Body
+
+The Request Body is a Formdata Object. The Formdata Object has the following fields :
+
+- File Object (You can upload any Image File)
+- Scale (The Scale to which you want to upscale the image. The default value is 2x)
+- output_type (The Output Type of the Image. You can choose from `URL` or `blob`. The default value is
+URL)
+
+| Data Type |    Key    | Value | Description                           |
+|:---------|:---------:| :---------------- |:--------------------------------------|
+| File Object | file | ``File Object`` | The File Object of the Image you want to Upscale |
+| Number | scale | ``Number`` | The Scale to which you want to upscale the image. The default value is `2` |
+| String | output_type | ``URL`` or ``blob`` | The Output Type of the Image. You can choose from `URL` or `blob`. The default value is URL |
+
+<Callout type="warning" emoji="⚠️">
+  Please note that the Request Body is a Formdata Object. You can use any Formdata Object to send
+  the Request Body. The Request Body is not a JSON Object.
+</Callout>
+
+<Callout type="warning" emoji="⚠️">
+  Keep in mind that the File Object dimensions should not exceed `1024x1024`. Also, the
+  resulting image dimensions will not exceed `2048x2048`.
+</Callout>
+
+
+```json filename="Request Body (Formdata)" copy
+{
+  "baseFile": "The File Upload in Formdata",
+  "output_type":"URL",
+  "scale":3
+}
+```
+
+
+
+### Sample Code
+
+You can use the following Endpoints on any Codebase, including client side codebases as long as
+you are able to send the Headers and the Request Body to the API Endpoint. It's that easy! Just
+send a POST Request to the API Endpoint with the Headers and the Request Body, and you are good to go!
+
+
+<Tabs items={['cURL', 'Client JS', 'NodeJS', 'Python', 'Ruby', 'PHP', 'Java', 'GO', 'C']}>
+  <Tab>
+    ``` bash filename="cURL" copy
+
+    ```
+  </Tab>
+  <Tab>
+    ```js filename="Client JS fetch" copy
+
+    ```
+  </Tab>
+  <Tab>
+    ```js filename="NodeJS" copy
+
+    ```
+
+    ```js filename="NodeJS Axios" copy
+
+
+    ```
+  </Tab>
+  <Tab>
+    ```py filename="Python Requests" copy
+
+    ```
+  </Tab>
+  <Tab>
+    ```ruby filename="Ruby" copy
+
+    ```
+  </Tab>
+  <Tab>
+    ```php filename="PHP" copy
+
+    ```
+  </Tab>
+  <Tab>
+    ```java filename="Java" copy
+
+    ```
+  </Tab>
+  <Tab>
+    ```go filename="GO" copy
+
+    ```
+  </Tab>
+  <Tab>
+    ```c filename="C" copy
+
+    ```
+  </Tab>
+</Tabs>
+
+### Response
+
+#### Table View
+
+| Data Type |  Key  | Value | Description                           |
+|:---------| :------------: | :---------------- |:--------------------------------------|
+| String | id | `4a24ea32-3fbc-4667-ad78-d5bd1652a5cb` | Unique identifier for the API Request |
+| String | status | `success` or `error` | Status of the API Request             |
+| Number | timestamp | `1620120000` | Timestamp of the API Request          |
+| String | content | `blob` or `URL` | The Output of the API Request         |
+| Number | Processing Count  | `1` | Number of Images Processed                            |
+
+#### JSON View
+
+<Tabs items={['URL', 'blob']}>
+  <Tab>
+    ```json filename="JSON" copy
+    {
+      "id": "f7539998-e8ba-45b0-92da-58be65772316",
+      "status": "success",
+      "timestamp": "1683195942787",
+      "content": "https://worqhat.s3.amazonaws.com/outputs/1683195935137.png",
+      "processing_count": "1"
+    }
+    ```
+  </Tab>
+  <Tab>
+    ```json filename="JSON" copy
+    {
+      "id": "f7539998-e8ba-45b0-92da-58be65772316",
+      "status": "success",
+      "timestamp": "1683195942787",
+      "content": "iVBORw0KGgoAAAANSUhEUgAABgAAAAYACAIAAAA/jBQ8AAEAAElEQVR4nIz9W9bkOq...........",
+      "processing_count": "1"
+    }
+    ```
+  </Tab>
+</Tabs>
+
+
+
+### Error Codes
+
+| Error Code | Description                                        |
+|:---------|:---------------------------------------------------|
+| 400 | Bad Request                                        |
+| 401 | Unauthorized : Invalid API Key or Organization Key |
+| 402 | Syntax Error : Invalid JSON                        |

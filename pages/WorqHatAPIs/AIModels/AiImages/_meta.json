@@ -1,5 +1,7 @@
 {
-  "baseUrl": "Getting Started",
-  "versioning": "Versioning",
-  "rateLimits": "Rate Limits"
+  "imageConv2": "Text to Image Gen V2",
+  "imageConv3": "Text to Image Gen V3",
+  "image2imagev2": "Image to Image Gen V2",
+  "image2imagev3": "Image to Image Gen V3",
+  "upscaleImage": "Image Upscaler V3"
 }
