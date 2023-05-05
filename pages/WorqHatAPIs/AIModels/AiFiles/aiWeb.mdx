@@ -1,0 +1,1538 @@
+import { Tab, Tabs } from "nextra-theme-docs";
+
+# AI to Extract Content from PDFs
+
+PDF Extract AI is a REST API Endpoint that allows you to extract content from PDFs. It uses machine
+learning to identify the structure of a PDF and extract the text, tables, and other content from it.
+
+## How does it work?
+
+PDF Extract AI is a machine learning (ML) service that automatically extracts text, handwriting,
+and data from scanned documents. It goes beyond simple optical character recognition (OCR) to
+identify, understand, and extract data from forms and tables. Today, many companies manually
+extract data from scanned documents such as PDFs, images, tables, and forms, or through simple
+OCR software that requires manual configuration (which often must be updated when the form
+changes). To overcome these manual and expensive processes, WorqHat AI uses ML to read and process
+any type of document, accurately extracting text, handwriting, tables, and other data with no
+manual effort. You can quickly automate document processing and act on the information extracted,
+whether you’re automating loans processing or extracting information from invoices and receipts.
+PDF Extract AI can extract the data in minutes instead of hours or days.
+
+## Use Cases
+
+- Accurately extract critical business data such as mortgage rates, applicant names, and invoice
+totals across a variety of financial forms to process loan and mortgage applications in minutes.
+
+- Better serve your patients and insurers by extracting important patient data from health intake forms, insurance claims, and pre-authorization forms. Keep data organized and in its original context, and eliminate manual review of output.
+
+- Extract data from a variety of forms and documents to automate the processing of invoices, receipts, and other documents.
+
+## How to use it?
+
+### API Endpoint
+
+```bash filename="API Endpoint" copy
+https://api.worqhat.com/api/ai/v2/pdf-extract
+```
+
+### Headers
+
+
+| Header Name |  Required  | Description |
+|:---------| :------------: | :---------------- |
+| x-api-key| ``true`` | This helps us to identify the User Sending the Request |
+| x-org-key|  ``true`` | This helps us to identify the Workspace Associated with the Request. This helps users to maintain easier logs |
+
+### Request Body
+
+The Request Body is a JSON Object. The JSON Object has the following fields :
+
+| Data Type |    Key    | Value | Description                           |
+|:---------|:---------:| :---------------- |:--------------------------------------|
+| String | url_path | `<url>` | The path to the WebPage (Localhost / Online) |
+
+
+
+```json filename="Request Body (JSON)" copy
+{
+  "url_path": "<url>"
+}
+```
+
+### Sample Code
+
+You can use the following Endpoints on any Codebase, including client side codebases as long as
+you are able to send the Headers and the Request Body to the API Endpoint.
+It's that easy!
+Just
+send a POST Request to the API Endpoint with the Headers and the Request Body,
+and you are good to go!
+
+
+<Tabs items={['cURL', 'Client JS', 'NodeJS', 'Python', 'Ruby', 'PHP', 'Java', 'GO', 'C']}>
+  <Tab>
+    ``` bash filename="cURL" copy
+
+    ```
+  </Tab>
+  <Tab>
+    ```js filename="Client JS fetch" copy
+
+    ```
+
+    ```js filename="Client JS XHR Request" copy
+
+    ```
+  </Tab>
+  <Tab>
+    ```js filename="NodeJS" copy
+
+    ```
+
+    ```js filename="NodeJS Axios" copy
+
+
+    ```
+  </Tab>
+  <Tab>
+    ```py filename="Python Requests" copy
+
+    ```
+
+    ```py filename="Python http.client" copy
+
+    ```
+  </Tab>
+  <Tab>
+    ```ruby filename="Ruby" copy
+
+    ```
+  </Tab>
+  <Tab>
+    ```php filename="PHP" copy
+
+    ```
+  </Tab>
+  <Tab>
+    ```java filename="Java" copy
+
+    ```
+  </Tab>
+  <Tab>
+    ```go filename="GO" copy
+
+    ```
+  </Tab>
+  <Tab>
+    ```c filename="C" copy
+
+    ```
+  </Tab>
+</Tabs>
+
+### Response
+
+#### Table View
+
+| Data Type |  Key  | Value | Description                           |
+|:---------| :------------: | :---------------- |:--------------------------------------|
+| String | id | `4a24ea32-3fbc-4667-ad78-d5bd1652a5cb` | Unique identifier for the API Request |
+| String | status | `success` or `error` | Status of the API Request             |
+| Number | timestamp | `1620120000` | Timestamp of the API Request          |
+| String | content | `Lorem ipsum dolor...` | Extracted text from the PDF           |
+| Number | Processing Count  | `223` | Number of Words Extracted |
+
+#### JSON View
+
+```json filename="JSON" copy
+{
+  "id": "77d4d87d-6e7e-4556-a4c2-aab535cfb5b4",
+  "status": "success",
+  "timestamp": "1683173445143",
+  "content": {
+    "text_content": "WorqHat\n\n🎉 Our Conversational Language Model WorqBot is now live for Beta use! Try out Now.🤖\n\n Resources\n\nAPIs\n\nConnect your app to WorqHat\n\nDocumentations\n\nLearn how to use our products\n\nChangelogs\n\nCheck what's new\n\nCareers\n\nFind your dream role\n\nCommunity\n\nConnect with other developers, designers, and entrepreneurs\n\nSecurity\n\nOur Security Principles and Practices\n\nBlog\n\nInterviews, tutorials, Updates and more\n\nStatus\n\nOutage updates and announcements\n\nGreen Initiatives\n\nPartnerships to make the World Greener\n\nContact Us\n\nGet in touch with us\n\n\n\n\n\nEnterprise WorqHat Playground\n\nJoin Waitlist\n\nThe Custom Apps You Want to Build -\n\nWithout the Dev Time\n\nRevolutionize Your Startup or Business with Customizable Apps, Automation, and Workflows - Managed by Our\n\nAdvanced AI\n\nJoin Waitlist Learn more →\n\nEmpowering Organizations of All Sizes\n\nFrom Cutting-Edge Startups to Established Organizations - with the Best Product Teams\n\nExperience the Future With\n\nAI Powered Workspaces\n\nSay Hello to Unmatched UI Precision and World-Class Performance with WorqHat -\n\nWhere Advanced AI Meets Elegance!\n\nGet Things Done Faster\n\nBuilt for speed with 50ms interactions and real-time sync between data and devices. We use the latest technologies and advancements in AI to make sure every interaction is lightning fast.\n\nFine Grained Access Controls & Logs\n\nGranularly control which Team Members can access which apps and which resources. Add custom authentication for end users as well. And after they use the apps, query what they did via the audit logs.\n\nDesigned for Modern Teams\n\nComes with built-in workflows that create focus and routine, so you can get more done in less time. WorqHat is designed to help you and your team work together, so you can get more done.\n\nYour Very Own AI Powered Assistant\n\nComplete any action in seconds with the global command menu. WorqHat’s AI assistant can help you find the right app, run a workflow, or even create a new one.\n\nNo Screen is Too Big or Small\n\nYour Custom Builds, Apps and Pages adapt to any screen size, so you can create a seamless experience for your users, no matter what device they’re using.\n\nEverything stays in sync\n\nConnect apps to the same data to create powerful, multi-platform scenarios that will leave your colleagues speechless. WorqHat’s powerful data management tools make it easy to keep everything in sync.\n\nA complete set of PowerfulBuilding Blocks\n\nAll internal tools are made up of the same building blocks: Tables, Lists, Charts, Forms, Wizards, Maps and so on. WorqHat provides those blocks out of the box so you can spend your time assembling your UI, not inventing it from scratch. Instead of hunting down the best React table library, you can put together your app in a few minutes by dragging and dropping. We have gone a step ahead and made it even easier for you to add your Components through Conversations that is supported by both Text and Voice Commands.\n\nTransform Your Data into Stunning Visuals withour AI\n\nCreate custom portals, customer dashboards, user directories, automated workflows and more with the data you already have. We make it easy for you to transform your data into powerful tools that will streamline your workflows and improve your overall productivity.\n\nJoin Waitlist Learn more →\n\nThe Editor that Brings it allTogether\n\nSimple. Familiar. But built to adapt to your team’s needs. WorqHat brings all your words, data, and teamwork into one powerful doc. WorqHat Docs comes with a set of powerful building blocks, so you can use these as the components to create the tools your team needs.\n\nThe single source of truth for everything teams need\n\nApps that can’t combine text, tables, and integrations just aren’t equipped to be an all-in-one solution. With WorqDocs, you can create docs for everything from dashboards to databases to complex project trackers, and keep your workflows in one place. Whats more, you can use these as the Building Block for Custom Apps.\n\nBuild any page, communicate any idea\n\nWorqDocs' drag and drop interface simplifies document creation with its user-friendly platform. Anyone can add images, to-do's, toggles, lists, and embedded databases with just a few clicks. Experience the power and simplicity of WorqDocs today and streamline your document creation process.\n\nGo From Idea to Done in Minutes\n\nPowered by AI and machine learning, WorqDocs' document creation platform is designed to help you create documents faster than ever before. WorqDocs' AI engine automatically formats your documents, writes content for you so you can focus on what matters most. So now, its time to showoff your Ideas to the world.\n\nCentralize data from any source and create aSingle Source of Truth\n\nOnce you've brought all of your data into WorqHat, you can create a single source of truth for your business. This means that everyone in your organization is working with the same information, reducing the risk of errors and miscommunication. With our intuitive interface, you can build custom dashboards that give you a real-time view.\n\nSuper Cells\n\nTurn your spreadsheets into data hubs. Connect to internal APIs and build automations that keep data in sync and your workflows running smoothly.From every minute to every month, schedule updates that refresh any cell using natural languages.\n\nInteractive Tools\n\nTurn your Databases into interactive forms or dashboards that your users or customers can fill for real-time collaboration. Let WorqBot get the work done for you. Collaborate with your team or external partners.\n\nAdvanced Functions\n\nWe have also added Advanced Functions to the Database that allows you to Perform complex calculations and data transformations. You can also create and save your own custom functions and formulas and even share them with your team.\n\nUnlock Your Organization Goals with AdvancedAI Charts and Reports\n\nWhether you're a Startup or a Enterprise, detailed Charts and Reports with Predictive AI helps focus your team on what work should happen next and how the team should prepare itself to meet Targets. A healthy routine to maintain velocity and make meaningful progress.\n\nMore powerful charts\n\nLearn more from your data by filtering and sorting, comparing to past periods, layering on trendlines, aggregating, and more. It easier by viewing your data in a variety of charts and graphs. PS: The Graphs get updated automatically as your Data Changes.\n\nAssisted by AI\n\nAsk WorqBot to help you with your data. WorqBot will help you with your data by providing you with insights and recommendations. Give Instructions to fetch your Data from a WorqHat DB and WorqBot will do the rest.\n\nAdd context\n\nUse text to tell a story around your chart, reference your data or highlight the most important points. You can add it your Applications, Reports, and Dashboards and share it with your team or customers.\n\nBring Momentum\n\nthroughAutomated Workflows\n\nAutomate Email Workflows\n\nYou get dozens of daily e-mails, but only some need your immediate attention, so the e-mail classifier helps you maintain an organized inbox. For customer complaints, we summarize the main issue and notify #customer-support on WorqChat. Delayed orders go into #customer-relation. For others, we can add it to your database and send you a daily digest.\n\nAdd AI to your Products\n\nAfter a customer call with your support agent, you want to stay informed on what happened. Instead of listening to the whole call, create a Workflow that summarizes the main points. You can then choose to send it to your team or add it to your database for future reference.\n\nCreate Smart Internal Tools\n\nMany people experience writer's block when writing text. Quickly build an internal tool with WorqHat that automatically gathers information about the recipient from LinkedIn, summarizes the content and a Google search to a solution to the problem and then combine all of it to generate a highly personalized first draft. You can even ask WorqBot to send you a draft of the e-mail to review. Once you're happy with it, WorqBot will send it to the recipient. Send the details through a API request and watch the magic unfold.\n\nCreate Text Processing Pipelines\n\nAutomate the summarization of your articles, blog posts, products, and e-mail inbound. We will help you choose the right information that you want to keep. You can even chain multiple processes together to create Personalised Emails based on Form Submissions.\n\nCreate Image Processing Tools\n\nCreate custom image processing pipelines by chaining different models together. Select from different models and tune them according to your expectations. We support a variety of features for image processing: image generation, upscaling, inpainting, variations, image-to-image etc. One application is to automatically generate a blog post thumbnail.\n\nUnlock the Power of Natural Language Processing withAiCon\n\nOur revolutionary AI language model, AiCon - short for AI Content Optimization Network is at the heart of everything we do here at WorqHat. As a cutting-edge deep learning model, AiCon has been trained on massive amounts of data to be able to understand natural language with exceptional accuracy and at lightning fast speeds. This means that our intelligent chatbot, WorqBot, can not only communicate with you in plain English, but it also has the capability to understand most languages, making platform building faster and more accessible than ever before.\n\nOne of AiCon's most exciting features is its ability to generate entirely new content based on just a few prompts. Whether you are looking to create an article, blog post, or social media update, AiCon can help by generating high-quality content that is both informative and engaging. Additionally, AiCon can create visual content such as logos, design mock-ups, and more, making it a valuable tool for designers and creative professionals alike.\n\nBut AiCon's capabilities go beyond just generating text and images. Our intelligent chatbot, WorqBot, powered by AiCon, allows users to interface with our no-code builder using natural language. This means that you can simply tell WorqBot what you want to achieve, and it will guide you through the process of building a complex automation process or workflow in no time.\n\nOverall, we believe that AiCon represents the future of platform building, and we are proud to offer it as part of our commitment to making no-code platform building accessible to everyone. Combining machine learning with state-of-the-art natural language processing, AiCon is a powerful tool for anyone looking to build intelligent systems, automation flows, workflows, and more. Try it out for yourself and experience the power of AiCon today!\n\nVisit Playground Learn more →\n\nUnlock YourBusiness Potential\n\nBuild automation for every part of your business—from Sales and Marketing to HR and Operations to Customer Support and Management through automated workflows so that your team can focus on what really matters: growing the business.\n\nCustomize as you progress\n\nExtend and tailor experiences to meet your unique business needs, with no-code development, advanced AI automations and multiple templates and integrations made available on our marketplace.\n\nCreate value, fast\n\nEmpower Your Beneficiaries with WorqHat: Speed Up Your Operations and Enhance Team Productivity with Cutting-Edge Automation and Collaboration Tools, Deliver Tangible Benefits in Little Time.\n\nStreamlined automation\n\nOptimize Your Workflows by eliminating Repetitive Tasks and Create Customized Rules to Automate Your Workspace for Efficient Operations and Enhanced Team Productivity.\n\nTeam up without the chaos\n\nCollaborate Effortlessly by connecting Your Teams and Centralize Projects & Documents to Achieve Seamless Collaboration and Enhanced Efficiency, Moving Together as One.\n\nScale with confidence\n\nScale Your Business Transformation by accelerating Your Growth. Seamlessly Scale New Instances, and Effectively Respond to Demands for a Rapid and Effective Transformation\n\nFuture-proof your business\n\nStay Ahead of the Curve to Ensure Seamless Integration, Extensibility, and Continuous Access to Advanced Features, Keeping Everyone from Admins to End-Users on Top of Their Game.\n\nJoin Waitlist\n\nBring Your WorkTogether\n\nConnect your tools to WorqHat\n\nYou can use your favorite work tools to communicate, collaborate, and coordinate everything in one place - from start to finish. Trust WorqHat to streamline your workflow.\n\nAuthentication\n\nUser accounts and social login for your App through WorqAuth, Google, Microsoft, and more.\n\nProduct Management\n\nStreamline your collaborative product management with Miro, Figma, and more.\n\nPayments\n\nAccept payments through popular payment gateways such as Stripe, Razorpay, KoFi and more.\n\nImport Data\n\nEasy-to-use import feature that supports various sources including Excel, Sheets, and more.\n\nView All Integrations →\n\nUnbeatableAirtight Security\n\nWe ensure top-notch security for all your sensitive data by utilizing the strongest encryption standard available. With our secure authentication process and registration restrictions, you can rest assured that your confidential data and content are protected at all times. Trust WorqHat to help you manage organization access with ease while keeping your information safe and secure.\n\nData encryption\n\nWorqhat encrypts your data aligning with industry-tested and accepted standards.\n\nSecure, reliable infrastructure\n\nWorqhat uses reliable and secure data centers for hosting all your data Securely.\n\nOperational and device security\n\nWe develop and deploy infrastructure software using rigorous security practices.\n\nTwo Factor Authentication\n\nStrict authentication ensures only you can access your account.\n\nExperience the Future Today withWorqHat\n\nThe Ultimate Tech Companion for Your Business Needs!\n\nJoin Waitlist\n\nTake your Business to aNew Scale\n\nWorqHat offers fast and scalable hosting, advanced security solutions, and dedicated partnership to meet the unique needs of your enterprise. Trust us to deliver customized solutions to ensure optimal performance and protection of your sensitive data.\n\nExperience the power of enterprise-grade solutions with WorqHat.\n\nConnect with Sales About Enterprise →\n\nWe are Backed by\n\nReduce CarbonAs you Build Your Future\n\nAt WorqHat, We're Committed to Building a Sustainable Future with Innovative Carbon Removal Technologies! A Share of Our Revenue Goes Towards Scaling Emerging Initiatives. We are proud to Have Partnered With:\n\nFooter\n\nExperience the Next-Gen Workspace with WorqHat's AI-Powered Toolkit!\n\nProduct\n\n- Playground\n- No-Code Builder\n- WorqDocs\n- AI Workflows\n- Databases\n- Integrations\n\nCompany\n\n- Community\n- Careers\n- Documentation\n- Changelog\n- Blogs\n- Security\n\nSubscribe to our newsletter\n\nStay up to date with the latest news and updates from WorqHat.\n\n\n Join us!\n\n- LinkedIn >\n- Instagram\n- Facebook\n- Twitter\n- GitHub\n\n© 2023. Winlysis Pvt. Ltd., India All rights reserved.\n\n- Terms & Conditions\n- Privacy Policy\n-  Status",
+    "tags": [
+      {
+        "name": "language",
+        "value": "en",
+        "data": {}
+      },
+      {
+        "name": "thumbnail",
+        "value": "/resources/WorqHat TM Logo.png",
+        "data": {}
+      },
+      {
+        "name": "current_date",
+        "value": "2023-01-01",
+        "data": {}
+      },
+      {
+        "name": "title",
+        "span": [
+          "0",
+          "7"
+        ],
+        "span_text": "WorqHat",
+        "value": "WorqHat",
+        "data": {}
+      },
+      {
+        "name": "link",
+        "span": [
+          "45",
+          "52"
+        ],
+        "span_text": "WorqBot",
+        "value": "//playground.worqhat.app/worqbot",
+        "data": {}
+      },
+      {
+        "name": "link",
+        "span": [
+          "79",
+          "91"
+        ],
+        "span_text": "Try out Now.",
+        "value": "//playground.worqhat.app/worqbot",
+        "data": {}
+      },
+      {
+        "name": "image",
+        "span": [
+          "94",
+          "94"
+        ],
+        "value": "/resources/WorqHat TM Logo.png",
+        "data": {
+          "alt": "WorqHat Logo"
+        }
+      },
+      {
+        "name": "control",
+        "span": [
+          "94",
+          "105"
+        ],
+        "span_text": " Resources ",
+        "value": " Resources ",
+        "data": {}
+      },
+      {
+        "name": "link",
+        "span": [
+          "106",
+          "141"
+        ],
+        "span_text": "APIs\n\nConnect your app to WorqHat\n\n",
+        "value": "https://playground.worqhat.app/coming-soon",
+        "data": {}
+      },
+      {
+        "name": "link",
+        "span": [
+          "141",
+          "188"
+        ],
+        "span_text": "Documentations\n\nLearn how to use our products\n\n",
+        "value": "https://docs.worqhat.com/",
+        "data": {}
+      },
+      {
+        "name": "link",
+        "span": [
+          "188",
+          "218"
+        ],
+        "span_text": "Changelogs\n\nCheck what's new\n\n",
+        "value": "https://updates.worqhat.com/",
+        "data": {}
+      },
+      {
+        "name": "link",
+        "span": [
+          "218",
+          "249"
+        ],
+        "span_text": "Careers\n\nFind your dream role\n\n",
+        "value": "https://careers.worqhat.com/",
+        "data": {}
+      },
+      {
+        "name": "link",
+        "span": [
+          "249",
+          "321"
+        ],
+        "span_text": "Community\n\nConnect with other developers, designers, and entrepreneurs\n\n",
+        "value": "https://discord.com/invite/KHh9mguKBx",
+        "data": {}
+      },
+      {
+        "name": "link",
+        "span": [
+          "321",
+          "370"
+        ],
+        "span_text": "Security\n\nOur Security Principles and Practices\n\n",
+        "value": "/security",
+        "data": {}
+      },
+      {
+        "name": "link",
+        "span": [
+          "370",
+          "417"
+        ],
+        "span_text": "Blog\n\nInterviews, tutorials, Updates and more\n\n",
+        "value": "https://playground.worqhat.app/coming-soon",
+        "data": {}
+      },
+      {
+        "name": "link",
+        "span": [
+          "417",
+          "459"
+        ],
+        "span_text": "Status\n\nOutage updates and announcements\n\n",
+        "value": "https://worqhat-status.statuspage.io/",
+        "data": {}
+      },
+      {
+        "name": "link",
+        "span": [
+          "459",
+          "518"
+        ],
+        "span_text": "Green Initiatives\n\nPartnerships to make the World Greener\n\n",
+        "value": "/green-initiative",
+        "data": {}
+      },
+      {
+        "name": "link",
+        "span": [
+          "518",
+          "552"
+        ],
+        "span_text": "Contact Us\n\nGet in touch with us\n\n",
+        "value": "/contact-us",
+        "data": {}
+      },
+      {
+        "name": "link",
+        "span": [
+          "556",
+          "566"
+        ],
+        "span_text": "Enterprise",
+        "value": "/enterprise",
+        "data": {}
+      },
+      {
+        "name": "link",
+        "span": [
+          "567",
+          "585"
+        ],
+        "span_text": "WorqHat Playground",
+        "value": "https://playground.worqhat.app/worqbot",
+        "data": {}
+      },
+      {
+        "name": "link",
+        "span": [
+          "587",
+          "600"
+        ],
+        "span_text": "Join Waitlist",
+        "value": "https://join.worqhat.com/waitlist",
+        "data": {}
+      },
+      {
+        "name": "control",
+        "span": [
+          "95",
+          "601"
+        ],
+        "span_text": "Resources\n\nAPIs\n\nConnect your app to WorqHat\n\nDocumentations\n\nLearn how to use our products\n\nChangelogs\n\nCheck what's new\n\nCareers\n\nFind your dream role\n\nCommunity\n\nConnect with other developers, designers, and entrepreneurs\n\nSecurity\n\nOur Security Principles and Practices\n\nBlog\n\nInterviews, tutorials, Updates and more\n\nStatus\n\nOutage updates and announcements\n\nGreen Initiatives\n\nPartnerships to make the World Greener\n\nContact Us\n\nGet in touch with us\n\n\n\n\n\nEnterprise WorqHat Playground\n\nJoin Waitlist\n",
+        "value": "Resources\n\nAPIs\n\nConnect your app to WorqHat\n\nDocumentations\n\nLearn how to use our products\n\nChangelogs\n\nCheck what's new\n\nCareers\n\nFind your dream role\n\nCommunity\n\nConnect with other developers, designers, and entrepreneurs\n\nSecurity\n\nOur Security Principles and Practices\n\nBlog\n\nInterviews, tutorials, Updates and more\n\nStatus\n\nOutage updates and announcements\n\nGreen Initiatives\n\nPartnerships to make the World Greener\n\nContact Us\n\nGet in touch with us\n\n\n\n\n\nEnterprise WorqHat Playground\n\nJoin Waitlist\n",
+        "data": {}
+      },
+      {
+        "name": "link",
+        "span": [
+          "781",
+          "795"
+        ],
+        "span_text": "Join Waitlist ",
+        "value": "https://join.worqhat.com/waitlist",
+        "data": {}
+      },
+      {
+        "name": "link",
+        "span": [
+          "795",
+          "807"
+        ],
+        "span_text": "Learn more →",
+        "value": "#ai-powered-workspace",
+        "data": {}
+      },
+      {
+        "name": "image",
+        "span": [
+          "935",
+          "935"
+        ],
+        "value": "/resources/MIT_LOGO_PUNE.svg",
+        "data": {
+          "alt": "logo"
+        }
+      },
+      {
+        "name": "image",
+        "span": [
+          "935",
+          "935"
+        ],
+        "value": "/resources/Cummins-College-Logo-1.png",
+        "data": {
+          "alt": "logo"
+        }
+      },
+      {
+        "name": "image",
+        "span": [
+          "935",
+          "935"
+        ],
+        "value": "/resources/youthoverse_edited.webp",
+        "data": {
+          "alt": "logo"
+        }
+      },
+      {
+        "name": "image",
+        "span": [
+          "935",
+          "935"
+        ],
+        "value": "/resources/logo-color-1.png",
+        "data": {
+          "alt": "logo"
+        }
+      },
+      {
+        "name": "subheading",
+        "span": [
+          "1101",
+          "1123"
+        ],
+        "span_text": "Get Things Done Faster",
+        "value": "Get Things Done Faster",
+        "data": {}
+      },
+      {
+        "name": "subheading",
+        "span": [
+          "1314",
+          "1349"
+        ],
+        "span_text": "Fine Grained Access Controls & Logs",
+        "value": "Fine Grained Access Controls & Logs",
+        "data": {}
+      },
+      {
+        "name": "subheading",
+        "span": [
+          "1551",
+          "1576"
+        ],
+        "span_text": "Designed for Modern Teams",
+        "value": "Designed for Modern Teams",
+        "data": {}
+      },
+      {
+        "name": "subheading",
+        "span": [
+          "1766",
+          "1800"
+        ],
+        "span_text": "Your Very Own AI Powered Assistant",
+        "value": "Your Very Own AI Powered Assistant",
+        "data": {}
+      },
+      {
+        "name": "subheading",
+        "span": [
+          "1962",
+          "1991"
+        ],
+        "span_text": "No Screen is Too Big or Small",
+        "value": "No Screen is Too Big or Small",
+        "data": {}
+      },
+      {
+        "name": "subheading",
+        "span": [
+          "2148",
+          "2172"
+        ],
+        "span_text": "Everything stays in sync",
+        "value": "Everything stays in sync",
+        "data": {}
+      },
+      {
+        "name": "image",
+        "span": [
+          "2939",
+          "2939"
+        ],
+        "value": "/resources/spr-components-light.png",
+        "data": {
+          "alt": "Docs Screen Components"
+        }
+      },
+      {
+        "name": "image",
+        "span": [
+          "3259",
+          "3259"
+        ],
+        "value": "/resources/pages-ui-comp.png",
+        "data": {
+          "alt": "Responsive Screen"
+        }
+      },
+      {
+        "name": "link",
+        "span": [
+          "3259",
+          "3273"
+        ],
+        "span_text": "Join Waitlist ",
+        "value": "https://join.worqhat.com/waitlist",
+        "data": {}
+      },
+      {
+        "name": "link",
+        "span": [
+          "3273",
+          "3285"
+        ],
+        "span_text": "Learn more →",
+        "value": "#worqdocs",
+        "data": {}
+      },
+      {
+        "name": "image",
+        "span": [
+          "3594",
+          "3594"
+        ],
+        "value": "/resources/Docs.gif",
+        "data": {
+          "alt": "Docs Screen Record"
+        }
+      },
+      {
+        "name": "image",
+        "span": [
+          "6132",
+          "6132"
+        ],
+        "value": "/resources/Reports and Graphing.png",
+        "data": {
+          "alt": "Demo of the Graphing aand Charts Process"
+        }
+      },
+      {
+        "name": "control",
+        "span": [
+          "6903",
+          "6928"
+        ],
+        "span_text": "Automate Email Workflows ",
+        "value": "Automate Email Workflows ",
+        "data": {}
+      },
+      {
+        "name": "subheading",
+        "span": [
+          "6903",
+          "6928"
+        ],
+        "span_text": "Automate Email Workflows ",
+        "value": "Automate Email Workflows ",
+        "data": {
+          "element_id": "accordion-flush-heading-1"
+        }
+      },
+      {
+        "name": "image",
+        "span": [
+          "7282",
+          "7282"
+        ],
+        "value": "/resources/workflows/email-processing.png",
+        "data": {
+          "alt": "Email Processing Workflow"
+        }
+      },
+      {
+        "name": "control",
+        "span": [
+          "7282",
+          "7306"
+        ],
+        "span_text": "Add AI to your Products ",
+        "value": "Add AI to your Products ",
+        "data": {}
+      },
+      {
+        "name": "subheading",
+        "span": [
+          "7282",
+          "7306"
+        ],
+        "span_text": "Add AI to your Products ",
+        "value": "Add AI to your Products ",
+        "data": {
+          "element_id": "accordion-flush-heading-2"
+        }
+      },
+      {
+        "name": "image",
+        "span": [
+          "7583",
+          "7583"
+        ],
+        "value": "/resources/workflows/voice-processing.png",
+        "data": {
+          "alt": "Email Processing Workflow"
+        }
+      },
+      {
+        "name": "control",
+        "span": [
+          "7583",
+          "7611"
+        ],
+        "span_text": "Create Smart Internal Tools ",
+        "value": "Create Smart Internal Tools ",
+        "data": {}
+      },
+      {
+        "name": "subheading",
+        "span": [
+          "7583",
+          "7611"
+        ],
+        "span_text": "Create Smart Internal Tools ",
+        "value": "Create Smart Internal Tools ",
+        "data": {
+          "element_id": "accordion-flush-heading-3"
+        }
+      },
+      {
+        "name": "image",
+        "span": [
+          "8137",
+          "8137"
+        ],
+        "value": "/resources/workflows/smart-internal-tools.png",
+        "data": {
+          "alt": "Email Processing Workflow"
+        }
+      },
+      {
+        "name": "control",
+        "span": [
+          "8137",
+          "8170"
+        ],
+        "span_text": "Create Text Processing Pipelines ",
+        "value": "Create Text Processing Pipelines ",
+        "data": {}
+      },
+      {
+        "name": "subheading",
+        "span": [
+          "8137",
+          "8170"
+        ],
+        "span_text": "Create Text Processing Pipelines ",
+        "value": "Create Text Processing Pipelines ",
+        "data": {
+          "element_id": "accordion-flush-heading-4"
+        }
+      },
+      {
+        "name": "image",
+        "span": [
+          "8432",
+          "8432"
+        ],
+        "value": "/resources/workflows/text-processing-pipeline.png",
+        "data": {
+          "alt": "Text Processing Workflow"
+        }
+      },
+      {
+        "name": "control",
+        "span": [
+          "8432",
+          "8462"
+        ],
+        "span_text": "Create Image Processing Tools ",
+        "value": "Create Image Processing Tools ",
+        "data": {}
+      },
+      {
+        "name": "subheading",
+        "span": [
+          "8432",
+          "8462"
+        ],
+        "span_text": "Create Image Processing Tools ",
+        "value": "Create Image Processing Tools ",
+        "data": {
+          "element_id": "accordion-flush-heading-5"
+        }
+      },
+      {
+        "name": "image",
+        "span": [
+          "8815",
+          "8815"
+        ],
+        "value": "/resources/workflows/image-pipeline.png",
+        "data": {
+          "alt": "Image Processing Workflow"
+        }
+      },
+      {
+        "name": "image",
+        "span": [
+          "9435",
+          "9435"
+        ],
+        "value": "/resources/AiCon Mockup.jpg",
+        "data": {
+          "alt": "Screen Rendering of WorqBot Generating Content and Images"
+        }
+      },
+      {
+        "name": "link",
+        "span": [
+          "10703",
+          "10720"
+        ],
+        "span_text": "Visit Playground ",
+        "value": "https://playground.worqhat.app/worqbot",
+        "data": {}
+      },
+      {
+        "name": "link",
+        "span": [
+          "10720",
+          "10732"
+        ],
+        "span_text": "Learn more →",
+        "value": "https://docs.worqhat.com/en/articles/7055968-introducing-worqbot-ai-your-personal-ai-language-model-now-in-public-beta",
+        "data": {}
+      },
+      {
+        "name": "image",
+        "span": [
+          "10998",
+          "10998"
+        ],
+        "value": "/resources/benefits/1.svg",
+        "data": {
+          "alt": "Icon for Customize as you progress"
+        }
+      },
+      {
+        "name": "subheading",
+        "span": [
+          "10998",
+          "11023"
+        ],
+        "span_text": "Customize as you progress",
+        "value": "Customize as you progress",
+        "data": {}
+      },
+      {
+        "name": "image",
+        "span": [
+          "11217",
+          "11217"
+        ],
+        "value": "/resources/benefits/3.svg",
+        "data": {
+          "alt": "Icon for Create Value Fast"
+        }
+      },
+      {
+        "name": "subheading",
+        "span": [
+          "11217",
+          "11235"
+        ],
+        "span_text": "Create value, fast",
+        "value": "Create value, fast",
+        "data": {}
+      },
+      {
+        "name": "image",
+        "span": [
+          "11430",
+          "11430"
+        ],
+        "value": "/resources/benefits/2.svg",
+        "data": {
+          "alt": "Icon for Streamlined Automation"
+        }
+      },
+      {
+        "name": "subheading",
+        "span": [
+          "11430",
+          "11452"
+        ],
+        "span_text": "Streamlined automation",
+        "value": "Streamlined automation",
+        "data": {}
+      },
+      {
+        "name": "image",
+        "span": [
+          "11623",
+          "11623"
+        ],
+        "value": "/resources/benefits/4.svg",
+        "data": {
+          "alt": "Icon for Team up without the Chaos"
+        }
+      },
+      {
+        "name": "subheading",
+        "span": [
+          "11623",
+          "11648"
+        ],
+        "span_text": "Team up without the chaos",
+        "value": "Team up without the chaos",
+        "data": {}
+      },
+      {
+        "name": "image",
+        "span": [
+          "11820",
+          "11820"
+        ],
+        "value": "/resources/benefits/5.svg",
+        "data": {
+          "alt": "Icon for Scale with Confidence"
+        }
+      },
+      {
+        "name": "subheading",
+        "span": [
+          "11820",
+          "11841"
+        ],
+        "span_text": "Scale with confidence",
+        "value": "Scale with confidence",
+        "data": {}
+      },
+      {
+        "name": "image",
+        "span": [
+          "12016",
+          "12016"
+        ],
+        "value": "/resources/benefits/6.svg",
+        "data": {
+          "alt": "Icon for Future Proof your Business"
+        }
+      },
+      {
+        "name": "subheading",
+        "span": [
+          "12016",
+          "12042"
+        ],
+        "span_text": "Future-proof your business",
+        "value": "Future-proof your business",
+        "data": {}
+      },
+      {
+        "name": "link",
+        "span": [
+          "12224",
+          "12238"
+        ],
+        "span_text": "Join Waitlist ",
+        "value": "https://join.worqhat.com/waitlist",
+        "data": {}
+      },
+      {
+        "name": "image",
+        "span": [
+          "12295",
+          "12295"
+        ],
+        "value": "/resources/integrations/logo-dropbox-40.svg",
+        "data": {
+          "alt": "Dropbox Icon"
+        }
+      },
+      {
+        "name": "image",
+        "span": [
+          "12295",
+          "12295"
+        ],
+        "value": "/resources/integrations/logo-figma-40.svg",
+        "data": {
+          "alt": "Figma Icon"
+        }
+      },
+      {
+        "name": "image",
+        "span": [
+          "12295",
+          "12295"
+        ],
+        "value": "/resources/integrations/adobe-xd-icon.png",
+        "data": {
+          "alt": "Adobde XD Icon"
+        }
+      },
+      {
+        "name": "image",
+        "span": [
+          "12295",
+          "12295"
+        ],
+        "value": "/resources/integrations/logo-gdrive-40.svg",
+        "data": {
+          "alt": "Google Drive Icon"
+        }
+      },
+      {
+        "name": "image",
+        "span": [
+          "12295",
+          "12295"
+        ],
+        "value": "/resources/integrations/logo-gmail-40.svg",
+        "data": {
+          "alt": "Gmail Icon"
+        }
+      },
+      {
+        "name": "image",
+        "span": [
+          "12295",
+          "12295"
+        ],
+        "value": "/resources/integrations/logo-outlook-40.svg",
+        "data": {
+          "alt": "Outlook Icon"
+        }
+      },
+      {
+        "name": "image",
+        "span": [
+          "12295",
+          "12295"
+        ],
+        "value": "/resources/integrations/logo-slack-40.svg",
+        "data": {
+          "alt": "Slack Icon"
+        }
+      },
+      {
+        "name": "image",
+        "span": [
+          "12295",
+          "12295"
+        ],
+        "value": "/resources/integrations/logo-vimeo-40.svg",
+        "data": {
+          "alt": "Vimeo Icon"
+        }
+      },
+      {
+        "name": "image",
+        "span": [
+          "12295",
+          "12295"
+        ],
+        "value": "/resources/integrations/loom_logo.png",
+        "data": {
+          "alt": "Loom Icon"
+        }
+      },
+      {
+        "name": "image",
+        "span": [
+          "12295",
+          "12295"
+        ],
+        "value": "/resources/integrations/canva-logo.png",
+        "data": {
+          "alt": "Canva Icon"
+        }
+      },
+      {
+        "name": "image",
+        "span": [
+          "12295",
+          "12295"
+        ],
+        "value": "/resources/integrations/Whimsical-logo.png",
+        "data": {
+          "alt": "Whimsical Icon"
+        }
+      },
+      {
+        "name": "image",
+        "span": [
+          "12295",
+          "12295"
+        ],
+        "value": "/resources/integrations/miro-2.svg",
+        "data": {
+          "alt": "Miro Icon"
+        }
+      },
+      {
+        "name": "link",
+        "span": [
+          "12881",
+          "12904"
+        ],
+        "span_text": "View All Integrations →",
+        "value": "https://playground.worqhat.app/coming-soon",
+        "data": {}
+      },
+      {
+        "name": "image",
+        "span": [
+          "13743",
+          "13743"
+        ],
+        "value": "/resources/worqhat icon.png",
+        "data": {
+          "alt": "WorqHat Icon"
+        }
+      },
+      {
+        "name": "link",
+        "span": [
+          "13838",
+          "13852"
+        ],
+        "span_text": "Join Waitlist ",
+        "value": "#",
+        "data": {}
+      },
+      {
+        "name": "link",
+        "span": [
+          "14206",
+          "14225"
+        ],
+        "span_text": "Connect with Sales ",
+        "value": "/contact-us",
+        "data": {}
+      },
+      {
+        "name": "link",
+        "span": [
+          "14225",
+          "14243"
+        ],
+        "span_text": "About Enterprise →",
+        "value": "/enterprise",
+        "data": {}
+      },
+      {
+        "name": "image",
+        "span": [
+          "14263",
+          "14263"
+        ],
+        "value": "/resources/backers/126876670-bd015eeb-35c8-4a5e-9594-d6a0a11ed91c.png",
+        "data": {
+          "alt": "logo"
+        }
+      },
+      {
+        "name": "image",
+        "span": [
+          "14263",
+          "14263"
+        ],
+        "value": "/resources/backers/126877188-88332b1e-c4a8-4453-a92d-5e0517941f07.png",
+        "data": {
+          "alt": "logo"
+        }
+      },
+      {
+        "name": "image",
+        "span": [
+          "14263",
+          "14263"
+        ],
+        "value": "https://d33wubrfki0l68.cloudfront.net/4dc5df63255f9f0c1f54c804dd3149cf11308507/b7a70/images/logos/3.svg",
+        "data": {
+          "alt": "logo"
+        }
+      },
+      {
+        "name": "image",
+        "span": [
+          "14263",
+          "14263"
+        ],
+        "value": "/resources/backers/126877262-8ad92411-f45b-405d-acac-7cc49ade42b4.png",
+        "data": {
+          "alt": "logo"
+        }
+      },
+      {
+        "name": "image",
+        "span": [
+          "14263",
+          "14263"
+        ],
+        "value": "/resources/backers/126877325-0de5000c-1dca-48b7-83f8-960aa7651961.png",
+        "data": {
+          "alt": "logo"
+        }
+      },
+      {
+        "name": "image",
+        "span": [
+          "14263",
+          "14263"
+        ],
+        "value": "/resources/backers/126877426-2613eedb-9319-4f1e-9cd4-624d5672a99b.png",
+        "data": {
+          "alt": "logo"
+        }
+      },
+      {
+        "name": "image",
+        "span": [
+          "14263",
+          "14263"
+        ],
+        "value": "/resources/backers/126877489-0230fbc4-e1c0-45d2-974d-2e78b05df361.png",
+        "data": {
+          "alt": "logo"
+        }
+      },
+      {
+        "name": "image",
+        "span": [
+          "14263",
+          "14263"
+        ],
+        "value": "/resources/backers/126877795-f569a51b-57d4-4dcb-832b-a0324e2c27a6.png",
+        "data": {
+          "alt": "logo"
+        }
+      },
+      {
+        "name": "image",
+        "span": [
+          "14263",
+          "14263"
+        ],
+        "value": "/resources/backers/Freshworks-vector-logo.svg.png",
+        "data": {
+          "alt": "logo"
+        }
+      },
+      {
+        "name": "image",
+        "span": [
+          "14263",
+          "14263"
+        ],
+        "value": "/resources/backers/ycombinator-logo-ee6c80faf1d1ce2491d8.png",
+        "data": {
+          "alt": "logo"
+        }
+      },
+      {
+        "name": "image",
+        "span": [
+          "14263",
+          "14263"
+        ],
+        "value": "/resources/backers/seedstars_blue.fcbd2a36c116.svg",
+        "data": {
+          "alt": "logo"
+        }
+      },
+      {
+        "name": "image",
+        "span": [
+          "14263",
+          "14263"
+        ],
+        "value": "/resources/backers/Financial_Times_logo_PNG4.png",
+        "data": {
+          "alt": "logo"
+        }
+      },
+      {
+        "name": "image",
+        "span": [
+          "14512",
+          "14512"
+        ],
+        "value": "/resources/seachange logo.png",
+        "data": {
+          "alt": "Seachange Logo"
+        }
+      },
+      {
+        "name": "image",
+        "span": [
+          "14512",
+          "14512"
+        ],
+        "value": "/resources/Mission Zero Technologies.webp",
+        "data": {
+          "alt": "Mission Zero logo"
+        }
+      },
+      {
+        "name": "image",
+        "span": [
+          "14512",
+          "14512"
+        ],
+        "value": "/resources/heirloom.webp",
+        "data": {
+          "alt": "Heirloom logo"
+        }
+      },
+      {
+        "name": "image",
+        "span": [
+          "14512",
+          "14512"
+        ],
+        "value": "/resources/captura.png",
+        "data": {
+          "alt": "Captura logo"
+        }
+      },
+      {
+        "name": "image",
+        "span": [
+          "14512",
+          "14512"
+        ],
+        "value": "/resources/Arca_Yellow_Black_3_Full_Logo_RGB.png",
+        "data": {
+          "alt": "Arca logo"
+        }
+      },
+      {
+        "name": "subheading",
+        "span": [
+          "14512",
+          "14518"
+        ],
+        "span_text": "Footer",
+        "value": "Footer",
+        "data": {
+          "element_id": "footer-heading"
+        }
+      },
+      {
+        "name": "image",
+        "span": [
+          "14520",
+          "14520"
+        ],
+        "value": "/resources/WorqHat TM Logo.png",
+        "data": {
+          "alt": "Worqhat"
+        }
+      },
+      {
+        "name": "subheading",
+        "span": [
+          "14590",
+          "14597"
+        ],
+        "span_text": "Product",
+        "value": "Product",
+        "data": {}
+      },
+      {
+        "name": "link",
+        "span": [
+          "14601",
+          "14611"
+        ],
+        "span_text": "Playground",
+        "value": "https://playground.worqhat.app/worqbot",
+        "data": {}
+      },
+      {
+        "name": "link",
+        "span": [
+          "14614",
+          "14629"
+        ],
+        "span_text": "No-Code Builder",
+        "value": "#no-code-builder",
+        "data": {}
+      },
+      {
+        "name": "link",
+        "span": [
+          "14632",
+          "14640"
+        ],
+        "span_text": "WorqDocs",
+        "value": "#worqdocs",
+        "data": {}
+      },
+      {
+        "name": "link",
+        "span": [
+          "14643",
+          "14655"
+        ],
+        "span_text": "AI Workflows",
+        "value": "#workflows",
+        "data": {}
+      },
+      {
+        "name": "link",
+        "span": [
+          "14658",
+          "14667"
+        ],
+        "span_text": "Databases",
+        "value": "#databases",
+        "data": {}
+      },
+      {
+        "name": "link",
+        "span": [
+          "14670",
+          "14682"
+        ],
+        "span_text": "Integrations",
+        "value": "https://playground.worqhat.app/coming-soon",
+        "data": {}
+      },
+      {
+        "name": "subheading",
+        "span": [
+          "14684",
+          "14691"
+        ],
+        "span_text": "Company",
+        "value": "Company",
+        "data": {}
+      },
+      {
+        "name": "link",
+        "span": [
+          "14695",
+          "14704"
+        ],
+        "span_text": "Community",
+        "value": "https://discord.com/invite/KHh9mguKBx",
+        "data": {}
+      },
+      {
+        "name": "link",
+        "span": [
+          "14707",
+          "14714"
+        ],
+        "span_text": "Careers",
+        "value": "https://careers.worqhat.com/",
+        "data": {}
+      },
+      {
+        "name": "link",
+        "span": [
+          "14717",
+          "14730"
+        ],
+        "span_text": "Documentation",
+        "value": "https://docs.worqhat.com/en/",
+        "data": {}
+      },
+      {
+        "name": "link",
+        "span": [
+          "14733",
+          "14742"
+        ],
+        "span_text": "Changelog",
+        "value": "https://updates.worqhat.com/",
+        "data": {}
+      },
+      {
+        "name": "link",
+        "span": [
+          "14745",
+          "14750"
+        ],
+        "span_text": "Blogs",
+        "value": "https://playground.worqhat.app/coming-soon",
+        "data": {}
+      },
+      {
+        "name": "link",
+        "span": [
+          "14753",
+          "14761"
+        ],
+        "span_text": "Security",
+        "value": "/security",
+        "data": {}
+      },
+      {
+        "name": "subheading",
+        "span": [
+          "14763",
+          "14790"
+        ],
+        "span_text": "Subscribe to our newsletter",
+        "value": "Subscribe to our newsletter",
+        "data": {}
+      },
+      {
+        "name": "control",
+        "span": [
+          "14857",
+          "14867"
+        ],
+        "span_text": " Join us! ",
+        "value": " Join us! ",
+        "data": {
+          "element_id": "subscribeEmail"
+        }
+      },
+      {
+        "name": "link",
+        "span": [
+          "14870",
+          "14881"
+        ],
+        "span_text": "LinkedIn > ",
+        "value": "https://www.linkedin.com/company/worqhat/",
+        "data": {}
+      },
+      {
+        "name": "link",
+        "span": [
+          "14883",
+          "14893"
+        ],
+        "span_text": "Instagram ",
+        "value": "https://www.instagram.com/WorqHat/",
+        "data": {}
+      },
+      {
+        "name": "link",
+        "span": [
+          "14895",
+          "14904"
+        ],
+        "span_text": "Facebook ",
+        "value": "https://www.facebook.com/worqhat",
+        "data": {}
+      },
+      {
+        "name": "link",
+        "span": [
+          "14906",
+          "14914"
+        ],
+        "span_text": "Twitter ",
+        "value": "https://www.twitter.com/WorqHat/",
+        "data": {}
+      },
+      {
+        "name": "link",
+        "span": [
+          "14916",
+          "14923"
+        ],
+        "span_text": "GitHub ",
+        "value": "https://github.com/WorqHat/",
+        "data": {}
+      },
+      {
+        "name": "link",
+        "span": [
+          "14982",
+          "15000"
+        ],
+        "span_text": "Terms & Conditions",
+        "value": "/terms-of-service",
+        "data": {}
+      },
+      {
+        "name": "link",
+        "span": [
+          "15003",
+          "15017"
+        ],
+        "span_text": "Privacy Policy",
+        "value": "/privacy-policy",
+        "data": {}
+      },
+      {
+        "name": "link",
+        "span": [
+          "15020",
+          "15028"
+        ],
+        "span_text": " Status ",
+        "value": "https://worqhat-status.statuspage.io/",
+        "data": {}
+      },
+      {
+        "name": "control",
+        "span": [
+          "14979",
+          "15029"
+        ],
+        "span_text": "\n- Terms & Conditions\n- Privacy Policy\n-  Status\n\n",
+        "value": "\n- Terms & Conditions\n- Privacy Policy\n-  Status\n\n",
+        "data": {}
+      }
+    ]
+  },
+  "processing_count": "2152"
+}
+```
+
+### Error Codes
+
+| Error Code | Description                                        |
+|:---------|:---------------------------------------------------|
+| 400 | Bad Request                                        |
+| 401 | Unauthorized : Invalid API Key or Organization Key |
+| 402 | Syntax Error : Invalid JSON                        |

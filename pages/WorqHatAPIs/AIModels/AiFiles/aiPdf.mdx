@@ -213,7 +213,7 @@ send a POST Request to the API Endpoint with the Headers and the Request Body, a
     ```
   </Tab>
   <Tab>
-    ```py filename="Ruby" copy
+    ```ruby filename="Ruby" copy
     require "uri"
     require "net/http"
 
@@ -233,7 +233,7 @@ send a POST Request to the API Endpoint with the Headers and the Request Body, a
     ```
   </Tab>
   <Tab>
-    ```py filename="PHP" copy
+    ```php filename="PHP" copy
     <?php
 
     $curl = curl_init();
@@ -355,3 +355,35 @@ send a POST Request to the API Endpoint with the Headers and the Request Body, a
     ```
   </Tab>
 </Tabs>
+
+### Response
+
+#### Table View
+
+| Data Type |  Key  | Value | Description                           |
+|:---------| :------------: | :---------------- |:--------------------------------------|
+| String | id | `4a24ea32-3fbc-4667-ad78-d5bd1652a5cb` | Unique identifier for the API Request |
+| String | status | `success` or `error` | Status of the API Request             |
+| Number | timestamp | `1620120000` | Timestamp of the API Request          |
+| String | content | `Lorem ipsum dolor...` | Extracted text from the PDF           |
+| Number | Processing Count  | `223` | Number of Words Extracted |
+
+#### JSON View
+
+```json filename="JSON" copy
+{
+  "id": "4a24ea32-3fbc-4667-ad78-d5bd1652a5cb",
+  "status": "success",
+  "timestamp": 1620120000,
+  "content": "Lorem ipsum dolor...",
+  "processing_count": 223
+}
+```
+
+### Error Codes
+
+| Error Code | Description                                        |
+|:---------|:---------------------------------------------------|
+| 400 | Bad Request                                        |
+| 401 | Unauthorized : Invalid API Key or Organization Key |
+| 402 | Syntax Error : Invalid JSON                        |
