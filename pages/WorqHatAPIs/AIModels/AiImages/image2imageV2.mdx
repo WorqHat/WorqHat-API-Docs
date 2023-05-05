@@ -1,0 +1,483 @@
+import { Callout, Tab, Tabs } from "nextra-theme-docs";
+
+# Image Variations V2
+
+Text to image generation models are a type of artificial intelligence that can create images
+based on textual descriptions. These models use machine learning algorithms to learn the
+relationship between text and images, and can generate realistic-looking images that match the
+textual description. Now you can use these same models to modify existing images, creating
+new variations of the original image. You can either choose the guide the model by providing
+a textual description of the image you want to create, or you can let the model generate a
+random image based on the original image.
+
+
+## How does it work?
+
+The ImageGen AI from WorqHat uses a combination of text encoding, image encoding, and image
+decoding to generate images based on a textual prompt. The process begins by inputting a text prompt into a text encoder, which maps the prompt to a representation space. Next, a model called the prior maps the text encoding to an image encoding that captures the semantic information of the prompt contained in the text encoding. Finally, an image decoder generates a stochastic image based on the semantic information captured in the image encoding. While this high-level overview provides a general idea of how the AI Image Generator works, there are many interesting implementation details to consider. Nonetheless, it's clear that the AI Image Generator has many potential applications, ranging from generating product images for e-commerce websites to creating visual representations of text-based data.
+
+## Use Cases
+
+- **E-commerce product images**: The AI Image Generator can be used to create high-quality product
+images for e-commerce websites, reducing the need for costly and time-consuming photo shoots.
+
+- **Visualizing data**: The AI Image Generator can be used to create visual representations of
+text-based data, such as graphs and charts, which can be useful for presentations and reports.
+
+- **Book covers**: The AI Image Generator can be used to create visually striking book covers that
+capture the essence of the story and attract potential readers.
+
+- **Video game design**: The AI Image Generator can be used to generate images for use in video games,
+such as landscapes and character designs.
+
+- **Architecture and interior design**: The AI Image Generator can be used to create visual
+representations of proposed architecture and interior design projects, providing a realistic preview of what the finished project will look like.
+
+- **Marketing materials**: The AI Image Generator can be used to create eye-catching marketing
+materials, such as banners and social media posts, that stand out from the crowd and help to promote a brand or product.
+
+## How to use it?
+
+### API Endpoint
+
+```bash filename="API Endpoint" copy
+https://api.worqhat.com/api/ai/images/modify/v2
+```
+
+### Headers
+
+
+| Header Name |  Required  | Description |
+|:---------| :------------: | :---------------- |
+| x-api-key| ``true`` | This helps us to identify the User Sending the Request |
+| x-org-key|  ``true`` | This helps us to identify the Workspace Associated with the Request. This helps users to maintain easier logs |
+
+### Request Body
+
+The Request Body is a Formdata Object. The Formdata Object has the following fields :
+
+- File Object (You can upload any Existing Image File)
+- Modifications (The Modifications you want to make to the Image. If you want to generate a
+random image, you can leave this field empty.)
+- output_type (The Output Type of the Image. You can choose from `URL` or `blob`. The default value is
+URL)
+- Similarity (The Similarity of the Image to the Original Image. The default value is `50`)
+
+| Data Type |    Key    | Value | Description                           |
+|:---------|:---------:| :---------------- |:--------------------------------------|
+| File Object | file | ``File Object`` | The File Object of the Image you want to modify |
+| String | modifications | ``String`` | The Modifications you want to make to the Image. If you want to generate a random image, you can leave this field empty. |
+| String | output_type | `URL` or `blob` | The Output Type of the Image. You can choose from `URL` or `blob`. The default value is URL |
+| Number | similarity | ``Number`` | The Similarity of the Image to the Original Image. The default value is `50` |
+
+
+<Callout type="warning" emoji="⚠️">
+  Please note that the Request Body is a Formdata Object. You can use any Formdata Object to send
+  the Request Body. The Request Body is not a JSON Object.
+</Callout>
+
+<Callout type="warning" emoji="⚠️">
+  Keep in mind that the File Object dimensions should not exceed `1024x1024`.
+</Callout>
+
+
+```json filename="Request Body (Formdata)" copy
+{
+  "existing_image": "File Object",
+  "modifications": "String",
+  "output_type": "URL or blob",
+  "similarity": "Number"
+}
+```
+
+
+
+### Sample Code
+
+You can use the following Endpoints on any Codebase, including client side codebases as long as
+you are able to send the Headers and the Request Body to the API Endpoint. It's that easy! Just
+send a POST Request to the API Endpoint with the Headers and the Request Body, and you are good to go!
+
+
+<Tabs items={['cURL', 'Client JS', 'NodeJS', 'Python', 'Ruby', 'PHP', 'Java', 'GO', 'C']}>
+  <Tab>
+    ```` bash filename="cURL" copy
+    curl --location 'https://api.worqhat.com/api/ai/images/modify/v2' \
+    --header 'x-api-key: •••••••' \
+    --header 'x-org-key: •••••••' \
+    --form 'existing_image=@"/C:/Users/ghosh/Downloads/Earth Day winners/1682109016516.png"' \
+    --form 'modification="Change the colour theme to red"' \
+    --form 'similarity=10' \
+    --form 'outputType="URL"'
+    ````
+  </Tab>
+  <Tab>
+    ````js filename="Client JS fetch" copy
+    var myHeaders = new Headers();
+    myHeaders.append("x-api-key", "•••••••");
+    myHeaders.append("x-org-key", "•••••••");
+
+    var formdata = new FormData();
+    formdata.append("existing_image", fileInput.files[0], "1682109016516.png");
+    formdata.append("modification", "Change the colour theme to red");
+    formdata.append("similarity", 10);
+    formdata.append("outputType", "URL");
+
+    var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: formdata,
+    redirect: 'follow'
+  };
+
+    fetch("https://api.worqhat.com/api/ai/images/modify/v2", requestOptions)
+    .then(response => response.text())
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));
+    ````
+
+    ````js filename="Client JS XHR" copy
+    // WARNING: For POST requests, body is set to null by browsers.
+    var data = new FormData();
+    data.append("existing_image", fileInput.files[0], "1682109016516.png");
+    data.append("modification", "Change the colour theme to red");
+    data.append("similarity", 10);
+    data.append("outputType", "URL");
+
+    var xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
+
+    xhr.addEventListener("readystatechange", function() {
+    if(this.readyState === 4) {
+    console.log(this.responseText);
+  }
+  });
+
+    xhr.open("POST", "https://api.worqhat.com/api/ai/images/modify/v2");
+    xhr.setRequestHeader("x-api-key", "•••••••");
+    xhr.setRequestHeader("x-org-key", "•••••••");
+
+    xhr.send(data);
+
+    ````
+
+  </Tab>
+  <Tab>
+    ````js filename="NodeJS" copy
+    var request = require('request');
+    var fs = require('fs');
+    var options = {
+    'method': 'POST',
+    'url': 'https://api.worqhat.com/api/ai/images/modify/v2',
+    'headers': {
+    'x-api-key': '•••••••',
+    'x-org-key': '•••••••'
+  },
+    formData: {
+    'existing_image': {
+    'value': fs.createReadStream('/C:/Users/ghosh/Downloads/1682109016516.png'),
+    'options': {
+    'filename': '1682109016516.png',
+  }
+  },
+    'modification': 'Change the colour theme to red',
+    'similarity': '10',
+    'outputType': 'URL'
+  }
+  };
+    request(options, function (error, response) {
+    if (error) throw new Error(error);
+    console.log(response.body);
+  });
+
+    ````
+
+    ````js filename="NodeJS Axios" copy
+    var axios = require('axios');
+    var FormData = require('form-data');
+    var fs = require('fs');
+    var data = new FormData();
+    data.append('existing_image', fs.createReadStream('/C:/Users/ghosh/1682109016516.png'));
+    data.append('modification', 'Change the colour theme to red');
+    data.append('similarity', '10');
+    data.append('outputType', 'URL');
+
+    var config = {
+    method: 'post',
+    maxBodyLength: Infinity,
+    url: 'https://api.worqhat.com/api/ai/images/modify/v2',
+    headers: {
+    'x-api-key': '•••••••',
+    'x-org-key': '•••••••',
+    ...data.getHeaders()
+  },
+    data : data
+  };
+
+    axios(config)
+    .then(function (response) {
+    console.log(JSON.stringify(response.data));
+  })
+    .catch(function (error) {
+    console.log(error);
+  });
+
+
+    ````
+  </Tab>
+  <Tab>
+    ````py filename="Python Requests" copy
+    import requests
+
+    url = "https://api.worqhat.com/api/ai/images/modify/v2"
+
+    payload = {'modification': 'Change the colour theme to red',
+    'similarity': '10',
+    'outputType': 'URL'}
+
+    files = [
+    ('existing_image', ('1682109016516.png', open('/C:/Users/ghosh/1682109016516.png', 'rb'),
+    'image/png'))
+    ]
+
+    headers = {
+    'x-api-key': '•••••••',
+    'x-org-key': '•••••••'
+  }
+
+    response = requests.post(url, headers=headers, data=payload, files=files)
+
+    print(response.text)
+
+    ````
+  </Tab>
+  <Tab>
+    ````ruby filename="Ruby" copy
+    require "uri"
+    require "net/http"
+
+    url = URI("https://api.worqhat.com/api/ai/images/modify/v2")
+
+    https = Net::HTTP.new(url.host, url.port)
+    https.use_ssl = true
+
+    request = Net::HTTP::Post.new(url)
+    request["x-api-key"] = "•••••••"
+    request["x-org-key"] = "•••••••"
+    form_data = [['existing_image', File.open('/C:/Users/ghosh/1682109016516.png')],['modification',
+    'Change the colour theme to red'],['similarity', '10'],['outputType', 'URL']]
+    request.set_form form_data, 'multipart/form-data'
+    response = https.request(request)
+    puts response.read_body
+
+    ````
+  </Tab>
+  <Tab>
+    ````php filename="PHP" copy
+    <?php
+
+    $curl = curl_init();
+
+    curl_setopt_array($curl, array(
+    CURLOPT_URL => 'https://api.worqhat.com/api/ai/images/modify/v2',
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_ENCODING => '',
+    CURLOPT_MAXREDIRS => 10,
+    CURLOPT_TIMEOUT => 0,
+    CURLOPT_FOLLOWLOCATION => true,
+    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    CURLOPT_CUSTOMREQUEST => 'POST',
+    CURLOPT_POSTFIELDS => array('existing_image'=> new CURLFILE('/C:/Users/ghosh/1682109016516.
+    png'),'modification' => 'Change the colour theme to red','similarity' => '10','outputType' =>
+    'URL'),
+    CURLOPT_HTTPHEADER => array(
+    'x-api-key: •••••••',
+    'x-org-key: •••••••'
+    ),
+    ));
+
+    $response = curl_exec($curl);
+
+    curl_close($curl);
+    echo $response;
+
+    ````
+  </Tab>
+  <Tab>
+    ````java filename="Java" copy
+    OkHttpClient client = new OkHttpClient().newBuilder()
+    .build();
+    MediaType mediaType = MediaType.parse("text/plain");
+    RequestBody body = new MultipartBody.Builder().setType(MultipartBody.FORM)
+    .addFormDataPart("existing_image","1682109016516.png",
+    RequestBody.create(MediaType.parse("application/octet-stream"),
+    new File("/C:/Users/ghosh/Downloads/1682109016516.png")))
+    .addFormDataPart("modification","Change the colour theme to red")
+    .addFormDataPart("similarity",10)
+    .addFormDataPart("outputType","URL")
+    .build();
+    Request request = new Request.Builder()
+    .url("https://api.worqhat.com/api/ai/images/modify/v2")
+    .method("POST", body)
+    .addHeader("x-api-key", "•••••••")
+    .addHeader("x-org-key", "•••••••")
+    .build();
+    Response response = client.newCall(request).execute();
+    ````
+  </Tab>
+  <Tab>
+    ````go filename="GO" copy
+    package main
+
+    import (
+    "fmt"
+    "bytes"
+    "mime/multipart"
+    "os"
+    "path/filepath"
+    "io"
+    "net/http"
+    "io/ioutil"
+    )
+
+    func main() {
+
+    url := "https://api.worqhat.com/api/ai/images/modify/v2"
+    method := "POST"
+
+    payload := &bytes.Buffer{}
+    writer := multipart.NewWriter(payload)
+    file, errFile1 := os.Open("/C:/Users/ghosh/Downloads/Earth Day winners/1682109016516.png")
+    defer file.Close()
+    part1,
+    errFile1 := writer.CreateFormFile("existing_image",filepath.Base("/C:/Users/ghosh/Downloads/Earth Day winners/1682109016516.png"))
+    _, errFile1 = io.Copy(part1, file)
+    if errFile1 != nil {
+    fmt.Println(errFile1)
+    return
+  }
+    _ = writer.WriteField("modification", "Change the colour theme to red")
+    _ = writer.WriteField("similarity", "10")
+    _ = writer.WriteField("outputType", "URL")
+    err := writer.Close()
+    if err != nil {
+    fmt.Println(err)
+    return
+  }
+
+
+    client := &http.Client {
+  }
+    req, err := http.NewRequest(method, url, payload)
+
+    if err != nil {
+    fmt.Println(err)
+    return
+  }
+    req.Header.Add("x-api-key", "•••••••")
+    req.Header.Add("x-org-key", "•••••••")
+
+    req.Header.Set("Content-Type", writer.FormDataContentType())
+    res, err := client.Do(req)
+    if err != nil {
+    fmt.Println(err)
+    return
+  }
+    defer res.Body.Close()
+
+    body, err := ioutil.ReadAll(res.Body)
+    if err != nil {
+    fmt.Println(err)
+    return
+  }
+    fmt.Println(string(body))
+  }
+    ````
+  </Tab>
+  <Tab>
+    ````c filename="C" copy
+    CURL *curl;
+    CURLcode res;
+    curl = curl_easy_init();
+    if(curl) {
+    curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, "POST");
+    curl_easy_setopt(curl, CURLOPT_URL, "https://api.worqhat.com/api/ai/images/modify/v2");
+    curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
+    curl_easy_setopt(curl, CURLOPT_DEFAULT_PROTOCOL, "https");
+    struct curl_slist *headers = NULL;
+    headers = curl_slist_append(headers, "x-api-key: •••••••");
+    headers = curl_slist_append(headers, "x-org-key: •••••••");
+    curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
+    curl_mime *mime;
+    curl_mimepart *part;
+    mime = curl_mime_init(curl);
+    part = curl_mime_addpart(mime);
+    curl_mime_name(part, "existing_image");
+    curl_mime_filedata(part, "/C:/Users/ghosh/1682109016516.png");
+    part = curl_mime_addpart(mime);
+    curl_mime_name(part, "modification");
+    curl_mime_data(part, "Change the colour theme to red", CURL_ZERO_TERMINATED);
+    part = curl_mime_addpart(mime);
+    curl_mime_name(part, "similarity");
+    curl_mime_data(part, "10", CURL_ZERO_TERMINATED);
+    part = curl_mime_addpart(mime);
+    curl_mime_name(part, "outputType");
+    curl_mime_data(part, "URL", CURL_ZERO_TERMINATED);
+    curl_easy_setopt(curl, CURLOPT_MIMEPOST, mime);
+    res = curl_easy_perform(curl);
+    curl_mime_free(mime);
+  }
+    curl_easy_cleanup(curl);
+
+    ````
+  </Tab>
+</Tabs>
+
+### Response
+
+#### Table View
+
+| Data Type |  Key  | Value | Description                           |
+|:---------| :------------: | :---------------- |:--------------------------------------|
+| String | id | `4a24ea32-3fbc-4667-ad78-d5bd1652a5cb` | Unique identifier for the API Request |
+| String | status | `success` or `error` | Status of the API Request             |
+| Number | timestamp | `1620120000` | Timestamp of the API Request          |
+| String | content | `blob` or `URL` | The Output of the API Request         |
+| Number | Processing Count  | `1` | Number of Images Processed                            |
+
+#### JSON View
+
+<Tabs items={['URL', 'blob']}>
+  <Tab>
+    ```json filename="JSON" copy
+    {
+      "id": "f7539998-e8ba-45b0-92da-58be65772316",
+      "status": "success",
+      "timestamp": "1683195942787",
+      "content": "https://worqhat.s3.amazonaws.com/outputs/1683195935137.png",
+      "processing_count": "1"
+    }
+    ```
+  </Tab>
+  <Tab>
+    ```json filename="JSON" copy
+    {
+      "id": "f7539998-e8ba-45b0-92da-58be65772316",
+      "status": "success",
+      "timestamp": "1683195942787",
+      "content": "iVBORw0KGgoAAAANSUhEUgAABgAAAAYACAIAAAA/jBQ8AAEAAElEQVR4nIz9W9bkOq...........",
+      "processing_count": "1"
+    }
+    ```
+  </Tab>
+</Tabs>
+
+
+
+### Error Codes
+
+| Error Code | Description                                        |
+|:---------|:---------------------------------------------------|
+| 400 | Bad Request                                        |
+| 401 | Unauthorized : Invalid API Key or Organization Key |
+| 402 | Syntax Error : Invalid JSON                        |
