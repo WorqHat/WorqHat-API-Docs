@@ -93,39 +93,39 @@ and you are good to go!
   <Tab>
     ```js filename="Client JS fetch" copy
     var myHeaders = new Headers();
-myHeaders.append("x-api-key", "•••••••");
-myHeaders.append("x-org-key", "•••••••");
+    myHeaders.append("x-api-key", "•••••••");
+    myHeaders.append("x-org-key", "•••••••");
 
-var raw = {
-    "url_path": "https://worqhat.com",
-    "headline": false,
-    "inline_code" : false,
-    "code_blocks" : true,
-    "references" : false,
-    "tables" : false
-  };
+    var raw = {
+      "url_path": "https://worqhat.com",
+      "headline": false,
+      "inline_code": false,
+      "code_blocks": true,
+      "references": false,
+      "tables": false
+    };
 
-var requestOptions = {
-  method: 'POST',
-  headers: myHeaders,
-  body: JSON.stringify(raw),
-  redirect: 'follow'
-};
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: JSON.stringify(raw),
+      redirect: 'follow'
+    };
 
-fetch("https://api.worqhat.com/api/ai/v2/web-extract", requestOptions)
-  .then(response => response.text())
-  .then(result => console.log(result))
-  .catch(error => console.log('error', error));
+    fetch("https://api.worqhat.com/api/ai/v2/web-extract", requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
     ```
 
     ```js filename="Client JS XHR Request" copy
     var data = JSON.stringify({
       "url_path": ,
       "headline": false,
-      "inline_code" : false,
-      "code_blocks" : true,
-      "references" : false,
-      "tables" : false
+      "inline_code": false,
+      "code_blocks": true,
+      "references": false,
+      "tables": false
     });
 
     var xhr = new XMLHttpRequest();
@@ -133,7 +133,7 @@ fetch("https://api.worqhat.com/api/ai/v2/web-extract", requestOptions)
 
     xhr.addEventListener("readystatechange", function () {
       if (this.readyState === this.DONE) {
-        console.log(this.responseText);
+          console.log(this.responseText);
       }
     });
 
@@ -145,290 +145,288 @@ fetch("https://api.worqhat.com/api/ai/v2/web-extract", requestOptions)
   </Tab>
   <Tab>
     ```js filename="NodeJS" copy
-var request = require('request');
-var options = {
-  'method': 'POST',
-  'url': 'https://api.worqhat.com/api/ai/v2/web-extract',
-  'headers': {
-    'x-api-key': '•••••••',
-    'x-org-key': '•••••••'
-  },
-  body: JSON.stringify({
-    "url_path": "<url>",
-      "headline": false,
-      "inline_code" : false,
-      "code_blocks" : true,
-      "references" : false,
-      "tables" : false
-	  });
-	  
-	 request(options, function (error, response) {
-		if (error) throw new Error(error);
-		console.log(response.body);
-	});
-	  
-	  
+  var request = require('request');
+  var options = {
+      'method': 'POST',
+      'url': 'https://api.worqhat.com/api/ai/v2/web-extract',
+      'headers': {
+        'x-api-key': '•••••••',
+        'x-org-key': '•••••••'
+    },
+    body: JSON.stringify({
+        "url_path": "<url>",
+        "headline": false,
+        "inline_code" : false,
+        "code_blocks" : true,
+        "references" : false,
+        "tables" : false
+      });
+      
+    request(options, function (error, response) {
+      if (error) throw new Error(error);
+      console.log(response.body);
+    });
     ```
 
     ```js filename="NodeJS Axios" copy
-var axios = require('axios');
-var data = JSON.stringify({
-    "url_path": "<url>",
-      "headline": false,
-      "inline_code" : false,
-      "code_blocks" : true,
-      "references" : false,
-      "tables" : false
-});
+    var axios = require('axios');
+    var data = JSON.stringify({
+        "url_path": "<url>",
+        "headline": false,
+        "inline_code" : false,
+        "code_blocks" : true,
+        "references" : false,
+        "tables" : false
+    });
 
-var config = {
-	method: 'post',
-	maxBodyLength: Infinity,
-	url: 'https://api.worqhat.com/api/ai/v2/web-extract',
-	headers: { 
-		'x-api-key': '•••••••', 
-		'x-org-key': '•••••••', 
-		'Content-Type': 'application/json'
-	},
-	data : data
-};
+    var config = {
+      method: 'post',
+      maxBodyLength: Infinity,
+      url: 'https://api.worqhat.com/api/ai/v2/web-extract',
+      headers: { 
+        'x-api-key': '•••••••', 
+        'x-org-key': '•••••••', 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
 
-axios(config)
-.then(function (response) {
-  console.log(JSON.stringify(response.data));
-})
-.catch(function (error) {
-  console.log(error);
-});
+    axios(config)
+    .then(function (response) {
+      console.log(JSON.stringify(response.data));
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
     ```
   </Tab>
   <Tab>
     ```py filename="Python http.client" copy
-import http.client
-import json
+    import http.client
+    import json
 
-conn = http.client.HTTPSConnection("api.worqhat.com")
-payload = json.dumps({
-    "url_path": "<url>",
+    conn = http.client.HTTPSConnection("api.worqhat.com")
+    payload = json.dumps({
+      "url_path": "<url>",
       "headline": False,
-      "inline_code" : False,
-      "code_blocks" : True,
-      "references" : False,
-      "tables" : False
-})
-headers = {
-  'x-api-key': '•••••••',
-  'x-org-key': '•••••••',
-  'Content-Type': 'application/json'
-}
-conn.request("POST", "/api/ai/v2/web-extract", payload, headers)
-res = conn.getresponse()
-data = res.read()
-print(data.decode("utf-8"))
+      "inline_code": False,
+      "code_blocks": True,
+      "references": False,
+      "tables": False
+    })
+    headers = {
+      'x-api-key': '•••••••',
+      'x-org-key': '•••••••',
+      'Content-Type': 'application/json'
+    }
+    conn.request("POST", "/api/ai/v2/web-extract", payload, headers)
+    res = conn.getresponse()
+    data = res.read()
+    print(data.decode("utf-8"))
     ```
 
     ```py filename="Python Requests" copy
-import http.client
-import json
+    import http.client
+    import json
 
-conn = http.client.HTTPSConnection("api.worqhat.com")
-payload = json.dumps({
-    "url_path": "<url>",
+    conn = http.client.HTTPSConnection("api.worqhat.com")
+    payload = json.dumps({
+      "url_path": "<url>",
       "headline": False,
-      "inline_code" : False,
-      "code_blocks" : True,
-      "references" : False,
-      "tables" : False
-})
-headers = {
-  'x-api-key': '•••••••',
-  'x-org-key': '•••••••',
-  'Content-Type': 'application/json'
-}
-conn.request("POST", "/api/ai/v2/web-extract", payload, headers)
-res = conn.getresponse()
-data = res.read()
-print(data.decode("utf-8"))
+      "inline_code": False,
+      "code_blocks": True,
+      "references": False,
+      "tables": False
+    })
+    headers = {
+      'x-api-key': '•••••••',
+      'x-org-key': '•••••••',
+      'Content-Type': 'application/json'
+    }
+    conn.request("POST", "/api/ai/v2/web-extract", payload, headers)
+    res = conn.getresponse()
+    data = res.read()
+    print(data.decode("utf-8"))
     ```
   </Tab>
   <Tab>
     ```ruby filename="Ruby" copy
-import requests
+    import requests
 
-url = "https://api.worqhat.com/api/ai/v2/web-extract"
+    url = "https://api.worqhat.com/api/ai/v2/web-extract"
 
-payload = {    
-"url_path": "<url>",
+    payload = {
+      "url_path": "<url>",
       "headline": false,
-      "inline_code" : false,
-      "code_blocks" : true,
-      "references" : false,
-      "tables" : false
-	  }
-headers = {
-    "x-api-key": "{{x-api-key}}",
-    "x-org-key": "{{x-org-key}}"
-}
+      "inline_code": false,
+      "code_blocks": true,
+      "references": false,
+      "tables": false
+    }
+    headers = {
+      "x-api-key": "{{x-api-key}}",
+      "x-org-key": "{{x-org-key}}"
+    }
 
-response = requests.post(url, json=payload, headers=headers)
+    response = requests.post(url, json = payload, headers = headers)
 
-print(response.text)
+    print(response.text)
     ```
   </Tab>
   <Tab>
     ```php filename="PHP" copy
-<?php
+    < ? php
 
-$curl = curl_init();
+    $curl = curl_init();
 
-curl_setopt_array($curl, [
-  CURLOPT_URL => "https://api.worqhat.com/api/ai/v2/web-extract",
-  CURLOPT_RETURNTRANSFER => true,
-  CURLOPT_ENCODING => "",
-  CURLOPT_MAXREDIRS => 10,
-  CURLOPT_TIMEOUT => 30,
-  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-  CURLOPT_CUSTOMREQUEST => "POST",
-  CURLOPT_POSTFIELDS => "{    
-"url_path": "<url>",
+    curl_setopt_array($curl, [
+      CURLOPT_URL => "https://api.worqhat.com/api/ai/v2/web-extract",
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_ENCODING => "",
+      CURLOPT_MAXREDIRS => 10,
+      CURLOPT_TIMEOUT => 30,
+      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+      CURLOPT_CUSTOMREQUEST => "POST",
+      CURLOPT_POSTFIELDS => "{    
+      "url_path": "<url>",
       "headline": false,
-      "inline_code" : false,
-      "code_blocks" : true,
-      "references" : false,
-      "tables" : false
-	  }",
-  CURLOPT_HTTPHEADER => [
-    "x-api-key: {{x-api-key}}",
-    "x-org-key: {{x-org-key}}"
-  ],
-]);
+      "inline_code": false,
+      "code_blocks": true,
+      "references": false,
+      "tables": false
+    }
+    ",
+    CURLOPT_HTTPHEADER => [
+      "x-api-key: {{x-api-key}}",
+      "x-org-key: {{x-org-key}}"
+    ],
+    ]);
 
-$response = curl_exec($curl);
-$err = curl_error($curl);
+    $response = curl_exec($curl);
+    $err = curl_error($curl);
 
-curl_close($curl);
+    curl_close($curl);
 
-if ($err) {
-  echo "cURL Error #:" . $err;
-} else {
-  echo $response;
-}
+    if ($err) {
+      echo "cURL Error #:".$err;
+    } else {
+      echo $response;
+    }
     ```
   </Tab>
   <Tab>
     ```java filename="Java" copy
-HttpResponse<String> response = Unirest.post("https://api.worqhat.com/api/ai/v2/web-extract")
-  .header("x-api-key", "{{x-api-key}}")
-  .header("x-org-key", "{{x-org-key}}")
-  .body("{    
-"url_path": "<url>",
-      "headline": false,
-      "inline_code" : false,
-      "code_blocks" : true,
-      "references" : false,
-      "tables" : false
-	  }")
-  .asString();
+    HttpResponse < String > response = Unirest.post("https://api.worqhat.com/api/ai/v2/web-extract")
+      .header("x-api-key", "{{x-api-key}}")
+      .header("x-org-key", "{{x-org-key}}")
+      .body("{    
+          "url_path": "<url>",
+          "headline": false,
+          "inline_code": false,
+          "code_blocks": true,
+          "references": false,
+          "tables": false
+      }
+    ")
+    .asString();
     ```
   </Tab>
   <Tab>
     ```go filename="GO" copy
-package main
+    package main
 
-import (
-	"bytes"
-	"fmt"
-	"net/http"
-)
+    import(
+      "bytes"
+      "fmt"
+      "net/http"
+    )
 
-func main() {
-	url := "https://api.worqhat.com/api/ai/v2/web-extract"
-	method := "POST"
+    func main() {
+      url: = "https://api.worqhat.com/api/ai/v2/web-extract"
+      method: = "POST"
 
-	payload := []byte(`{
-		"url_path": "https://worqhat.com",
-		"headline": false,
-		"inline_code": false,
-		"code_blocks": true,
-		"references": false,
-		"tables": false
-	}`)
+      payload: = [] byte(`{
+      "url_path": "https://worqhat.com",
+      "headline": false,
+      "inline_code": false,
+      "code_blocks": true,
+      "references": false,
+      "tables": false
+    }`)
 
-	client := &http.Client{}
-	req, err := http.NewRequest(method, url, bytes.NewBuffer(payload))
+      client: = & http.Client {}
+      req,
+      err: = http.NewRequest(method, url, bytes.NewBuffer(payload))
 
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+      if err != nil {
+          fmt.Println(err)
+          return
+      }
 
-	req.Header.Add("x-api-key", "•••••••")
-	req.Header.Add("x-org-key", "•••••••")
+      req.Header.Add("x-api-key", "•••••••")
+      req.Header.Add("x-org-key", "•••••••")
 
-	res, err := client.Do(req)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-	defer res.Body.Close()
+      res,
+      err: = client.Do(req)
+      if err != nil {
+          fmt.Println(err)
+          return
+      }
+      defer res.Body.Close()
 
-	buf := new(bytes.Buffer)
-	buf.ReadFrom(res.Body)
-	bodyStr := buf.String()
+      buf: = new(bytes.Buffer)
+      buf.ReadFrom(res.Body)
+      bodyStr: = buf.String()
 
-	fmt.Println(bodyStr)
-}
+      fmt.Println(bodyStr)
+    }
 
     ```
   </Tab>
   <Tab>
     ```c filename="C" copy
-#include <stdio.h>
-#include <stdlib.h>
-#include <curl/curl.h>
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <curl/curl.h>
 
-int main()
-{
-    CURL *curl;
-    CURLcode res;
-    struct curl_slist *headers = NULL;
+    int main() {
+      CURL * curl;
+      CURLcode res;
+      struct curl_slist * headers = NULL;
+      char * url = "https://api.worqhat.com/api/ai/v2/web-extract";
+      char * raw_data = "{\n"
+      "\"url_path\": \"https://worqhat.com\",\n"
+      "\"headline\": false,\n"
+      "\"inline_code\": false,\n"
+      "\"code_blocks\": true,\n"
+      "\"references\": false,\n"
+      "\"tables\": false\n"
+      "}";
 
-    char *url = "https://api.worqhat.com/api/ai/v2/web-extract";
-    char *raw_data = "{\n"
-                     "\"url_path\": \"https://worqhat.com\",\n"
-                     "\"headline\": false,\n"
-                     "\"inline_code\": false,\n"
-                     "\"code_blocks\": true,\n"
-                     "\"references\": false,\n"
-                     "\"tables\": false\n"
-                     "}";
+      curl_global_init(CURL_GLOBAL_ALL);
+      curl = curl_easy_init();
 
-    curl_global_init(CURL_GLOBAL_ALL);
+      if (curl) {
+          headers = curl_slist_append(headers, "x-api-key: •••••••");
+          headers = curl_slist_append(headers, "x-org-key: •••••••");
+          headers = curl_slist_append(headers, "Content-Type: application/json");
 
-    curl = curl_easy_init();
+          curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
+          curl_easy_setopt(curl, CURLOPT_URL, url);
+          curl_easy_setopt(curl, CURLOPT_POSTFIELDS, raw_data);
 
-    if(curl) {
-        headers = curl_slist_append(headers, "x-api-key: •••••••");
-        headers = curl_slist_append(headers, "x-org-key: •••••••");
-        headers = curl_slist_append(headers, "Content-Type: application/json");
+          res = curl_easy_perform(curl);
 
-        curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
-        curl_easy_setopt(curl, CURLOPT_URL, url);
-        curl_easy_setopt(curl, CURLOPT_POSTFIELDS, raw_data);
-
-        res = curl_easy_perform(curl);
-
-        if(res != CURLE_OK)
+          if (res != CURLE_OK)
             fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
 
-        curl_easy_cleanup(curl);
+          curl_easy_cleanup(curl);
+      }
+
+      curl_global_cleanup();
+
+      return 0;
     }
-
-    curl_global_cleanup();
-
-    return 0;
-}
-
     ```
   </Tab>
 </Tabs>
