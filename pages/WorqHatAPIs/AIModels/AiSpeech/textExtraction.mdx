@@ -1,0 +1,403 @@
+import { Tab, Tabs } from "nextra-theme-docs";
+
+# AI to Extract Text from Speech
+
+We're introducing SpeechAI, a state-of-the-art speech recognition model trained on 650K hours of
+audio data that achieves near human-level performance and robustness across a variety of data.
+
+## How does it work?
+
+The SpeechAI is a neural net for speech recognition that was published by Google Brain in 2020. The Conformer builds upon the now-ubiquitous Transformer architecture, which is famous for its parallelizability and heavy use of the attention mechanism. By integrating convolutional layers into the Transformer architecture, the Conformer can capture both local and global dependencies while being a relatively size-efficient neural net architecture.
+
+With SpeechAI, our goal was to train a production-ready speech recognition model that can be
+deployed
+at extremely large scale and that maximally leverages the original Conformer architecture’s outstanding modeling capabilities.
+
+## Use Cases
+
+- **Transcription**: Speech to text AI can be used to automatically transcribe audio or video
+recordings into text format. This can be useful for businesses or individuals who need to transcribe interviews, meetings, or other audio content.
+
+- **Closed captioning**: Speech to text AI can be used to generate closed captions for videos, making
+them accessible to people with hearing impairments. This is important for ensuring that content is accessible to everyone, regardless of their abilities.
+
+- **Voice search**: Speech to text AI can be used to power voice search functionality in search
+engines or other applications. This allows users to search for information using their voice, making the process more natural and intuitive.
+
+- **Customer service**: Speech to text AI can be used to transcribe customer service calls, allowing
+businesses to analyze the conversations and identify areas for improvement. It can also be used to generate transcripts of customer service chats or emails.
+
+- **Language learning**: Speech to text AI can be used to transcribe and analyze language
+conversations, helping language learners to improve their listening and comprehension skills. It can also be used to generate transcripts of language lessons or podcasts.
+
+## How to use it?
+
+### API Endpoint
+
+```bash filename="API Endpoint" copy
+https://api.worqhat.com/api/ai/speech-text
+```
+
+### Headers
+
+
+| Header Name |  Required  | Description |
+|:---------| :------------: | :---------------- |
+| x-api-key| ``true`` | This helps us to identify the User Sending the Request |
+| x-org-key|  ``true`` | This helps us to identify the Workspace Associated with the Request. This helps users to maintain easier logs |
+
+### Request Body
+
+The Request Body is a Formdata Object. The Formdata Object has the following fields :
+
+- File Object (You can upload any audio file, we support all major audio formats)
+
+```json filename="Request Body (Formdata)" copy
+{
+  "audio": "File Object as webm, mp3, wav, ogg, flac, etc."
+}
+```
+
+### Sample Code
+
+You can use the following Endpoints on any Codebase, including client side codebases as long as
+you are able to send the Headers and the Request Body to the API Endpoint. It's that easy! Just
+send a POST Request to the API Endpoint with the Headers and the Request Body, and you are good to go!
+
+
+<Tabs items={['cURL', 'Client JS', 'NodeJS', 'Python', 'Ruby', 'PHP', 'Java', 'GO', 'C']}>
+  <Tab>
+    ``` bash filename="cURL" copy
+    curl --location 'https://api.worqhat.com/api/ai/speech-text' \
+    --header 'x-api-key: •••••••' \
+    --header 'x-org-key: •••••••' \
+    --form 'audio=@"/C:/Users/ghosh/Downloads/230684883-a344c619-a560-4ff5-8b99-b4463a34487b.webm"'
+    ```
+  </Tab>
+  <Tab>
+    ```js filename="Client JS fetch" copy
+    var myHeaders = new Headers();
+    myHeaders.append("x-api-key", "•••••••");
+    myHeaders.append("x-org-key", "•••••••");
+
+    var formdata = new FormData();
+    formdata.append("audio", fileInput.files[0],
+    "230684883-a344c619-a560-4ff5-8b99-b4463a34487b.webm");
+
+    var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: formdata,
+    redirect: 'follow'
+  };
+
+    fetch("https://api.worqhat.com/api/ai/speech-text", requestOptions)
+    .then(response => response.text())
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));
+    ```
+
+    ```js filename="Client JS XHR Request" copy
+    // WARNING: For POST requests, body is set to null by browsers.
+    var data = new FormData();
+    data.append("audio", fileInput.files[0], "230684883-a344c619-a560-4ff5-8b99-b4463a34487b.webm");
+
+    var xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
+
+    xhr.addEventListener("readystatechange", function() {
+    if(this.readyState === 4) {
+    console.log(this.responseText);
+  }
+  });
+
+    xhr.open("POST", "https://api.worqhat.com/api/ai/speech-text");
+    xhr.setRequestHeader("x-api-key", "•••••••");
+    xhr.setRequestHeader("x-org-key", "•••••••");
+
+    xhr.send(data);
+    ```
+  </Tab>
+  <Tab>
+    ```js filename="NodeJS" copy
+    var request = require('request');
+    var fs = require('fs');
+    var options = {
+    'method': 'POST',
+    'url': 'https://api.worqhat.com/api/ai/speech-text',
+    'headers': {
+    'x-api-key': '•••••••',
+    'x-org-key': '•••••••'
+  },
+    formData: {
+    'audio': {
+    'value': fs.createReadStream('/C:/Users/ghosh/Downloads/230684883-a344c619-a560-4ff5-8b99-b4463a34487b.webm'),
+    'options': {
+    'filename': 'lorem-ipsum-2023-05-04-04-26-53.pdf',
+    'contentType': audio/webm
+  }
+  }
+  }
+  };
+    request(options, function (error, response) {
+    if (error) throw new Error(error);
+    console.log(response.body);
+  });
+    ```
+
+    ```js filename="NodeJS Axios" copy
+    var axios = require('axios');
+    var FormData = require('form-data');
+    var fs = require('fs');
+    var data = new FormData();
+    data.append('audio',
+    fs.createReadStream('/C:/Users/ghosh/Downloads/230684883-a344c619-a560-4ff5-8b99-b4463a34487b.webm'),
+
+    var config = {
+    method: 'post',
+    maxBodyLength: Infinity,
+    url: 'https://api.worqhat.com/api/ai/speech-text',
+    headers: {
+    'x-api-key': '•••••••',
+    'x-org-key': '•••••••',
+    ...data.getHeaders()
+  },
+    data: data
+  };
+
+    axios(config)
+    .then(function (response) {
+    console.log(JSON.stringify(response.data));
+  })
+    .catch(function (error) {
+    console.log(error);
+  });
+
+    ```
+  </Tab>
+  <Tab>
+    ```py filename="Python Requests" copy
+    import requests
+
+    url = "https://api.worqhat.com/api/ai/speech-text"
+
+    payload = {}
+    files = [
+    ('audio', ('230684883-a344c619-a560-4ff5-8b99-b4463a34487b.webm', open
+    ('/C:/Users/ghosh/Downloads/230684883-a344c619-a560-4ff5-8b99-b4463a34487b.webm', 'rb'),
+    'audio/webm'))
+    ]
+    headers = {
+    'x-api-key': '•••••••',
+    'x-org-key': '•••••••'
+  }
+
+    response = requests.request("POST", url, headers = headers, data = payload, files = files)
+
+    print(response.text)
+    ```
+
+    ```py filename="Python http.client" copy
+    import http.client
+    import mimetypes
+
+    conn = http.client.HTTPSConnection("api.worqhat.com")
+
+    payload = ''
+    files = [
+    ('audio', ('230684883-a344c619-a560-4ff5-8b99-b4463a34487b.webm', open
+    ('/C:/Users/ghosh/Downloads/230684883-a344c619-a560-4ff5-8b99-b4463a34487b.webm', 'rb'),
+    'audio/webm'))
+    ]
+    headers = {
+    'x-api-key': '•••••••',
+    'x-org-key': '•••••••'
+  }
+
+    conn.request("POST", "/api/ai/speech-text", payload, headers, files)
+    res = conn.getresponse()
+    data = res.read()
+    print(data.decode("utf-8"))
+    ```
+  </Tab>
+  <Tab>
+    ```ruby filename="Ruby" copy
+    require "uri"
+    require "net/http"
+
+    url = URI("https://api.worqhat.com/api/ai/speech-text")
+
+    https = Net::HTTP.new(url.host, url.port);
+    https.use_ssl = true
+
+    request = Net::HTTP::Post.new(url)
+    request["x-api-key"] = "•••••••"
+    request["x-org-key"] = "•••••••"
+    form_data = [
+    ['audio',
+    File.open('/C:/Users/ghosh/Downloads/230684883-a344c619-a560-4ff5-8b99-b4463a34487b.webm')]
+    ]
+    request.set_form form_data, 'multipart/form-data'
+    response = https.request(request)
+    puts response.read_body
+    ```
+  </Tab>
+  <Tab>
+    ```php filename="PHP" copy
+    < ? php
+
+    $curl = curl_init();
+
+    curl_setopt_array($curl, array(
+    CURLOPT_URL => 'https://api.worqhat.com/api/ai/speech-text',
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_ENCODING => '',
+    CURLOPT_MAXREDIRS => 10,
+    CURLOPT_TIMEOUT => 0,
+    CURLOPT_FOLLOWLOCATION => true,
+    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    CURLOPT_CUSTOMREQUEST => 'POST',
+    CURLOPT_POSTFIELDS => array('audio' => new
+    CURLFILE('/C:/Users/ghosh/Downloads/230684883-a344c619-a560-4ff5-8b99-b4463a34487b.webm')),
+    CURLOPT_HTTPHEADER => array(
+    'x-api-key: •••••••',
+    'x-org-key: •••••••'
+    ),
+    ));
+
+    $response = curl_exec($curl);
+
+    curl_close($curl);
+    echo $response;
+    ```
+  </Tab>
+  <Tab>
+    ```java filename="Java" copy
+    OkHttpClient client = new OkHttpClient().newBuilder()
+    .build();
+    MediaType mediaType = MediaType.parse("application/pdf");
+    RequestBody body = new MultipartBody.Builder().setType(MultipartBody.FORM)
+    .addFormDataPart("file", "230684883-a344c619-a560-4ff5-8b99-b4463a34487b.webm",
+    RequestBody.create(mediaType, new
+    File("/C:/Users/ghosh/Downloads/230684883-a344c619-a560-4ff5-8b99-b4463a34487b.webm")))
+    .build();
+    Request request = new Request.Builder()
+    .url("https://api.worqhat.com/api/ai/speech-text")
+    .method("POST", body)
+    .addHeader("x-api-key", "•••••••")
+    .addHeader("x-org-key", "•••••••")
+    .build();
+    Response response = client.newCall(request).execute();
+    ```
+  </Tab>
+  <Tab>
+    ```go filename="GO" copy
+    package main
+
+    import(
+    "fmt"
+    "bytes"
+    "mime/multipart"
+    "net/http"
+    "io/ioutil"
+    )
+
+    func main() {
+
+    url: = "https://api.worqhat.com/api/ai/speech-text"
+
+    payload: = & bytes.Buffer {}
+    writer: = multipart.NewWriter(payload)
+    file,
+    errFile1: = os.Open("/C:/Users/ghosh/Downloads/230684883-a344c619-a560-4ff5-8b99-b4463a34487b.webm")
+    defer file.Close()
+    part1,
+    errFile1: = writer.CreateFormFile("audio", filepath.Base("/C:/Users/ghosh/Downloads/230684883-a344c619-a560-4ff5-8b99-b4463a34487b.webm"))
+    _,
+    errFile1 = io.Copy(part1, file)
+    if errFile1 != nil {
+    fmt.Println(errFile1)
+  }
+    err: = writer.Close()
+    if err != nil {
+    fmt.Println(err)
+  }
+
+    client: = & http.Client {}
+    req,
+    err: = http.NewRequest("POST", url, payload)
+    if err != nil {
+    fmt.Println(err)
+  }
+    req.Header.Add("x-api-key", "•••••••")
+    req.Header.Add("x-org-key", "•••••••")
+    req.Header.Set("Content-Type", writer.FormDataContentType())
+    res,
+    err: = client.Do(req)
+    defer res.Body.Close()
+    body,
+    err: = ioutil.ReadAll(res.Body)
+    fmt.Println(string(body))
+  }
+    ```
+  </Tab>
+  <Tab>
+    ```c filename="C" copy
+    CURL * curl;
+    CURLcode res;
+    curl = curl_easy_init();
+    if (curl) {
+    curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, "POST");
+    curl_easy_setopt(curl, CURLOPT_URL, "https://api.worqhat.com/api/ai/speech-text");
+    curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1 L);
+    curl_easy_setopt(curl, CURLOPT_DEFAULT_PROTOCOL, "https");
+    struct curl_slist * headers = NULL;
+    headers = curl_slist_append(headers, "x-api-key: •••••••");
+    headers = curl_slist_append(headers, "x-org-key: •••••••");
+    curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
+    curl_mime * mime;
+    curl_mimepart * part;
+    mime = curl_mime_init(curl);
+    part = curl_mime_addpart(mime);
+    curl_mime_name(part, "audio");
+    curl_mime_filedata(part, "/C:/Users/ghosh/Downloads/230684883-a344c619-a560-4ff5-8b99-b4463a34487b.webm");
+    curl_easy_setopt(curl, CURLOPT_MIMEPOST, mime);
+    res = curl_easy_perform(curl);
+    curl_mime_free(mime);
+  }
+    curl_easy_cleanup(curl);
+    ```
+  </Tab>
+</Tabs>
+
+### Response
+
+#### Table View
+
+| Data Type |  Key  | Value | Description                           |
+|:---------| :------------: | :---------------- |:--------------------------------------|
+| String | id | `4a24ea32-3fbc-4667-ad78-d5bd1652a5cb` | Unique identifier for the API Request |
+| String | status | `success` or `error` | Status of the API Request             |
+| Number | timestamp | `1620120000` | Timestamp of the API Request          |
+| String | content | `Lorem ipsum dolor...` | Extracted text from the Speech           |
+| Number | Processing Count  | `223` | Number of Words Extracted |
+
+#### JSON View
+
+```json filename="JSON" copy
+{
+    "id": "d94612c2-e572-479b-894e-8254705c2983",
+    "status": "success",
+    "timestamp": 1683211582017,
+    "content": "I have a silky smooth voice, and today I will tell you about the exercise regimen of the common sloth.",
+    "processing_count": 20
+}
+```
+
+### Error Codes
+
+| Error Code | Description                                        |
+|:---------|:---------------------------------------------------|
+| 400 | Bad Request                                        |
+| 401 | Unauthorized : Invalid API Key or Organization Key |
+| 402 | Syntax Error : Invalid JSON                        |
