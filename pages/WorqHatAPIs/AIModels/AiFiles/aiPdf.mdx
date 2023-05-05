@@ -81,11 +81,11 @@ send a POST Request to the API Endpoint with the Headers and the Request Body, a
     formdata.append("file", fileInput.files[0], "lorem-ipsum-2023-05-04-04-26-53.pdf");
 
     var requestOptions = {
-    method: 'POST',
-    headers: myHeaders,
-    body: formdata,
-    redirect: 'follow'
-  };
+      method: 'POST',
+      headers: myHeaders,
+      body: formdata,
+      redirect: 'follow'
+    };
 
     fetch("https://api.worqhat.com/api/ai/v2/pdf-extract", requestOptions)
     .then(response => response.text())
@@ -116,28 +116,28 @@ send a POST Request to the API Endpoint with the Headers and the Request Body, a
   </Tab>
   <Tab>
     ```js filename="NodeJS" copy
-    var request = require('request');
-    var fs = require('fs');
-    var options = {
-    'method': 'POST',
-    'url': 'https://api.worqhat.com/api/ai/v2/pdf-extract',
-    'headers': {
-    'x-api-key': '•••••••',
-    'x-org-key': '•••••••'
-  },
+  var request = require('request');
+  var fs = require('fs');
+  var options = {
+      'method': 'POST',
+      'url': 'https://api.worqhat.com/api/ai/v2/pdf-extract',
+      'headers': {
+      'x-api-key': '•••••••',
+      'x-org-key': '•••••••'
+    },
     formData: {
-    'file': {
-    'value': fs.createReadStream('/C:/Users/ghosh/Downloads/lorem-ipsum-2023-05-04-04-26-53.pdf'),
-    'options': {
-    'filename': 'lorem-ipsum-2023-05-04-04-26-53.pdf',
-    'contentType': application/pdf
-  }
-  }
-  }
+      'file': {
+        'value': fs.createReadStream('/C:/Users/ghosh/Downloads/lorem-ipsum-2023-05-04-04-26-53.pdf'),
+        'options': {
+          'filename': 'lorem-ipsum-2023-05-04-04-26-53.pdf',
+          'contentType': application/pdf
+        }
+      }
+    }
   };
-    request(options, function (error, response) {
-    if (error) throw new Error(error);
-    console.log(response.body);
+  request(options, function (error, response) {
+      if (error) throw new Error(error);
+      console.log(response.body);
   });
     ```
 
@@ -147,27 +147,27 @@ send a POST Request to the API Endpoint with the Headers and the Request Body, a
     var fs = require('fs');
     var data = new FormData();
     data.append('file',
-    fs.createReadStream('/C:/Users/ghosh/Downloads/lorem-ipsum-2023-05-04-04-26-53.pdf'));
+      fs.createReadStream('/C:/Users/ghosh/Downloads/lorem-ipsum-2023-05-04-04-26-53.pdf'));
 
     var config = {
-    method: 'post',
-    maxBodyLength: Infinity,
-    url: 'https://api.worqhat.com/api/ai/v2/pdf-extract',
-    headers: {
-    'x-api-key': '•••••••',
-    'x-org-key': '•••••••',
-    ...data.getHeaders()
-  },
-    data : data
-  };
+      method: 'post',
+      maxBodyLength: Infinity,
+      url: 'https://api.worqhat.com/api/ai/v2/pdf-extract',
+      headers: {
+          'x-api-key': '•••••••',
+          'x-org-key': '•••••••',
+          ...data.getHeaders()
+      },
+      data: data
+    };
 
     axios(config)
-    .then(function (response) {
-    console.log(JSON.stringify(response.data));
-  })
-    .catch(function (error) {
-    console.log(error);
-  });
+      .then(function (response) {
+          console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+          console.log(error);
+      });
 
     ```
   </Tab>
@@ -177,16 +177,16 @@ send a POST Request to the API Endpoint with the Headers and the Request Body, a
 
     url = "https://api.worqhat.com/api/ai/v2/pdf-extract"
 
-    payload={}
-    files=[
-    ('file',('lorem-ipsum-2023-05-04-04-26-53.pdf',open('/C:/Users/ghosh/Downloads/lorem-ipsum-2023-05-04-04-26-53.pdf','rb'),'application/pdf'))
+    payload = {}
+    files = [
+      ('file', ('lorem-ipsum-2023-05-04-04-26-53.pdf', open('/C:/Users/ghosh/Downloads/lorem-ipsum-2023-05-04-04-26-53.pdf', 'rb'), 'application/pdf'))
     ]
     headers = {
-    'x-api-key': '•••••••',
-    'x-org-key': '•••••••'
-  }
+      'x-api-key': '•••••••',
+      'x-org-key': '•••••••'
+    }
 
-    response = requests.request("POST", url, headers=headers, data=payload, files=files)
+    response = requests.request("POST", url, headers = headers, data = payload, files = files)
 
     print(response.text)
     ```
@@ -198,13 +198,13 @@ send a POST Request to the API Endpoint with the Headers and the Request Body, a
     conn = http.client.HTTPSConnection("api.worqhat.com")
 
     payload = ''
-    files=[
-    ('file',('lorem-ipsum-2023-05-04-04-26-53.pdf',open('/C:/Users/ghosh/Downloads/lorem-ipsum-2023-05-04-04-26-53.pdf','rb'),'application/pdf'))
+    files = [
+      ('file', ('lorem-ipsum-2023-05-04-04-26-53.pdf', open('/C:/Users/ghosh/Downloads/lorem-ipsum-2023-05-04-04-26-53.pdf', 'rb'), 'application/pdf'))
     ]
     headers = {
-    'x-api-key': '•••••••',
-    'x-org-key': '•••••••'
-  }
+      'x-api-key': '•••••••',
+      'x-org-key': '•••••••'
+    }
 
     conn.request("POST", "/api/ai/v2/pdf-extract", payload, headers, files)
     res = conn.getresponse()
@@ -225,8 +225,11 @@ send a POST Request to the API Endpoint with the Headers and the Request Body, a
     request = Net::HTTP::Post.new(url)
     request["x-api-key"] = "•••••••"
     request["x-org-key"] = "•••••••"
-    form_data = [['file',
-    File.open('/C:/Users/ghosh/Downloads/lorem-ipsum-2023-05-04-04-26-53.pdf')]]
+    form_data = [
+      ['file',
+          File.open('/C:/Users/ghosh/Downloads/lorem-ipsum-2023-05-04-04-26-53.pdf')
+      ]
+    ]
     request.set_form form_data, 'multipart/form-data'
     response = https.request(request)
     puts response.read_body
@@ -234,25 +237,24 @@ send a POST Request to the API Endpoint with the Headers and the Request Body, a
   </Tab>
   <Tab>
     ```php filename="PHP" copy
-    <?php
+    < ? php
 
     $curl = curl_init();
 
     curl_setopt_array($curl, array(
-    CURLOPT_URL => 'https://api.worqhat.com/api/ai/v2/pdf-extract',
-    CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_ENCODING => '',
-    CURLOPT_MAXREDIRS => 10,
-    CURLOPT_TIMEOUT => 0,
-    CURLOPT_FOLLOWLOCATION => true,
-    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-    CURLOPT_CUSTOMREQUEST => 'POST',
-    CURLOPT_POSTFIELDS => array('file'=> new
-    CURLFILE('/C:/Users/ghosh/Downloads/lorem-ipsum-2023-05-04-04-26-53.pdf')),
-    CURLOPT_HTTPHEADER => array(
-    'x-api-key: •••••••',
-    'x-org-key: •••••••'
-    ),
+      CURLOPT_URL => 'https://api.worqhat.com/api/ai/v2/pdf-extract',
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_ENCODING => '',
+      CURLOPT_MAXREDIRS => 10,
+      CURLOPT_TIMEOUT => 0,
+      CURLOPT_FOLLOWLOCATION => true,
+      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+      CURLOPT_CUSTOMREQUEST => 'POST',
+      CURLOPT_POSTFIELDS => array('file' => new CURLFILE('/C:/Users/ghosh/Downloads/lorem-ipsum-2023-05-04-04-26-53.pdf')),
+      CURLOPT_HTTPHEADER => array(
+          'x-api-key: •••••••',
+          'x-org-key: •••••••'
+      ),
     ));
 
     $response = curl_exec($curl);
@@ -264,19 +266,18 @@ send a POST Request to the API Endpoint with the Headers and the Request Body, a
   <Tab>
     ```java filename="Java" copy
     OkHttpClient client = new OkHttpClient().newBuilder()
-    .build();
+      .build();
     MediaType mediaType = MediaType.parse("application/pdf");
     RequestBody body = new MultipartBody.Builder().setType(MultipartBody.FORM)
-    .addFormDataPart("file", "lorem-ipsum-2023-05-04-04-26-53.pdf",
-    RequestBody.create(mediaType, new
-    File("/C:/Users/ghosh/Downloads/lorem-ipsum-2023-05-04-04-26-53.pdf")))
-    .build();
+      .addFormDataPart("file", "lorem-ipsum-2023-05-04-04-26-53.pdf",
+          RequestBody.create(mediaType, new File("/C:/Users/ghosh/Downloads/lorem-ipsum-2023-05-04-04-26-53.pdf")))
+      .build();
     Request request = new Request.Builder()
-    .url("https://api.worqhat.com/api/ai/v2/pdf-extract")
-    .method("POST", body)
-    .addHeader("x-api-key", "•••••••")
-    .addHeader("x-org-key", "•••••••")
-    .build();
+      .url("https://api.worqhat.com/api/ai/v2/pdf-extract")
+      .method("POST", body)
+      .addHeader("x-api-key", "•••••••")
+      .addHeader("x-org-key", "•••••••")
+      .build();
     Response response = client.newCall(request).execute();
     ```
   </Tab>
@@ -284,73 +285,77 @@ send a POST Request to the API Endpoint with the Headers and the Request Body, a
     ```go filename="GO" copy
     package main
 
-    import (
-    "fmt"
-    "bytes"
-    "mime/multipart"
-    "net/http"
-    "io/ioutil"
+    import(
+      "fmt"
+      "bytes"
+      "mime/multipart"
+      "net/http"
+      "io/ioutil"
     )
 
     func main() {
 
-    url := "https://api.worqhat.com/api/ai/v2/pdf-extract"
+      url: = "https://api.worqhat.com/api/ai/v2/pdf-extract"
 
-    payload := &bytes.Buffer{}
-    writer := multipart.NewWriter(payload)
-    file, errFile1 := os.Open("/C:/Users/ghosh/Downloads/lorem-ipsum-2023-05-04-04-26-53.pdf")
-    defer file.Close()
-    part1,
-    errFile1 := writer.CreateFormFile("file",filepath.Base("/C:/Users/ghosh/Downloads/lorem-ipsum-2023-05-04-04-26-53.pdf"))
-    _, errFile1 = io.Copy(part1, file)
-    if errFile1 != nil {
-    fmt.Println(errFile1)
-  }
-    err := writer.Close()
-    if err != nil {
-    fmt.Println(err)
-  }
+      payload: = & bytes.Buffer {}
+      writer: = multipart.NewWriter(payload)
+      file,
+      errFile1: = os.Open("/C:/Users/ghosh/Downloads/lorem-ipsum-2023-05-04-04-26-53.pdf")
+      defer file.Close()
+      part1,
+      errFile1: = writer.CreateFormFile("file", filepath.Base("/C:/Users/ghosh/Downloads/lorem-ipsum-2023-05-04-04-26-53.pdf"))
+      _,
+      errFile1 = io.Copy(part1, file)
+      if errFile1 != nil {
+          fmt.Println(errFile1)
+      }
+      err: = writer.Close()
+      if err != nil {
+          fmt.Println(err)
+      }
 
-    client := &http.Client {
-  }
-    req, err := http.NewRequest("POST", url, payload)
-    if err != nil {
-    fmt.Println(err)
-  }
-    req.Header.Add("x-api-key", "•••••••")
-    req.Header.Add("x-org-key", "•••••••")
-    req.Header.Set("Content-Type", writer.FormDataContentType())
-    res, err := client.Do(req)
-    defer res.Body.Close()
-    body, err := ioutil.ReadAll(res.Body)
-    fmt.Println(string(body))
-  }
+      client: = & http.Client {}
+      req,
+      err: = http.NewRequest("POST", url, payload)
+      if err != nil {
+          fmt.Println(err)
+      }
+      req.Header.Add("x-api-key", "•••••••")
+      req.Header.Add("x-org-key", "•••••••")
+      req.Header.Set("Content-Type", writer.FormDataContentType())
+      res,
+      err: = client.Do(req)
+      defer res.Body.Close()
+      body,
+      err: = ioutil.ReadAll(res.Body)
+      fmt.Println(string(body))
+    }
     ```
   </Tab>
   <Tab>
     ```c filename="C" copy
-    CURL *curl;
+    CURL * curl;
     CURLcode res;
     curl = curl_easy_init();
-    if(curl) {
-    curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, "POST");
-    curl_easy_setopt(curl, CURLOPT_URL, "https://api.worqhat.com/api/ai/v2/pdf-extract");
-    curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
-    curl_easy_setopt(curl, CURLOPT_DEFAULT_PROTOCOL, "https");
-    struct curl_slist *headers = NULL;
-    headers = curl_slist_append(headers, "x-api-key: •••••••");
-    headers = curl_slist_append(headers, "x-org-key: •••••••");
-    curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
-    curl_mime *mime;
-    curl_mimepart *part;
-    mime = curl_mime_init(curl);
-    part = curl_mime_addpart(mime);
-    curl_mime_name(part, "file");
-    curl_mime_filedata(part, "/C:/Users/ghosh/Downloads/lorem-ipsum-2023-05-04-04-26-53.pdf");
-    curl_easy_setopt(curl, CURLOPT_MIMEPOST, mime);
-    res = curl_easy_perform(curl);
-    curl_mime_free(mime);
-  }
+    if (curl) {
+      curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, "POST");
+      curl_easy_setopt(curl, CURLOPT_URL, "https://api.worqhat.com/api/ai/v2/pdf-extract");
+      curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1 L);
+      curl_easy_setopt(curl, CURLOPT_DEFAULT_PROTOCOL, "https");
+      struct curl_slist * headers = NULL;
+      headers = curl_slist_append(headers, "x-api-key: •••••••");
+      headers = curl_slist_append(headers, "x-org-key: •••••••");
+      curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
+      curl_mime * mime;
+      curl_mimepart * part;
+      mime = curl_mime_init(curl);
+      part = curl_mime_addpart(mime);
+      curl_mime_name(part, "file");
+      curl_mime_filedata(part, "/C:/Users/ghosh/Downloads/lorem-ipsum-2023-05-04-04-26-53.pdf");
+      curl_easy_setopt(curl, CURLOPT_MIMEPOST, mime);
+      res = curl_easy_perform(curl);
+      curl_mime_free(mime);
+    }
     curl_easy_cleanup(curl);
     ```
   </Tab>
