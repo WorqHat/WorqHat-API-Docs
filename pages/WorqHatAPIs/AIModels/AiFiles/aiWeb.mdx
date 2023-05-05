@@ -1,6 +1,6 @@
 import { Tab, Tabs } from "nextra-theme-docs";
 
-# AI to Extract Content from
+# AI to Extract Content from Web Pages
 
 PDF Extract AI is a REST API Endpoint that allows you to extract content from PDFs. It uses machine
 learning to identify the structure of a PDF and extract the text, tables, and other content from it.
@@ -49,13 +49,23 @@ The Request Body is a JSON Object. The JSON Object has the following fields :
 
 | Data Type |    Key    | Value | Description                           |
 |:---------|:---------:| :---------------- |:--------------------------------------|
-| String | url_path | `<url>` | The path to the WebPage (Localhost / Online) |
+| String | url_path (required) | `<url>` | The path to the WebPage (Localhost / Online) |
+| Boolean | headline (optional) |  `true` or `false` | Whether to extract the Headline or not |
+| Boolean | inline_code (optional) |  `true` or `false` | Whether to extract the Inline Code or not |
+| Boolean | code_block (optional) |  `true` or `false` | Whether to extract the Code Block or not |
+| Boolean | tables (optional) |  `true` or `false` | Whether to extract the Table or not |
+| Boolean | references (optional) |  `true` or `false` | Whether to extract the References or not |
 
 
 
 ```json filename="Request Body (JSON)" copy
 {
-  "url_path": "<url>"
+    "url_path": "<url>",
+    "headline": false,
+    "inline_code" : false,
+    "code_blocks" : true,
+    "references" : false,
+    "tables" : false
 }
 ```
 
@@ -68,72 +78,91 @@ Just
 send a POST Request to the API Endpoint with the Headers and the Request Body,
 and you are good to go!
 
-
 <Tabs items={['cURL', 'Client JS', 'NodeJS', 'Python', 'Ruby', 'PHP', 'Java', 'GO', 'C']}>
   <Tab>
     ``` bash filename="cURL" copy
     curl --location 'https://api.worqhat.com/api/ai/v2/web-extract' \
-    --header 'x-api-key: U2FsdGVkX19Ec9Y7GqkJBtee7KyGgcyCFwQFuLbTn85n0/FfvLXf5AhXKxXBZpCV' \
-    --header 'x-org-key: U2FsdGVkX1/00L32p4/3wuDFaSPenMfI+Fdo8uihrX856XjT6hqM2x+eZ58EgStnu1zGBADKq13paSr4YqmNPA==' \
-    --header 'Content-Type: application/json' \
-    --data '{
-    "url_path": "https://worqhat.com"
-  }'
+  --header 'x-api-key: •••••••' \
+  --header 'x-org-key: •••••••' \
+  --data '{
+      "url_path": "https://worqhat.com",
+      "headline": false,
+      "inline_code" : false,
+      "code_blocks" : true,
+      "references" : false,
+      "tables" : false
+}'
     ```
   </Tab>
   <Tab>
     ```js filename="Client JS fetch" copy
     var myHeaders = new Headers();
-    myHeaders.append("x-api-key", "•••••••");
-    myHeaders.append("x-org-key", "•••••••");
-    myHeaders.append("Content-Type", "application/json");
+myHeaders.append("x-api-key", "•••••••");
+myHeaders.append("x-org-key", "•••••••");
 
-    var raw = {
-"url_path": "<url>"
+var raw = {
+    "url_path": "https://worqhat.com",
+    "headline": false,
+    "inline_code" : false,
+    "code_blocks" : true,
+    "references" : false,
+    "tables" : false
   };
 
-    var requestOptions = {
-    method: 'POST',
-    headers: myHeaders,
-    body: raw,
-    redirect: 'follow'
-  };
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: JSON.stringify(raw),
+  redirect: 'follow'
+};
 
-    fetch("https://api.worqhat.com/api/ai/v2/web-extract", requestOptions)
-    .then(response => response.text())
-    .then(result => console.log(result))
-    .catch(error => console.log('error', error));
+fetch("https://api.worqhat.com/api/ai/v2/web-extract", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
     ```
 
     ```js filename="Client JS XHR Request" copy
-    // WARNING: For POST requests, body is set to null by browsers.
-    var data = {
-    "url_path": "<url>"
-  };
+    var data = JSON.stringify({
+      "url_path": ,
+      "headline": false,
+      "inline_code" : false,
+      "code_blocks" : true,
+      "references" : false,
+      "tables" : false
+    });
 
     var xhr = new XMLHttpRequest();
     xhr.withCredentials = true;
 
-    xhr.addEventListener("readystatechange", function() {
-    if(this.readyState === 4) {
-    console.log(this.responseText);
-    }
-  });
+    xhr.addEventListener("readystatechange", function () {
+      if (this.readyState === this.DONE) {
+        console.log(this.responseText);
+      }
+    });
 
     xhr.open("POST", "https://api.worqhat.com/api/ai/v2/web-extract");
     xhr.setRequestHeader("x-api-key", "•••••••");
     xhr.setRequestHeader("x-org-key", "•••••••");
-    xhr.setRequestHeader("Content-Type", "application/json");
-
     xhr.send(data);
     ```
   </Tab>
   <Tab>
     ```js filename="NodeJS" copy
+var request = require('request');
+var options = {
+  'method': 'POST',
+  'url': 'https://api.worqhat.com/api/ai/v2/web-extract',
+  'headers': {
+    'x-api-key': '•••••••',
+    'x-org-key': '•••••••'
+  },
+  body: JSON.stringify({
+    "url_path": "<url>",
+
     ```
 
     ```js filename="NodeJS Axios" copy
-
 
     ```
   </Tab>
@@ -172,6 +201,7 @@ and you are good to go!
     ```
   </Tab>
 </Tabs>
+
 
 ### Response
 
