@@ -116,25 +116,25 @@ send a POST Request to the API Endpoint with the Headers and the Request Body, a
   </Tab>
   <Tab>
     ```js filename="NodeJS" copy
-  var request = require('request');
-  var fs = require('fs');
-  var options = {
-      'method': 'POST',
-      'url': 'https://api.worqhat.com/api/ai/v2/pdf-extract',
-      'headers': {
-      'x-api-key': '•••••••',
-      'x-org-key': '•••••••'
-    },
-    formData: {
-      'file': {
-        'value': fs.createReadStream('/C:/Users/ghosh/Downloads/lorem-ipsum-2023-05-04-04-26-53.pdf'),
-        'options': {
-          'filename': 'lorem-ipsum-2023-05-04-04-26-53.pdf',
-          'contentType': application/pdf
+    var request = require('request');
+    var fs = require('fs');
+    var options = {
+        'method': 'POST',
+        'url': 'https://api.worqhat.com/api/ai/v2/pdf-extract',
+        'headers': {
+        'x-api-key': '•••••••',
+        'x-org-key': '•••••••'
+      },
+      formData: {
+        'file': {
+          'value': fs.createReadStream('/C:/Users/ghosh/Downloads/lorem-ipsum-2023-05-04-04-26-53.pdf'),
+          'options': {
+            'filename': 'lorem-ipsum-2023-05-04-04-26-53.pdf',
+            'contentType': application/pdf
+          }
         }
       }
-    }
-  };
+    };
   request(options, function (error, response) {
       if (error) throw new Error(error);
       console.log(response.body);
