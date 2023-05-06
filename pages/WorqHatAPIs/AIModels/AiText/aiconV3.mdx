@@ -3,15 +3,19 @@ import { Callout, Tab, Tabs } from "nextra-theme-docs";
 
 # AiCon V3 (Advanced and Powerful AI Content Generation Network)
 
-AiCon’s impressive conversational abilities are rooted in years of research and development. Like many advanced language models, such as BERT and GPT-3, AiCon is based on the Transformer neural network architecture, which was made publicly available in 2017. This architecture allows for the creation of models that can read multiple words (such as a sentence or paragraph) and understand the relationships between those words, thereby predicting what words will come next.
+AiCon V3, the most powerful content generation AI, has captured the attention of developers
+worldwide with its groundbreaking capabilities. Previously, access to this remarkable AI model
+was limited to a few companies like Descript, Walmart, Canva via the WorqHat Workspaces and
+Alpha APIs.
 
-What sets AiCon apart from other language models is its unique training process. Unlike traditional models, AiCon was trained on current web data, including actual conversations. This training allowed it to grasp the subtleties that make open-ended conversation and text distinct from other forms of language. One of these subtleties is sensibility - does the response match the conversational context and make sense?
+However, a
+recent development has
+revolutionized the landscape,
+as developers now have the opportunity to build upon AiCon V3 using APIs, unleashing a new era of innovation. With its seamless integration via API, AiCon V3 empowers developers to effortlessly generate high-quality and engaging content across various domains, revolutionizing the way developers approach content creation. This AI model, equipped with cutting-edge algorithms and a deep understanding of human language, produces contextually relevant and coherent content that resonates with audiences.
 
-We are dedicated to revolutionizing the way organizations approach productivity, building applications and content generation. Our latest creation AiCon - the AI Content Optimization Network - has been developed to help organizations streamline their workflow and improve their overall output.
+The availability of AiCon V3 through APIs provides developers with a streamlined workflow and unrivaled flexibility. By building on top of this powerful AI, developers can tailor its capabilities to their specific needs, amplifying their creative output. Whether it's crafting compelling articles, generating imaginative stories, or composing catchy marketing slogans, AiCon V3's versatility knows no bounds. Its integration with APIs enables developers to seamlessly incorporate its advanced content generation features into their applications, platforms, or systems.
 
-Developers can not only translate languages, summarize long documents, and answer
-information-seeking questions, but they can also create comprehensive and engaging content in a
-fraction of the time and cost it would take without the aid of artificial intelligence.
+The transition from exclusive access through WorqHat workspaces to API integration marks a significant turning point in the accessibility and usability of AiCon V3. Developers can now unlock the immense potential of this AI model, leveraging its advanced capabilities to create dynamic and tailored user experiences. The fusion of AiCon V3's powerful content generation capabilities with the convenience of API integration propels the evolution of content creation, propelling developers to new heights of innovation and enabling them to build upon AiCon V3's foundation to shape the future of artificial intelligence-driven content generation.
 
 ## Use Cases
 
@@ -99,7 +103,7 @@ you are able to send the Headers and the Request Body to the API Endpoint. It's 
 send a POST Request to the API Endpoint with the Headers and the Request Body, and you are good to go!
 
 <Callout type="warning" emoji="⚠️">
-  Please note that the **AiCon V2 Model** has a word capacity limit of 4000 words in a single
+  Please note that the **AiCon V3 Model** has a word capacity limit of `8,000 words` in a single
   request including maintaining history and adding training data. If you exceed this limit, you
   will get an error.
 </Callout>
@@ -886,7 +890,8 @@ send a POST Request to the API Endpoint with the Headers and the Request Body, a
 <Callout type="warning" emoji="⚠️">
   You can choose to pass both the `history object` and `training_data` in the same request. In that
   case, the `training_data` will be used to train the AI and the `history object` will be used to
-  generate the response.
+  generate the response. Please make sure that the entire content payload should not exceed `8,000
+  words`.
 </Callout>
 
 ### Response

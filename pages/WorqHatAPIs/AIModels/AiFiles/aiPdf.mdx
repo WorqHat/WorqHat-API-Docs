@@ -48,10 +48,17 @@ https://api.worqhat.com/api/ai/v2/pdf-extract
 The Request Body is a Formdata Object. The Formdata Object has the following fields :
 
 - File Object (You can upload a PDF File)
+- Output Format (You can choose the Output Format of the Extracted Data. The Default is Text)
+
+| Data Type |    Key    | Value | Description                           |
+|:---------|:---------:| :---------------- |:--------------------------------------|
+| File Object | file | ``File Object`` | The File Object of the PDF File to be Extracted |
+| String | outputFormat | ``text`` or ``json`` | The Output Format of the Extracted Data. The Default is ``text`` |
 
 ```json filename="Request Body (Formdata)" copy
 {
-  "file": "The File Upload in Formdata"
+  "file": "The File Upload in Formdata",
+  "outputFormat": "text"
 }
 ```
 
@@ -353,9 +360,9 @@ send a POST Request to the API Endpoint with the Headers and the Request Body, a
       curl_mime_name(part, "file");
       curl_mime_filedata(part, "/C:/Users/ghosh/Downloads/lorem-ipsum-2023-05-04-04-26-53.pdf");
       curl_easy_setopt(curl, CURLOPT_MIMEPOST, mime);
-      res = curl_easy_perform(curl);
-      curl_mime_free(mime);
-    }
+    res = curl_easy_perform(curl);
+    curl_mime_free(mime);
+  }
     curl_easy_cleanup(curl);
     ```
   </Tab>
@@ -363,32 +370,90 @@ send a POST Request to the API Endpoint with the Headers and the Request Body, a
 
 ### Response
 
-#### Table View
 
-| Data Type |  Key  | Value | Description                           |
-|:---------| :------------: | :---------------- |:--------------------------------------|
-| String | id | `4a24ea32-3fbc-4667-ad78-d5bd1652a5cb` | Unique identifier for the API Request |
-| String | status | `success` or `error` | Status of the API Request             |
-| Number | timestamp | `1620120000` | Timestamp of the API Request          |
-| String | content | `Lorem ipsum dolor...` | Extracted text from the PDF           |
-| Number | Processing Count  | `223` | Number of Words Extracted |
 
-#### JSON View
+  <Tabs items={['text', 'json']}>
+    <Tab>
 
-```json filename="JSON" copy
-{
-  "id": "4a24ea32-3fbc-4667-ad78-d5bd1652a5cb",
-  "status": "success",
-  "timestamp": 1620120000,
-  "content": "Lorem ipsum dolor...",
-  "processing_count": 223
-}
-```
+      #### Table View
 
-### Error Codes
+      | Data Type | Key | Value | Description |
+      |:---------| :------------: | :---------------- |:--------------------------------------|
+      | String | id | `4a24ea32-3fbc-4667-ad78-d5bd1652a5cb` | Unique identifier for the API Request
+      |
+      | String | status | `success` or `error` | Status of the API Request |
+      | Number | timestamp | `1620120000` | Timestamp of the API Request |
+      | String | content | `Lorem ipsum dolor...` | Extracted text from the PDF |
+      | Number | Processing Count | `223` | Number of Words Extracted |
 
-| Error Code | Description                                        |
-|:---------|:---------------------------------------------------|
-| 400 | Bad Request                                        |
-| 401 | Unauthorized : Invalid API Key or Organization Key |
-| 402 | Syntax Error : Invalid JSON                        |
+      #### JSON View
+
+      ```json filename="JSON" copy
+      {
+        "id": "4a24ea32-3fbc-4667-ad78-d5bd1652a5cb",
+        "status": "success",
+        "timestamp": 1620120000,
+        "content": "Lorem ipsum dolor...",
+        "processing_count": 223
+      }
+      ```
+    </Tab>
+  <Tab>
+
+    #### Table View
+
+    | Data Type |  Key  | Value | Description                           |
+    |:---------| :------------: | :---------------- |:--------------------------------------|
+    | String | id | `4a24ea32-3fbc-4667-ad78-d5bd1652a5cb` | Unique identifier for the API Request |
+    | String | status | `success` or `error` | Status of the API Request             |
+    | Number | timestamp | `1620120000` | Timestamp of the API Request          |
+    | Object | bounded_contents | `{Object of Pages with the Identified contents}` | Extracted text
+    from the PDF     |
+    | Number | Processing Count  | `223` | Number of Words Extracted |
+
+
+    ````json filename="JSON" copy
+  {
+    {
+      "id": "7e7d4357-3653-4ff4-b504-dd37907f8d21",
+      "status": "success",
+      "timestamp": 1683400807441,
+      "content": {
+        "page_number(int)": [
+          { // identified objects
+            "type": "KEY_VALUE_SET" || "PAGE" || "LINE" || "WORD" || "TABLE" || "CELL" || "SELECTION_ELEMENT" || "MERGED_CELL" || "TITLE" || "QUERY" || "QUERY_RESULT" || "SIGNATURE" || "TABLE_TITLE" || "TABLE_FOOTER",
+            "score": "Number("float")",
+            "content": "Lorem ipsum dolor... Text content of the identified object",
+            "RowIndex": "Number: Only for Tables("int")",
+            "ColumnIndex": "Number: Only for Tables("int")",
+            "RowSpan": "Number: Only for Tables("int")",
+            "ColumnSpan": "Number: Only for Tables("int")",
+            "id": "STRING_VALUE",
+            "Relationships": [ // RelationshipList
+              { // Relationship Type: "VALUE" || "CHILD" || "COMPLEX_FEATURES" || "MERGED_CELL" ||
+                "TITLE" || "ANSWER" || "TABLE" || "TABLE_TITLE" || "TABLE_FOOTER",
+              Ids: [ // IdList
+    "STRING_VALUE",
+    ],
+  },
+    ],
+    EntityTypes: [ // EntityTypes
+    "KEY" || "VALUE" || "COLUMN_HEADER" || "TABLE_TITLE" || "TABLE_FOOTER" || "TABLE_SECTION_TITLE" || "TABLE_SUMMARY" || "STRUCTURED_TABLE" || "SEMI_STRUCTURED_TABLE",
+    ],
+  },
+    ]
+  }
+    ````
+
+    </Tab>
+    </Tabs>
+
+
+
+  ### Error Codes
+
+  | Error Code | Description                                        |
+  |:---------|:---------------------------------------------------|
+  | 400 | Bad Request                                        |
+  | 401 | Unauthorized : Invalid API Key or Organization Key |
+  | 402 | Syntax Error : Invalid JSON                        |
