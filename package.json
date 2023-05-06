@@ -4,7 +4,7 @@
   "description": "WorqHat API Docs",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && next export",
     "start": "next start",
     "update-contrib": "weallcontribute -o . && git add CONTRIBUTING.md && git commit -m 'docs:Update CONTRIBUTING.md'"
   },
@@ -26,8 +26,9 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@types/node": "20.1.0",
-    "typescript": "^5.0.4",
+    "@types/node": "18.11.10",
+    "typescript": "^4.9.3",
     "weallcontribute": "^1.0.9"
   }
 }
+

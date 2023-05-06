@@ -1,0 +1,923 @@
+import { Callout, Tab, Tabs } from "nextra-theme-docs";
+
+
+# AiCon V3 (Advanced and Powerful AI Content Generation Network)
+
+AiCon’s impressive conversational abilities are rooted in years of research and development. Like many advanced language models, such as BERT and GPT-3, AiCon is based on the Transformer neural network architecture, which was made publicly available in 2017. This architecture allows for the creation of models that can read multiple words (such as a sentence or paragraph) and understand the relationships between those words, thereby predicting what words will come next.
+
+What sets AiCon apart from other language models is its unique training process. Unlike traditional models, AiCon was trained on current web data, including actual conversations. This training allowed it to grasp the subtleties that make open-ended conversation and text distinct from other forms of language. One of these subtleties is sensibility - does the response match the conversational context and make sense?
+
+We are dedicated to revolutionizing the way organizations approach productivity, building applications and content generation. Our latest creation AiCon - the AI Content Optimization Network - has been developed to help organizations streamline their workflow and improve their overall output.
+
+Developers can not only translate languages, summarize long documents, and answer
+information-seeking questions, but they can also create comprehensive and engaging content in a
+fraction of the time and cost it would take without the aid of artificial intelligence.
+
+## Use Cases
+
+- **Writing Assistance**: Content Generation APIs can help writers and authors by providing
+suggestions, generating outlines, or even drafting entire paragraphs or articles based on given prompts. This can save time and enhance the writing process.
+
+- **Marketing and Advertising**: AI-powered APIs can generate engaging and persuasive marketing copy, including ad slogans, social media posts, email campaigns, and product descriptions. This enables businesses to create compelling content that resonates with their target audience.
+
+- **Personalized Content**: Content Generation APIs can assist in creating personalized content experiences by dynamically generating content tailored to individual users. This could include personalized product recommendations, news articles, or even customized emails.
+
+- **Language Translation**: APIs can be used to automate language translation tasks, converting text from one language to another. This is particularly useful for websites, apps, or platforms that need to support multiple languages, enabling effective communication with a global audience.
+
+- **Chatbots and Virtual Assistants**: AI-powered chatbots and virtual assistants leverage Content Generation APIs to provide human-like responses to user queries. These APIs enable the generation of natural language responses, enhancing the user experience and improving customer service.
+
+- **Content Summarization**: APIs can automatically generate concise summaries of lengthy documents, articles, or reports. This is valuable for news aggregators, research platforms, or any application where users need quick access to the main points of a large body of text.
+
+- **Data Visualization**: APIs can assist in generating visual representations of data, such as charts, graphs, or infographics, based on input datasets. This helps businesses and individuals present complex information in a more digestible and visually appealing manner.
+
+- **Virtual Storytelling**: Content Generation APIs can be used in video game development or virtual reality experiences to dynamically generate storylines, dialogues, and narratives. This allows for immersive and interactive storytelling experiences that adapt to user actions and choices.
+
+- **Content Curation**: APIs can automate the process of collecting and curating content from various sources, such as news articles, blog posts, or social media feeds. This helps content platforms deliver relevant and up-to-date information to their users.
+
+- **E-commerce Product Descriptions**: AI-powered APIs can generate compelling and accurate
+product descriptions by analyzing product features, specifications, and customer reviews. This assists e-commerce platforms in creating engaging content that drives conversions.
+
+## How to use it?
+
+### API Endpoint
+
+````bash filename="API Endpoint" copy
+https://api.worqhat.com/api/ai/content/v3
+````
+
+### Headers
+
+
+| Header Name |  Required  | Description |
+|:---------| :------------: | :---------------- |
+| x-api-key| ``true`` | This helps us to identify the User Sending the Request |
+| x-org-key|  ``true`` | This helps us to identify the Workspace Associated with the Request. This helps users to maintain easier logs |
+
+### Request Body
+
+The Request Body is a JSON Object that contains the following fields:
+
+| Data Type | Key | Value | Description |
+|:---------| :------------: | :---------------- | :---------------- |
+| String | question (required) | ``<Any Question that you want to pass to the model>`` | The question you want to ask the AI |
+| Boolean | preserve_history (optional) | ``true`` or ``false`` | Whether you want to preserve the history of the conversation or not. If you set this to ``true``, you will have to pass the ``history_object`` field as well. |
+| Object | history_object (optional) | ``{}`` | This is the history object that you want to pass to the model. This is only required if you set ``preserve_history`` to ``true``. |
+| String | training_data (optional) | ``<Any Training Data that you want to pass to the model>`` | The training data you want to pass to the AI. The AI will answer on the basis of your Data.|
+| Float | randomness (optional) | ``0.0`` to ``1.0`` | This is the randomness factor that you want to pass to the model. This is only required if you want to set the randomness factor. Default is ``0.9``. |
+
+````json filename="Request Body (Formdata)" copy
+{
+    "question": "Hi, who built you?",
+    "preserve_history": true,
+    "history_object": {
+        "Hi, who are you?": "My name is WorqBot, nice to meet you!"
+    },
+    "randomness": 0.4
+}
+````
+
+#### History Object
+
+The History Object is a JSON Object that contains the following fields:
+
+| Data Type | Key | Value | Description |
+|:---------| :------------: | :---------------- | :---------------- |
+| String | ``<User Question or Response>`` | ``<Associated AI Response or Question>`` | The question or response that you want to pass to the model. The AI will answer on the basis of your Data. |
+
+````json filename="History Object" copy
+{
+    "Hi, who are you?(User) ": "My name is WorqBot, nice to meet you! (AI)",
+    "Who built you?(User)": "I was built by WorqHat, a company that is dedicated to revolutionizing the way organizations approach productivity, building applications and content generation. (AI)"
+}
+````
+
+
+### Sample Code
+
+You can use the following Endpoints on any Codebase, including client side codebases as long as
+you are able to send the Headers and the Request Body to the API Endpoint. It's that easy! Just
+send a POST Request to the API Endpoint with the Headers and the Request Body, and you are good to go!
+
+<Callout type="warning" emoji="⚠️">
+  Please note that the **AiCon V2 Model** has a word capacity limit of 4000 words in a single
+  request including maintaining history and adding training data. If you exceed this limit, you
+  will get an error.
+</Callout>
+
+#### To Preserve History
+
+
+<Tabs items={['cURL', 'Client JS', 'NodeJS', 'Python', 'Ruby', 'PHP', 'Java', 'GO', 'C']}>
+  <Tab>
+    ```` bash filename="cURL" copy
+    curl --location 'https://api.worqhat.com/api/ai/content/v3' \
+    --header 'x-api-key: •••••••' \
+    --header 'x-org-key: •••••••' \
+    --data '{
+    "question" : "Hi, who built you?",
+    "preserve_history" : true,
+    "history_object" : {
+    "Hi, who are you?":"My name is WorqBot, nice to meet you!"
+  },
+    "randomness": 0.1
+  }'
+    ````
+  </Tab>
+  <Tab>
+    ````js filename="Client JS fetch" copy
+    var myHeaders = new Headers();
+    myHeaders.append("x-api-key", "•••••••");
+    myHeaders.append("x-org-key", "•••••••");
+
+    var raw = {
+    "question" : "Hi, who built you?",
+    "preserve_history" : true,
+    "history_object" : {"Hi, who are you?":"My name is WorqBot, nice to meet you!"},
+    "randomness": 0.1
+  };
+
+    var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: JSON.stringify(raw),
+    redirect: 'follow'
+  };
+
+    fetch("https://api.worqhat.com/api/ai/content/v3", requestOptions)
+    .then(response => response.text())
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));
+
+    ````
+
+    ````js filename="Client JS XHR" copy
+    var xhr = new XMLHttpRequest();
+    var url = "https://api.worqhat.com/api/ai/content/v3";
+
+    xhr.open("POST", url);
+    xhr.setRequestHeader("x-api-key", "•••••••");
+    xhr.setRequestHeader("x-org-key", "•••••••");
+    xhr.setRequestHeader("Content-Type", "application/json");
+
+    xhr.onreadystatechange = function() {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+    console.log(xhr.responseText);
+  }
+  };
+
+    var raw = JSON.stringify({
+    "question": "Hi, who built you?",
+    "preserve_history": true,
+    "history_object": {"Hi, who are you?": "My name is WorqBot, nice to meet you!"},
+    "randomness": 0.1
+  });
+
+    xhr.send(raw);
+
+    ````
+  </Tab>
+  <Tab>
+    ````js filename="NodeJS" copy
+    const request = require('request');
+
+    const url = "https://api.worqhat.com/api/ai/content/v3";
+
+    const headers = {
+    "x-api-key": "•••••••",
+    "x-org-key": "•••••••",
+    "Content-Type": "application/json"
+  };
+
+    const raw = JSON.stringify({
+    "question": "Hi, who built you?",
+    "preserve_history": true,
+    "history_object": {"Hi, who are you?": "My name is WorqBot, nice to meet you!"},
+    "randomness": 0.1
+  });
+
+    const requestOptions = {
+    url: url,
+    method: 'POST',
+    headers: headers,
+    body: raw
+  };
+
+    request(requestOptions, (error, response, body) => {
+    if (!error && response.statusCode === 200) {
+    console.log(body);
+  } else {
+    console.log('Error:', error);
+  }
+  });
+
+    ````
+
+    ````js filename="NodeJS Axios" copy
+    const axios = require('axios');
+
+    const url = "https://api.worqhat.com/api/ai/content/v3";
+
+    const headers = {
+    "x-api-key": "•••••••",
+    "x-org-key": "•••••••",
+    "Content-Type": "application/json"
+  };
+
+    const raw = JSON.stringify({
+    "question": "Hi, who built you?",
+    "preserve_history": true,
+    "history_object": {"Hi, who are you?": "My name is WorqBot, nice to meet you!"},
+    "randomness": 0.1
+  });
+
+    axios.post(url, raw, {headers: headers})
+    .then(response => {
+    console.log(response.data);
+  })
+    .catch(error => {
+    console.log('Error:', error.message);
+  });
+
+    ````
+  </Tab>
+  <Tab>
+    ````py filename="Python Requests" copy
+    import requests
+
+    url = "https://api.worqhat.com/api/ai/content/v3"
+
+    headers = {
+    "x-api-key": "•••••••",
+    "x-org-key": "•••••••",
+    "Content-Type": "application/json"
+  }
+
+    data = {
+    "question": "Hi, who built you?",
+    "preserve_history": True,
+    "history_object": {"Hi, who are you?": "My name is WorqBot, nice to meet you!"},
+    "randomness": 0.1
+  }
+
+    response = requests.post(url, headers=headers, json=data)
+
+    if response.status_code == 200:
+    print(response.json())
+    else:
+    print("Error:", response.text)
+
+    ````
+  </Tab>
+  <Tab>
+    ````ruby filename="Ruby" copy
+    require 'httparty'
+
+    url = "https://api.worqhat.com/api/ai/content/v3"
+
+    headers = {
+    "x-api-key" => "•••••••",
+    "x-org-key" => "•••••••",
+    "Content-Type" => "application/json"
+  }
+
+    data = {
+    "question" => "Hi, who built you?",
+    "preserve_history" => true,
+    "history_object" => {"Hi, who are you?" => "My name is WorqBot, nice to meet you!"},
+    "randomness" => 0.1
+  }
+
+    response = HTTParty.post(url, headers: headers, body: data.to_json)
+
+    if response.code == 200
+    puts response.body
+    else
+    puts "Error: #{response.code}, #{response.body}"
+    end
+
+    ````
+  </Tab>
+  <Tab>
+    ````php filename="PHP" copy
+    $url = "https://api.worqhat.com/api/ai/content/v3";
+
+    $headers = array(
+    "x-api-key: •••••••",
+    "x-org-key: •••••••",
+    "Content-Type: application/json"
+    );
+
+    $data = array(
+    "question" => "Hi, who built you?",
+    "preserve_history" => true,
+    "history_object" => array("Hi, who are you?" => "My name is WorqBot, nice to meet you!"),
+    "randomness" => 0.1
+    );
+
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+
+    $response = curl_exec($ch);
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+    if ($httpCode === 200) {
+    echo $response;
+  } else {
+    echo "Error: " . $httpCode . ", " . $response;
+  }
+
+    curl_close($ch);
+
+    ````
+  </Tab>
+  <Tab>
+    ````java filename="Java" copy
+    import java.io.BufferedReader;
+    import java.io.InputStreamReader;
+    import java.io.OutputStream;
+    import java.net.HttpURLConnection;
+    import java.net.URL;
+
+    public class Main {
+    public static void main(String[] args) {
+    String url = "https://api.worqhat.com/api/ai/content/v3";
+    String apiKey = "•••••••";
+    String orgKey = "•••••••";
+
+    try {
+    URL apiUrl = new URL(url);
+    HttpURLConnection connection = (HttpURLConnection) apiUrl.openConnection();
+    connection.setRequestMethod("POST");
+    connection.setRequestProperty("x-api-key", apiKey);
+    connection.setRequestProperty("x-org-key", orgKey);
+    connection.setRequestProperty("Content-Type", "application/json");
+    connection.setDoOutput(true);
+
+    String jsonData = "{\"question\":\"Hi, who built you?\"," +
+    "\"preserve_history\":true," +
+    "\"history_object\":{\"Hi, who are you?\":\"My name is WorqBot, nice to meet you!\"}," +
+    "\"randomness\":0.1}";
+
+    OutputStream outputStream = connection.getOutputStream();
+    outputStream.write(jsonData.getBytes());
+    outputStream.flush();
+
+    int responseCode = connection.getResponseCode();
+    if (responseCode == HttpURLConnection.HTTP_OK) {
+    BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+    String line;
+    StringBuilder response = new StringBuilder();
+    while ((line = reader.readLine()) != null) {
+    response.append(line);
+  }
+    reader.close();
+
+    System.out.println(response.toString());
+  } else {
+    System.out.println("Error: " + responseCode + ", " + connection.getResponseMessage());
+  }
+
+    connection.disconnect();
+  } catch (Exception e) {
+    e.printStackTrace();
+  }
+  }
+  }
+
+    ````
+  </Tab>
+  <Tab>
+    ````go filename="GO" copy
+    package main
+
+    import (
+    "bytes"
+    "encoding/json"
+    "fmt"
+    "net/http"
+    )
+
+    func main() {
+    url := "https://api.worqhat.com/api/ai/content/v3"
+    apiKey := "•••••••"
+    orgKey := "•••••••"
+
+    data := map[string]interface{}{
+    "question":         "Hi, who built you?",
+    "preserve_history": true,
+    "history_object": map[string]string{
+    "Hi, who are you?": "My name is WorqBot, nice to meet you!",
+  },
+    "randomness": 0.1,
+  }
+
+    jsonData, err := json.Marshal(data)
+    if err != nil {
+    fmt.Println("Error:", err)
+    return
+  }
+
+    req, err := http.NewRequest("POST", url, bytes.NewBuffer(jsonData))
+    if err != nil {
+    fmt.Println("Error:", err)
+    return
+  }
+
+    req.Header.Set("x-api-key", apiKey)
+    req.Header.Set("x-org-key", orgKey)
+    req.Header.Set("Content-Type", "application/json")
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    if err != nil {
+    fmt.Println("Error:", err)
+    return
+  }
+
+    defer resp.Body.Close()
+
+    if resp.StatusCode == http.StatusOK {
+    var result map[string]interface{}
+    err = json.NewDecoder(resp.Body).Decode(&result)
+    if err != nil {
+    fmt.Println("Error:", err)
+    return
+  }
+    fmt.Println(result)
+  } else {
+    fmt.Println("Error:", resp.Status)
+  }
+  }
+
+    ````
+  </Tab>
+  <Tab>
+    ````c filename="C" copy
+
+    #include <stdio.h>
+    #include <curl/curl.h>
+
+    int main(void) {
+    CURL * curl;
+    CURLcode res;
+
+    char url[] = "https://api.worqhat.com/api/ai/content/v3";
+    char apiKey[] = "•••••••";
+    char orgKey[] = "•••••••";
+
+    struct curl_slist *headers = NULL;
+    headers = curl_slist_append(headers, "x-api-key: •••••••");
+    headers = curl_slist_append(headers, "x-org-key: •••••••");
+    headers = curl_slist_append(headers, "Content-Type: application/json");
+
+    char data[] = "{\"question\":\"Hi, who built you?\"," \
+    "\"preserve_history\":true," \
+    "\"history_object\":{\"Hi, who are you?\":\"My name is WorqBot, nice to meet you!\"}," \
+    "\"randomness\":0.1}";
+
+    curl_global_init(CURL_GLOBAL_DEFAULT);
+    curl = curl_easy_init();
+
+    if (curl) {
+    curl_easy_setopt(curl, CURLOPT_URL, url);
+    curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
+    curl_easy_setopt(curl, CURLOPT_POSTFIELDS, data);
+
+    res = curl_easy_perform(curl);
+
+    if (res != CURLE_OK) {
+    fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
+  }
+
+    curl_easy_cleanup(curl);
+  }
+
+    curl_global_cleanup();
+
+    return 0;
+  }
+
+    ````
+  </Tab>
+</Tabs>
+
+#### To Add Training Data
+
+
+<Tabs items={['cURL', 'Client JS', 'NodeJS', 'Python', 'Ruby', 'PHP', 'Java', 'GO', 'C']}>
+  <Tab>
+    ```` bash filename="cURL" copy
+    curl --location 'https://api.worqhat.com/api/ai/content/v3' \
+    --header 'x-api-key: •••••••' \
+    --header 'x-org-key: •••••••' \
+    --data '{
+    "training_data":"I’m Sagnik, currently I live in Pune, India working as a Co-Founder || CTO at WorqHat. WorqHat is a No-Code Drag and Drop Workspace for Organizations to build their Internal Tools and Applications like Customer Portals and Dashboards in Hours instead of Days and with Zero Dev Time.I have extensive experience building frontend design components, full-scale end-to-end applications, and working with machine learning models and NoSQL databases. I have a strong track record of successfully taking projects from concept to launch, and I have a particular passion for working on projects that are in the early stages of development. My diverse skill set and hands-on approach have allowed me to contribute to a wide range of projects and industries, and I am always eager to take on new challenges and learn new technologies.Being comfortable with code allows me to rapidly prototype and validate experiences. I have also had the opportunity to work with the Firebase team at Google Cloud as a documentation contributor for Firebase Firestore and Firebase Auth. In addition, I am an avid public speaker and have conducted programming sessions for college students, sharing my journey as a student startup founder. These experiences have allowed me to expand my skills and knowledge in the field, and have helped me to develop my ability to communicate and collaborate with others. I am always looking for new opportunities to learn and grow as a developer, and I am excited to bring my skills and insights to your team.In my spare time, I enjoy mentoring young grads about different programming tricks and contributing to open source projects. These hobbies allow me to stay up-to-date on the latest trends and techniques in my field, and to share my knowledge and experience with others. I am always looking for new opportunities to learn and grow as a programmer, and I find great satisfaction in helping others to do the same. I’m always down for hearing about new projects, so feel free to drop me a line.",
+    "question" : "What are the skills of Sagnik in bullets?",
+    "randomness": 0.1
+  }'
+    ````
+  </Tab>
+  <Tab>
+    ````js filename="Client JS fetch" copy
+    var myHeaders = new Headers();
+    myHeaders.append("x-api-key", "•••••••");
+    myHeaders.append("x-org-key", "•••••••");
+
+    var raw = {
+    "training_data":"I’m Sagnik, currently I live in Pune, India working as a Co-Founder || CTO at WorqHat. WorqHat is a No-Code Drag and Drop Workspace for Organizations to build their Internal Tools and Applications like Customer Portals and Dashboards in Hours instead of Days and with Zero Dev Time.I have extensive experience building frontend design components, full-scale end-to-end applications, and working with machine learning models and NoSQL databases. I have a strong track record of successfully taking projects from concept to launch, and I have a particular passion for working on projects that are in the early stages of development. My diverse skill set and hands-on approach have allowed me to contribute to a wide range of projects and industries, and I am always eager to take on new challenges and learn new technologies.Being comfortable with code allows me to rapidly prototype and validate experiences. I have also had the opportunity to work with the Firebase team at Google Cloud as a documentation contributor for Firebase Firestore and Firebase Auth. In addition, I am an avid public speaker and have conducted programming sessions for college students, sharing my journey as a student startup founder. These experiences have allowed me to expand my skills and knowledge in the field, and have helped me to develop my ability to communicate and collaborate with others. I am always looking for new opportunities to learn and grow as a developer, and I am excited to bring my skills and insights to your team.In my spare time, I enjoy mentoring young grads about different programming tricks and contributing to open source projects. These hobbies allow me to stay up-to-date on the latest trends and techniques in my field, and to share my knowledge and experience with others. I am always looking for new opportunities to learn and grow as a programmer, and I find great satisfaction in helping others to do the same. I’m always down for hearing about new projects, so feel free to drop me a line.",
+    "question" : "What are the skills of Sagnik in bullets?",
+    "randomness": 0.1};
+
+    var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: JSON.stringify(raw),
+    redirect: 'follow'
+  };
+
+    fetch("https://api.worqhat.com/api/ai/content/v3", requestOptions)
+    .then(response => response.text())
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));
+    ````
+
+    ````js filename="Client JS XHR" copy
+    var xhr = new XMLHttpRequest();
+    var url = "https://api.worqhat.com/api/ai/content/v3";
+
+    xhr.open("POST", url);
+    xhr.setRequestHeader("x-api-key", "•••••••");
+    xhr.setRequestHeader("x-org-key", "•••••••");
+    xhr.setRequestHeader("Content-Type", "application/json");
+
+    xhr.onreadystatechange = function() {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+    console.log(xhr.responseText);
+  }
+  };
+
+    var raw = JSON.stringify({
+    "training_data": "I’m Sagnik, currently I live in Pune, India working as a Co-Founder || CTO at WorqHat. WorqHat is a No-Code Drag and Drop Workspace for Organizations to build their Internal Tools and Applications like Customer Portals and Dashboards in Hours instead of Days and with Zero Dev Time.I have extensive experience building frontend design components, full-scale end-to-end applications, and working with machine learning models and NoSQL databases. I have a strong track record of successfully taking projects from concept to launch, and I have a particular passion for working on projects that are in the early stages of development. My diverse skill set and hands-on approach have allowed me to contribute to a wide range of projects and industries, and I am always eager to take on new challenges and learn new technologies.Being comfortable with code allows me to rapidly prototype and validate experiences. I have also had the opportunity to work with the Firebase team at Google Cloud as a documentation contributor for Firebase Firestore and Firebase Auth. In addition, I am an avid public speaker and have conducted programming sessions for college students, sharing my journey as a student startup founder. These experiences have allowed me to expand my skills and knowledge in the field, and have helped me to develop my ability to communicate and collaborate with others. I am always looking for new opportunities to learn and grow as a developer, and I am excited to bring my skills and insights to your team.In my spare time, I enjoy mentoring young grads about different programming tricks and contributing to open source projects. These hobbies allow me to stay up-to-date on the latest trends and techniques in my field, and to share my knowledge and experience with others. I am always looking for new opportunities to learn and grow as a programmer, and I find great satisfaction in helping others to do the same. I’m always down for hearing about new projects, so feel free to drop me a line.",
+    "question": "What are the skills of Sagnik in bullets?",
+    "randomness": 0.1
+  });
+
+    xhr.send(raw);
+
+    ````
+  </Tab>
+  <Tab>
+    ````js filename="NodeJS" copy
+    const request = require('request');
+
+    const url = "https://api.worqhat.com/api/ai/content/v3";
+
+    const headers = {
+    "x-api-key": "•••••••",
+    "x-org-key": "•••••••",
+    "Content-Type": "application/json"
+  };
+
+    const raw = JSON.stringify({
+    "training_data": "I’m Sagnik, currently I live in Pune, India working as a Co-Founder || CTO at WorqHat. WorqHat is a No-Code Drag and Drop Workspace for Organizations to build their Internal Tools and Applications like Customer Portals and Dashboards in Hours instead of Days and with Zero Dev Time.I have extensive experience building frontend design components, full-scale end-to-end applications, and working with machine learning models and NoSQL databases. I have a strong track record of successfully taking projects from concept to launch, and I have a particular passion for working on projects that are in the early stages of development. My diverse skill set and hands-on approach have allowed me to contribute to a wide range of projects and industries, and I am always eager to take on new challenges and learn new technologies.Being comfortable with code allows me to rapidly prototype and validate experiences. I have also had the opportunity to work with the Firebase team at Google Cloud as a documentation contributor for Firebase Firestore and Firebase Auth. In addition, I am an avid public speaker and have conducted programming sessions for college students, sharing my journey as a student startup founder. These experiences have allowed me to expand my skills and knowledge in the field, and have helped me to develop my ability to communicate and collaborate with others. I am always looking for new opportunities to learn and grow as a developer, and I am excited to bring my skills and insights to your team.In my spare time, I enjoy mentoring young grads about different programming tricks and contributing to open source projects. These hobbies allow me to stay up-to-date on the latest trends and techniques in my field, and to share my knowledge and experience with others. I am always looking for new opportunities to learn and grow as a programmer, and I find great satisfaction in helping others to do the same. I’m always down for hearing about new projects, so feel free to drop me a line.",
+    "question": "What are the skills of Sagnik in bullets?",
+    "randomness": 0.1
+  });
+
+    const requestOptions = {
+    url: url,
+    method: 'POST',
+    headers: headers,
+    body: raw
+  };
+
+    request(requestOptions, (error, response, body) => {
+    if (!error && response.statusCode === 200) {
+    console.log(body);
+  } else {
+    console.log('Error:', error);
+  }
+  });
+
+    ````
+
+    ````js filename="NodeJS Axios" copy
+    const axios = require('axios');
+
+    const url = "https://api.worqhat.com/api/ai/content/v3";
+
+    const headers = {
+    "x-api-key": "•••••••",
+    "x-org-key": "•••••••",
+    "Content-Type": "application/json"
+  };
+
+    const raw = JSON.stringify({
+    "training_data": "I’m Sagnik, currently I live in Pune, India working as a Co-Founder || CTO at WorqHat. WorqHat is a No-Code Drag and Drop Workspace for Organizations to build their Internal Tools and Applications like Customer Portals and Dashboards in Hours instead of Days and with Zero Dev Time.I have extensive experience building frontend design components, full-scale end-to-end applications, and working with machine learning models and NoSQL databases. I have a strong track record of successfully taking projects from concept to launch, and I have a particular passion for working on projects that are in the early stages of development. My diverse skill set and hands-on approach have allowed me to contribute to a wide range of projects and industries, and I am always eager to take on new challenges and learn new technologies.Being comfortable with code allows me to rapidly prototype and validate experiences. I have also had the opportunity to work with the Firebase team at Google Cloud as a documentation contributor for Firebase Firestore and Firebase Auth. In addition, I am an avid public speaker and have conducted programming sessions for college students, sharing my journey as a student startup founder. These experiences have allowed me to expand my skills and knowledge in the field, and have helped me to develop my ability to communicate and collaborate with others. I am always looking for new opportunities to learn and grow as a developer, and I am excited to bring my skills and insights to your team.In my spare time, I enjoy mentoring young grads about different programming tricks and contributing to open source projects. These hobbies allow me to stay up-to-date on the latest trends and techniques in my field, and to share my knowledge and experience with others. I am always looking for new opportunities to learn and grow as a programmer, and I find great satisfaction in helping others to do the same. I’m always down for hearing about new projects, so feel free to drop me a line.",
+    "question": "What are the skills of Sagnik in bullets?",
+    "randomness": 0.1
+  });
+
+    axios.post(url, raw, {headers: headers})
+    .then(response => {
+    console.log(response.data);
+  })
+    .catch(error => {
+    console.log('Error:', error);
+  });
+
+    ````
+  </Tab>
+  <Tab>
+    ````py filename="Python Requests" copy
+    import requests
+
+    url = "https://api.worqhat.com/api/ai/content/v3"
+
+    headers = {
+    "x-api-key": "•••••••",
+    "x-org-key": "•••••••",
+    "Content-Type": "application/json"
+  }
+
+    data = {
+    "training_data": "I’m Sagnik, currently I live in Pune, India working as a Co-Founder || CTO at WorqHat. WorqHat is a No-Code Drag and Drop Workspace for Organizations to build their Internal Tools and Applications like Customer Portals and Dashboards in Hours instead of Days and with Zero Dev Time.I have extensive experience building frontend design components, full-scale end-to-end applications, and working with machine learning models and NoSQL databases. I have a strong track record of successfully taking projects from concept to launch, and I have a particular passion for working on projects that are in the early stages of development. My diverse skill set and hands-on approach have allowed me to contribute to a wide range of projects and industries, and I am always eager to take on new challenges and learn new technologies.Being comfortable with code allows me to rapidly prototype and validate experiences. I have also had the opportunity to work with the Firebase team at Google Cloud as a documentation contributor for Firebase Firestore and Firebase Auth. In addition, I am an avid public speaker and have conducted programming sessions for college students, sharing my journey as a student startup founder. These experiences have allowed me to expand my skills and knowledge in the field, and have helped me to develop my ability to communicate and collaborate with others. I am always looking for new opportunities to learn and grow as a developer, and I am excited to bring my skills and insights to your team.In my spare time, I enjoy mentoring young grads about different programming tricks and contributing to open source projects. These hobbies allow me to stay up-to-date on the latest trends and techniques in my field, and to share my knowledge and experience with others. I am always looking for new opportunities to learn and grow as a programmer, and I find great satisfaction in helping others to do the same. I’m always down for hearing about new projects, so feel free to drop me a line.",
+    "question": "What are the skills of Sagnik in bullets?",
+    "randomness": 0.1
+  }
+
+    response = requests.post(url, headers=headers, json=data)
+
+    if response.status_code == 200:
+    print(response.json())
+    else:
+    print("Error:", response.text)
+
+    ````
+  </Tab>
+  <Tab>
+    ````ruby filename="Ruby" copy
+    require 'httparty'
+
+    url = "https://api.worqhat.com/api/ai/content/v3"
+
+    headers = {
+    "x-api-key" => "•••••••",
+    "x-org-key" => "•••••••",
+    "Content-Type" => "application/json"
+  }
+
+    data = {
+    "training_data" => "I’m Sagnik, currently I live in Pune, India working as a Co-Founder || CTO at WorqHat. WorqHat is a No-Code Drag and Drop Workspace for Organizations to build their Internal Tools and Applications like Customer Portals and Dashboards in Hours instead of Days and with Zero Dev Time.I have extensive experience building frontend design components, full-scale end-to-end applications, and working with machine learning models and NoSQL databases. I have a strong track record of successfully taking projects from concept to launch, and I have a particular passion for working on projects that are in the early stages of development. My diverse skill set and hands-on approach have allowed me to contribute to a wide range of projects and industries, and I am always eager to take on new challenges and learn new technologies.Being comfortable with code allows me to rapidly prototype and validate experiences. I have also had the opportunity to work with the Firebase team at Google Cloud as a documentation contributor for Firebase Firestore and Firebase Auth. In addition, I am an avid public speaker and have conducted programming sessions for college students, sharing my journey as a student startup founder. These experiences have allowed me to expand my skills and knowledge in the field, and have helped me to develop my ability to communicate and collaborate with others. I am always looking for new opportunities to learn and grow as a developer, and I am excited to bring my skills and insights to your team.In my spare time, I enjoy mentoring young grads about different programming tricks and contributing to open source projects. These hobbies allow me to stay up-to-date on the latest trends and techniques in my field, and to share my knowledge and experience with others. I am always looking for new opportunities to learn and grow as a programmer, and I find great satisfaction in helping others to do the same. I’m always down for hearing about new projects, so feel free to drop me a line.",
+    "question" => "What are the skills of Sagnik in bullets?",
+    "randomness" => 0.1
+  }
+
+    response = HTTParty.post(url, headers: headers, body: data.to_json)
+
+    if response.code == 200
+    puts response.body
+    else
+    puts "Error: #{response.body}"
+    end
+
+    ````
+  </Tab>
+  <Tab>
+    ````php filename="PHP" copy
+    $url = "https://api.worqhat.com/api/ai/content/v3";
+
+    $headers = [
+    "x-api-key: •••••••",
+    "x-org-key: •••••••",
+    "Content-Type: application/json"
+    ];
+
+    $data = [
+    "training_data" => "I’m Sagnik, currently I live in Pune, India working as a Co-Founder || CTO
+    at WorqHat. WorqHat is a No-Code Drag and Drop Workspace for Organizations to build their
+    Internal Tools and Applications like Customer Portals and Dashboards in Hours instead of Days
+    and with Zero Dev Time.I have extensive experience building frontend design components,
+    full-scale end-to-end applications, and working with machine learning models and NoSQL
+    databases. I have a strong track record of successfully taking projects from concept to launch,
+    and I have a particular passion for working on projects that are in the early stages of
+    development. My diverse skill set and hands-on approach have allowed me to contribute to a wide
+    range of projects and industries, and I am always eager to take on new challenges and learn new
+    technologies.Being comfortable with code allows me to rapidly prototype and validate
+    experiences. I have also had the opportunity to work with the Firebase team at Google Cloud as a
+    documentation contributor for Firebase Firestore and Firebase Auth. In addition, I am an avid
+    public speaker and have conducted programming sessions for college students, sharing my journey
+    as a student startup founder. These experiences have allowed me to expand my skills and
+    knowledge in the field, and have helped me to develop my ability to communicate and collaborate
+    with others. I am always looking for new opportunities to learn and grow as a developer, and I
+    am excited to bring my skills and insights to your team.In my spare time, I enjoy mentoring
+    young grads about different programming tricks and contributing to open source projects. These
+    hobbies allow me to stay up-to-date on the latest trends and techniques in my field, and to
+    share my knowledge and experience with others. I am always looking for new opportunities to
+    learn and grow as a programmer, and I find great satisfaction in helping others to do the same.
+    I’m always down for hearing about new projects, so feel free to drop me a line.",
+    "question" => "What are the skills of Sagnik in bullets?",
+    "randomness" => 0.1
+    ];
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    $response = curl_exec($ch);
+
+    if ($response === false) {
+    echo "Error: " . curl_error($ch);
+  } else {
+    echo $response;
+  }
+
+    curl_close($ch);
+
+    ````
+  </Tab>
+  <Tab>
+    ````java filename="Java" copy
+    import java.io.BufferedReader;
+    import java.io.IOException;
+    import java.io.InputStreamReader;
+    import java.io.OutputStream;
+    import java.net.HttpURLConnection;
+    import java.net.URL;
+
+    public class Main {
+    public static void main(String[] args) throws IOException {
+    String url = "https://api.worqhat.com/api/ai/content/v3";
+
+    URL obj = new URL(url);
+    HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+
+    con.setRequestMethod("POST");
+    con.setRequestProperty("x-api-key", "•••••••");
+    con.setRequestProperty("x-org-key", "•••••••");
+    con.setRequestProperty("Content-Type", "application/json");
+
+    String data = "{\"training_data\":\"I’m Sagnik, currently I live in Pune, India working as a Co-Founder || CTO at WorqHat. WorqHat is a No-Code Drag and Drop Workspace for Organizations to build their Internal Tools and Applications like Customer Portals and Dashboards in Hours instead of Days and with Zero Dev Time.I have extensive experience building frontend design components, full-scale end-to-end applications, and working with machine learning models and NoSQL databases. I have a strong track record of successfully taking projects from concept to launch, and I have a particular passion for working on projects that are in the early stages of development. My diverse skill set and hands-on approach have allowed me to contribute to a wide range of projects and industries, and I am always eager to take on new challenges and learn new technologies.Being comfortable with code allows me to rapidly prototype and validate experiences. I have also had the opportunity to work with the Firebase team at Google Cloud as a documentation contributor for Firebase Firestore and Firebase Auth. In addition, I am an avid public speaker and have conducted programming sessions for college students, sharing my journey as a student startup founder. These experiences have allowed me to expand my skills and knowledge in the field, and have helped me to develop my ability to communicate and collaborate with others. I am always looking for new opportunities to learn and grow as a developer, and I am excited to bring my skills and insights to your team.In my spare time, I enjoy mentoring young grads about different programming tricks and contributing to open source projects. These hobbies allow me to stay up-to-date on the latest trends and techniques in my field, and to share my knowledge and experience with others. I am always looking for new opportunities to learn and grow as a programmer, and I find great satisfaction in helping others to do the same. I’m always down for hearing about new projects, so feel free to drop me a line.\",\"question\":\"What are the skills of Sagnik in bullets?\",\"randomness\":0.1}";
+
+    con.setDoOutput(true);
+    OutputStream os = con.getOutputStream();
+    os.write(data.getBytes());
+    os.flush();
+    os.close();
+
+    int responseCode = con.getResponseCode();
+
+    BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+    String inputLine;
+    StringBuilder response = new StringBuilder();
+
+    while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+  }
+    in.close();
+
+    if (responseCode == 200) {
+    System.out.println(response.toString());
+  } else {
+    System.out.println("Error: " + responseCode);
+  }
+  }
+  }
+
+    ````
+  </Tab>
+  <Tab>
+    ````go filename="GO" copy
+    package main
+
+    import (
+    "bytes"
+    "fmt"
+    "net/http"
+    )
+
+    func main() {
+    url := "https://api.worqhat.com/api/ai/content/v3"
+
+    payload := []byte(`{"training_data":"I’m Sagnik, currently I live in Pune, India working as a Co-Founder || CTO at WorqHat. WorqHat is a No-Code Drag and Drop Workspace for Organizations to build their Internal Tools and Applications like Customer Portals and Dashboards in Hours instead of Days and with Zero Dev Time.I have extensive experience building frontend design components, full-scale end-to-end applications, and working with machine learning models and NoSQL databases. I have a strong track record of successfully taking projects from concept to launch, and I have a particular passion for working on projects that are in the early stages of development. My diverse skill set and hands-on approach have allowed me to contribute to a wide range of projects and industries, and I am always eager to take on new challenges and learn new technologies.Being comfortable with code allows me to rapidly prototype and validate experiences. I have also had the opportunity to work with the Firebase team at Google Cloud as a documentation contributor for Firebase Firestore and Firebase Auth. In addition, I am an avid public speaker and have conducted programming sessions for college students, sharing my journey as a student startup founder. These experiences have allowed me to expand my skills and knowledge in the field, and have helped me to develop my ability to communicate and collaborate with others. I am always looking for new opportunities to learn and grow as a developer, and I am excited to bring my skills and insights to your team.In my spare time, I enjoy mentoring young grads about different programming tricks and contributing to open source projects. These hobbies allow me to stay up-to-date on the latest trends and techniques in my field, and to share my knowledge and experience with others. I am always looking for new opportunities to learn and grow as a programmer, and I find great satisfaction in helping others to do the same. I’m always down for hearing about new projects, so feel free to drop me a line.","question":"What are the skills of Sagnik in bullets?","randomness":0.1}`)
+
+    req, err := http.NewRequest("POST", url, bytes.NewBuffer(payload))
+    if err != nil {
+    fmt.Println("Error:", err)
+    return
+  }
+
+    req.Header.Set("x-api-key", "•••••••")
+    req.Header.Set("x-org-key", "•••••••")
+    req.Header.Set("Content-Type", "application/json")
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    if err != nil {
+    fmt.Println("Error:", err)
+    return
+  }
+
+    defer resp.Body.Close()
+
+    var buffer bytes.Buffer
+    _, err = buffer.ReadFrom(resp.Body)
+    if err != nil {
+    fmt.Println("Error:", err)
+    return
+  }
+
+    fmt.Println(buffer.String())
+  }
+
+    ````
+  </Tab>
+  <Tab>
+    ````c filename="C" copy
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <string.h>
+    #include <curl/curl.h>
+
+    int main(void) {
+    CURL * curl;
+    CURLcode res;
+    const char *url = "https://api.worqhat.com/api/ai/content/v3";
+    const char *payload = "{\"training_data\":\"I’m Sagnik, currently I live in Pune, India working as a Co-Founder || CTO at WorqHat. WorqHat is a No-Code Drag and Drop Workspace for Organizations to build their Internal Tools and Applications like Customer Portals and Dashboards in Hours instead of Days and with Zero Dev Time.I have extensive experience building frontend design components, full-scale end-to-end applications, and working with machine learning models and NoSQL databases. I have a strong track record of successfully taking projects from concept to launch, and I have a particular passion for working on projects that are in the early stages of development. My diverse skill set and hands-on approach have allowed me to contribute to a wide range of projects and industries, and I am always eager to take on new challenges and learn new technologies.Being comfortable with code allows me to rapidly prototype and validate experiences. I have also had the opportunity to work with the Firebase team at Google Cloud as a documentation contributor for Firebase Firestore and Firebase Auth. In addition, I am an avid public speaker and have conducted programming sessions for college students, sharing my journey as a student startup founder. These experiences have allowed me to expand my skills and knowledge in the field, and have helped me to develop my ability to communicate and collaborate with others. I am always looking for new opportunities to learn and grow as a developer, and I am excited to bring my skills and insights to your team.In my spare time, I enjoy mentoring young grads about different programming tricks and contributing to open source projects. These hobbies allow me to stay up-to-date on the latest trends and techniques in my field, and to share my knowledge and experience with others. I am always looking for new opportunities to learn and grow as a programmer, and I find great satisfaction in helping others to do the same. I’m always down for hearing about new projects, so feel free to drop me a line.\",\"question\":\"What are the skills of Sagnik in bullets?\",\"randomness\":0.1}";
+
+    curl_global_init(CURL_GLOBAL_DEFAULT);
+    curl = curl_easy_init();
+
+    if (curl) {
+    struct curl_slist *headers = NULL;
+    headers = curl_slist_append(headers, "Content-Type: application/json");
+    headers = curl_slist_append(headers, "x-api-key: •••••••");
+    headers = curl_slist_append(headers, "x-org-key: •••••••");
+
+    curl_easy_setopt(curl, CURLOPT_URL, url);
+    curl_easy_setopt(curl, CURLOPT_POST, 1);
+    curl_easy_setopt(curl, CURLOPT_POSTFIELDS, payload);
+    curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
+
+    res = curl_easy_perform(curl);
+
+    if (res != CURLE_OK) {
+    fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
+  }
+
+    curl_slist_free_all(headers);
+    curl_easy_cleanup(curl);
+  }
+
+    curl_global_cleanup();
+    return 0;
+  }
+
+    ````
+  </Tab>
+</Tabs>
+
+<Callout type="warning" emoji="⚠️">
+  You can choose to pass both the `history object` and `training_data` in the same request. In that
+  case, the `training_data` will be used to train the AI and the `history object` will be used to
+  generate the response.
+</Callout>
+
+### Response
+
+#### Table View
+
+| Data Type |  Key  | Value                                  | Description                                                                                               |
+|:---------| :------------: |:---------------------------------------|:----------------------------------------------------------------------------------------------------------|
+| String | id | `4a24ea32-3fbc-4667-ad78-d5bd1652a5cb` | Unique identifier for the API Request                                                                     |
+| String | status | `success` or `error`                   | Status of the API Request                                                                                 |
+| Number | timestamp | `1620120000`                           | Timestamp of the API Request                                                                              |
+| String | content | `<The response of the AI>` | The response from the AI |
+  | Number | processing_count | `58` | The number of times the AI has processed the words to
+  generate a response. |
+
+  #### JSON View
+
+  ````json filename="JSON" copy
+  {
+    "id": "1d9affa3-deac-49ee-87e7-a8d0397826fb",
+    "status": "success",
+    "timestamp": 1683057609614,
+    "content": "I was built by WorqHat, a Generative AI Based No-Code Platform Builder based on the Advanced LLM Model AiCon. It's a predictive technology that is designed to make building applications faster and easier. Is there anything you need help with?",
+    "processing_count": 58
+  }
+  ````
+
+  ### Error Codes
+
+  | Error Code | Description |
+  |:---------|:---------------------------------------------------|
+  | 400 | Bad Request |
+  | 401 | Unauthorized : Invalid API Key or Organization Key |
+  | 402 | Syntax Error : Invalid JSON |
