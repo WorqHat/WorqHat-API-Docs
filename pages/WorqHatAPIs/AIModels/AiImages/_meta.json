@@ -3,5 +3,8 @@
   "imageConv3": "Text to Image Gen V3",
   "image2imageV2": "Image to Image Gen V2",
   "image2imageV3": "Image to Image Gen V3",
-  "upscaleImage": "Image Upscaler V3"
+  "upscaleImage": "Image Upscaler V3",
+  "imageAnalyzer": "Image Analyzer V2",
+  "faceDetector": "Face Detection V2",
+  "textInImage": "Identify Text in Image V2"
 }
