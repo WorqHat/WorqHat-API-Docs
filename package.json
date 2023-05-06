@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "export": "npm run build && next export -o _static",
     "update-contrib": "weallcontribute -o . && git add CONTRIBUTING.md && git commit -m 'docs:Update CONTRIBUTING.md'"
   },
   "repository": {
