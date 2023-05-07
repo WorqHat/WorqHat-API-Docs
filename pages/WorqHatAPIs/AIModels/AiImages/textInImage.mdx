@@ -1,0 +1,858 @@
+import { Callout, Tab, Tabs } from "nextra-theme-docs";
+
+# Identifying Text in Images (Powered by ImageCon V2)
+
+ImageCon V2 introduces an advanced text detection and extraction capability that allows you to uncover machine-readable text from images. This powerful feature enables a wide range of applications and unlocks new possibilities for image analysis and understanding.
+
+One of the key applications is Visual Search. By leveraging the detected text in images, you can retrieve and display visually similar images that contain the same or similar textual content. This opens up avenues for enhanced search experiences, recommendation systems, and content discovery.
+
+In the realm of Content Insights, the ability to recognize and extract text from extracted video frames provides valuable information about the themes and topics discussed within the visual content. By searching and analyzing the recognized text, you can uncover relevant content such as news updates, sports scores, athlete identification numbers, and even extract captions or subtitles for further analysis or display.
+
+Navigation solutions can also benefit from this text detection capability. For instance, imagine developing a mobile application for visually impaired individuals that utilizes image recognition to identify and read aloud the names of restaurants, shops, street signs, or other important textual information. This assists users in navigating their surroundings and enhances their overall mobility and independence.
+
+In the context of public safety and transportation support, ImageCon V2 can be employed to detect and extract crucial information such as car license plate numbers from traffic camera images. This can aid in various applications, including automated toll systems, traffic violation detection, or vehicle tracking.
+
+Another valuable application is Filtering, specifically in scenarios where it is necessary to safeguard personally identifiable information (PII). ImageCon V2 enables the identification and removal of sensitive text from images, ensuring privacy and compliance with data protection regulations.
+
+Once text is detected, ImageCon V2 provides a comprehensive representation of the recognized words and lines, highlighting their relationships and indicating their positions within the image. This facilitates further analysis, extraction, or visualization of the text, allowing developers to create innovative and intelligent solutions powered by machine-readable text detection in images.
+
+
+
+## Use Cases
+
+- **E-commerce Visual Search**: Enhance the shopping experience by allowing users to search for products based on text found in images. By extracting machine-readable text from product images, users can easily find similar products or explore related items based on the textual content present in the images.
+
+- **News and Media Analysis**: Analyze news articles, social media posts, and online publications by extracting machine-readable text from images shared along with the content. This enables content analysis, sentiment analysis, topic extraction, and categorization, providing valuable insights into public opinion, emerging trends, and user-generated content.
+
+- **Document Digitization**: Simplify the process of digitizing physical documents by automatically detecting and extracting text from scanned images or photographs. This can be particularly useful for converting paper documents, such as invoices, receipts, and forms, into editable and searchable digital formats.
+
+- **Accessibility Solutions**: Develop inclusive applications for individuals with visual impairments by utilizing machine-readable text detection in images. By recognizing and converting text in images into speech, visually impaired users can access important information such as menus, signs, labels, or instructions, enhancing their independence and accessibility in various environments.
+
+- **Social Media Content Analysis**: Extract machine-readable text from images shared on social media platforms to gain insights into user-generated content. This can be used for sentiment analysis, brand monitoring, trend analysis, and identifying user preferences, enabling businesses to better understand and engage with their target audience.
+
+- **Compliance and Data Privacy**: Ensure compliance with data protection regulations by using machine-readable text detection to filter out personally identifiable information (PII) from images. This can be valuable in scenarios where user-generated content needs to be moderated or when handling sensitive data in automated systems.
+
+- **Automatic Captioning and Transcription**: Enhance video content by automatically extracting machine-readable text from video frames. This enables the generation of accurate captions and subtitles, making video content more accessible and facilitating content localization for different languages.
+
+- **Intelligent Content Indexing**: Index and categorize large image databases or archives by
+extracting machine-readable text from images. This enables efficient search, retrieval, and organization of image collections based on the textual content present in the images.
+
+## How to use it?
+
+### API Endpoint
+
+````bash filename="API Endpoint" copy
+https://api.worqhat.com/api/ai/images/v2/image-text-detection
+````
+
+### Headers
+
+
+| Header Name |  Required  | Description |
+|:---------| :------------: | :---------------- |
+| x-api-key| ``true`` | This helps us to identify the User Sending the Request |
+| x-org-key|  ``true`` | This helps us to identify the Workspace Associated with the Request. This helps users to maintain easier logs |
+
+### Request Body
+
+The Request Body is a JSON Object that contains the following fields:
+
+| Data Type |  Key  | Value | Description |
+|:---------|:-----:| :---------------- | :---------------- |
+| File Object | image | ``File Object`` | The Image File Object that you want to send to the API Endpoint. |
+
+````json filename="Request Body (Formdata)" copy
+{
+  "image": "File Object"
+}
+````
+
+<Callout type="warning" emoji="⚠️">
+  <b>Info:</b> If you provide a source image that contains multiple faces, the service detects the
+  largest face and uses it to compare with each face that's detected in the target image. If no
+  faces are detected in the source image, the service returns an error.
+</Callout>
+
+### Sample Code
+
+You can use the following Endpoints on any Codebase, including client side codebases as long as
+you are able to send the Headers and the Request Body to the API Endpoint. It's that easy! Just
+send a POST Request to the API Endpoint with the Headers and the Request Body, and you are good to go!
+
+
+<Tabs items={['cURL', 'Client JS', 'NodeJS', 'Python', 'Ruby', 'PHP', 'Java', 'GO', 'C']}>
+  <Tab>
+    ```` bash filename="cURL" copy
+    curl --location 'https://api.worqhat.com/api/ai/images/v2/image-text-detection' \
+    --header 'x-api-key: •••••••' \
+    --header 'x-org-key: •••••••' \
+    --form 'image=@"/C:/Users/ghosh/introduction.png"'
+    ````
+  </Tab>
+  <Tab>
+    ````js filename="Client JS fetch" copy
+    var myHeaders = new Headers();
+    myHeaders.append("x-api-key", "•••••••");
+    myHeaders.append("x-org-key", "•••••••");
+
+    var formdata = new FormData();
+    formdata.append("image", fileInput.files[0], "introduction.png");
+
+    var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: formdata,
+    redirect: 'follow'
+  };
+
+    fetch("https://api.worqhat.com/api/ai/images/v2/image-text-detection", requestOptions)
+    .then(response => response.text())
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));
+    ````
+
+    ````js filename="Client JS XHR" copy
+    var xhr = new XMLHttpRequest();
+    var url = "https://api.worqhat.com/api/ai/images/v2/image-text-detection";
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("x-api-key", "•••••••");
+    xhr.setRequestHeader("x-org-key", "•••••••");
+
+    var formdata = new FormData();
+    formdata.append("image", fileInput.files[0], "introduction.png");
+
+    xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+    var response = JSON.parse(xhr.responseText);
+    console.log(response);
+  }
+  };
+
+    xhr.onerror = function (error) {
+    console.log('error', error);
+  };
+
+    xhr.send(formdata);
+
+    ````
+  </Tab>
+  <Tab>
+    ````js filename="NodeJS" copy
+    const request = require('request');
+    const fs = require('fs');
+
+    const url = 'https://api.worqhat.com/api/ai/images/v2/image-text-detection';
+    const apiKey = '•••••••';
+    const orgKey = '•••••••';
+    const filePath = 'path/to/introduction.png';
+
+    const formData = {
+    image: fs.createReadStream(filePath),
+  };
+
+    const requestOptions = {
+    url: url,
+    method: 'POST',
+    headers: {
+    'x-api-key': apiKey,
+    'x-org-key': orgKey,
+  },
+    formData: formData,
+  };
+
+    request(requestOptions, function (error, response, body) {
+    if (error) {
+    console.log('Error:', error);
+  } else {
+    console.log('Response:', body);
+  }
+  });
+
+    ````
+
+    ````js filename="NodeJS Axios" copy
+    const axios = require('axios');
+    const fs = require('fs');
+
+    const url = 'https://api.worqhat.com/api/ai/images/v2/image-text-detection';
+    const apiKey = '•••••••';
+    const orgKey = '•••••••';
+    const filePath = 'path/to/introduction.png';
+
+    const formData = new FormData();
+    formData.append('image', fs.createReadStream(filePath));
+
+    const config = {
+    headers: {
+    'x-api-key': apiKey,
+    'x-org-key': orgKey,
+    ...formData.getHeaders(),
+  },
+  };
+
+    axios.post(url, formData, config)
+    .then(response => {
+    console.log('Response:', response.data);
+  })
+    .catch(error => {
+    console.log('Error:', error);
+  });
+
+    ````
+  </Tab>
+  <Tab>
+    ````py filename="Python Requests" copy
+    import requests
+
+    url = 'https://api.worqhat.com/api/ai/images/v2/image-text-detection'
+    api_key = '•••••••'
+    org_key = '•••••••'
+    file_path = 'path/to/introduction.png'
+
+    headers = {
+    'x-api-key': api_key,
+    'x-org-key': org_key
+  }
+
+    files = {'image': open(file_path, 'rb')}
+
+    response = requests.post(url, headers=headers, files=files)
+
+    if response.status_code == 200:
+    print('Response:', response.json())
+    else:
+    print('Error:', response.text)
+
+    ````
+  </Tab>
+  <Tab>
+    ````ruby filename="Ruby" copy
+    require 'httparty'
+
+    url = 'https://api.worqhat.com/api/ai/images/v2/image-text-detection'
+    api_key = '•••••••'
+    org_key = '•••••••'
+    file_path = 'path/to/introduction.png'
+
+    headers = {
+    'x-api-key' => api_key,
+    'x-org-key' => org_key
+  }
+
+    response = HTTParty.post(url, headers: headers, body: {image: File.open(file_path)})
+
+    if response.code == 200
+    puts 'Response:', response.parsed_response
+    else
+    puts 'Error:', response.body
+    end
+
+    ````
+  </Tab>
+  <Tab>
+    ````php filename="PHP" copy
+    <?php
+
+    $url = 'https://api.worqhat.com/api/ai/images/v2/image-text-detection';
+    $api_key = '•••••••';
+    $org_key = '•••••••';
+    $file_path = 'path/to/introduction.png';
+
+    $headers = array(
+      'x-api-key: ' . $api_key,
+      'x-org-key: ' . $org_key
+    );
+
+    $curl = curl_init();
+
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($curl, CURLOPT_POST, true);
+    curl_setopt($curl, CURLOPT_POSTFIELDS, array('image' => new CurlFile($file_path)));
+
+    $response = curl_exec($curl);
+
+    if ($response === false) {
+      echo 'Error: ' . curl_error($curl);
+    } else {
+      $http_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+      if ($http_code === 200) {
+        echo 'Response: ' . $response;
+      } else {
+        echo 'Error: ' . $response;
+      }
+    }
+
+    curl_close($curl);
+    ?>
+
+    ````
+  </Tab>
+  <Tab>
+    ````java filename="Java" copy
+    import okhttp3.MediaType;
+    import okhttp3.OkHttpClient;
+    import okhttp3.Request;
+    import okhttp3.RequestBody;
+    import okhttp3.Response;
+
+    import java.io.File;
+    import java.io.IOException;
+
+    public class Main {
+    public static void main(String[] args) throws IOException {
+    String url = "https://api.worqhat.com/api/ai/images/v2/image-text-detection";
+    String apiKey = "•••••••";
+    String orgKey = "•••••••";
+    String filePath = "path/to/introduction.png";
+
+    File imageFile = new File(filePath);
+    OkHttpClient client = new OkHttpClient();
+
+    RequestBody requestBody = new MultipartBody.Builder()
+    .setType(MultipartBody.FORM)
+    .addFormDataPart("image", imageFile.getName(),
+    RequestBody.create(MediaType.parse("image/*"), imageFile))
+    .build();
+
+    Request request = new Request.Builder()
+    .url(url)
+    .header("x-api-key", apiKey)
+    .header("x-org-key", orgKey)
+    .post(requestBody)
+    .build();
+
+    Response response = client.newCall(request).execute();
+    if (response.isSuccessful()) {
+    System.out.println("Response: " + response.body().string());
+  } else {
+    System.out.println("Error: " + response.body().string());
+  }
+  }
+  }
+
+    ````
+  </Tab>
+  <Tab>
+    ````go filename="GO" copy
+    package main
+
+    import (
+    "bytes"
+    "fmt"
+    "io"
+    "mime/multipart"
+    "net/http"
+    "os"
+    )
+
+    func main() {
+    url := "https://api.worqhat.com/api/ai/images/v2/image-text-detection"
+    apiKey := "•••••••"
+    orgKey := "•••••••"
+    filePath := "path/to/introduction.png"
+
+    file, err := os.Open(filePath)
+    if err != nil {
+    fmt.Println("Error opening file:", err)
+    return
+  }
+    defer file.Close()
+
+    body := &bytes.Buffer{}
+    writer := multipart.NewWriter(body)
+    part, err := writer.CreateFormFile("image", file.Name())
+    if err != nil {
+    fmt.Println("Error creating form file:", err)
+    return
+  }
+    io.Copy(part, file)
+    writer.Close()
+
+    request, err := http.NewRequest("POST", url, body)
+    if err != nil {
+    fmt.Println("Error creating request:", err)
+    return
+  }
+    request.Header.Set("x-api-key", apiKey)
+    request.Header.Set("x-org-key", orgKey)
+    request.Header.Set("Content-Type", writer.FormDataContentType())
+
+    client := &http.Client{}
+    response, err := client.Do(request)
+    if err != nil {
+    fmt.Println("Error sending request:", err)
+    return
+  }
+    defer response.Body.Close()
+
+    if response.StatusCode == http.StatusOK {
+    fmt.Println("Response:", response.Body)
+  } else {
+    fmt.Println("Error:", response.Status)
+  }
+  }
+
+    ````
+  </Tab>
+  <Tab>
+    ````c filename="C" copy
+    #include <stdio.h>
+    #include <curl/curl.h>
+
+    int main(void) {
+    CURL * curl;
+    CURLcode res;
+    const char *url = "https://api.worqhat.com/api/ai/images/v2/image-text-detection";
+    const char *apiKey = "•••••••";
+    const char *orgKey = "•••••••";
+    const char *filePath = "path/to/introduction.png";
+
+    FILE *file = fopen(filePath, "rb");
+    if (!file) {
+    printf("Error opening file\n");
+    return 1;
+  }
+
+    curl_global_init(CURL_GLOBAL_ALL);
+    curl = curl_easy_init();
+    if (curl) {
+    struct curl_httppost *formpost = NULL;
+    struct curl_httppost *lastptr = NULL;
+
+    curl_formadd(&formpost, &lastptr,
+    CURLFORM_COPYNAME, "image",
+    CURLFORM_FILE, filePath,
+    CURLFORM_END);
+
+    curl_easy_setopt(curl, CURLOPT_URL, url);
+    curl_easy_setopt(curl, CURLOPT_HTTPHEADER, "Content-Type: multipart/form-data");
+    curl_easy_setopt(curl, CURLOPT_HTTPHEADER, "x-api-key: %s", apiKey);
+    curl_easy_setopt(curl, CURLOPT_HTTPHEADER, "x-org-key: %s", orgKey);
+    curl_easy_setopt(curl, CURLOPT_HTTPPOST, formpost);
+
+    res = curl_easy_perform(curl);
+    if (res != CURLE_OK) {
+    printf("Error sending request: %s\n", curl_easy_strerror(res));
+  } else {
+    long response_code;
+    curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &response_code);
+    if (response_code == 200) {
+    printf("Request succeeded\n");
+  } else {
+    printf("Request failed with code %ld\n", response_code);
+  }
+  }
+
+    curl_formfree(formpost);
+    curl_easy_cleanup(curl);
+  }
+
+    fclose(file);
+    curl_global_cleanup();
+
+    return 0;
+  }
+
+    ````
+  </Tab>
+</Tabs>
+
+
+### Response
+
+#### Table View
+
+| Data Type |  Key  | Value                                  | Description                           |
+|:---------| :------------: |:---------------------------------------|:--------------------------------------|
+| String | id | `4a24ea32-3fbc-4667-ad78-d5bd1652a5cb` | Unique identifier for the API Request |
+| String | status | `success` or `error`                   | Status of the API Request             |
+| Number | timestamp | `1620120000`                           | Timestamp of the API Request          |
+| Object | content | `{Key Value Pairs of Types}`   | The Analysis Results                |
+| Number | processing_count | `6` | The Number of API Requests Processed |
+
+#### JSON View
+
+````json filename="JSON" copy
+{
+"id": "0d43b414-2a7a-425f-9f2d-4bd8d07a164d",
+  "status": "success",
+  "timestamp": 1683408470311,
+  "content": [
+  {
+    "Confidence": 90.54900360107422,
+    "DetectedText": "IT'S",
+    "Geometry": {
+      "BoundingBox": {
+        "Height": 0.10317354649305344,
+        "Left": 0.6677391529083252,
+        "Top": 0.17569075524806976,
+        "Width": 0.15113449096679688
+      },
+      "Polygon": [
+        {
+          "X": 0.6677391529083252,
+          "Y": 0.17569075524806976
+        },
+        {
+          "X": 0.8188736438751221,
+          "Y": 0.17574213445186615
+        },
+        {
+          "X": 0.8188582062721252,
+          "Y": 0.278915673494339
+        },
+        {
+          "X": 0.6677237153053284,
+          "Y": 0.2788642942905426
+        }
+      ]
+    },
+    "Id": 0,
+    "Type": "LINE"
+  },
+  {
+    "Confidence": 59.411651611328125,
+    "DetectedText": "I",
+    "Geometry": {
+      "BoundingBox": {
+        "Height": 0.05955825746059418,
+        "Left": 0.2763049304485321,
+        "Top": 0.394121915102005,
+        "Width": 0.026684552431106567
+      },
+      "Polygon": [
+        {
+          "X": 0.2763049304485321,
+          "Y": 0.394121915102005
+        },
+        {
+          "X": 0.30298948287963867,
+          "Y": 0.3932435214519501
+        },
+        {
+          "X": 0.30385109782218933,
+          "Y": 0.45280176401138306
+        },
+        {
+          "X": 0.27716654539108276,
+          "Y": 0.453680157661438
+        }
+      ]
+    },
+    "Id": 1,
+    "Type": "LINE"
+  },
+  {
+    "Confidence": 92.76634979248047,
+    "DetectedText": "MONDAY",
+    "Geometry": {
+      "BoundingBox": {
+        "Height": 0.11997425556182861,
+        "Left": 0.5545867085456848,
+        "Top": 0.34920141100883484,
+        "Width": 0.39841532707214355
+      },
+      "Polygon": [
+        {
+          "X": 0.5545867085456848,
+          "Y": 0.34920141100883484
+        },
+        {
+          "X": 0.9530020356178284,
+          "Y": 0.3471102714538574
+        },
+        {
+          "X": 0.9532787799835205,
+          "Y": 0.46708452701568604
+        },
+        {
+          "X": 0.554863452911377,
+          "Y": 0.46917566657066345
+        }
+      ]
+    },
+    "Id": 2,
+    "Type": "LINE"
+  },
+  {
+    "Confidence": 96.7636489868164,
+    "DetectedText": "but keep",
+    "Geometry": {
+      "BoundingBox": {
+        "Height": 0.0756164938211441,
+        "Left": 0.634815514087677,
+        "Top": 0.5181083083152771,
+        "Width": 0.20877975225448608
+      },
+      "Polygon": [
+        {
+          "X": 0.634815514087677,
+          "Y": 0.5181083083152771
+        },
+        {
+          "X": 0.8435952663421631,
+          "Y": 0.52589350938797
+        },
+        {
+          "X": 0.8423560857772827,
+          "Y": 0.6015099883079529
+        },
+        {
+          "X": 0.6335763335227966,
+          "Y": 0.59372478723526
+        }
+      ]
+    },
+    "Id": 3,
+    "Type": "LINE"
+  },
+  {
+    "Confidence": 99.47185516357422,
+    "DetectedText": "Smiling",
+    "Geometry": {
+      "BoundingBox": {
+        "Height": 0.2814019024372101,
+        "Left": 0.48475268483161926,
+        "Top": 0.6823741793632507,
+        "Width": 0.47539761662483215
+      },
+      "Polygon": [
+        {
+          "X": 0.48475268483161926,
+          "Y": 0.6823741793632507
+        },
+        {
+          "X": 0.9601503014564514,
+          "Y": 0.587857186794281
+        },
+        {
+          "X": 0.9847385287284851,
+          "Y": 0.8692590594291687
+        },
+        {
+          "X": 0.5093409419059753,
+          "Y": 0.9637760519981384
+        }
+      ]
+    },
+    "Id": 4,
+    "Type": "LINE"
+  },
+  {
+    "Confidence": 90.54900360107422,
+    "DetectedText": "IT'S",
+    "Geometry": {
+      "BoundingBox": {
+        "Height": 0.10387301445007324,
+        "Left": 0.6685508489608765,
+        "Top": 0.17597118020057678,
+        "Width": 0.14985692501068115
+      },
+      "Polygon": [
+        {
+          "X": 0.6677391529083252,
+          "Y": 0.17569075524806976
+        },
+        {
+          "X": 0.8188736438751221,
+          "Y": 0.17574213445186615
+        },
+        {
+          "X": 0.8188582062721252,
+          "Y": 0.278915673494339
+        },
+        {
+          "X": 0.6677237153053284,
+          "Y": 0.2788642942905426
+        }
+      ]
+    },
+    "Id": 5,
+    "ParentId": 0,
+    "Type": "WORD"
+  },
+  {
+    "Confidence": 92.76634979248047,
+    "DetectedText": "MONDAY",
+    "Geometry": {
+      "BoundingBox": {
+        "Height": 0.11929994821548462,
+        "Left": 0.5540683269500732,
+        "Top": 0.34858056902885437,
+        "Width": 0.3998897075653076
+      },
+      "Polygon": [
+        {
+          "X": 0.5545867085456848,
+          "Y": 0.34920141100883484
+        },
+        {
+          "X": 0.9530020356178284,
+          "Y": 0.3471102714538574
+        },
+        {
+          "X": 0.9532787799835205,
+          "Y": 0.46708452701568604
+        },
+        {
+          "X": 0.554863452911377,
+          "Y": 0.46917566657066345
+        }
+      ]
+    },
+    "Id": 7,
+    "ParentId": 2,
+    "Type": "WORD"
+  },
+  {
+    "Confidence": 59.411651611328125,
+    "DetectedText": "I",
+    "Geometry": {
+      "BoundingBox": {
+        "Height": 0.05981886386871338,
+        "Left": 0.2779299318790436,
+        "Top": 0.3935416042804718,
+        "Width": 0.02624112367630005
+      },
+      "Polygon": [
+        {
+          "X": 0.2763049304485321,
+          "Y": 0.394121915102005
+        },
+        {
+          "X": 0.30298948287963867,
+          "Y": 0.3932435214519501
+        },
+        {
+          "X": 0.30385109782218933,
+          "Y": 0.45280176401138306
+        },
+        {
+          "X": 0.27716654539108276,
+          "Y": 0.453680157661438
+        }
+      ]
+    },
+    "Id": 6,
+    "ParentId": 1,
+    "Type": "WORD"
+  },
+  {
+    "Confidence": 95.33189392089844,
+    "DetectedText": "but",
+    "Geometry": {
+      "BoundingBox": {
+        "Height": 0.06849122047424316,
+        "Left": 0.6350157260894775,
+        "Top": 0.5214487314224243,
+        "Width": 0.08413040637969971
+      },
+      "Polygon": [
+        {
+          "X": 0.6347596645355225,
+          "Y": 0.5215170383453369
+        },
+        {
+          "X": 0.719483494758606,
+          "Y": 0.5212655067443848
+        },
+        {
+          "X": 0.7195737957954407,
+          "Y": 0.5904868841171265
+        },
+        {
+          "X": 0.6348499655723572,
+          "Y": 0.5907384157180786
+        }
+      ]
+    },
+    "Id": 8,
+    "ParentId": 3,
+    "Type": "WORD"
+  },
+  {
+    "Confidence": 98.1954116821289,
+    "DetectedText": "keep",
+    "Geometry": {
+      "BoundingBox": {
+        "Height": 0.07207882404327393,
+        "Left": 0.7295929789543152,
+        "Top": 0.5265749096870422,
+        "Width": 0.11196041107177734
+      },
+      "Polygon": [
+        {
+          "X": 0.7290706038475037,
+          "Y": 0.5251666903495789
+        },
+        {
+          "X": 0.842876672744751,
+          "Y": 0.5268880724906921
+        },
+        {
+          "X": 0.8423973917961121,
+          "Y": 0.5989891886711121
+        },
+        {
+          "X": 0.7285913228988647,
+          "Y": 0.5972678065299988
+        }
+      ]
+    },
+    "Id": 9,
+    "ParentId": 3,
+    "Type": "WORD"
+  },
+  {
+    "Confidence": 99.47185516357422,
+    "DetectedText": "Smiling",
+    "Geometry": {
+      "BoundingBox": {
+        "Height": 0.3739858865737915,
+        "Left": 0.48920923471450806,
+        "Top": 0.5900818109512329,
+        "Width": 0.5097314119338989
+      },
+      "Polygon": [
+        {
+          "X": 0.48475268483161926,
+          "Y": 0.6823741793632507
+        },
+        {
+          "X": 0.9601503014564514,
+          "Y": 0.587857186794281
+        },
+        {
+          "X": 0.9847385287284851,
+          "Y": 0.8692590594291687
+        },
+        {
+          "X": 0.5093409419059753,
+          "Y": 0.9637760519981384
+        }
+      ]
+    },
+    "Id": 10,
+    "ParentId": 4,
+    "Type": "WORD"
+  }
+],
+  "processing_count": 1
+}
+````
+
+The Content Body is an Array that contains multiple JSON Object that contains the following fields:
+
+| Data Type | Key | Value | Description |
+|:---------| :------------: | :---------------- | :---------------- |
+| String | DetectedText | ``<the detected text>`` | The detected text |
+
+  ### Error Codes
+
+  | Error Code | Description |
+  |:---------|:---------------------------------------------------|
+  | 400 | Bad Request |
+  | 401 | Unauthorized : Invalid API Key or Organization Key |
+  | 402 | Syntax Error : Invalid JSON |

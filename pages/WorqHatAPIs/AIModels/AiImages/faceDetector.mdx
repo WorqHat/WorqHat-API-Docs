@@ -92,57 +92,377 @@ send a POST Request to the API Endpoint with the Headers and the Request Body, a
 <Tabs items={['cURL', 'Client JS', 'NodeJS', 'Python', 'Ruby', 'PHP', 'Java', 'GO', 'C']}>
   <Tab>
     ```` bash filename="cURL" copy
-
+    curl --location 'https://api.worqhat.com/api/ai/images/v2/face-detection' \
+    --header 'x-api-key: •••••••' \
+    --header 'x-org-key: •••••••' \
+    --form 'image=@"/C:/Users/ghosh/introduction.png"'
     ````
   </Tab>
   <Tab>
     ````js filename="Client JS fetch" copy
+    var myHeaders = new Headers();
+    myHeaders.append("x-api-key", "•••••••");
+    myHeaders.append("x-org-key", "•••••••");
 
+    var formdata = new FormData();
+    formdata.append("image", fileInput.files[0], "introduction.png");
+
+    var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: formdata,
+    redirect: 'follow'
+  };
+
+    fetch("https://api.worqhat.com/api/ai/images/v2/face-detection", requestOptions)
+    .then(response => response.text())
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));
     ````
 
     ````js filename="Client JS XHR" copy
+    var xhr = new XMLHttpRequest();
+    var url = "https://api.worqhat.com/api/ai/images/v2/face-detection";
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("x-api-key", "•••••••");
+    xhr.setRequestHeader("x-org-key", "•••••••");
+
+    var formdata = new FormData();
+    formdata.append("image", fileInput.files[0], "introduction.png");
+
+    xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+    var response = JSON.parse(xhr.responseText);
+    console.log(response);
+  }
+  };
+
+    xhr.onerror = function (error) {
+    console.log('error', error);
+  };
+
+    xhr.send(formdata);
 
     ````
   </Tab>
   <Tab>
     ````js filename="NodeJS" copy
+    const request = require('request');
+    const fs = require('fs');
 
+    const url = 'https://api.worqhat.com/api/ai/images/v2/face-detection';
+    const apiKey = '•••••••';
+    const orgKey = '•••••••';
+    const filePath = 'path/to/introduction.png';
+
+    const formData = {
+    image: fs.createReadStream(filePath),
+  };
+
+    const requestOptions = {
+    url: url,
+    method: 'POST',
+    headers: {
+    'x-api-key': apiKey,
+    'x-org-key': orgKey,
+  },
+    formData: formData,
+  };
+
+    request(requestOptions, function (error, response, body) {
+    if (error) {
+    console.log('Error:', error);
+  } else {
+    console.log('Response:', body);
+  }
+  });
 
     ````
 
     ````js filename="NodeJS Axios" copy
+    const axios = require('axios');
+    const fs = require('fs');
+
+    const url = 'https://api.worqhat.com/api/ai/images/v2/face-detection';
+    const apiKey = '•••••••';
+    const orgKey = '•••••••';
+    const filePath = 'path/to/introduction.png';
+
+    const formData = new FormData();
+    formData.append('image', fs.createReadStream(filePath));
+
+    const config = {
+    headers: {
+    'x-api-key': apiKey,
+    'x-org-key': orgKey,
+    ...formData.getHeaders(),
+  },
+  };
+
+    axios.post(url, formData, config)
+    .then(response => {
+    console.log('Response:', response.data);
+  })
+    .catch(error => {
+    console.log('Error:', error);
+  });
 
     ````
   </Tab>
   <Tab>
     ````py filename="Python Requests" copy
+    import requests
+
+    url = 'https://api.worqhat.com/api/ai/images/v2/face-detection'
+    api_key = '•••••••'
+    org_key = '•••••••'
+    file_path = 'path/to/introduction.png'
+
+    headers = {
+    'x-api-key': api_key,
+    'x-org-key': org_key
+  }
+
+    files = {'image': open(file_path, 'rb')}
+
+    response = requests.post(url, headers=headers, files=files)
+
+    if response.status_code == 200:
+    print('Response:', response.json())
+    else:
+    print('Error:', response.text)
 
     ````
   </Tab>
   <Tab>
     ````ruby filename="Ruby" copy
+    require 'httparty'
+
+    url = 'https://api.worqhat.com/api/ai/images/v2/face-detection'
+    api_key = '•••••••'
+    org_key = '•••••••'
+    file_path = 'path/to/introduction.png'
+
+    headers = {
+    'x-api-key' => api_key,
+    'x-org-key' => org_key
+  }
+
+    response = HTTParty.post(url, headers: headers, body: {image: File.open(file_path)})
+
+    if response.code == 200
+    puts 'Response:', response.parsed_response
+    else
+    puts 'Error:', response.body
+    end
 
     ````
   </Tab>
   <Tab>
     ````php filename="PHP" copy
+    <?php
+
+    $url = 'https://api.worqhat.com/api/ai/images/v2/face-detection';
+    $api_key = '•••••••';
+    $org_key = '•••••••';
+    $file_path = 'path/to/introduction.png';
+
+    $headers = array(
+      'x-api-key: ' . $api_key,
+      'x-org-key: ' . $org_key
+    );
+
+    $curl = curl_init();
+
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($curl, CURLOPT_POST, true);
+    curl_setopt($curl, CURLOPT_POSTFIELDS, array('image' => new CurlFile($file_path)));
+
+    $response = curl_exec($curl);
+
+    if ($response === false) {
+      echo 'Error: ' . curl_error($curl);
+    } else {
+      $http_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+      if ($http_code === 200) {
+        echo 'Response: ' . $response;
+      } else {
+        echo 'Error: ' . $response;
+      }
+    }
+
+    curl_close($curl);
+    ?>
 
     ````
   </Tab>
   <Tab>
     ````java filename="Java" copy
+    import okhttp3.MediaType;
+    import okhttp3.OkHttpClient;
+    import okhttp3.Request;
+    import okhttp3.RequestBody;
+    import okhttp3.Response;
 
+    import java.io.File;
+    import java.io.IOException;
+
+    public class Main {
+    public static void main(String[] args) throws IOException {
+    String url = "https://api.worqhat.com/api/ai/images/v2/face-detection";
+    String apiKey = "•••••••";
+    String orgKey = "•••••••";
+    String filePath = "path/to/introduction.png";
+
+    File imageFile = new File(filePath);
+    OkHttpClient client = new OkHttpClient();
+
+    RequestBody requestBody = new MultipartBody.Builder()
+    .setType(MultipartBody.FORM)
+    .addFormDataPart("image", imageFile.getName(),
+    RequestBody.create(MediaType.parse("image/*"), imageFile))
+    .build();
+
+    Request request = new Request.Builder()
+    .url(url)
+    .header("x-api-key", apiKey)
+    .header("x-org-key", orgKey)
+    .post(requestBody)
+    .build();
+
+    Response response = client.newCall(request).execute();
+    if (response.isSuccessful()) {
+    System.out.println("Response: " + response.body().string());
+  } else {
+    System.out.println("Error: " + response.body().string());
+  }
+  }
+  }
 
     ````
   </Tab>
   <Tab>
     ````go filename="GO" copy
+    package main
+
+    import (
+    "bytes"
+    "fmt"
+    "io"
+    "mime/multipart"
+    "net/http"
+    "os"
+    )
+
+    func main() {
+    url := "https://api.worqhat.com/api/ai/images/v2/face-detection"
+    apiKey := "•••••••"
+    orgKey := "•••••••"
+    filePath := "path/to/introduction.png"
+
+    file, err := os.Open(filePath)
+    if err != nil {
+    fmt.Println("Error opening file:", err)
+    return
+  }
+    defer file.Close()
+
+    body := &bytes.Buffer{}
+    writer := multipart.NewWriter(body)
+    part, err := writer.CreateFormFile("image", file.Name())
+    if err != nil {
+    fmt.Println("Error creating form file:", err)
+    return
+  }
+    io.Copy(part, file)
+    writer.Close()
+
+    request, err := http.NewRequest("POST", url, body)
+    if err != nil {
+    fmt.Println("Error creating request:", err)
+    return
+  }
+    request.Header.Set("x-api-key", apiKey)
+    request.Header.Set("x-org-key", orgKey)
+    request.Header.Set("Content-Type", writer.FormDataContentType())
+
+    client := &http.Client{}
+    response, err := client.Do(request)
+    if err != nil {
+    fmt.Println("Error sending request:", err)
+    return
+  }
+    defer response.Body.Close()
+
+    if response.StatusCode == http.StatusOK {
+    fmt.Println("Response:", response.Body)
+  } else {
+    fmt.Println("Error:", response.Status)
+  }
+  }
 
     ````
   </Tab>
   <Tab>
     ````c filename="C" copy
+    #include <stdio.h>
+    #include <curl/curl.h>
 
+    int main(void) {
+    CURL * curl;
+    CURLcode res;
+    const char *url = "https://api.worqhat.com/api/ai/images/v2/face-detection";
+    const char *apiKey = "•••••••";
+    const char *orgKey = "•••••••";
+    const char *filePath = "path/to/introduction.png";
+
+    FILE *file = fopen(filePath, "rb");
+    if (!file) {
+    printf("Error opening file\n");
+    return 1;
+  }
+
+    curl_global_init(CURL_GLOBAL_ALL);
+    curl = curl_easy_init();
+    if (curl) {
+    struct curl_httppost *formpost = NULL;
+    struct curl_httppost *lastptr = NULL;
+
+    curl_formadd(&formpost, &lastptr,
+    CURLFORM_COPYNAME, "image",
+    CURLFORM_FILE, filePath,
+    CURLFORM_END);
+
+    curl_easy_setopt(curl, CURLOPT_URL, url);
+    curl_easy_setopt(curl, CURLOPT_HTTPHEADER, "Content-Type: multipart/form-data");
+    curl_easy_setopt(curl, CURLOPT_HTTPHEADER, "x-api-key: %s", apiKey);
+    curl_easy_setopt(curl, CURLOPT_HTTPHEADER, "x-org-key: %s", orgKey);
+    curl_easy_setopt(curl, CURLOPT_HTTPPOST, formpost);
+
+    res = curl_easy_perform(curl);
+    if (res != CURLE_OK) {
+    printf("Error sending request: %s\n", curl_easy_strerror(res));
+  } else {
+    long response_code;
+    curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &response_code);
+    if (response_code == 200) {
+    printf("Request succeeded\n");
+  } else {
+    printf("Request failed with code %ld\n", response_code);
+  }
+  }
+
+    curl_formfree(formpost);
+    curl_easy_cleanup(curl);
+  }
+
+    fclose(file);
+    curl_global_cleanup();
+
+    return 0;
+  }
 
     ````
   </Tab>

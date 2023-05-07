@@ -2,13 +2,15 @@ import { Callout, Tab, Tabs } from "nextra-theme-docs";
 
 # Comparing Faces with AI (Powered by ImageCon V2)
 
-ImageCon V2 by WorqHat AI offers robust face analysis capabilities for images and videos. With ImageCon V2, you can detect faces within an image or video, and obtain valuable information about those faces. This includes the location of detected faces, facial landmarks such as the position of eyes, and attributes such as emotions (e.g., happiness or sadness) and the presence of glasses or face occlusion.
+The Face Comparison AI Model by WorqHat, powered by ImageCon V2, is designed to determine if a face in one image matches a face in another image. This face comparison system takes an input image and predicts whether it matches any face in a provided database. The system is built to compare faces irrespective of variations in expression, facial hair, and age.
 
-By submitting an image containing a face to ImageCon V2, the system will detect and analyze the facial attributes present. It provides a confidence score indicating the likelihood of a face being detected, along with detailed information about the facial attributes identified in the image.
+Both face detection and face comparison systems provide confidence level estimates for their predictions in the form of probabilities or confidence scores. For instance, a face detection system may identify a region as a face with a confidence score of 90% while assigning a confidence score of 60% to another region. The region with the higher confidence score is considered more likely to contain a face. However, it is important to note that face detection systems may occasionally miss detecting a face (false negative) or incorrectly predict the presence of a face (false positive) with high confidence.
 
-Additionally, ImageCon V2 enables face-to-face comparison by allowing you to compare a face in one image with faces detected in another image. This feature can be useful for applications such as identity verification or searching for similar faces in a database.
+Similar to face detection, the face comparison system also relies on confidence scores. It determines whether two faces belong to the same person (true match) or erroneously predicts a match between faces from different individuals (false match). Users of the system should consider the provided confidence score or similarity threshold when making decisions or designing applications based on the system's output.
 
-ImageCon V2 by WorqHat AI empowers users to perform comprehensive face analysis, extracting key facial attributes and facilitating face-to-face comparisons. These capabilities have broad applications across industries, including security, identity verification, image search, and more.
+The confidence threshold allows users to control the trade-off between missed detections and false alarms. In the context of a photo application aimed at identifying similar-looking family members, setting the confidence threshold to 80% would return matches only when the system predicts a match with 80% confidence or higher. This threshold is acceptable since the risk of missed detections or false alarms is relatively low in this scenario. However, in cases where highly accurate facial matches are crucial, it is recommended to use a higher confidence level, such as a 99% confidence or similarity threshold.
+
+The Face Comparison AI Model by WorqHat, powered by ImageCon V2, provides the tools and capabilities to compare faces and determine potential matches. Users should consider the confidence threshold appropriate for their specific use case, balancing the risk of missed detections and false alarms to ensure the desired level of accuracy and reliability in facial comparisons.
 
 ## How does it work?
 
@@ -19,11 +21,10 @@ corresponding confidence scores.
 
 It's important to note that gender binary predictions made by ImageCon V2, based on physical appearance, should not be used to determine a person's gender identity. Similarly, emotion predictions are based on facial expressions and may not reflect an individual's actual internal emotional state. It is not recommended to make decisions impacting rights, privacy, or access to services solely based on these predictions.
 
-To ensure accuracy in classification, it is advisable to use a threshold of 99% or higher,
-particularly when negative impacts could arise from wrong classification. However, for Age Range,
-ImageCon V2 estimates lower and upper age bounds, with wider ranges indicating lower confidence. Approximating the mid-point of the range can be used as a single value for age estimation.
-
-One valuable use of these attributes is generating aggregate statistics. For instance, attributes like Smile, Pose, and Sharpness can be utilized to automatically select the "best profile picture" in a social media application. Additionally, anonymized demographic estimation based on predicted gender and age attributes can be employed for broader sample analysis, such as at events or retail stores.
+The AI Model further makes use of this data to compare two Images with each other and returns a
+similarity score between the two images. The similarity score is a value between 0 and 1, where 0
+means that the two images are completely different and 1 means that the two images are exactly the
+same.
 
 
 <Callout type="info" emoji="ℹ️">
@@ -37,27 +38,32 @@ One valuable use of these attributes is generating aggregate statistics. For ins
 
 ## Use Cases
 
-- **Facial Recognition and Identity Verification**: ImageCon V2 can be used for facial recognition
-tasks, allowing for identity verification or authentication. This can be valuable in access control systems, secure authentication processes, or personalized user experiences.
+- **Identity Verification**: The face comparison system can be used for identity verification purposes, such as in banking or e-commerce applications. By comparing a user's selfie with their registered photo, the system can authenticate their identity and provide an additional layer of security.
 
-- **Emotion Analysis and User Experience Enhancement**: By analyzing facial expressions and predicting emotions, ImageCon V2 can provide insights into user reactions and sentiments. This information can be leveraged to improve user experiences, personalize content, or tailor marketing strategies.
+- **Access Control and Security**: The face comparison system can be integrated into access control systems, allowing for secure entry to restricted areas or buildings. It can compare a person's face captured by a surveillance camera with authorized personnel in the database to grant or deny access.
 
-- **Audience Analysis and Demographics**: ImageCon V2's age and gender prediction capabilities can assist in analyzing the demographics of an audience or customer base. This information can be valuable for targeted marketing campaigns, product development, or understanding customer preferences.
+- **Law Enforcement and Forensics**: Law enforcement agencies can utilize the face comparison system to match suspects or persons of interest with images from surveillance footage or databases. This can aid in criminal investigations, identifying potential matches, and generating leads.
 
-- **Content Moderation**: The face analysis capabilities of ImageCon V2 can be utilized for content moderation purposes, identifying and flagging inappropriate or offensive images or videos that violate community guidelines or policies.
+- **Personalized User Experiences**: In applications such as social media or entertainment platforms, the face comparison system can be employed to provide personalized user experiences. It can match user photos to celebrity or character databases to offer tailored recommendations, filters, or virtual transformations.
 
-- **Personalized Recommendations**: By analyzing facial attributes such as age, gender, and emotions, ImageCon V2 can contribute to personalized recommendation systems. This can be used in e-commerce platforms, streaming services, or content delivery systems to provide tailored recommendations based on user characteristics.
+- **Lost and Found Services**: The system can assist in identifying lost or missing individuals by comparing their current appearance with their registered photos. This can be valuable in finding lost children, reuniting families, or locating individuals in emergency situations.
 
-- **Market Research and Advertising**: The facial analysis capabilities of ImageCon V2 can aid in market research by providing insights into consumer reactions to advertisements, product packaging, or promotional materials. This information can guide advertising strategies and help optimize marketing campaigns.
+- **Fraud Detection and Prevention**: The face comparison system can be used in financial institutions or online platforms to detect fraudulent activities. By comparing user photos with known fraudulent profiles or multiple account registrations, it can help identify and prevent identity theft or fake accounts.
 
-- **Augmented Reality (AR) and Virtual Reality (VR)**: ImageCon V2's face analysis capabilities can enhance AR and VR experiences by tracking facial landmarks and expressions. This enables interactive and immersive virtual overlays or animations that respond to user actions and emotions.
+- **Employee Attendance and Time Tracking**: The system can be integrated into attendance management systems to verify employee presence by comparing their live facial images with registered employee photos. This ensures accurate time tracking and prevents buddy punching or proxy attendance.
+
+- **Border Control and Immigration**: Immigration authorities can leverage the face comparison system to verify the identities of travelers at border checkpoints. By comparing the faces captured by passport scanners with official records, it can enhance border security and facilitate the screening process.
+
+- **Customer Service and Personalization**: Face comparison can be used in customer service applications to recognize and greet customers by matching their faces with registered profiles. This can enhance customer experience and provide personalized assistance.
+
+- **Social Networking and Dating Platforms**: The face comparison system can be employed in social networking or dating platforms to suggest potential matches based on facial similarities or preferences. It can assist users in finding people with similar physical attributes or specific interests.
 
 ## How to use it?
 
 ### API Endpoint
 
 ````bash filename="API Endpoint" copy
-https://api.worqhat.com/api/ai/images/v2/face-detection
+https://api.worqhat.com/api/ai/images/v2/facial-comparison
 ````
 
 ### Headers
@@ -74,13 +80,21 @@ The Request Body is a JSON Object that contains the following fields:
 
 | Data Type | Key | Value | Description |
 |:---------| :------------: | :---------------- | :---------------- |
-| File Object | image | ``The Image File that you want to Identify faces from`` | This is the Image File that you want to Identify faces from. The Image File should be sent as a Formdata Object and can be of any format.|
+| File Object | source_image | ``File Object`` | The Image File that you want to Identify faces from |
+| File Object | target_image | ``File Object`` | The Image File that has the faces that you want to compare with the source image |
 
 ````json filename="Request Body (Formdata)" copy
 {
-    "image":"The Image File that you want to Identify faces from"
+  "source_image": "File Object",
+  "target_image": "File Object"
 }
 ````
+
+<Callout type="warning" emoji="⚠️">
+  <b>Info:</b> If you provide a source image that contains multiple faces, the service detects the
+  largest face and uses it to compare with each face that's detected in the target image. If no
+  faces are detected in the source image, the service returns an error.
+</Callout>
 
 ### Sample Code
 
@@ -92,57 +106,441 @@ send a POST Request to the API Endpoint with the Headers and the Request Body, a
 <Tabs items={['cURL', 'Client JS', 'NodeJS', 'Python', 'Ruby', 'PHP', 'Java', 'GO', 'C']}>
   <Tab>
     ```` bash filename="cURL" copy
-
+    curl --location 'https://api.worqhat.com/api/ai/images/v2/facial-comparison' \
+    --header 'x-api-key: •••••••' \
+    --header 'x-org-key: •••••••' \
+    --form 'source_image=@"/C:/Users/IMG_20230215_004925-2.jpg"' \
+    --form 'target_image=@"/C:/Users/introduction.png"'
     ````
   </Tab>
   <Tab>
     ````js filename="Client JS fetch" copy
+    var myHeaders = new Headers();
+    myHeaders.append("x-api-key", "•••••••");
+    myHeaders.append("x-org-key", "•••••••");
 
+    var formdata = new FormData();
+    formdata.append("source_image", fileInput.files[0], "IMG_20230215_004925-2.jpg");
+    formdata.append("target_image", fileInput.files[0], "introduction.png");
+
+    var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: formdata,
+    redirect: 'follow'
+  };
+
+    fetch("https://api.worqhat.com/api/ai/images/v2/facial-comparison", requestOptions)
+    .then(response => response.text())
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));
     ````
 
     ````js filename="Client JS XHR" copy
+    var fileInput = document.getElementById("fileInput");
+
+    var formData = new FormData();
+    formData.append("source_image", fileInput.files[0], "IMG_20230215_004925-2.jpg");
+    formData.append("target_image", fileInput.files[0], "introduction.png");
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "https://api.worqhat.com/api/ai/images/v2/facial-comparison");
+    xhr.setRequestHeader("x-api-key", "•••••••");
+    xhr.setRequestHeader("x-org-key", "•••••••");
+
+    xhr.onload = function() {
+    if (xhr.status === 200) {
+    console.log(xhr.responseText);
+  } else {
+    console.log("Request failed with status:", xhr.status);
+  }
+  };
+
+    xhr.onerror = function() {
+    console.log("An error occurred while sending the request.");
+  };
+
+    xhr.send(formData);
 
     ````
   </Tab>
   <Tab>
     ````js filename="NodeJS" copy
+    const request = require('request');
+    const fs = require('fs');
 
+    const fileInput = 'path/to/IMG_20230215_004925-2.jpg';
+
+    const formData = {
+    source_image: fs.createReadStream(fileInput),
+    target_image: fs.createReadStream(fileInput)
+  };
+
+    const options = {
+    url: 'https://api.worqhat.com/api/ai/images/v2/facial-comparison',
+    headers: {
+    'x-api-key': '•••••••',
+    'x-org-key': '•••••••'
+  },
+    formData: formData
+  };
+
+    request.post(options, function(error, response, body) {
+    if (error) {
+    console.log('Error:', error);
+  } else {
+    console.log('Response:', body);
+  }
+  });
 
     ````
 
     ````js filename="NodeJS Axios" copy
+    const axios = require('axios');
+    const fs = require('fs');
+
+    const fileInput = 'path/to/IMG_20230215_004925-2.jpg';
+
+    const formData = new FormData();
+    formData.append('source_image', fs.createReadStream(fileInput), 'IMG_20230215_004925-2.jpg');
+    formData.append('target_image', fs.createReadStream(fileInput), 'introduction.png');
+
+    const url = 'https://api.worqhat.com/api/ai/images/v2/facial-comparison';
+    const headers = {
+    'x-api-key': '•••••••',
+    'x-org-key': '•••••••',
+    'Content-Type': 'multipart/form-data'
+  };
+
+    axios.post(url, formData, {headers})
+    .then(response => {
+    console.log('Response:', response.data);
+  })
+    .catch(error => {
+    console.log('Error:', error);
+  });
 
     ````
   </Tab>
   <Tab>
     ````py filename="Python Requests" copy
+    import requests
+
+    url = "https://api.worqhat.com/api/ai/images/v2/facial-comparison"
+    headers = {
+    "x-api-key": "•••••••",
+    "x-org-key": "•••••••"
+  }
+
+    files = [
+    ("source_image", open("IMG_20230215_004925-2.jpg", "rb")),
+    ("target_image", open("introduction.png", "rb"))
+    ]
+
+    response = requests.post(url, headers=headers, files=files)
+
+    if response.status_code == 200:
+    print(response.text)
+    else:
+    print("Request failed with status:", response.status_code)
 
     ````
   </Tab>
   <Tab>
     ````ruby filename="Ruby" copy
+    require 'net/http'
+
+    url = URI.parse("https://api.worqhat.com/api/ai/images/v2/facial-comparison")
+    headers = {
+    "x-api-key" => "•••••••",
+    "x-org-key" => "•••••••"
+  }
+
+    file_input = "IMG_20230215_004925-2.jpg"
+    file_data = File.binread(file_input)
+
+    request = Net::HTTP::Post.new(url.path, headers)
+    request.set_form([
+    ["source_image", file_data, {filename: File.basename(file_input)}],
+    ["target_image", file_data, {filename: "introduction.png"}]
+    ], 'multipart/form-data')
+
+    response = Net::HTTP.start(url.host, url.port, use_ssl: true) do |http|
+    http.request(request)
+    end
+
+    if response.code.to_i == 200
+    puts response.body
+    else
+    puts "Request failed with status: #{response.code}"
+    end
 
     ````
   </Tab>
   <Tab>
     ````php filename="PHP" copy
+    <?php
+
+    $url = "https://api.worqhat.com/api/ai/images/v2/facial-comparison";
+    $headers = array(
+        "x-api-key: •••••••",
+        "x-org-key: •••••••"
+    );
+
+    $fileInput = "IMG_20230215_004925-2.jpg";
+    $targetImage = "introduction.png";
+
+    $postFields = array(
+        'source_image' => new CURLFile($fileInput, mime_content_type($fileInput), basename($fileInput)),
+        'target_image' => new CURLFile($fileInput, mime_content_type($fileInput), $targetImage)
+    );
+
+    $ch = curl_init();
+
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $postFields);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    $response = curl_exec($ch);
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+    curl_close($ch);
+
+    if ($httpCode == 200) {
+        echo $response;
+    } else {
+        echo "Request failed with status: " . $httpCode;
+    }
+
+    ?>
 
     ````
   </Tab>
   <Tab>
     ````java filename="Java" copy
+    import java.io.File;
+    import java.io.FileInputStream;
+    import java.io.IOException;
+    import java.io.OutputStream;
+    import java.net.HttpURLConnection;
+    import java.net.URL;
 
+    public class FacialComparison {
+    public static void main(String[] args) throws IOException {
+    String endpointUrl = "https://api.worqhat.com/api/ai/images/v2/facial-comparison";
+    String apiKey = "•••••••";
+    String orgKey = "•••••••";
+    String sourceImageFilePath = "IMG_20230215_004925-2.jpg";
+    String targetImageFilePath = "introduction.png";
+
+    URL url = new URL(endpointUrl);
+    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+    conn.setRequestMethod("POST");
+    conn.setRequestProperty("x-api-key", apiKey);
+    conn.setRequestProperty("x-org-key", orgKey);
+    conn.setDoOutput(true);
+
+    String boundary = "Boundary-" + System.currentTimeMillis();
+    conn.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + boundary);
+
+    OutputStream outputStream = conn.getOutputStream();
+    File sourceImageFile = new File(sourceImageFilePath);
+    File targetImageFile = new File(targetImageFilePath);
+
+    writeFormField(outputStream, boundary, "source_image", sourceImageFile.getName());
+    writeFileField(outputStream, boundary, "source_image", sourceImageFile);
+    writeFormField(outputStream, boundary, "target_image", targetImageFile.getName());
+    writeFileField(outputStream, boundary, "target_image", targetImageFile);
+
+    outputStream.write(("--" + boundary + "--\r\n").getBytes());
+    outputStream.flush();
+    outputStream.close();
+
+    int responseCode = conn.getResponseCode();
+    if (responseCode == HttpURLConnection.HTTP_OK) {
+    // Successful response
+    StringBuilder response = new StringBuilder();
+    FileInputStream inputStream = new FileInputStream(conn.getInputStream());
+    int bytesRead;
+    byte[] buffer = new byte[4096];
+    while ((bytesRead = inputStream.read(buffer)) != -1) {
+    response.append(new String(buffer, 0, bytesRead));
+  }
+    inputStream.close();
+    System.out.println(response.toString());
+  } else {
+    // Error occurred
+    System.out.println("Request failed with status: " + responseCode);
+  }
+  }
+
+    private static void writeFormField(OutputStream outputStream, String boundary, String fieldName, String fieldValue)
+    throws IOException {
+    outputStream.write(("--" + boundary + "\r\n").getBytes());
+    outputStream.write(("Content-Disposition: form-data; name=\"" + fieldName + "\"\r\n").getBytes());
+    outputStream.write("\r\n".getBytes());
+    outputStream.write(fieldValue.getBytes());
+    outputStream.write("\r\n".getBytes());
+  }
+
+    private static void writeFileField(OutputStream outputStream, String boundary, String fieldName, File file)
+    throws IOException {
+    outputStream.write(("--" + boundary + "\r\n").getBytes());
+    outputStream.write(
+    ("Content-Disposition: form-data; name=\"" + fieldName + "\"; filename=\"" + file.getName() + "\"\r\n")
+    .getBytes());
+    outputStream.write(("Content-Type: " + HttpURLConnection.guessContentTypeFromName(file.getName()) + "\r\n")
+    .getBytes());
+    outputStream.write("\r\n".getBytes());
+
+    FileInputStream fileInputStream = new FileInputStream(file);
+    byte[] buffer = new byte[4096];
+    int bytesRead;
+    while ((bytesRead = fileInputStream.read(buffer)) != -1) {
+    outputStream.write(buffer, 0, bytesRead);
+  }
+    fileInputStream.close();
+
+    outputStream.write("\r\n".getBytes());
+  }
+  }
 
     ````
   </Tab>
   <Tab>
     ````go filename="GO" copy
+    package main
+
+    import (
+    "bytes"
+    "fmt"
+    "io"
+    "mime/multipart"
+    "net/http"
+    "os"
+    )
+
+    func main() {
+    url := "https://api.worqhat.com/api/ai/images/v2/facial-comparison"
+    apiKey := "•••••••"
+    orgKey := "•••••••"
+    sourceImageFilePath := "IMG_20230215_004925-2.jpg"
+    targetImageFilePath := "introduction.png"
+
+    body := &bytes.Buffer{}
+    writer := multipart.NewWriter(body)
+
+    file, err := os.Open(sourceImageFilePath)
+    if err != nil {
+    fmt.Println("Failed to open source image file:", err)
+    return
+  }
+    defer file.Close()
+
+    sourceImagePart, err := writer.CreateFormFile("source_image", sourceImageFilePath)
+    if err != nil {
+    fmt.Println("Failed to create source image form file:", err)
+    return
+  }
+
+    _, err = io.Copy(sourceImagePart, file)
+    if err != nil {
+    fmt.Println("Failed to write source image file data:", err)
+    return
+  }
+
+    file, err = os.Open(targetImageFilePath)
+    if err != nil {
+    fmt.Println("Failed to open target image file:", err)
+    return
+  }
+    defer file.Close()
+
+    targetImagePart, err := writer.CreateFormFile("target_image", targetImageFilePath)
+    if err != nil {
+    fmt.Println("Failed to create target image form file:", err)
+    return
+  }
+
+    _, err = io.Copy(targetImagePart, file)
+    if err != nil {
+    fmt.Println("Failed to write target image file data:", err)
+    return
+  }
+
+    err = writer.Close()
+    if err != nil {
+    fmt.Println("Failed to close multipart writer:", err)
+    return
+  }
+
+    request, err := http.NewRequest("POST", url, body)
+    if err != nil {
+    fmt.Println("Failed to create HTTP request:", err)
+    return
+  }
+
+    request.Header.Set("x-api-key", apiKey)
+    request.Header.Set("x-org-key", orgKey)
+    request.Header.Set("Content-Type", writer.FormDataContentType())
+
+    client := &http.Client{}
+    response, err := client.Do(request)
+    if err != nil {
+    fmt.Println("Failed to send HTTP request:", err)
+    return
+  }
+
+    defer response.Body.Close()
+
+    if response.StatusCode == http.StatusOK {
+    var buf bytes.Buffer
+    _, err = buf.ReadFrom(response.Body)
+    if err != nil {
+    fmt.Println("Failed to read response body:", err)
+    return
+  }
+    fmt.Println(buf.String())
+  } else {
+    fmt.Println("Request failed with status:", response.StatusCode)
+  }
+  }
 
     ````
   </Tab>
   <Tab>
     ````c filename="C" copy
+    #include <stdio.h>
+    #include <curl/curl.h>
 
+    int main(void) {
+    CURL * curl;
+    CURLcode res;
+    struct curl_httppost *formpost = NULL;
+    struct curl_httppost *lastptr = NULL;
+
+    curl_global_init(CURL_GLOBAL_ALL);
+    curl = curl_easy_init();
+    if (curl) {
+    curl_formadd(&formpost, &lastptr, CURLFORM_COPYNAME, "source_image", CURLFORM_FILE, "IMG_20230215_004925-2.jpg", CURLFORM_END);
+    curl_formadd(&formpost, &lastptr, CURLFORM_COPYNAME, "target_image", CURLFORM_FILE, "introduction.png", CURLFORM_END);
+
+    curl_easy_setopt(curl, CURLOPT_URL, "https://api.worqhat.com/api/ai/images/v2/facial-comparison");
+    curl_easy_setopt(curl, CURLOPT_HTTPHEADER, "x-api-key: •••••••", "x-org-key: •••••••");
+    curl_easy_setopt(curl, CURLOPT_HTTPPOST, formpost);
+
+    res = curl_easy_perform(curl);
+    if (res != CURLE_OK)
+    fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
+
+    curl_easy_cleanup(curl);
+    curl_formfree(formpost);
+  }
+    curl_global_cleanup();
+    return 0;
+  }
 
     ````
   </Tab>
@@ -165,274 +563,99 @@ send a POST Request to the API Endpoint with the Headers and the Request Body, a
 
 ````json filename="JSON" copy
 {
-  "id": "edea3d37-01da-487a-8015-af712615beca",
+"id": "0d43b414-2a7a-425f-9f2d-4bd8d07a164d",
   "status": "success",
-  "timestamp": 1683406580856,
+  "timestamp": 1683408470311,
   "content": {
-    "analysed_data": [
-      {
-        "BoundingBox": {
-          "Width": 0.10777401179075241,
-          "Height": 0.13282546401023865,
-          "Left": 0.17654450237751007,
-          "Top": 0.3921668529510498
+  "SourceImageFace"
+:
+  {
+    "BoundingBox"
+  :
+    {
+      "Width"
+    :
+      0.1680983304977417,
+        "Height"
+    :
+      0.09100770205259323,
+        "Left"
+    :
+      0.48030680418014526,
+        "Top"
+    :
+      0.8345635533332825
+    }
+  ,
+    "Confidence"
+  :
+    99.99486541748047
+  }
+,
+  "matchedFaces"
+:
+  [],
+    "unmatchedFaces"
+:
+  [
+    {
+      "BoundingBox": {
+        "Width": 0.22275960445404053,
+        "Height": 0.30170711874961853,
+        "Left": 0.39496153593063354,
+        "Top": 0.32357266545295715
+      },
+      "Confidence": 99.99957275390625,
+      "Landmarks": [
+        {
+          "Type": "eyeLeft",
+          "X": 0.45603784918785095,
+          "Y": 0.45682597160339355
         },
-        "AgeRange": {
-          "Low": 20,
-          "High": 28
+        {
+          "Type": "eyeRight",
+          "X": 0.5573944449424744,
+          "Y": 0.44467875361442566
         },
-        "Smile": {
-          "Value": false,
-          "Confidence": 93.70523071289062
+        {
+          "Type": "mouthLeft",
+          "X": 0.47634047269821167,
+          "Y": 0.5560102462768555
         },
-        "Eyeglasses": {
-          "Value": true,
-          "Confidence": 99.99999237060547
+        {
+          "Type": "mouthRight",
+          "X": 0.5607470870018005,
+          "Y": 0.545693576335907
         },
-        "Sunglasses": {
-          "Value": false,
-          "Confidence": 99.95690155029297
-        },
-        "Gender": {
-          "Value": "Male",
-          "Confidence": 99.96484375
-        },
-        "Beard": {
-          "Value": false,
-          "Confidence": 62.05418014526367
-        },
-        "Mustache": {
-          "Value": false,
-          "Confidence": 97.35452270507812
-        },
-        "EyesOpen": {
-          "Value": true,
-          "Confidence": 98.76431274414062
-        },
-        "MouthOpen": {
-          "Value": true,
-          "Confidence": 84.85880279541016
-        },
-        "Emotions": [
-          {
-            "Type": "SURPRISED",
-            "Confidence": 92.99723815917969
-          },
-          {
-            "Type": "CALM",
-            "Confidence": 23.0799503326416
-          },
-          {
-            "Type": "FEAR",
-            "Confidence": 7.924409866333008
-          },
-          {
-            "Type": "CONFUSED",
-            "Confidence": 4.7363104820251465
-          },
-          {
-            "Type": "SAD",
-            "Confidence": 2.6062285900115967
-          },
-          {
-            "Type": "ANGRY",
-            "Confidence": 1.7453320026397705
-          },
-          {
-            "Type": "HAPPY",
-            "Confidence": 1.4428735971450806
-          },
-          {
-            "Type": "DISGUSTED",
-            "Confidence": 1.3754680156707764
-          }
-        ],
-        "Landmarks": [
-          {
-            "Type": "eyeLeft",
-            "X": 0.21465006470680237,
-            "Y": 0.437491774559021
-          },
-          {
-            "Type": "eyeRight",
-            "X": 0.25979283452033997,
-            "Y": 0.4359549283981323
-          },
-          {
-            "Type": "mouthLeft",
-            "X": 0.22244024276733398,
-            "Y": 0.48688557744026184
-          },
-          {
-            "Type": "mouthRight",
-            "X": 0.2600334584712982,
-            "Y": 0.4855155050754547
-          },
-          {
-            "Type": "nose",
-            "X": 0.2459861785173416,
-            "Y": 0.4550646245479584
-          },
-          {
-            "Type": "leftEyeBrowLeft",
-            "X": 0.19446563720703125,
-            "Y": 0.4297780692577362
-          },
-          {
-            "Type": "leftEyeBrowRight",
-            "X": 0.22514291107654572,
-            "Y": 0.4198493957519531
-          },
-          {
-            "Type": "leftEyeBrowUp",
-            "X": 0.21060246229171753,
-            "Y": 0.4192149043083191
-          },
-          {
-            "Type": "rightEyeBrowLeft",
-            "X": 0.25112780928611755,
-            "Y": 0.4189653992652893
-          },
-          {
-            "Type": "rightEyeBrowRight",
-            "X": 0.2729511260986328,
-            "Y": 0.42690983414649963
-          },
-          {
-            "Type": "rightEyeBrowUp",
-            "X": 0.2628464102745056,
-            "Y": 0.41738104820251465
-          },
-          {
-            "Type": "leftEyeLeft",
-            "X": 0.2056843489408493,
-            "Y": 0.43866878747940063
-          },
-          {
-            "Type": "leftEyeRight",
-            "X": 0.2234984040260315,
-            "Y": 0.43773695826530457
-          },
-          {
-            "Type": "leftEyeUp",
-            "X": 0.21461336314678192,
-            "Y": 0.4346442222595215
-          },
-          {
-            "Type": "leftEyeDown",
-            "X": 0.21498507261276245,
-            "Y": 0.439727783203125
-          },
-          {
-            "Type": "rightEyeLeft",
-            "X": 0.250782310962677,
-            "Y": 0.4368106424808502
-          },
-          {
-            "Type": "rightEyeRight",
-            "X": 0.2668272852897644,
-            "Y": 0.43646448850631714
-          },
-          {
-            "Type": "rightEyeUp",
-            "X": 0.25996148586273193,
-            "Y": 0.43306758999824524
-          },
-          {
-            "Type": "rightEyeDown",
-            "X": 0.25965967774391174,
-            "Y": 0.4381241202354431
-          },
-          {
-            "Type": "noseLeft",
-            "X": 0.23344972729682922,
-            "Y": 0.4658816158771515
-          },
-          {
-            "Type": "noseRight",
-            "X": 0.25016430020332336,
-            "Y": 0.46519964933395386
-          },
-          {
-            "Type": "mouthUp",
-            "X": 0.2432977706193924,
-            "Y": 0.47654277086257935
-          },
-          {
-            "Type": "mouthDown",
-            "X": 0.24340258538722992,
-            "Y": 0.4926367402076721
-          },
-          {
-            "Type": "leftPupil",
-            "X": 0.21465006470680237,
-            "Y": 0.437491774559021
-          },
-          {
-            "Type": "rightPupil",
-            "X": 0.25979283452033997,
-            "Y": 0.4359549283981323
-          },
-          {
-            "Type": "upperJawlineLeft",
-            "X": 0.1773587167263031,
-            "Y": 0.45201900601387024
-          },
-          {
-            "Type": "midJawlineLeft",
-            "X": 0.19171585142612457,
-            "Y": 0.5035356879234314
-          },
-          {
-            "Type": "chinBottom",
-            "X": 0.24220940470695496,
-            "Y": 0.5216568112373352
-          },
-          {
-            "Type": "midJawlineRight",
-            "X": 0.2716551721096039,
-            "Y": 0.500251829624176
-          },
-          {
-            "Type": "upperJawlineRight",
-            "X": 0.27593758702278137,
-            "Y": 0.4482903778553009
-          }
-        ],
-        "Pose": {
-          "Roll": -0.5706930756568909,
-          "Yaw": 9.576250076293945,
-          "Pitch": 21.39400863647461
-        },
-        "Quality": {
-          "Brightness": 52.36806869506836,
-          "Sharpness": 78.64350128173828
-        },
-        "Confidence": 99.99894714355469
+        {
+          "Type": "nose",
+          "X": 0.5165039300918579,
+          "Y": 0.49855881929397583
+        }
+      ],
+      "Pose": {
+        "Roll": -6.501305103302002,
+        "Yaw": 2.388709306716919,
+        "Pitch": 9.898780822753906
+      },
+      "Quality": {
+        "Brightness": 54.408485412597656,
+        "Sharpness": 83.14741516113281
       }
-    ]
-  },
-  "processing_count": 1
+    }
+  ]
+},
+"processing_count": 1
 }
 ````
 
-The analyzed data returned by the API is structured as a JSON object and contains essential information about the detected faces. The `analysed_data` includes the total count of faces detected (`face_count`) and an array called `faces` that holds detailed information for each individual face.
+The Content Body is a JSON Object that contains the following fields:
 
-Within the `faces` array, each face object is identified by a unique `face_id` and provides the following attributes: `face_rectangle`, `face_landmarks`, `pose`, `quality`, and `confidence`.
-
-The `face_rectangle` attribute specifies the dimensions and position of the detected face within the image, including its `width`, `height`, `left` coordinate, and `top` coordinate.
-
-The `face_landmarks` attribute contains specific facial landmarks, such as `eyeLeft`, `eyeRight`, `nose`, `mouthLeft`, and `mouthRight`. Each landmark is associated with `x` and `y` coordinates, indicating their positions on the face.
-
-The `pose` attribute describes the face's rotation in terms of `roll`, `yaw`, and `pitch`. This information can be utilized to determine the face's orientation and adjust any visual elements accordingly.
-
-The `quality` attribute provides insights into the face's attributes such as `brightness` and `sharpness`. This data can be useful for comparing faces across different images and identifying the best-quality face among them.
-
-The `confidence` attribute represents the confidence level or certainty of the face detection process for the specific face. It indicates the reliability of the detection result, helping to gauge the accuracy of the detected face.
-
-By combining the `face_rectangle` and `pose` data, developers can draw bounding boxes accurately around the detected faces within their applications. The `quality` attribute can aid in comparing faces, while the default `landmarks` provide key facial features for further analysis and manipulation.
-
-Overall, the analyzed data from ImageCon V2 provides detailed information about each detected face, including their `location`, `landmarks`, `pose`, `quality`, and `confidence`. This data can be leveraged for various purposes, such as face visualization, face comparison, or further facial analysis.
+| Data Type | Key | Value | Description |
+|:---------| :------------: | :---------------- | :---------------- |
+| Array | matchedFaces | ``Array of Objects`` | The Faces that were matched in the Target Image |
+| Array | unmatchedFaces | ``Array of Objects`` | The Faces that were not matched in the Target Image |
+| Object | SourceImageFace | ``Object`` | The Face that was detected in the Source Image |
 
 ### Error Codes
 
