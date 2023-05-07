@@ -70,7 +70,7 @@ The Request Body is a JSON Object that contains the following fields:
 
 ````json filename="Request Body (Formdata)" copy
 {
-    "image":"The Image File that you want to moderate"
+    "image":"The Image File that you want to analyze"
 }
 ````
 
@@ -150,7 +150,7 @@ send a POST Request to the API Endpoint with the Headers and the Request Body, a
 | String | id | `4a24ea32-3fbc-4667-ad78-d5bd1652a5cb` | Unique identifier for the API Request |
 | String | status | `success` or `error`                   | Status of the API Request             |
 | Number | timestamp | `1620120000`                           | Timestamp of the API Request          |
-| Object | content | `{Key Value Pairs of Types}`   | The Moderation Results                |
+| Object | content | `{Key Value Pairs of Types}`   | The Analysis Results                |
 | Number | processing_count | `6` | The Number of API Requests Processed |
 
 #### JSON View

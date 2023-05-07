@@ -6,5 +6,6 @@
   "upscaleImage": "Image Upscaler V3",
   "imageAnalyzer": "Image Analyzer V2",
   "faceDetector": "Face Detection V2",
+  "faceComparison": "Face Comparison V2",
   "textInImage": "Identify Text in Image V2"
 }
