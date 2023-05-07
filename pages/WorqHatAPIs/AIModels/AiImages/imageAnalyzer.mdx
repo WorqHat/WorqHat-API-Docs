@@ -1,0 +1,296 @@
+import { Callout, Tab, Tabs } from "nextra-theme-docs";
+
+# Analyze Image Contents with AI (Powered by ImageCon V2)
+
+ImageCon V2 Models are advanced tools designed to analyze the contents of images and detect various labels associated with them. These models have undergone extensive training to identify specific objects, scenes, actions, and concepts within an image. By utilizing these models, you can gain insights into the different elements present in a given photograph.
+
+When an image is processed using ImageCon V2 Models, they are capable of detecting a wide range of labels, numbering in the thousands. These labels can include objects such as "Palm Tree," scenes like "Beach," actions like "Running," and concepts such as "Outdoors." By detecting these labels, the models provide information about the prominent elements and themes within the image.
+
+In addition to label detection, ImageCon V2 Models also offer the ability to retrieve valuable information about various properties of an image. These properties encompass attributes like the color of the foreground and background, as well as the overall sharpness, brightness, and contrast of the image. This feature allows for a more comprehensive understanding of the visual characteristics and qualities of the analyzed image.
+
+ImageCon V2 Models offer powerful capabilities for detecting labels in images, enabling the identification of objects, scenes, actions, and concepts present in a given photograph. Moreover, these models provide insights into image properties, including color attributes and visual qualities like sharpness, brightness, and contrast. By leveraging these advanced tools, users can extract valuable information from images, opening up a wide range of applications in various domains.
+
+## How does it work?
+
+ImageCon V2 Models operate by undergoing extensive training on large datasets of labeled images, enabling them to detect labels in images based on their contents. These models utilize deep learning techniques and convolutional neural networks to extract meaningful features and patterns from the input images. By comparing these features to learned representations of labels, the models assign confidence scores to different labels, allowing for label detection. A threshold is applied to the confidence scores to determine the most relevant labels for the image.
+
+Alongside label detection, ImageCon V2 Models also analyze various image properties such as foreground and background colors, sharpness, brightness, and contrast. This analysis is accomplished through computer vision techniques applied to the image data. The output of ImageCon V2 Models includes the detected labels and their corresponding confidence scores, as well as information about image properties. These insights can be utilized in a variety of applications ranging from content categorization and image search to recommendation systems and automated tasks. Overall, ImageCon V2 Models provide advanced capabilities for understanding and utilizing images, making them invaluable tools in diverse domains.
+
+
+<Callout type="info" emoji="ℹ️">
+  <b>Info:</b> ImageCon V2 by WorqHat AI provides gender binary predictions based on physical
+  appearance in images. These predictions are not intended to determine an individual's gender
+  identity and should not be used for that purpose. They are more suitable for analyzing aggregate
+  gender distribution statistics without identifying specific users. It is not recommended to make
+  decisions impacting individuals' rights, privacy, or access to services based solely on these
+  predictions. Caution and respect for individuals' self-identified gender are crucial when using
+  ImageCon V2.
+</Callout>
+
+
+## Use Cases
+
+- **Content Moderation**: ImageCon V2 can be used for content moderation purposes on social media
+platforms or online communities. It can help identify and flag inappropriate or offensive images that violate community guidelines, thereby ensuring a safer and more respectful online environment.
+
+- **Image Organization and Tagging**: ImageCon V2 can automatically analyze and tag images based on their content. This can be useful for organizing large image collections, creating searchable databases, or powering image search functionality on websites or applications.
+
+- **E-commerce Product Categorization**: In an e-commerce setting, ImageCon V2 can assist in automatically categorizing products based on their visual attributes. For example, it can identify and tag clothing items by their style, color, or pattern, making it easier for customers to find specific products.
+
+- **Visual Analytics and Insights**: ImageCon V2 can be leveraged to analyze large sets of images and extract valuable insights. This can include detecting trends, identifying popular objects or scenes, or understanding the visual preferences of a target audience. Such insights can inform marketing strategies, product development, or content creation.
+
+- **Augmented Reality and Virtual Reality (AR/VR)**: ImageCon V2 can be utilized in AR/VR applications to provide real-time image analysis and enhance virtual experiences. It can detect objects or scenes in the user's environment, enabling interactive and immersive virtual overlays or visualizations.
+
+- **Creative Tools and Image Editing**: ImageCon V2's analysis of image properties like color,
+sharpness, brightness, and contrast can be valuable in creative applications. It can assist in automatic image enhancement, recommend filters or adjustments, or even generate new artistic effects based on the analyzed properties.
+
+## How to use it?
+
+### API Endpoint
+
+````bash filename="API Endpoint" copy
+https://api.worqhat.com/api/ai/images/v2/image-analysis
+````
+
+### Headers
+
+
+| Header Name |  Required  | Description |
+|:---------| :------------: | :---------------- |
+| x-api-key| ``true`` | This helps us to identify the User Sending the Request |
+| x-org-key|  ``true`` | This helps us to identify the Workspace Associated with the Request. This helps users to maintain easier logs |
+
+### Request Body
+
+The Request Body is a JSON Object that contains the following fields:
+
+| Data Type | Key | Value | Description |
+|:---------| :------------: | :---------------- | :---------------- |
+| File Object | image | ``The Image File that you want to Analyse`` | This is the Image File that you want to Analyse. The Image File should be sent as a Formdata Object and can be any type. |
+
+````json filename="Request Body (Formdata)" copy
+{
+    "image":"The Image File that you want to moderate"
+}
+````
+
+### Sample Code
+
+You can use the following Endpoints on any Codebase, including client side codebases as long as
+you are able to send the Headers and the Request Body to the API Endpoint. It's that easy! Just
+send a POST Request to the API Endpoint with the Headers and the Request Body, and you are good to go!
+
+
+<Tabs items={['cURL', 'Client JS', 'NodeJS', 'Python', 'Ruby', 'PHP', 'Java', 'GO', 'C']}>
+  <Tab>
+    ```` bash filename="cURL" copy
+
+    ````
+  </Tab>
+  <Tab>
+    ````js filename="Client JS fetch" copy
+
+    ````
+
+    ````js filename="Client JS XHR" copy
+
+    ````
+  </Tab>
+  <Tab>
+    ````js filename="NodeJS" copy
+
+
+    ````
+
+    ````js filename="NodeJS Axios" copy
+
+    ````
+  </Tab>
+  <Tab>
+    ````py filename="Python Requests" copy
+
+    ````
+  </Tab>
+  <Tab>
+    ````ruby filename="Ruby" copy
+
+    ````
+  </Tab>
+  <Tab>
+    ````php filename="PHP" copy
+
+    ````
+  </Tab>
+  <Tab>
+    ````java filename="Java" copy
+
+
+    ````
+  </Tab>
+  <Tab>
+    ````go filename="GO" copy
+
+    ````
+  </Tab>
+  <Tab>
+    ````c filename="C" copy
+
+
+    ````
+  </Tab>
+</Tabs>
+
+
+### Response
+
+#### Table View
+
+| Data Type |  Key  | Value                                  | Description                           |
+|:---------| :------------: |:---------------------------------------|:--------------------------------------|
+| String | id | `4a24ea32-3fbc-4667-ad78-d5bd1652a5cb` | Unique identifier for the API Request |
+| String | status | `success` or `error`                   | Status of the API Request             |
+| Number | timestamp | `1620120000`                           | Timestamp of the API Request          |
+| Object | content | `{Key Value Pairs of Types}`   | The Moderation Results                |
+| Number | processing_count | `6` | The Number of API Requests Processed |
+
+#### JSON View
+
+````json filename="JSON" copy
+{
+  id: "050433c7-1ca4-4fdc-a3d5-0655c2c8a721",
+  status: "success",
+  timestamp: 1683322578778,
+  content: {
+    analysed_data: [
+      {
+        Name: "Mobile Phone",
+        Parents: [
+          {
+            Name: "Phone"
+          }
+        ],
+        Aliases: [
+          {
+            Name: "Cell Phone"
+          }
+        ],
+        Categories: [
+          {
+            Name: "Technology and Computing"
+          }
+        ],
+        Confidence: 99.9364013671875,
+        Instances: [
+          {
+            BoundingBox: {
+              Width: 0.26779675483703613,
+              Height: 0.8562285900115967,
+              Left: 0.3604024350643158,
+              Top: 0.09245597571134567
+            },
+            Confidence: 99.9364013671875,
+            DominantColors: [
+              {
+                Red: 120,
+                Green: 137,
+                Blue: 132,
+                HexCode: "3A7432",
+                SimplifiedColor: "red",
+                CssColor: "fuscia",
+                PixelPercentage: 40.1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    image_properties: {
+      Quality: {
+        Brightness: 40,
+        Sharpness: 40,
+        Contrast: 24
+      },
+      DominantColors: [
+        {
+          Red: 120,
+          Green: 137,
+          Blue: 132,
+          HexCode: "3A7432",
+          SimplifiedColor: "red",
+          CssColor: "fuscia",
+          PixelPercentage: 40.1
+        }
+      ],
+      Foreground: {
+        Quality: {
+          Brightness: 40,
+          Sharpness: 40
+        },
+        DominantColors: [
+          {
+            Red: 200,
+            Green: 137,
+            Blue: 132,
+            HexCode: "3A7432",
+            CSSColor: "",
+            SimplifiedColor: "red",
+            PixelPercentage: 30.7
+          }
+        ]
+      },
+      Background: {
+        Quality: {
+          Brightness: 40,
+          Sharpness: 40
+        },
+        DominantColors: [
+          {
+            Red: 200,
+            Green: 137,
+            Blue: 132,
+            HexCode: "3A7432",
+            CSSColor: "",
+            SimplifiedColor: "Red",
+            PixelPercentage: 10.2
+          }
+        ]
+      }
+    }
+  },
+  processing_count: 6
+}
+````
+
+The Content Object contains two main arrays, `analysed_data` and `image_properties`. The
+`analysed_data` array contains the results of the Image Analysis process, while the
+`image_properties` array contains the results of the Image Properties Analysis.
+
+The `analysed_data` array contains an array of the Detected Objects and Labels in the form of
+Key Value Pairs in the following format:
+
+| Data Type |  Key  | Value                                  | Description                           |
+|:---------| :------------: |:---------------------------------------|:--------------------------------------|
+| String | Name | `Mobile Phone` | The Name of the Detected Object |
+| Array | Parents | `[{Name: "Phone"}]` | The Parent Labels of the Detected Object |
+| Array | Aliases | `[{Name: "Cell Phone"}]` | The Aliases/Similar Names of the Detected Object |
+| Array | Categories | `[{Name: "Technology and Computing"}]` | The Categories of the Detected Object |
+| Number | Confidence | `99.9364013671875` | The Confidence Score of the Detected Object |
+
+The `image_properties` array contains an array of the Image Properties in the form of
+Key Value Pairs in the following format:
+
+| Data Type |  Key  | Value                                  | Description                           |
+|:---------| :------------: |:---------------------------------------|:--------------------------------------|
+| Object | Quality | `{Brightness: 40, Sharpness: 40, Contrast: 24}` | The Quality of the Image |
+| Array | DominantColors | `[{Red: 120, Green: 137, Blue: 132, HexCode: "3A7432", SimplifiedColor: "red", CssColor: "fuscia", PixelPercentage: 40.1}]` | The Dominant Colors of the Image |
+| Object | Foreground | `{Quality: {Brightness: 40, Sharpness: 40}, DominantColors: [{Red: 200, Green: 137, Blue: 132, HexCode: "3A7432", CSSColor: "", SimplifiedColor: "red", PixelPercentage: 30.7}]}` | The Foreground of the Image |
+| Object | Background | `{Quality: {Brightness: 40, Sharpness: 40}, DominantColors: [{Red: 200, Green: 137, Blue: 132, HexCode: "3A7432", CSSColor: "", SimplifiedColor: "Red", PixelPercentage: 10.2}]}` | The Background of the Image |
+
+
+### Error Codes
+
+| Error Code | Description                                        |
+|:---------|:---------------------------------------------------|
+| 400 | Bad Request                                        |
+| 401 | Unauthorized : Invalid API Key or Organization Key |
+| 402 | Syntax Error : Invalid JSON                        |
