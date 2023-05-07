@@ -34,7 +34,7 @@ solution for your needs.
 ### Links
 
 - Homepage: https://www.worqhat.com
-- Documentation: https://doc.worqhat.com
+- Documentation: https://docs.worqhat.com
 - API Docs: https://devs.worqhat.com
 - Changelogs: https://updates.worqhat.com
 - Community: https://discord.com/invite/KHh9mguKBx
