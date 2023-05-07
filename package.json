@@ -4,7 +4,7 @@
   "description": "WorqHat API Docs",
   "scripts": {
     "dev": "next dev",
-    "build": "next build && next export",
+    "build": "next build",
     "start": "next start",
     "update-contrib": "weallcontribute -o . && git add CONTRIBUTING.md && git commit -m 'docs:Update CONTRIBUTING.md'"
   },
