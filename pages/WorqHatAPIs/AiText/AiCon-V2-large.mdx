@@ -1455,6 +1455,73 @@ var requestOptions = {
 }
   ````
 
+  ## Delete a Trained Dataset
+
+You can delete a trained dataset from the Records. Please note that this is a one-time action an cannot be reverted. Once the Dataset is deleted it will be removed from our Database and will not be accessible anymore. This means that if any of your models are using this dataset, they will not be able to use it anymore. You will have to retrain the model with a new dataset and add the new Dataset to the Model.
+
+### API Endpoint
+
+```bash filename="API Endpoint" copy
+https://api.worqhat.com/api/ai/content/v2-large/delete-datasets
+```
+
+### Headers
+
+
+| Header Name |  Required  | Description |
+|:---------| :------------: | :---------------- |
+| x-api-key| ``true`` | This helps us to identify the User Sending the Request |
+| x-org-key|  ``true`` | This helps us to identify the Workspace Associated with the Request. This helps users to maintain easier logs |
+
+
+### Request Body
+
+The Request Body is a JSON Object that contains the following fields:
+
+| Data Type | Key | Value | Description |
+|:---------| :------------: | :---------------- | :---------------- |
+| String | datasetId | ``Dataset ID`` | The Dataset ID of the Dataset that you want to delete. |
+
+
+
+<Callout type="warning" emoji="⚠️">
+  Please make sure that you train and store the model before you make a request to the API with
+  the ``DatasetID``. If you have not trained and stored the model, you will not be able to make a
+  request to the API and you will receive an error.
+</Callout>
+
+
+````json filename="Request Body for Deleting a Dataset (JSON)" copy
+{
+    "datasetId": "6e950721-a68e-45c4-a578-7d801b4f7853"
+}
+````
+
+### Sample Code
+
+The Sample Codes are the same as the ones that we have used in the previous API Endpoints. We will be using the same Sample Codes to make the request to the API Endpoint. You just need to change the API Endpoint URL and the Request Body should only contain the ``DatasetID``.
+
+### Response
+
+#### Table View
+
+| Data Type |  Key  | Value                                  | Description                                                                                               |
+|:---------| :------------: |:---------------------------------------|:----------------------------------------------------------------------------------------------------------|
+| String | id | `4a24ea32-3fbc-4667-ad78-d5bd1652a5cb` | Unique identifier for the API Request                                                                     |
+| String | status | `success` or `error`                   | Status of the API Request                                                                                 |
+| Number | timestamp | `1685730942074`                           | Timestamp of the API Request                                                                              |
+| String | state | ``Dataset has been deleted successfully from our records`` | The State of the API Request. This will be ``Dataset has been deleted successfully from our records`` if the Dataset has been deleted successfully. |
+
+  #### JSON View
+
+  ````json filename="JSON" copy
+{
+    "id": "a0180b3e-b2ca-49f5-99a3-b72e55246894",
+    "status": "success",
+    "timestamp": 1685610875245,
+    "state": "Dataset has been deleted successfully from our records"
+}
+  ````
 
 ### Error Codes
 
