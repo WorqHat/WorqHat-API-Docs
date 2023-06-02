@@ -2,5 +2,9 @@
   "baseUrl": "Getting Started",
   "versioning": "Versioning",
   "rateLimits": "Rate Limits",
-  "AIModels": "AI Models"
+  "AiText": "AI for Content",
+  "AiImages": "AI for Images",
+  "AiFiles": "AI for Files",
+  "AiSpeech": "AI for Speech",
+  "AiSecurity": "AI for Security"
 }
