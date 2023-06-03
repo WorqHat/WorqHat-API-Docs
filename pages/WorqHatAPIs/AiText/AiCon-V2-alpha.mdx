@@ -1,0 +1,382 @@
+import { Callout, Tab, Tabs } from "nextra-theme-docs";
+
+
+# AiCon V2 2023 (Nightly Alpha Channel)
+
+AiCon’s impressive conversational abilities are rooted in years of research and development. Like many advanced language models, such as BERT and GPT-3, AiCon is based on the Transformer neural network architecture, which was made publicly available in 2017. This architecture allows for the creation of models that can read multiple words (such as a sentence or paragraph) and understand the relationships between those words, thereby predicting what words will come next.
+
+What sets this model apart from our other existing models is its ability to understand the context of a conversation and generate responses that are more natural and human-like. This is achieved by training the model on a massive dataset of conversations, which allows it to learn the many nuances of language and how they are used in conversation. 
+
+With this new model, we are training the Model on the most recent conversations from the internet, which allows it to learn the latest trends in language and how they are used in conversation. This is achieved by training the model on a massive dataset of conversations, which allows it to learn the many nuances of language and how they are used in conversation. The Alpha Channel of AiCon V2 is mostly dependent on the Data upto March 2023 which makes it relatively upto date and more accurate than the previous versions of AiCon.
+
+However, the Alpha Nightly channel is our most recent API Release, and is currently in active development. This channel is not recommended for production use, and is subject to change at any time.
+
+<Callout type="warning" emoji="⚠️">
+  This API is currently in active development and is subject to change at any time. It is suggested to have a fallback plan in place in case of any issues or errors with the API.
+  Like our Previous Versions, this is the Smaller Version of the AiCon V2 API, which has a word limit of 4,000 words per request.
+</Callout>
+
+## How to use it?
+
+### API Endpoint
+
+````bash filename="API Endpoint" copy
+https://api.worqhat.com/api/ai/content/v2/new/alpha
+````
+
+### Headers
+
+
+| Header Name |  Required  | Description |
+|:---------| :------------: | :---------------- |
+| x-api-key| ``true`` | This helps us to identify the User Sending the Request |
+| x-org-key|  ``true`` | This helps us to identify the Workspace Associated with the Request. This helps users to maintain easier logs |
+
+### Request Body
+
+The Request Body is a JSON Object that contains the following fields:
+
+| Data Type | Key | Value | Description |
+|:---------| :------------: | :---------------- | :---------------- |
+| String | question (required) | ``<Any Question that you want to pass to the model>`` | The question you want to ask the AI |
+
+````json filename="Request Body (JSON)" copy
+{
+    "question": "Why did the SVB Collapse?"
+}
+````
+
+### Sample Code
+
+
+You can use the following Endpoints on any Codebase, including client side codebases as long as
+you are able to send the Headers and the Request Body to the API Endpoint. It's that easy! Just
+send a POST Request to the API Endpoint with the Headers and the Request Body, and you are good to go!
+
+<Callout type="warning" emoji="⚠️">
+  Please note that the **AiCon V2 Model** has a word capacity limit of 4000 words in a single
+  request including maintaining history and adding training data. If you exceed this limit, you
+  will get an error.
+</Callout>
+
+
+<Tabs items={['cURL', 'Client JS', 'NodeJS', 'Python', 'Ruby', 'PHP', 'Java', 'GO', 'C']}>
+  <Tab>
+    ```` bash filename="cURL" copy
+curl --location 'https://api.worqhat.com/api/ai/content/v2/new/alpha' \
+--header 'x-api-key: •••••••' \
+--header 'x-org-key: •••••••' \
+--header 'Content-Type: application/json' \
+--data '{
+    "question": "Why did the SVB Collapse?"
+}'
+    ````
+  </Tab>
+  <Tab>
+    ````js filename="Client JS fetch" copy
+var myHeaders = new Headers();
+myHeaders.append("x-api-key", "•••••••");
+myHeaders.append("x-org-key", "•••••••");
+myHeaders.append("Content-Type", "application/json");
+
+var raw = JSON.stringify({
+  "question": "Why did the SVB Collapse?"
+});
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://api.worqhat.com/api/ai/content/v2/new/alpha", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+    ````
+
+    ````js filename="Client JS XHR" copy
+// WARNING: For POST requests, body is set to null by browsers.
+var data = JSON.stringify({
+  "question": "Why did the SVB Collapse?"
+});
+
+var xhr = new XMLHttpRequest();
+xhr.withCredentials = true;
+
+xhr.addEventListener("readystatechange", function() {
+  if(this.readyState === 4) {
+    console.log(this.responseText);
+  }
+});
+
+xhr.open("POST", "https://api.worqhat.com/api/ai/content/v2/new/alpha");
+xhr.setRequestHeader("x-api-key", "•••••••");
+xhr.setRequestHeader("x-org-key", "•••••••");
+xhr.setRequestHeader("Content-Type", "application/json");
+
+xhr.send(data);
+
+    ````
+  </Tab>
+  <Tab>
+    ````js filename="NodeJS" copy
+var request = require('request');
+var options = {
+  'method': 'POST',
+  'url': 'https://api.worqhat.com/api/ai/content/v2/new/alpha',
+  'headers': {
+    'x-api-key': '•••••••',
+    'x-org-key': '•••••••',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    "question": "Why did the SVB Collapse?"
+  })
+
+};
+request(options, function (error, response) {
+  if (error) throw new Error(error);
+  console.log(response.body);
+});
+
+
+    ````
+
+    ````js filename="NodeJS Axios" copy
+const axios = require('axios');
+let data = JSON.stringify({
+  "question": "Why did the SVB Collapse?"
+});
+
+let config = {
+  method: 'post',
+  maxBodyLength: Infinity,
+  url: 'https://api.worqhat.com/api/ai/content/v2/new/alpha',
+  headers: { 
+    'x-api-key': '•••••••', 
+    'x-org-key': '•••••••', 
+    'Content-Type': 'application/json'
+  },
+  data : data
+};
+
+axios.request(config)
+.then((response) => {
+  console.log(JSON.stringify(response.data));
+})
+.catch((error) => {
+  console.log(error);
+});
+
+
+    ````
+  </Tab>
+  <Tab>
+    ````py filename="Python Requests" copy
+import requests
+import json
+
+url = "https://api.worqhat.com/api/ai/content/v2/new/alpha"
+
+payload = json.dumps({
+  "question": "Why did the SVB Collapse?"
+})
+headers = {
+  'x-api-key': '•••••••',
+  'x-org-key': '•••••••',
+  'Content-Type': 'application/json'
+}
+
+response = requests.request("POST", url, headers=headers, data=payload)
+
+print(response.text)
+
+    ````
+  </Tab>
+  <Tab>
+    ````ruby filename="Ruby" copy
+require "uri"
+require "json"
+require "net/http"
+
+url = URI("https://api.worqhat.com/api/ai/content/v2/new/alpha")
+
+https = Net::HTTP.new(url.host, url.port)
+https.use_ssl = true
+
+request = Net::HTTP::Post.new(url)
+request["x-api-key"] = "•••••••"
+request["x-org-key"] = "•••••••"
+request["Content-Type"] = "application/json"
+request.body = JSON.dump({
+  "question": "Why did the SVB Collapse?"
+})
+
+response = https.request(request)
+puts response.read_body
+
+    ````
+  </Tab>
+  <Tab>
+    ````php filename="PHP" copy
+    <?php
+
+$curl = curl_init();
+
+curl_setopt_array($curl, array(
+  CURLOPT_URL => 'https://api.worqhat.com/api/ai/content/v2/new/alpha',
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => '',
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => 'POST',
+  CURLOPT_POSTFIELDS =>'{
+    "question": "Why did the SVB Collapse?"
+}',
+  CURLOPT_HTTPHEADER => array(
+    'x-api-key: •••••••',
+    'x-org-key: •••••••',
+    'Content-Type: application/json'
+  ),
+));
+
+$response = curl_exec($curl);
+
+curl_close($curl);
+echo $response;
+
+
+    ````
+  </Tab>
+  <Tab>
+    ````java filename="Java" copy
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\n    \"question\": \"Why did the SVB Collapse?\"\n}");
+Request request = new Request.Builder()
+  .url("https://api.worqhat.com/api/ai/content/v2/new/alpha")
+  .method("POST", body)
+  .addHeader("x-api-key", "•••••••")
+  .addHeader("x-org-key", "•••••••")
+  .addHeader("Content-Type", "application/json")
+  .build();
+Response response = client.newCall(request).execute();
+
+    ````
+  </Tab>
+  <Tab>
+    ````go filename="GO" copy
+package main
+
+import (
+  "fmt"
+  "strings"
+  "net/http"
+  "io/ioutil"
+)
+
+func main() {
+
+  url := "https://api.worqhat.com/api/ai/content/v2/new/alpha"
+  method := "POST"
+
+  payload := strings.NewReader(`{
+    "question": "Why did the SVB Collapse?"
+}`)
+
+  client := &http.Client {
+  }
+  req, err := http.NewRequest(method, url, payload)
+
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  req.Header.Add("x-api-key", "•••••••")
+  req.Header.Add("x-org-key", "•••••••")
+  req.Header.Add("Content-Type", "application/json")
+
+  res, err := client.Do(req)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  defer res.Body.Close()
+
+  body, err := ioutil.ReadAll(res.Body)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  fmt.Println(string(body))
+}
+
+    ````
+  </Tab>
+  <Tab>
+    ````c filename="C" copy
+CURL *curl;
+CURLcode res;
+curl = curl_easy_init();
+if(curl) {
+  curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, "POST");
+  curl_easy_setopt(curl, CURLOPT_URL, "https://api.worqhat.com/api/ai/content/v2/new/alpha");
+  curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
+  curl_easy_setopt(curl, CURLOPT_DEFAULT_PROTOCOL, "https");
+  struct curl_slist *headers = NULL;
+  headers = curl_slist_append(headers, "x-api-key: •••••••");
+  headers = curl_slist_append(headers, "x-org-key: •••••••");
+  headers = curl_slist_append(headers, "Content-Type: application/json");
+  curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
+  const char *data = "{\n    \"question\": \"Why did the SVB Collapse?\"\n}";
+  curl_easy_setopt(curl, CURLOPT_POSTFIELDS, data);
+  res = curl_easy_perform(curl);
+}
+curl_easy_cleanup(curl);
+
+
+    ````
+  </Tab>
+</Tabs>
+
+<Callout type="warning" emoji="⚠️">
+Since this Model is currently in Alpha Channel, this can only have the capability to answer questions or any other context that is passed to the model. We currently do no support any one-shot or longer form training processes on this model. We are working on this and will be releasing this feature soon.
+</Callout>
+
+### Response
+
+#### Table View
+
+| Data Type |  Key  | Value                                  | Description                                                                                               |
+|:---------| :------------: |:---------------------------------------|:----------------------------------------------------------------------------------------------------------|
+| String | id | `4a24ea32-3fbc-4667-ad78-d5bd1652a5cb` | Unique identifier for the API Request                                                                     |
+| String | status | `success` or `error`                   | Status of the API Request                                                                                 |
+| Number | timestamp | `1620120000`                           | Timestamp of the API Request                                                                              |
+| String | content | `<The response of the AI>` | The response from the AI |
+  | Number | processing_count | `58` | The number of times the AI has processed the words to generate a response. |
+
+  #### JSON View
+
+  ````json filename="JSON" copy
+{
+    "id": "1d71dd4d-7c39-4811-b90f-1892e361e457",
+    "status": "success",
+    "timestamp": 1685764595866,
+    "content": "The collapse of Silicon Valley Bank (SVB) occurred on March 10, 2023, due to a bank run. The FDIC transferred all the deposits and substantially all of the assets of Silicon Valley Bank to Silicon Valley Bridge Bank, National Association (Bridge Bank). Bridge Bank is the managing member of Silicon Valley Bank, National Association (SVB Bank), which is the continuing entity for Silicon Valley Bank.",
+    "processing_count": 5824
+}
+  ````
+
+  ### Error Codes
+
+  | Error Code | Description |
+  |:---------|:---------------------------------------------------|
+  | 400 | Bad Request |
+  | 401 | Unauthorized : Invalid API Key or Organization Key |
+  | 402 | Syntax Error : Invalid JSON |

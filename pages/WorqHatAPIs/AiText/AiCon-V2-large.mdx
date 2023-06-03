@@ -1,0 +1,1532 @@
+import { Callout, Tab, Tabs } from "nextra-theme-docs";
+
+
+# AiCon V2 Large Model (Beta)
+
+AiCon’s impressive conversational abilities are rooted in years of research and development. Like many advanced language models, such as BERT and GPT-3, AiCon is based on the Transformer neural network architecture, which was made publicly available in 2017. This architecture allows for the creation of models that can read multiple words (such as a sentence or paragraph) and understand the relationships between those words, thereby predicting what words will come next.
+
+What sets AiCon apart from other language models is its unique training process. Unlike
+traditional models, AiCon was trained on current web data upto March 2022, including actual
+conversations.
+
+This training allowed it to grasp the subtleties that make open-ended conversation and text distinct from other forms of language. One of these subtleties is sensibility - does the response match the conversational context and make sense?
+
+Andd now we have gone a step further and increased the Word Size to 100,000 words in a
+single request. You can now Train Your Data Earlier and get better results or pass a longer
+training context to the model. Please note that this is a relatively new feature and may return
+results that are not as accurate as the previous version. We are working on improving the
+accuracy of the model and will be releasing updates soon.
+
+
+<Callout type="warning" emoji="⚠️">
+  Passing larger amount of Text Content directly to the model may result in a higher number of
+  Word Processes and may take longer to process. We recommend that you use the Training Data
+  field to pass your data to the model. When you pass the data to the model using the Training
+  Data field, the model will process the data and cache it so that it is available for future
+  requests. This will help you save time and costs on processing.
+</Callout>
+
+<Callout type="info" emoji="ℹ️">
+  When you pass the data to the model using the Training Data field, you are only limited to 100,000 words. If you want to pass more than 100,000 words, you will have to pass the data
+  directly to the model for training.
+</Callout>
+
+We are dedicated to revolutionizing the way organizations approach productivity, building applications and content generation. Our latest creation AiCon - the AI Content Optimization Network - has been developed to help organizations streamline their workflow and improve their overall output.
+
+Developers can not only translate languages, summarize long documents, and answer
+information-seeking questions, but they can also create comprehensive and engaging content in a
+fraction of the time and cost it would take without the aid of artificial intelligence.
+
+## Use Cases
+
+- **Writing Assistance**: Content Generation APIs can help writers and authors by providing
+suggestions, generating outlines, or even drafting entire paragraphs or articles based on given prompts. This can save time and enhance the writing process.
+
+- **Marketing and Advertising**: AI-powered APIs can generate engaging and persuasive marketing copy, including ad slogans, social media posts, email campaigns, and product descriptions. This enables businesses to create compelling content that resonates with their target audience.
+
+- **Personalized Content**: Content Generation APIs can assist in creating personalized content experiences by dynamically generating content tailored to individual users. This could include personalized product recommendations, news articles, or even customized emails.
+
+- **Language Translation**: APIs can be used to automate language translation tasks, converting text from one language to another. This is particularly useful for websites, apps, or platforms that need to support multiple languages, enabling effective communication with a global audience.
+
+- **Chatbots and Virtual Assistants**: AI-powered chatbots and virtual assistants leverage Content Generation APIs to provide human-like responses to user queries. These APIs enable the generation of natural language responses, enhancing the user experience and improving customer service.
+
+- **Content Summarization**: APIs can automatically generate concise summaries of lengthy documents, articles, or reports. This is valuable for news aggregators, research platforms, or any application where users need quick access to the main points of a large body of text.
+
+- **Data Visualization**: APIs can assist in generating visual representations of data, such as charts, graphs, or infographics, based on input datasets. This helps businesses and individuals present complex information in a more digestible and visually appealing manner.
+
+- **Virtual Storytelling**: Content Generation APIs can be used in video game development or virtual reality experiences to dynamically generate storylines, dialogues, and narratives. This allows for immersive and interactive storytelling experiences that adapt to user actions and choices.
+
+- **Content Curation**: APIs can automate the process of collecting and curating content from various sources, such as news articles, blog posts, or social media feeds. This helps content platforms deliver relevant and up-to-date information to their users.
+
+- **E-commerce Product Descriptions**: AI-powered APIs can generate compelling and accurate
+product descriptions by analyzing product features, specifications, and customer reviews. This assists e-commerce platforms in creating engaging content that drives conversions.
+
+## How to use it?
+
+### API Endpoint
+
+````bash filename="API Endpoint" copy
+https://api.worqhat.com/api/ai/content/v2-large/answering
+````
+
+### Headers
+
+
+| Header Name |  Required  | Description |
+|:---------| :------------: | :---------------- |
+| x-api-key| ``true`` | This helps us to identify the User Sending the Request |
+| x-org-key|  ``true`` | This helps us to identify the Workspace Associated with the Request. This helps users to maintain easier logs |
+
+### Request Body
+
+The Request Body is a JSON Object that contains the following fields:
+
+| Data Type | Key | Value | Description |
+|:---------| :------------: | :---------------- | :---------------- |
+| String | question (required) | ``<Any Question that you want to pass to the model>`` | The question you want to ask the AI |
+| Float | randomness (optional) | ``0.0`` to ``1.0`` | This is the randomness factor that you want to pass to the model. This is only required if you want to set the randomness factor. Default is ``0.9``. |
+| Boolean | self_train (required) | ``true`` or ``false`` | This determines whether you want to pass the Training Data directly as a content to the Request. This is not required if you are passing the ``datasetId`` to the Request |
+| Array | training_data (optional) | ``[<Training Data>]`` | This is the Training Data that you want to pass to the model. This is only required if you want to pass the Training Data directly to the model and you have set ``self_train = True``  |
+| String | datasetId (optional) | ``<Dataset ID>`` | This is the Dataset ID that you want to pass to the model. This is only required if you want to pass the Training Data directly to the model and you have set ``self_train = False``  |
+
+
+<Callout type="warning" emoji="⚠️">
+  Please make sure that you train and store the model before you make a request to the API with
+  the ``DatasetID``. If you have not trained and stored the model, you will not be able to make a
+  request to the API and you will receive an error.
+</Callout>
+
+
+````json filename="Request Body for Inline Training (JSON)" copy
+{
+    "question": "Write me a brief about google llc",
+    "trainingData": [
+        "Marico Limited is an Indian multinational consumer goods company[5] providing consumer products and services in the areas of health, beauty and wellness. With its headquarters in Mumbai, Marico is present in over 25 countries across Asia and Africa. It owns brands in categories of hair care, skin care, edible oils, health foods, male grooming, and fabric care.As of 2019–2020, the company generated a turnover of 7,315 crores.[8] Marico has 8 factories in India located at Puducherry, Perundurai, Kanjikode, Jalgaon, Paldhi, Dehradun, Baddi and Paonta Sahib. 1974 – Harsh Mariwala envisioned a branded FMCG market for coconut and refined edible oils in small consumer packs and sets up a national distribution network for Parachute. ",
+        "1990 – Marico was established in India. 1991 – Marico launches Hair & Care, a non-sticky hair oil repositioning the market leader through contemporary packaging. Sweekar sunflower oil goes national. 1992 to 94 – Marico goes from being an exporter to international marketer – sets up its first overseas office in Dubai. 1994 – The year marks another innovation, Revive cold water starch makes starching cottons more convenient for the consumer. 1996 – Marico lists on the Indian Stock Exchanges. 1999 – The company expands with its first overseas manufacturing facility in Bangladesh. Marico acquires Mediker in the same year 2003 – Marico Innovation Foundation, responsible for executing the Corporate Social Responsibility of Marico was formed. In the same year Marico sets up copra collection centres to procure directly from farmers increasing their margins. 2006 – Nihar enters the Marico fold. 2006-7 – Marico casts footprint in Africa, acquires Fiancée and Hair Code in Egypt and Caivil, Black Chic and Hercules in South Africa. 2009 – Marico makes a public offering of equity in Bangladesh  a first for one of its overseas subsidiaries. 2010 – The year also marks the launch of Saffola breakfast, Masala Oats in India. 2011 – Parachute Advanced entered the skin-care category with the launch of Parachute Advanced Body Lotion (PABL), another innovation by Marico. The year also marks the launch of Parachute Gold hair cream in the Middle East market targeted to women which today has great equity amongst the consumer. Marico strengthens its presence S.E. Asia through a male grooming, skin care and food portfolio acquired in Vietnam the same year. 2012 – India's Gen Next gets styled by Marico as it launches its male grooming brand, SetWet.[12] 2015 – Marico's Market Cap tops  25,000 crore. 2017– Marico acquires South Africa's leading hair styling business – Isoplus [13] launches Saffola Active[12] Slimming Nutri-shake (marking entry into nutraceuticals category) and makes a strategic investment in Zed Lifestyle (Beardo)[14] 2018 – Marico invests Revolutionary Fitness (Revofit) [15] launches a new brand – True Roots[16] that delays hair greying and launches its first digital exclusive brand – Studio X [17] launched Saffola Fittify.[18] 2019 – Marico announces association with Kaya, to create a skincare sub-brand, Kaya Youth.[19]",
+        "Thermax manufactures boilers to harness the power of steam. The company started with producing small, once-through, baby boilers to cater to the steam requirements at hospitals.[citation needed] It was established in 1966, when A. S. Bhathena collaborated with a Belgian company, Wanson, to commence business operations in Dadar, Mumbai, India as Wanson India Ltd., manufacturing small boilers.[3] On 15 February 1995 it became a public company on the Bombay Stock Exchange. It has, since long, been known simply as Thermax Limited.[citation needed] In 2009, it signed a 51–49 joint venture with US firm SPX Corporation to provide equipment and services for the Indian power sector.[4][5] In 2010, it signed a joint venture agreement with US-based Babcock & Wilcox to manufacture super-critical boilers for the power sector.[6]",
+        "Google LLC is an American multinational technology company focusing on online advertising, search engine technology, cloud computing, computer software, quantum computing, e-commerce, artificial intelligence,[9] and consumer electronics. It has been referred to as the most powerful company in the world[10] and one of the world's most valuable brands due to its market dominance, data collection, and technological advantages in the area of artificial intelligence.[11][12][13] Its parent company Alphabet is considered one of the Big Five American information technology companies, alongside Amazon, Apple, Meta, and Microsoft. Google was founded on September 4, 1998, by computer scientists Larry Page and Sergey Brin while they were PhD students at Stanford University in California. Together they own about 14% of its publicly listed shares and control 56% of its stockholder voting power through super-voting stock. The company went public via an initial public offering (IPO) in 2004. In 2015, Google was reorganized as a wholly owned subsidiary of Alphabet Inc. Google is Alphabet's largest subsidiary and is a holding company for Alphabet's internet properties and interests. Sundar Pichai was appointed CEO of Google on October 24, 2015, replacing Larry Page, who became the CEO of Alphabet. On December 3, 2019, Pichai also became the CEO of Alphabet.[14] The company has since rapidly grown to offer a multitude of products and services beyond Google Search, many of which hold dominant market positions. These products address a wide range of use cases, including email (Gmail), navigation (Waze & Maps), cloud computing (Cloud), web browsing (Chrome), video sharing (YouTube), productivity (Workspace), operating systems (Android), cloud storage (Drive), language translation (Translate), photo storage (Photos), video calling (Meet), smart home (Nest), smartphones (Pixel), wearable technology (Pixel Watch & Fitbit), music streaming (YouTube Music), video on demand (YouTube TV), artificial intelligence (Google Assistant), machine learning APIs (TensorFlow), AI chips (TPU), and more. Discontinued Google products include gaming (Stadia), Glass, Google+, Reader, Play Music, Nexus, Hangouts, and Inbox by Gmail.[15][16] Google's other ventures outside of Internet services and consumer electronics include quantum computing (Sycamore), self-driving cars (Waymo, formerly the Google Self-Driving Car Project), smart cities (Sidewalk Labs), and transformer models (Google Brain).[17] Google and YouTube are the two most visited websites worldwide followed by Facebook and Twitter. Google is also the largest search engine, mapping and navigation application, email provider, office suite, video sharing platform, photo and cloud storage provider, mobile operating system, web browser, ML framework, and AI virtual assistant provider in the world as measured by market share. On the list of most valuable brands, Google is ranked second by Forbes[18] and fourth by Interbrand.[19] It has received significant criticism involving issues such as privacy concerns, tax avoidance, censorship, search neutrality, antitrust and abuse of its monopoly position."
+    ],
+    "self_train": "True",
+    "randomness": 0.4
+}
+````
+
+````json filename="Request Body for Inline Training (JSON)" copy
+{
+    "question": "Write me a brief about google llc",
+    "datasetId": "•••••••",
+    "self_train": "False",
+    "randomness": 0.4
+}
+````
+
+
+
+### Sample Code
+
+You can use the following Endpoints on any Codebase, including client side codebases as long as
+you are able to send the Headers and the Request Body to the API Endpoint. It's that easy! Just
+send a POST Request to the API Endpoint with the Headers and the Request Body, and you are good to go!
+
+<Callout type="warning" emoji="⚠️">
+  Please note that the **AiCon V2 Model** has a word capacity limit of 100,000 words in a single
+  request including maintaining history and adding training data. If you exceed this limit, you
+  will get an error. However, if you want to pass more than 100,000 words, you can pass the
+  training data directly to the model as separate datasets.
+</Callout>
+
+
+<Tabs items={['cURL', 'Client JS', 'NodeJS', 'Python', 'Ruby', 'PHP', 'Java', 'GO', 'C']}>
+  <Tab>
+    ```` bash filename="cURL" copy
+    curl --location 'https://api.worqhat.com/api/ai/content/v2' \
+    --header 'x-api-key: •••••••' \
+    --header 'x-org-key: •••••••' \
+    --data '{
+    "question" : "Hi, who built you?",
+    "preserve_history" : true,
+    "history_object" : {
+    "Hi, who are you?":"My name is WorqBot, nice to meet you!"
+  },
+    "randomness": 0.1
+  }'
+    ````
+  </Tab>
+  <Tab>
+    ````js filename="Client JS fetch" copy
+    var myHeaders = new Headers();
+    myHeaders.append("x-api-key", "•••••••");
+    myHeaders.append("x-org-key", "•••••••");
+
+    var raw = {
+    "question" : "Hi, who built you?",
+    "preserve_history" : true,
+    "history_object" : {"Hi, who are you?":"My name is WorqBot, nice to meet you!"},
+    "randomness": 0.1
+  };
+
+    var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: JSON.stringify(raw),
+    redirect: 'follow'
+  };
+
+    fetch("https://api.worqhat.com/api/ai/content/v2", requestOptions)
+    .then(response => response.text())
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));
+
+    ````
+
+    ````js filename="Client JS XHR" copy
+    var xhr = new XMLHttpRequest();
+    var url = "https://api.worqhat.com/api/ai/content/v2";
+
+    xhr.open("POST", url);
+    xhr.setRequestHeader("x-api-key", "•••••••");
+    xhr.setRequestHeader("x-org-key", "•••••••");
+    xhr.setRequestHeader("Content-Type", "application/json");
+
+    xhr.onreadystatechange = function() {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+    console.log(xhr.responseText);
+  }
+  };
+
+    var raw = JSON.stringify({
+    "question": "Hi, who built you?",
+    "preserve_history": true,
+    "history_object": {"Hi, who are you?": "My name is WorqBot, nice to meet you!"},
+    "randomness": 0.1
+  });
+
+    xhr.send(raw);
+
+    ````
+  </Tab>
+  <Tab>
+    ````js filename="NodeJS" copy
+    const request = require('request');
+
+    const url = "https://api.worqhat.com/api/ai/content/v2";
+
+    const headers = {
+    "x-api-key": "•••••••",
+    "x-org-key": "•••••••",
+    "Content-Type": "application/json"
+  };
+
+    const raw = JSON.stringify({
+    "question": "Hi, who built you?",
+    "preserve_history": true,
+    "history_object": {"Hi, who are you?": "My name is WorqBot, nice to meet you!"},
+    "randomness": 0.1
+  });
+
+    const requestOptions = {
+    url: url,
+    method: 'POST',
+    headers: headers,
+    body: raw
+  };
+
+    request(requestOptions, (error, response, body) => {
+    if (!error && response.statusCode === 200) {
+    console.log(body);
+  } else {
+    console.log('Error:', error);
+  }
+  });
+
+    ````
+
+    ````js filename="NodeJS Axios" copy
+    const axios = require('axios');
+
+    const url = "https://api.worqhat.com/api/ai/content/v2";
+
+    const headers = {
+    "x-api-key": "•••••••",
+    "x-org-key": "•••••••",
+    "Content-Type": "application/json"
+  };
+
+    const raw = JSON.stringify({
+    "question": "Hi, who built you?",
+    "preserve_history": true,
+    "history_object": {"Hi, who are you?": "My name is WorqBot, nice to meet you!"},
+    "randomness": 0.1
+  });
+
+    axios.post(url, raw, {headers: headers})
+    .then(response => {
+    console.log(response.data);
+  })
+    .catch(error => {
+    console.log('Error:', error.message);
+  });
+
+    ````
+  </Tab>
+  <Tab>
+    ````py filename="Python Requests" copy
+    import requests
+
+    url = "https://api.worqhat.com/api/ai/content/v2"
+
+    headers = {
+    "x-api-key": "•••••••",
+    "x-org-key": "•••••••",
+    "Content-Type": "application/json"
+  }
+
+    data = {
+    "question": "Hi, who built you?",
+    "preserve_history": True,
+    "history_object": {"Hi, who are you?": "My name is WorqBot, nice to meet you!"},
+    "randomness": 0.1
+  }
+
+    response = requests.post(url, headers=headers, json=data)
+
+    if response.status_code == 200:
+    print(response.json())
+    else:
+    print("Error:", response.text)
+
+    ````
+  </Tab>
+  <Tab>
+    ````ruby filename="Ruby" copy
+    require 'httparty'
+
+    url = "https://api.worqhat.com/api/ai/content/v2"
+
+    headers = {
+    "x-api-key" => "•••••••",
+    "x-org-key" => "•••••••",
+    "Content-Type" => "application/json"
+  }
+
+    data = {
+    "question" => "Hi, who built you?",
+    "preserve_history" => true,
+    "history_object" => {"Hi, who are you?" => "My name is WorqBot, nice to meet you!"},
+    "randomness" => 0.1
+  }
+
+    response = HTTParty.post(url, headers: headers, body: data.to_json)
+
+    if response.code == 200
+    puts response.body
+    else
+    puts "Error: #{response.code}, #{response.body}"
+    end
+
+    ````
+  </Tab>
+  <Tab>
+    ````php filename="PHP" copy
+    $url = "https://api.worqhat.com/api/ai/content/v2";
+
+    $headers = array(
+    "x-api-key: •••••••",
+    "x-org-key: •••••••",
+    "Content-Type: application/json"
+    );
+
+    $data = array(
+    "question" => "Hi, who built you?",
+    "preserve_history" => true,
+    "history_object" => array("Hi, who are you?" => "My name is WorqBot, nice to meet you!"),
+    "randomness" => 0.1
+    );
+
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+
+    $response = curl_exec($ch);
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+    if ($httpCode === 200) {
+    echo $response;
+  } else {
+    echo "Error: " . $httpCode . ", " . $response;
+  }
+
+    curl_close($ch);
+
+    ````
+  </Tab>
+  <Tab>
+    ````java filename="Java" copy
+    import java.io.BufferedReader;
+    import java.io.InputStreamReader;
+    import java.io.OutputStream;
+    import java.net.HttpURLConnection;
+    import java.net.URL;
+
+    public class Main {
+    public static void main(String[] args) {
+    String url = "https://api.worqhat.com/api/ai/content/v2";
+    String apiKey = "•••••••";
+    String orgKey = "•••••••";
+
+    try {
+    URL apiUrl = new URL(url);
+    HttpURLConnection connection = (HttpURLConnection) apiUrl.openConnection();
+    connection.setRequestMethod("POST");
+    connection.setRequestProperty("x-api-key", apiKey);
+    connection.setRequestProperty("x-org-key", orgKey);
+    connection.setRequestProperty("Content-Type", "application/json");
+    connection.setDoOutput(true);
+
+    String jsonData = "{\"question\":\"Hi, who built you?\"," +
+    "\"preserve_history\":true," +
+    "\"history_object\":{\"Hi, who are you?\":\"My name is WorqBot, nice to meet you!\"}," +
+    "\"randomness\":0.1}";
+
+    OutputStream outputStream = connection.getOutputStream();
+    outputStream.write(jsonData.getBytes());
+    outputStream.flush();
+
+    int responseCode = connection.getResponseCode();
+    if (responseCode == HttpURLConnection.HTTP_OK) {
+    BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+    String line;
+    StringBuilder response = new StringBuilder();
+    while ((line = reader.readLine()) != null) {
+    response.append(line);
+  }
+    reader.close();
+
+    System.out.println(response.toString());
+  } else {
+    System.out.println("Error: " + responseCode + ", " + connection.getResponseMessage());
+  }
+
+    connection.disconnect();
+  } catch (Exception e) {
+    e.printStackTrace();
+  }
+  }
+  }
+
+    ````
+  </Tab>
+  <Tab>
+    ````go filename="GO" copy
+    package main
+
+    import (
+    "bytes"
+    "encoding/json"
+    "fmt"
+    "net/http"
+    )
+
+    func main() {
+    url := "https://api.worqhat.com/api/ai/content/v2"
+    apiKey := "•••••••"
+    orgKey := "•••••••"
+
+    data := map[string]interface{}{
+    "question":         "Hi, who built you?",
+    "preserve_history": true,
+    "history_object": map[string]string{
+    "Hi, who are you?": "My name is WorqBot, nice to meet you!",
+  },
+    "randomness": 0.1,
+  }
+
+    jsonData, err := json.Marshal(data)
+    if err != nil {
+    fmt.Println("Error:", err)
+    return
+  }
+
+    req, err := http.NewRequest("POST", url, bytes.NewBuffer(jsonData))
+    if err != nil {
+    fmt.Println("Error:", err)
+    return
+  }
+
+    req.Header.Set("x-api-key", apiKey)
+    req.Header.Set("x-org-key", orgKey)
+    req.Header.Set("Content-Type", "application/json")
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    if err != nil {
+    fmt.Println("Error:", err)
+    return
+  }
+
+    defer resp.Body.Close()
+
+    if resp.StatusCode == http.StatusOK {
+    var result map[string]interface{}
+    err = json.NewDecoder(resp.Body).Decode(&result)
+    if err != nil {
+    fmt.Println("Error:", err)
+    return
+  }
+    fmt.Println(result)
+  } else {
+    fmt.Println("Error:", resp.Status)
+  }
+  }
+
+    ````
+  </Tab>
+  <Tab>
+    ````c filename="C" copy
+
+    #include <stdio.h>
+    #include <curl/curl.h>
+
+    int main(void) {
+    CURL * curl;
+    CURLcode res;
+
+    char url[] = "https://api.worqhat.com/api/ai/content/v2";
+    char apiKey[] = "•••••••";
+    char orgKey[] = "•••••••";
+
+    struct curl_slist *headers = NULL;
+    headers = curl_slist_append(headers, "x-api-key: •••••••");
+    headers = curl_slist_append(headers, "x-org-key: •••••••");
+    headers = curl_slist_append(headers, "Content-Type: application/json");
+
+    char data[] = "{\"question\":\"Hi, who built you?\"," \
+    "\"preserve_history\":true," \
+    "\"history_object\":{\"Hi, who are you?\":\"My name is WorqBot, nice to meet you!\"}," \
+    "\"randomness\":0.1}";
+
+    curl_global_init(CURL_GLOBAL_DEFAULT);
+    curl = curl_easy_init();
+
+    if (curl) {
+    curl_easy_setopt(curl, CURLOPT_URL, url);
+    curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
+    curl_easy_setopt(curl, CURLOPT_POSTFIELDS, data);
+
+    res = curl_easy_perform(curl);
+
+    if (res != CURLE_OK) {
+    fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
+  }
+
+    curl_easy_cleanup(curl);
+  }
+
+    curl_global_cleanup();
+
+    return 0;
+  }
+
+    ````
+  </Tab>
+</Tabs>
+
+### Response
+
+#### Table View
+
+| Data Type |  Key  | Value                                  | Description                                                                                               |
+|:---------| :------------: |:---------------------------------------|:----------------------------------------------------------------------------------------------------------|
+| String | id | `4a24ea32-3fbc-4667-ad78-d5bd1652a5cb` | Unique identifier for the API Request                                                                     |
+| String | status | `success` or `error`                   | Status of the API Request                                                                                 |
+| Number | timestamp | `1620120000`                           | Timestamp of the API Request                                                                              |
+| String | result.answer | `<The response of the AI>` | The response from the AI |
+| String | result.source | `<The source of the response>` | The source file of the response |
+| Number | word_count | `58` | The number of times the AI has processed the words to generate a response. |
+
+  #### JSON View
+
+  ````json filename="JSON" copy
+{
+    "id": "8b7b574a-efd0-418c-bf2a-0d8fa19fd5bf",
+    "status": "success",
+    "timestamp": 1685525917563,
+    "result": {
+        "answer": "Larry Page and Sergey Brin founded Google on September 4, 1998, while they were PhD students at Stanford University in California. They own about 14% of its publicly listed shares and control 56% of its stockholder voting power through super-voting stock. Sundar Pichai was appointed CEO of Google on October 24, 2015, replacing Larry Page, who became the CEO of Alphabet. On December 3, 2019, Pichai also became the CEO of Alphabet. Google LLC is an American multinational technology company focusing on online advertising, search engine technology, cloud computing, computer software, quantum computing, e-commerce, artificial intelligence, and consumer electronics. It is considered one of the Big Five American information technology companies, alongside Amazon, Apple, Meta, and Microsoft. Google offers a multitude of products and services beyond Google Search, many of which hold dominant market positions. These products address a wide range of use cases, including email (Gmail), navigation (Waze & Maps), cloud computing (Cloud), web browsing (Chrome), video sharing (YouTube), productivity (Workspace), operating systems (Android), cloud storage (Drive), language translation (Translate), photo storage (Photos), video calling (Meet), smart home (Nest), smartphones (Pixel), wearable technology (Pixel Watch & Fitbit), music streaming (YouTube Music), video on demand (YouTube TV), artificial intelligence (Google Assistant), machine learning APIs (TensorFlow), AI chips (TPU), and more. Google and YouTube are the two most visited websites worldwide followed by Facebook and Twitter. Google is also the largest search engine, mapping and navigation application, email provider, office suite, video sharing platform, photo and cloud storage provider, mobile operating system, web browser, ML framework, and AI virtual assistant provider in the world as measured by market share. Larry Page and Sergey Brin are the founders of Google. \n\n",
+        "source": " Text File"
+    },
+    "word_count": 11185
+}
+  ````
+
+## To Add Training Data
+
+WorqHat's platform gives you the ability to train a Large Language Model (LLM) and customize it with a dataset to excel at a specific task. Custom models can lead to some of the best-performing NLP models for a wide number of tasks. Although this is something that is very early in our Development cycle, we are already looking at improved answering on the basis of the data that has been provided by the users.
+
+Training large language models is only required when you need to teach the model something extremely niche, like the different features of your product or your company's unique knowledge base. Common knowledge, like the colour of the sky, does not require training. Training is also helpful for generating or understanding data in a specific writing style or format.
+
+Training a generation model consists of a few simple steps. Let’s go through the steps for training a generation model. As of now, training a dataset is only available via the API but we will be releasing it soon through our Dashboards as well.
+
+
+### API Endpoint
+
+```bash filename="API Endpoint" copy
+https://api.worqhat.com/api/ai/content/v2-large/train-datasets
+```
+
+### Headers
+
+
+| Header Name |  Required  | Description |
+|:---------| :------------: | :---------------- |
+| x-api-key| ``true`` | This helps us to identify the User Sending the Request |
+| x-org-key|  ``true`` | This helps us to identify the Workspace Associated with the Request. This helps users to maintain easier logs |
+
+### Request Body
+
+The Request Body is a Formdata Object. The Formdata Object has the following fields :
+
+- training_file (You can upload Multiple Files to the API in the form of an array. The API will automatically merge the files together to create a single dataset.)
+- trainingstage (This can take in two values ``existing`` and ``new``. You can use the ``existing`` value if you want to add the training data to an existing dataset. You can use the ``new`` value if you want to create a new dataset with the training data. The default value is ``new``)
+- existingDatasetId (This is the Dataset ID of the Dataset you want to add the training data to. This is only required if you have set the ``trainingstage`` to ``existing``)
+- datasetname (This is the name of the Dataset you want to create. This is only required if you have set the ``trainingstage`` to ``new``. Ignore it if you have set the ``trainingstage`` to ``existing``)
+- datasetdescription (This is the description of the Dataset you want to create. This is only required if you have set the ``trainingstage`` to ``new``. Ignore it if you have set the ``trainingstage`` to ``existing``)
+- datasettype (You have choose between ``Self`` and ``Org``. If you choose ``Self``, the Dataset will be visible only to you. If you choose ``Org``, the Dataset will be visible to all the users in your Workspace. The default value is ``Self``. Please note that since we convert your data into a machine readable format, we will not be able to see your data. We do not store your data and we do not use your data for any purpose other than training the model. We do not share your data with anyone and it is not accessible after the training process has been completed.)
+
+| Data Type |    Key    | Value | Description                           |
+|:---------|:---------:| :---------------- |:--------------------------------------|
+| File Object | training_file | ``Array of File Object`` | The File Object of the Training Data that you want to pass to the model. You can choose between ``.csv``, ``.pdf``, ``.json`` formats |
+| String | trainingstage | ``existing`` or ``new`` | This is the stage of the training. You can choose between ``existing`` and ``new``. If you choose ``existing``, you will have to pass the ``existingDatasetId``. If you choose ``new``, you will have to pass the ``datasetname`` and ``datasetdescription``. The default value is ``new`` |
+| String | existingDatasetId | ``Dataset ID`` | This is the Dataset ID of the Dataset you want to add the training data to. This is only required if you have set the ``trainingstage`` to ``existing`` |
+| String | datasetname | ``Dataset Name`` | This is the name of the Dataset you want to create. This is only required if you have set the ``trainingstage`` to ``new``. Ignore it if you have set the ``trainingstage`` to ``existing`` |
+| String | datasetdescription | ``Dataset Description`` | This is the description of the Dataset you want to create. This is only required if you have set the ``trainingstage`` to ``new``. Ignore it if you have set the ``trainingstage`` to ``existing`` |
+| String | datasettype | ``Self`` or ``Org`` | You have choose between ``Self`` and ``Org``. If you choose ``Self``, the Dataset will be visible only to you. If you choose ``Org``, the Dataset will be visible to all the users in your Workspace. The default value is ``Self``. Please note that since we convert your data into a machine readable format, we will not be able to see your data. We do not store your data and we do not use your data for any purpose other than training the model. We do not share your data with anyone and it is not accessible after the training process has been completed. |
+
+````json filename="Request Body for Training Data (JSON)" copy
+{
+    "training_file": [
+        "https://www.worqhat.com/ai-training-data/ai-training-data-1.csv",
+        "https://www.worqhat.com/ai-training-data/ai-training-data-2.json"
+    ],
+    "trainingstage": "new",
+    "datasetname": "AI Training Data",
+    "datasetdescription": "This is the AI Training Data",
+    "datasettype": "Self"
+}
+````
+
+<Callout type="warning" emoji="⚠️">
+  Please note that the Request Body is a Formdata Object. You can use any Formdata Object to send
+  the Request Body. The Request Body is not a JSON Object.
+</Callout>
+
+<Tabs items={['cURL', 'Client JS', 'NodeJS', 'Python', 'Ruby', 'PHP', 'Java', 'GO', 'C']}>
+  <Tab>
+    ```` bash filename="cURL" copy
+    curl --location 'https://api.worqhat.com/api/ai/content/v2-large/train-datasets' \
+    --header 'x-api-key: •••••••' \
+    --header 'x-org-key: •••••••' \
+    --form 'trainingstage="existing"' \
+    --form 'existingDatasetId="6e950721-a68e-45c4-a578-7d801b4f7853"' \
+    --form 'datasetname="Sample Dataset"' \
+    --form 'datasetdescription="This is a sample dataset"' \
+    --form 'datasettype="Self"' \
+    --form 'training_file=@"/C:/Users/ghosh/Downloads/Sample Training File.pdf"' \
+    --form 'training_file=@"/C:/Users/ghosh/Downloads/Sample Training File.csv"'
+    ````
+  </Tab>
+  <Tab>
+    ````js filename="Client JS fetch" copy
+    var myHeaders = new Headers();
+    myHeaders.append("x-api-key", "•••••••");
+    myHeaders.append("x-org-key", "•••••••");
+
+    formdata.append("trainingstage", "existing");
+    formdata.append("existingDatasetId", "6e950721-a68e-45c4-a578-7d801b4f7853");
+    formdata.append("datasetname", "Sample Dataset");
+    formdata.append("datasetdescription", "This is a sample dataset");
+    formdata.append("datasettype", "Self");
+    formdata.append("training_file", fileInput.files[0], "/C:/Users/ghosh/Downloads/Sample Training File.pdf");
+    formdata.append("training_file", fileInput.files[0], "/C:/Users/ghosh/Downloads/Sample Training File.csv");
+
+    var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: JSON.stringify(raw),
+    redirect: 'follow'
+  };
+
+    fetch("https://api.worqhat.com/api/ai/content/v2-large/train-datasets", requestOptions)
+    .then(response => response.text())
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));
+    ````
+
+    ````js filename="Client JS XHR" copy
+    var xhr = new XMLHttpRequest();
+    var url = "https://api.worqhat.com/api/ai/content/v2-large/train-datasets";
+
+    xhr.open("POST", url);
+    xhr.setRequestHeader("x-api-key", "•••••••");
+    xhr.setRequestHeader("x-org-key", "•••••••");
+    xhr.setRequestHeader("Content-Type", "application/json");
+
+    xhr.onreadystatechange = function() {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+    console.log(xhr.responseText);
+  }
+  };
+
+  data.append("trainingstage", "existing");
+  data.append("existingDatasetId", "6e950721-a68e-45c4-a578-7d801b4f7853");
+  data.append("datasetname", "Sample Dataset");
+  data.append("datasetdescription", "This is a sample dataset");
+  data.append("datasettype", "Self");
+  data.append("training_file", fileInput.files[0], "/C:/Users/ghosh/Downloads/Sample Training File.pdf");
+  data.append("training_file", fileInput.files[0], "/C:/Users/ghosh/Downloads/Sample Training File.csv");
+
+    xhr.send(raw);
+
+    ````
+  </Tab>
+  <Tab>
+    ````js filename="NodeJS" copy
+    const request = require('request');
+
+    const url = "https://api.worqhat.com/api/ai/content/v2-large/train-datasets";
+
+    const headers = {
+    "x-api-key": "•••••••",
+    "x-org-key": "•••••••",
+    "Content-Type": "application/json"
+  };
+
+  formData: {
+    'trainingstage': 'existing',
+    'existingDatasetId': '6e950721-a68e-45c4-a578-7d801b4f7853',
+    'datasetname': 'Sample Dataset',
+    'datasetdescription': 'This is a sample dataset',
+    'datasettype': 'Self',
+    'training_file': {
+      'value': fs.createReadStream('/C:/Users/ghosh/Downloads/Sample Training File.pdf'),
+      'options': {
+        'filename': '/C:/Users/ghosh/Downloads/Sample Training File.pdf',
+        'contentType': null
+      }
+    },
+    'training_file': {
+      'value': fs.createReadStream('/C:/Users/ghosh/Downloads/Sample Training File.csv'),
+      'options': {
+        'filename': '/C:/Users/ghosh/Downloads/Sample Training File.csv',
+        'contentType': null
+      }
+    }
+  }
+
+    const requestOptions = {
+    url: url,
+    method: 'POST',
+    headers: headers,
+    body: raw
+  };
+
+    request(requestOptions, (error, response, body) => {
+    if (!error && response.statusCode === 200) {
+    console.log(body);
+  } else {
+    console.log('Error:', error);
+  }
+  });
+
+    ````
+
+    ````js filename="NodeJS Axios" copy
+      const axios = require('axios');
+      const FormData = require('form-data');
+      const fs = require('fs');
+      let data = new FormData();
+      data.append('trainingstage', 'existing');
+      data.append('existingDatasetId', '6e950721-a68e-45c4-a578-7d801b4f7853');
+      data.append('datasetname', 'Sample Dataset');
+      data.append('datasetdescription', 'This is a sample dataset');
+      data.append('datasettype', 'Self');
+      data.append('training_file', fs.createReadStream('/C:/Users/ghosh/Downloads/Sample Training File.pdf'));
+      data.append('training_file', fs.createReadStream('/C:/Users/ghosh/Downloads/Sample Training File.csv'));
+
+      let config = {
+        method: 'post',
+        maxBodyLength: Infinity,
+        url: 'https://api.worqhat.com/api/ai/content/v2-large/train-datasets',
+        headers: { 
+          "x-api-key": "•••••••",
+          "x-org-key": "•••••••",
+          ...data.getHeaders()
+        },
+        data : data
+      };
+
+      axios.request(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch((error) => {
+        console.log(error);
+});
+    ````
+  </Tab>
+  <Tab>
+    ````py filename="Python Requests" copy
+import requests
+
+url = "https://api.worqhat.com/api/ai/content/v2-large/train-datasets"
+
+payload = {'trainingstage': 'existing',
+'existingDatasetId': '6e950721-a68e-45c4-a578-7d801b4f7853',
+'datasetname': 'Sample Dataset',
+'datasetdescription': 'This is a sample dataset',
+'datasettype': 'Self'}
+files=[
+  ('training_file',('Sample Training File.pdf',open('/C:/Users/ghosh/Downloads/Sample Training File.pdf','rb'),'application/pdf')),
+  ('training_file',('Sample Training File.csv',open('/C:/Users/ghosh/Downloads/Sample Training File.csv','rb'),'text/csv'))
+]
+headers = {
+    "x-api-key": "•••••••",
+    "x-org-key": "•••••••",
+}
+
+response = requests.request("POST", url, headers=headers, data=payload, files=files)
+
+print(response.text)
+
+    ````
+  </Tab>
+  <Tab>
+    ````ruby filename="Ruby" copy
+    require "uri"
+require "net/http"
+
+url = URI("https://api.worqhat.com/api/ai/content/v2-large/train-datasets")
+
+http = Net::HTTP.new(url.host, url.port);
+request = Net::HTTP::Post.new(url)
+request["x-api-key"] = "•••••••"
+request["x-org-key"] = "•••••••"
+form_data = [['trainingstage', 'existing'],['existingDatasetId', '6e950721-a68e-45c4-a578-7d801b4f7853'],['datasetname', 'Sample Dataset'],['datasetdescription', 'This is a sample dataset'],['datasettype', 'Self'],['training_file', File.open('/C:/Users/ghosh/Downloads/Sample Training File.pdf')],['training_file', File.open('/C:/Users/ghosh/Downloads/Sample Training File.csv')]]
+request.set_form form_data, 'multipart/form-data'
+response = http.request(request)
+puts response.read_body
+
+    ````
+  </Tab>
+  <Tab>
+    ````php filename="PHP" copy
+    <?php
+
+$curl = curl_init();
+
+curl_setopt_array($curl, array(
+  CURLOPT_URL => 'https://api.worqhat.com/api/ai/content/v2-large/train-datasets',
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => '',
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => 'POST',
+  CURLOPT_POSTFIELDS => array('trainingstage' => 'existing','existingDatasetId' => '6e950721-a68e-45c4-a578-7d801b4f7853','datasetname' => 'Sample Dataset','datasetdescription' => 'This is a sample dataset','datasettype' => 'Self','training_file'=> new CURLFILE('/C:/Users/ghosh/Downloads/Sample Training File.pdf'),'training_file'=> new CURLFILE('/C:/Users/ghosh/Downloads/Sample Training File.csv')),
+  CURLOPT_HTTPHEADER => array(
+    "x-api-key": "•••••••",
+    "x-org-key": "•••••••",
+  ),
+));
+
+$response = curl_exec($curl);
+
+curl_close($curl);
+echo $response;
+
+    ````
+  </Tab>
+  <Tab>
+    ````java filename="Java" copy
+    OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = new MultipartBody.Builder().setType(MultipartBody.FORM)
+  .addFormDataPart("trainingstage","existing")
+  .addFormDataPart("existingDatasetId","6e950721-a68e-45c4-a578-7d801b4f7853")
+  .addFormDataPart("datasetname","Sample Dataset")
+  .addFormDataPart("datasetdescription","This is a sample dataset")
+  .addFormDataPart("datasettype","Self")
+  .addFormDataPart("training_file","/C:/Users/ghosh/Downloads/Sample Training File.pdf",
+    RequestBody.create(MediaType.parse("application/octet-stream"),
+    new File("/C:/Users/ghosh/Downloads/Sample Training File.pdf")))
+  .addFormDataPart("training_file","/C:/Users/ghosh/Downloads/Sample Training File.csv",
+    RequestBody.create(MediaType.parse("application/octet-stream"),
+    new File("/C:/Users/ghosh/Downloads/Sample Training File.csv")))
+  .build();
+Request request = new Request.Builder()
+  .url("https://api.worqhat.com/api/ai/content/v2-large/train-datasets")
+  .method("POST", body)
+  .addHeader("x-api-key", "•••••••")
+  .addHeader("x-org-key", "•••••••")
+  .build();
+
+    ````
+  </Tab>
+  <Tab>
+    ````go filename="GO" copy
+    package main
+
+import (
+  "fmt"
+  "bytes"
+  "mime/multipart"
+  "os"
+  "path/filepath"
+  "io"
+  "net/http"
+  "io/ioutil"
+)
+
+func main() {
+
+  url := "https://api.worqhat.com/api/ai/content/v2-large/train-datasets"
+  method := "POST"
+
+  payload := &bytes.Buffer{}
+  writer := multipart.NewWriter(payload)
+  _ = writer.WriteField("trainingstage", "existing")
+  _ = writer.WriteField("existingDatasetId", "6e950721-a68e-45c4-a578-7d801b4f7853")
+  _ = writer.WriteField("datasetname", "Sample Dataset")
+  _ = writer.WriteField("datasetdescription", "This is a sample dataset")
+  _ = writer.WriteField("datasettype", "Self")
+  file, errFile6 := os.Open("/C:/Users/ghosh/Downloads/Sample Training File.pdf")
+  defer file.Close()
+  part6,
+         errFile6 := writer.CreateFormFile("training_file",filepath.Base("/C:/Users/ghosh/Downloads/Sample Training File.pdf"))
+  _, errFile6 = io.Copy(part6, file)
+  if errFile6 != nil {
+    fmt.Println(errFile6)
+    return
+  }
+  file, errFile7 := os.Open("/C:/Users/ghosh/Downloads/Sample Training File.csv")
+  defer file.Close()
+  part7,
+         errFile7 := writer.CreateFormFile("training_file",filepath.Base("/C:/Users/ghosh/Downloads/Sample Training File.csv"))
+  _, errFile7 = io.Copy(part7, file)
+  if errFile7 != nil {
+    fmt.Println(errFile7)
+    return
+  }
+  err := writer.Close()
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+
+
+  client := &http.Client {
+  }
+  req, err := http.NewRequest(method, url, payload)
+
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  req.Header.Add("x-api-key", "•••••••")
+  req.Header.Add("x-org-key", "•••••••")
+
+  req.Header.Set("Content-Type", writer.FormDataContentType())
+  res, err := client.Do(req)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  defer res.Body.Close()
+
+  body, err := ioutil.ReadAll(res.Body)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  fmt.Println(string(body))
+}
+
+    ````
+  </Tab>
+  <Tab>
+    ````c filename="C" copy
+CURL *curl;
+CURLcode res;
+curl = curl_easy_init();
+if(curl) {
+  curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, "POST");
+  curl_easy_setopt(curl, CURLOPT_URL, "https://api.worqhat.com/api/ai/content/v2-large/train-datasets");
+  curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
+  curl_easy_setopt(curl, CURLOPT_DEFAULT_PROTOCOL, "https");
+  struct curl_slist *headers = NULL;
+  headers = curl_slist_append(headers, "x-api-key: •••••••");
+  headers = curl_slist_append(headers, "x-org-key: •••••••");
+  curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
+  curl_mime *mime;
+  curl_mimepart *part;
+  mime = curl_mime_init(curl);
+  part = curl_mime_addpart(mime);
+  curl_mime_name(part, "trainingstage");
+  curl_mime_data(part, "existing", CURL_ZERO_TERMINATED);
+  part = curl_mime_addpart(mime);
+  curl_mime_name(part, "existingDatasetId");
+  curl_mime_data(part, "6e950721-a68e-45c4-a578-7d801b4f7853", CURL_ZERO_TERMINATED);
+  part = curl_mime_addpart(mime);
+  curl_mime_name(part, "datasetname");
+  curl_mime_data(part, "Sample Dataset", CURL_ZERO_TERMINATED);
+  part = curl_mime_addpart(mime);
+  curl_mime_name(part, "datasetdescription");
+  curl_mime_data(part, "This is a sample dataset", CURL_ZERO_TERMINATED);
+  part = curl_mime_addpart(mime);
+  curl_mime_name(part, "datasettype");
+  curl_mime_data(part, "Self", CURL_ZERO_TERMINATED);
+  part = curl_mime_addpart(mime);
+  curl_mime_name(part, "training_file");
+  curl_mime_filedata(part, "/C:/Users/ghosh/Downloads/Sample Training File.pdf");
+  part = curl_mime_addpart(mime);
+  curl_mime_name(part, "training_file");
+  curl_mime_filedata(part, "/C:/Users/ghosh/Downloads/Sample Training File.csv");
+  curl_easy_setopt(curl, CURLOPT_MIMEPOST, mime);
+  res = curl_easy_perform(curl);
+  curl_mime_free(mime);
+}
+curl_easy_cleanup(curl);
+
+    ````
+  </Tab>
+</Tabs>
+
+<Callout type="warning" emoji="⚠️">
+  You can train any kind of files to work with the AorqHat AI Models. You can try ``pdf files``, ``csv files``, ``simple text content`` and even ``json`` files. The AI will learn from the data and will generate the response accordingly.
+</Callout>
+
+### Response
+
+#### Table View
+
+| Data Type |  Key  | Value                                  | Description                                                                                               |
+|:---------| :------------: |:---------------------------------------|:----------------------------------------------------------------------------------------------------------|
+| String | id | `4a24ea32-3fbc-4667-ad78-d5bd1652a5cb` | Unique identifier for the API Request                                                                     |
+| String | status | `success` or `error`                   | Status of the API Request                                                                                 |
+| Number | timestamp | `1685730942074`                           | Timestamp of the API Request                                                                              |
+| Object | training | ``Object`` | The Training Object |
+| String | training.dataset_id | ``Dataset ID`` | The Dataset ID of the Dataset that has been created |
+| String | training.dataset_name | ``Dataset Name`` | The Dataset Name of the Dataset that has been created |
+| String | training.dataset_description | ``Dataset Description`` | The Dataset Description of the Dataset that has been created |
+| String | training.dataset_timestamp | ``Dataset Timestamp`` | The Dataset Timestamp of the Dataset that has been created |
+| Number | training.word_count | ``Word Count`` | The Word Count of the Dataset that has been created |
+
+  #### JSON View
+
+  ````json filename="JSON" copy
+{
+    "id": "033228e4-8f1a-4f76-990a-a2934400163d",
+    "status": "success",
+    "timestamp": 1685730942074,
+    "training": {
+        "dataset_id": "9e6cb4f2-dd8d-4fb9-b874-1716e8badea6",
+        "dataset_name": "Sample Dataset",
+        "dataset_description": "This is a sample dataset",
+        "dataset_timestamp": "1620120000",
+        "word_count": 2000
+    }
+}
+  ````
+
+  ## View All Trained Datasets
+
+All the datasets that are trained by you are converted into Machine Readable Code and are stored in our Database. You can view all the datasets that you have trained by using this API Endpoint. You can also view the datasets that have been trained by other users in your Workspace if they have set the Permission to ``Org``. Please note that we do not store your actual data. We only store the Machine Readable Code that is generated from your data. We do not use your data for any purpose other than training the model. We do not share your data with anyone and it is not accessible after the training process has been completed.
+
+### API Endpoint
+
+```bash filename="API Endpoint" copy
+https://api.worqhat.com/api/ai/content/v2-large/list-datasets
+```
+
+### Headers
+
+
+| Header Name |  Required  | Description |
+|:---------| :------------: | :---------------- |
+| x-api-key| ``true`` | This helps us to identify the User Sending the Request |
+| x-org-key|  ``true`` | This helps us to identify the Workspace Associated with the Request. This helps users to maintain easier logs |
+
+
+### Request Body
+
+The Request Body doesn't need any parameters. We will be using the Header Keys to identify the User and the Workspace and then we will be returning the Datasets that are associated with the User and the Workspace.
+
+### Sample Code
+
+<Tabs items={['cURL', 'Client JS', 'NodeJS', 'Python', 'Ruby', 'PHP', 'Java', 'GO', 'C']}>
+  <Tab>
+    ```` bash filename="cURL" copy
+    curl --location 'https://api.worqhat.com/api/ai/content/v2-large/list-datasets' \
+    --header 'x-api-key: •••••••' \
+    --header 'x-org-key: •••••••' \
+    ````
+  </Tab>
+  <Tab>
+    ````js filename="Client JS fetch" copy
+    var myHeaders = new Headers();
+    myHeaders.append("x-api-key", "•••••••");
+    myHeaders.append("x-org-key", "•••••••");
+
+var raw = "";
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+    fetch("https://api.worqhat.com/api/ai/content/v2-large/list-datasets", requestOptions)
+    .then(response => response.text())
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));
+
+    ````
+
+    ````js filename="Client JS XHR" copy
+    var xhr = new XMLHttpRequest();
+    var url = "https://api.worqhat.com/api/ai/content/v2-large/list-datasets";
+
+    xhr.open("POST", url);
+    xhr.setRequestHeader("x-api-key", "•••••••");
+    xhr.setRequestHeader("x-org-key", "•••••••");
+    xhr.setRequestHeader("Content-Type", "application/json");
+
+    xhr.onreadystatechange = function() {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+    console.log(xhr.responseText);
+  }
+  };
+
+    var raw = "";
+
+    xhr.send(raw);
+
+    ````
+  </Tab>
+  <Tab>
+    ````js filename="NodeJS" copy
+    const request = require('request');
+
+    const url = "https://api.worqhat.com/api/ai/content/v2-large/list-datasets";
+
+    const headers = {
+    "x-api-key": "•••••••",
+    "x-org-key": "•••••••",
+    "Content-Type": "application/json"
+  };
+
+    const raw = "";
+
+    const requestOptions = {
+    url: url,
+    method: 'POST',
+    headers: headers,
+    body: raw
+  };
+
+    request(requestOptions, (error, response, body) => {
+    if (!error && response.statusCode === 200) {
+    console.log(body);
+  } else {
+    console.log('Error:', error);
+  }
+  });
+
+    ````
+
+    ````js filename="NodeJS Axios" copy
+    const axios = require('axios');
+
+    const url = "https://api.worqhat.com/api/ai/content/v2-large/list-datasets";
+
+    const headers = {
+    "x-api-key": "•••••••",
+    "x-org-key": "•••••••",
+    "Content-Type": "application/json"
+  };
+
+    const raw = "";
+
+    axios.post(url, raw, {headers: headers})
+    .then(response => {
+    console.log(response.data);
+  })
+    .catch(error => {
+    console.log('Error:', error.message);
+  });
+
+    ````
+  </Tab>
+  <Tab>
+    ````py filename="Python Requests" copy
+    import requests
+
+    url = "https://api.worqhat.com/api/ai/content/v2-large/list-datasets"
+
+    headers = {
+    "x-api-key": "•••••••",
+    "x-org-key": "•••••••",
+    "Content-Type": "application/json"
+  }
+
+    payload = ""
+
+    response = requests.request("POST", url, headers=headers, data=payload)
+
+    if response.status_code == 200:
+    print(response.json())
+    else:
+    print("Error:", response.text)
+
+    ````
+  </Tab>
+  <Tab>
+    ````ruby filename="Ruby" copy
+    require 'httparty'
+
+    url = "https://api.worqhat.com/api/ai/content/v2-large/list-datasets"
+
+    headers = {
+    "x-api-key" => "•••••••",
+    "x-org-key" => "•••••••",
+    "Content-Type" => "application/json"
+  }
+
+    data = ""
+
+    response = HTTParty.post(url, headers: headers, body: data.to_json)
+
+    if response.code == 200
+    puts response.body
+    else
+    puts "Error: #{response.code}, #{response.body}"
+    end
+
+    ````
+  </Tab>
+  <Tab>
+    ````php filename="PHP" copy
+    $url = "https://api.worqhat.com/api/ai/content/v2-large/list-datasets";
+
+    $headers = array(
+    "x-api-key: •••••••",
+    "x-org-key: •••••••",
+    "Content-Type: application/json"
+    );
+
+    $data = "";
+
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+
+    $response = curl_exec($ch);
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+    if ($httpCode === 200) {
+    echo $response;
+  } else {
+    echo "Error: " . $httpCode . ", " . $response;
+  }
+
+    curl_close($ch);
+
+    ````
+  </Tab>
+  <Tab>
+    ````java filename="Java" copy
+    import java.io.BufferedReader;
+    import java.io.InputStreamReader;
+    import java.io.OutputStream;
+    import java.net.HttpURLConnection;
+    import java.net.URL;
+
+    public class Main {
+    public static void main(String[] args) {
+    String url = "https://api.worqhat.com/api/ai/content/v2-large/list-datasets";
+    String apiKey = "•••••••";
+    String orgKey = "•••••••";
+
+    try {
+    URL apiUrl = new URL(url);
+    HttpURLConnection connection = (HttpURLConnection) apiUrl.openConnection();
+    connection.setRequestMethod("POST");
+    connection.setRequestProperty("x-api-key", apiKey);
+    connection.setRequestProperty("x-org-key", orgKey);
+    connection.setRequestProperty("Content-Type", "application/json");
+    connection.setDoOutput(true);
+
+    String jsonData = "";
+
+    OutputStream outputStream = connection.getOutputStream();
+    outputStream.write(jsonData.getBytes());
+    outputStream.flush();
+
+    int responseCode = connection.getResponseCode();
+    if (responseCode == HttpURLConnection.HTTP_OK) {
+    BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+    String line;
+    StringBuilder response = new StringBuilder();
+    while ((line = reader.readLine()) != null) {
+    response.append(line);
+  }
+    reader.close();
+
+    System.out.println(response.toString());
+  } else {
+    System.out.println("Error: " + responseCode + ", " + connection.getResponseMessage());
+  }
+
+    connection.disconnect();
+  } catch (Exception e) {
+    e.printStackTrace();
+  }
+  }
+  }
+
+    ````
+  </Tab>
+  <Tab>
+    ````go filename="GO" copy
+    package main
+
+    import (
+    "bytes"
+    "encoding/json"
+    "fmt"
+    "net/http"
+    )
+
+    func main() {
+    url := "https://api.worqhat.com/api/ai/content/v2-large/list-datasets"
+    apiKey := "•••••••"
+    orgKey := "•••••••"
+
+    payload := strings.NewReader(``)
+
+    jsonData, err := json.Marshal(data)
+    if err != nil {
+    fmt.Println("Error:", err)
+    return
+  }
+
+     req, err := http.NewRequest(method, url, payload)
+    if err != nil {
+    fmt.Println("Error:", err)
+    return
+  }
+
+    req.Header.Set("x-api-key", apiKey)
+    req.Header.Set("x-org-key", orgKey)
+    req.Header.Set("Content-Type", "application/json")
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    if err != nil {
+    fmt.Println("Error:", err)
+    return
+  }
+
+    defer resp.Body.Close()
+
+    if resp.StatusCode == http.StatusOK {
+    var result map[string]interface{}
+    err = json.NewDecoder(resp.Body).Decode(&result)
+    if err != nil {
+    fmt.Println("Error:", err)
+    return
+  }
+    fmt.Println(result)
+  } else {
+    fmt.Println("Error:", resp.Status)
+  }
+  }
+
+    ````
+  </Tab>
+  <Tab>
+    ````c filename="C" copy
+
+    #include <stdio.h>
+    #include <curl/curl.h>
+
+    int main(void) {
+    CURL * curl;
+    CURLcode res;
+
+    char url[] = "https://api.worqhat.com/api/ai/content/v2-large/list-datasets";
+    char apiKey[] = "•••••••";
+    char orgKey[] = "•••••••";
+
+    struct curl_slist *headers = NULL;
+    headers = curl_slist_append(headers, "x-api-key: •••••••");
+    headers = curl_slist_append(headers, "x-org-key: •••••••");
+    headers = curl_slist_append(headers, "Content-Type: application/json");
+
+    char data = "";
+
+    curl_global_init(CURL_GLOBAL_DEFAULT);
+    curl = curl_easy_init();
+
+    if (curl) {
+    curl_easy_setopt(curl, CURLOPT_URL, url);
+    curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
+    curl_easy_setopt(curl, CURLOPT_POSTFIELDS, data);
+
+    res = curl_easy_perform(curl);
+
+    if (res != CURLE_OK) {
+    fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
+  }
+
+    curl_easy_cleanup(curl);
+  }
+
+    curl_global_cleanup();
+
+    return 0;
+  }
+
+    ````
+  </Tab>
+</Tabs>
+
+### Response
+
+#### Table View
+
+| Data Type |  Key  | Value                                  | Description                                                                                               |
+|:---------| :------------: |:---------------------------------------|:----------------------------------------------------------------------------------------------------------|
+| String | id | `4a24ea32-3fbc-4667-ad78-d5bd1652a5cb` | Unique identifier for the API Request                                                                     |
+| String | status | `success` or `error`                   | Status of the API Request                                                                                 |
+| Number | timestamp | `1685730942074`                           | Timestamp of the API Request                                                                              |
+| Array | datasets | ``Array`` | The Datasets Array |
+| String | datasets.dataset_id | ``Dataset ID`` | The Dataset ID of the Dataset that has been created. You need to use this Dataset ID to pass in a Trained Model or Update the Existing Dataset Contents. New Content can be added to Datasets but cannot be removed.|
+| String | datasets.dataset_name | ``Dataset Name`` | The Dataset Name of the Dataset that has been created |
+| String | datasets.dataset_description | ``Dataset Description`` | The Dataset Description of the Dataset that has been created |
+| Number | datasets.dataset_timestamp._seconds | ``Dataset Timestamp`` | The Dataset Timestamp of the Dataset that has been created |
+| Number | datasets.dataset_timestamp._clock_hash | ``Dataset Timestamp`` | The Time Skew calcultor that helps make sure our Processing Server clocks are in sync with each other |
+
+
+  #### JSON View
+
+  ````json filename="JSON" copy
+{
+    "id": "76f28de5-4f80-4d95-bd2e-2684b522f0f5",
+    "status": "success",
+    "timestamp": 1685609386315,
+    "datasets": [
+        {
+            "dataset_id": "6e950721-a68e-45c4-a578-7d801b4f7853",
+            "dataset_name": "Sample Dataset",
+            "dataset_description": "This is a sample dataset",
+            "dataset_timestamp": {
+                "_seconds": 1685600941000,
+                "_clock_hash": 466451382000000
+            }
+        },
+        {
+            "dataset_id": "f5f66562-54a4-49a3-b105-a234cfe46eba",
+            "dataset_name": "Sample Dataset",
+            "dataset_description": "This is a sample dataset",
+            "dataset_timestamp": {
+                "_seconds": 1685600754000,
+                "_clock_hash": 167343750000000
+            }
+        }
+    ]
+}
+  ````
+
+  ## Delete a Trained Dataset
+
+You can delete a trained dataset from the Records. Please note that this is a one-time action an cannot be reverted. Once the Dataset is deleted it will be removed from our Database and will not be accessible anymore. This means that if any of your models are using this dataset, they will not be able to use it anymore. You will have to retrain the model with a new dataset and add the new Dataset to the Model.
+
+### API Endpoint
+
+```bash filename="API Endpoint" copy
+https://api.worqhat.com/api/ai/content/v2-large/delete-datasets
+```
+
+### Headers
+
+
+| Header Name |  Required  | Description |
+|:---------| :------------: | :---------------- |
+| x-api-key| ``true`` | This helps us to identify the User Sending the Request |
+| x-org-key|  ``true`` | This helps us to identify the Workspace Associated with the Request. This helps users to maintain easier logs |
+
+
+### Request Body
+
+The Request Body is a JSON Object that contains the following fields:
+
+| Data Type | Key | Value | Description |
+|:---------| :------------: | :---------------- | :---------------- |
+| String | datasetId | ``Dataset ID`` | The Dataset ID of the Dataset that you want to delete. |
+
+
+
+<Callout type="warning" emoji="⚠️">
+  Please make sure that you train and store the model before you make a request to the API with
+  the ``DatasetID``. If you have not trained and stored the model, you will not be able to make a
+  request to the API and you will receive an error.
+</Callout>
+
+
+````json filename="Request Body for Deleting a Dataset (JSON)" copy
+{
+    "datasetId": "6e950721-a68e-45c4-a578-7d801b4f7853"
+}
+````
+
+### Sample Code
+
+The Sample Codes are the same as the ones that we have used in the previous API Endpoints. We will be using the same Sample Codes to make the request to the API Endpoint. You just need to change the API Endpoint URL and the Request Body should only contain the ``DatasetID``.
+
+### Response
+
+#### Table View
+
+| Data Type |  Key  | Value                                  | Description                                                                                               |
+|:---------| :------------: |:---------------------------------------|:----------------------------------------------------------------------------------------------------------|
+| String | id | `4a24ea32-3fbc-4667-ad78-d5bd1652a5cb` | Unique identifier for the API Request                                                                     |
+| String | status | `success` or `error`                   | Status of the API Request                                                                                 |
+| Number | timestamp | `1685730942074`                           | Timestamp of the API Request                                                                              |
+| String | state | ``Dataset has been deleted successfully from our records`` | The State of the API Request. This will be ``Dataset has been deleted successfully from our records`` if the Dataset has been deleted successfully. |
+
+  #### JSON View
+
+  ````json filename="JSON" copy
+{
+    "id": "a0180b3e-b2ca-49f5-99a3-b72e55246894",
+    "status": "success",
+    "timestamp": 1685610875245,
+    "state": "Dataset has been deleted successfully from our records"
+}
+  ````
+
+### Error Codes
+
+| Error Code | Description |
+|:---------|:---------------------------------------------------|
+| 400 | Bad Request |
+| 401 | Unauthorized : Invalid API Key or Organization Key |
+| 402 | Syntax Error : Invalid JSON |

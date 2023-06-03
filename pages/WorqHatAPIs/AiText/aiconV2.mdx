@@ -1,21 +1,19 @@
 import { Callout, Tab, Tabs } from "nextra-theme-docs";
 
 
-# AiCon V3 (Advanced and Powerful AI Content Generation Network)
+# AiCon V2 Content Generation AI (Stable Beta)
 
-AiCon V3, the most powerful content generation AI, has captured the attention of developers
-worldwide with its groundbreaking capabilities. Previously, access to this remarkable AI model
-was limited to a few companies like Descript, Walmart, Canva via the WorqHat Workspaces and
-Alpha APIs.
+AiCon’s impressive conversational abilities are rooted in years of research and development. Like many advanced language models, such as BERT and GPT-3, AiCon is based on the Transformer neural network architecture, which was made publicly available in 2017. This architecture allows for the creation of models that can read multiple words (such as a sentence or paragraph) and understand the relationships between those words, thereby predicting what words will come next.
 
-However, a
-recent development has
-revolutionized the landscape,
-as developers now have the opportunity to build upon AiCon V3 using APIs, unleashing a new era of innovation. With its seamless integration via API, AiCon V3 empowers developers to effortlessly generate high-quality and engaging content across various domains, revolutionizing the way developers approach content creation. This AI model, equipped with cutting-edge algorithms and a deep understanding of human language, produces contextually relevant and coherent content that resonates with audiences.
+What sets AiCon apart from other language models is its unique training process. Unlike
+traditional models, AiCon was trained on current web data upto March 2022, including actual
+conversations. This training allowed it to grasp the subtleties that make open-ended conversation and text distinct from other forms of language. One of these subtleties is sensibility - does the response match the conversational context and make sense?
 
-The availability of AiCon V3 through APIs provides developers with a streamlined workflow and unrivaled flexibility. By building on top of this powerful AI, developers can tailor its capabilities to their specific needs, amplifying their creative output. Whether it's crafting compelling articles, generating imaginative stories, or composing catchy marketing slogans, AiCon V3's versatility knows no bounds. Its integration with APIs enables developers to seamlessly incorporate its advanced content generation features into their applications, platforms, or systems.
+We are dedicated to revolutionizing the way organizations approach productivity, building applications and content generation. Our latest creation AiCon - the AI Content Optimization Network - has been developed to help organizations streamline their workflow and improve their overall output.
 
-The transition from exclusive access through WorqHat workspaces to API integration marks a significant turning point in the accessibility and usability of AiCon V3. Developers can now unlock the immense potential of this AI model, leveraging its advanced capabilities to create dynamic and tailored user experiences. The fusion of AiCon V3's powerful content generation capabilities with the convenience of API integration propels the evolution of content creation, propelling developers to new heights of innovation and enabling them to build upon AiCon V3's foundation to shape the future of artificial intelligence-driven content generation.
+Developers can not only translate languages, summarize long documents, and answer
+information-seeking questions, but they can also create comprehensive and engaging content in a
+fraction of the time and cost it would take without the aid of artificial intelligence.
 
 ## Use Cases
 
@@ -46,7 +44,7 @@ product descriptions by analyzing product features, specifications, and customer
 ### API Endpoint
 
 ````bash filename="API Endpoint" copy
-https://api.worqhat.com/api/ai/content/v3
+https://api.worqhat.com/api/ai/content/v2
 ````
 
 ### Headers
@@ -103,7 +101,7 @@ you are able to send the Headers and the Request Body to the API Endpoint. It's 
 send a POST Request to the API Endpoint with the Headers and the Request Body, and you are good to go!
 
 <Callout type="warning" emoji="⚠️">
-  Please note that the **AiCon V3 Model** has a word capacity limit of `8,000 words` in a single
+  Please note that the **AiCon V2 Model** has a word capacity limit of 4000 words in a single
   request including maintaining history and adding training data. If you exceed this limit, you
   will get an error.
 </Callout>
@@ -114,7 +112,7 @@ send a POST Request to the API Endpoint with the Headers and the Request Body, a
 <Tabs items={['cURL', 'Client JS', 'NodeJS', 'Python', 'Ruby', 'PHP', 'Java', 'GO', 'C']}>
   <Tab>
     ```` bash filename="cURL" copy
-    curl --location 'https://api.worqhat.com/api/ai/content/v3' \
+    curl --location 'https://api.worqhat.com/api/ai/content/v2' \
     --header 'x-api-key: •••••••' \
     --header 'x-org-key: •••••••' \
     --data '{
@@ -147,7 +145,7 @@ send a POST Request to the API Endpoint with the Headers and the Request Body, a
     redirect: 'follow'
   };
 
-    fetch("https://api.worqhat.com/api/ai/content/v3", requestOptions)
+    fetch("https://api.worqhat.com/api/ai/content/v2", requestOptions)
     .then(response => response.text())
     .then(result => console.log(result))
     .catch(error => console.log('error', error));
@@ -156,7 +154,7 @@ send a POST Request to the API Endpoint with the Headers and the Request Body, a
 
     ````js filename="Client JS XHR" copy
     var xhr = new XMLHttpRequest();
-    var url = "https://api.worqhat.com/api/ai/content/v3";
+    var url = "https://api.worqhat.com/api/ai/content/v2";
 
     xhr.open("POST", url);
     xhr.setRequestHeader("x-api-key", "•••••••");
@@ -184,7 +182,7 @@ send a POST Request to the API Endpoint with the Headers and the Request Body, a
     ````js filename="NodeJS" copy
     const request = require('request');
 
-    const url = "https://api.worqhat.com/api/ai/content/v3";
+    const url = "https://api.worqhat.com/api/ai/content/v2";
 
     const headers = {
     "x-api-key": "•••••••",
@@ -219,7 +217,7 @@ send a POST Request to the API Endpoint with the Headers and the Request Body, a
     ````js filename="NodeJS Axios" copy
     const axios = require('axios');
 
-    const url = "https://api.worqhat.com/api/ai/content/v3";
+    const url = "https://api.worqhat.com/api/ai/content/v2";
 
     const headers = {
     "x-api-key": "•••••••",
@@ -248,7 +246,7 @@ send a POST Request to the API Endpoint with the Headers and the Request Body, a
     ````py filename="Python Requests" copy
     import requests
 
-    url = "https://api.worqhat.com/api/ai/content/v3"
+    url = "https://api.worqhat.com/api/ai/content/v2"
 
     headers = {
     "x-api-key": "•••••••",
@@ -276,7 +274,7 @@ send a POST Request to the API Endpoint with the Headers and the Request Body, a
     ````ruby filename="Ruby" copy
     require 'httparty'
 
-    url = "https://api.worqhat.com/api/ai/content/v3"
+    url = "https://api.worqhat.com/api/ai/content/v2"
 
     headers = {
     "x-api-key" => "•••••••",
@@ -303,7 +301,7 @@ send a POST Request to the API Endpoint with the Headers and the Request Body, a
   </Tab>
   <Tab>
     ````php filename="PHP" copy
-    $url = "https://api.worqhat.com/api/ai/content/v3";
+    $url = "https://api.worqhat.com/api/ai/content/v2";
 
     $headers = array(
     "x-api-key: •••••••",
@@ -347,7 +345,7 @@ send a POST Request to the API Endpoint with the Headers and the Request Body, a
 
     public class Main {
     public static void main(String[] args) {
-    String url = "https://api.worqhat.com/api/ai/content/v3";
+    String url = "https://api.worqhat.com/api/ai/content/v2";
     String apiKey = "•••••••";
     String orgKey = "•••••••";
 
@@ -405,7 +403,7 @@ send a POST Request to the API Endpoint with the Headers and the Request Body, a
     )
 
     func main() {
-    url := "https://api.worqhat.com/api/ai/content/v3"
+    url := "https://api.worqhat.com/api/ai/content/v2"
     apiKey := "•••••••"
     orgKey := "•••••••"
 
@@ -468,7 +466,7 @@ send a POST Request to the API Endpoint with the Headers and the Request Body, a
     CURL * curl;
     CURLcode res;
 
-    char url[] = "https://api.worqhat.com/api/ai/content/v3";
+    char url[] = "https://api.worqhat.com/api/ai/content/v2";
     char apiKey[] = "•••••••";
     char orgKey[] = "•••••••";
 
@@ -514,7 +512,7 @@ send a POST Request to the API Endpoint with the Headers and the Request Body, a
 <Tabs items={['cURL', 'Client JS', 'NodeJS', 'Python', 'Ruby', 'PHP', 'Java', 'GO', 'C']}>
   <Tab>
     ```` bash filename="cURL" copy
-    curl --location 'https://api.worqhat.com/api/ai/content/v3' \
+    curl --location 'https://api.worqhat.com/api/ai/content/v2' \
     --header 'x-api-key: •••••••' \
     --header 'x-org-key: •••••••' \
     --data '{
@@ -542,7 +540,7 @@ send a POST Request to the API Endpoint with the Headers and the Request Body, a
     redirect: 'follow'
   };
 
-    fetch("https://api.worqhat.com/api/ai/content/v3", requestOptions)
+    fetch("https://api.worqhat.com/api/ai/content/v2", requestOptions)
     .then(response => response.text())
     .then(result => console.log(result))
     .catch(error => console.log('error', error));
@@ -550,7 +548,7 @@ send a POST Request to the API Endpoint with the Headers and the Request Body, a
 
     ````js filename="Client JS XHR" copy
     var xhr = new XMLHttpRequest();
-    var url = "https://api.worqhat.com/api/ai/content/v3";
+    var url = "https://api.worqhat.com/api/ai/content/v2";
 
     xhr.open("POST", url);
     xhr.setRequestHeader("x-api-key", "•••••••");
@@ -577,7 +575,7 @@ send a POST Request to the API Endpoint with the Headers and the Request Body, a
     ````js filename="NodeJS" copy
     const request = require('request');
 
-    const url = "https://api.worqhat.com/api/ai/content/v3";
+    const url = "https://api.worqhat.com/api/ai/content/v2";
 
     const headers = {
     "x-api-key": "•••••••",
@@ -611,7 +609,7 @@ send a POST Request to the API Endpoint with the Headers and the Request Body, a
     ````js filename="NodeJS Axios" copy
     const axios = require('axios');
 
-    const url = "https://api.worqhat.com/api/ai/content/v3";
+    const url = "https://api.worqhat.com/api/ai/content/v2";
 
     const headers = {
     "x-api-key": "•••••••",
@@ -639,7 +637,7 @@ send a POST Request to the API Endpoint with the Headers and the Request Body, a
     ````py filename="Python Requests" copy
     import requests
 
-    url = "https://api.worqhat.com/api/ai/content/v3"
+    url = "https://api.worqhat.com/api/ai/content/v2"
 
     headers = {
     "x-api-key": "•••••••",
@@ -666,7 +664,7 @@ send a POST Request to the API Endpoint with the Headers and the Request Body, a
     ````ruby filename="Ruby" copy
     require 'httparty'
 
-    url = "https://api.worqhat.com/api/ai/content/v3"
+    url = "https://api.worqhat.com/api/ai/content/v2"
 
     headers = {
     "x-api-key" => "•••••••",
@@ -692,7 +690,7 @@ send a POST Request to the API Endpoint with the Headers and the Request Body, a
   </Tab>
   <Tab>
     ````php filename="PHP" copy
-    $url = "https://api.worqhat.com/api/ai/content/v3";
+    $url = "https://api.worqhat.com/api/ai/content/v2";
 
     $headers = [
     "x-api-key: •••••••",
@@ -757,7 +755,7 @@ send a POST Request to the API Endpoint with the Headers and the Request Body, a
 
     public class Main {
     public static void main(String[] args) throws IOException {
-    String url = "https://api.worqhat.com/api/ai/content/v3";
+    String url = "https://api.worqhat.com/api/ai/content/v2";
 
     URL obj = new URL(url);
     HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -807,7 +805,7 @@ send a POST Request to the API Endpoint with the Headers and the Request Body, a
     )
 
     func main() {
-    url := "https://api.worqhat.com/api/ai/content/v3"
+    url := "https://api.worqhat.com/api/ai/content/v2"
 
     payload := []byte(`{"training_data":"I’m Sagnik, currently I live in Pune, India working as a Co-Founder || CTO at WorqHat. WorqHat is a No-Code Drag and Drop Workspace for Organizations to build their Internal Tools and Applications like Customer Portals and Dashboards in Hours instead of Days and with Zero Dev Time.I have extensive experience building frontend design components, full-scale end-to-end applications, and working with machine learning models and NoSQL databases. I have a strong track record of successfully taking projects from concept to launch, and I have a particular passion for working on projects that are in the early stages of development. My diverse skill set and hands-on approach have allowed me to contribute to a wide range of projects and industries, and I am always eager to take on new challenges and learn new technologies.Being comfortable with code allows me to rapidly prototype and validate experiences. I have also had the opportunity to work with the Firebase team at Google Cloud as a documentation contributor for Firebase Firestore and Firebase Auth. In addition, I am an avid public speaker and have conducted programming sessions for college students, sharing my journey as a student startup founder. These experiences have allowed me to expand my skills and knowledge in the field, and have helped me to develop my ability to communicate and collaborate with others. I am always looking for new opportunities to learn and grow as a developer, and I am excited to bring my skills and insights to your team.In my spare time, I enjoy mentoring young grads about different programming tricks and contributing to open source projects. These hobbies allow me to stay up-to-date on the latest trends and techniques in my field, and to share my knowledge and experience with others. I am always looking for new opportunities to learn and grow as a programmer, and I find great satisfaction in helping others to do the same. I’m always down for hearing about new projects, so feel free to drop me a line.","question":"What are the skills of Sagnik in bullets?","randomness":0.1}`)
 
@@ -852,7 +850,7 @@ send a POST Request to the API Endpoint with the Headers and the Request Body, a
     int main(void) {
     CURL * curl;
     CURLcode res;
-    const char *url = "https://api.worqhat.com/api/ai/content/v3";
+    const char *url = "https://api.worqhat.com/api/ai/content/v2";
     const char *payload = "{\"training_data\":\"I’m Sagnik, currently I live in Pune, India working as a Co-Founder || CTO at WorqHat. WorqHat is a No-Code Drag and Drop Workspace for Organizations to build their Internal Tools and Applications like Customer Portals and Dashboards in Hours instead of Days and with Zero Dev Time.I have extensive experience building frontend design components, full-scale end-to-end applications, and working with machine learning models and NoSQL databases. I have a strong track record of successfully taking projects from concept to launch, and I have a particular passion for working on projects that are in the early stages of development. My diverse skill set and hands-on approach have allowed me to contribute to a wide range of projects and industries, and I am always eager to take on new challenges and learn new technologies.Being comfortable with code allows me to rapidly prototype and validate experiences. I have also had the opportunity to work with the Firebase team at Google Cloud as a documentation contributor for Firebase Firestore and Firebase Auth. In addition, I am an avid public speaker and have conducted programming sessions for college students, sharing my journey as a student startup founder. These experiences have allowed me to expand my skills and knowledge in the field, and have helped me to develop my ability to communicate and collaborate with others. I am always looking for new opportunities to learn and grow as a developer, and I am excited to bring my skills and insights to your team.In my spare time, I enjoy mentoring young grads about different programming tricks and contributing to open source projects. These hobbies allow me to stay up-to-date on the latest trends and techniques in my field, and to share my knowledge and experience with others. I am always looking for new opportunities to learn and grow as a programmer, and I find great satisfaction in helping others to do the same. I’m always down for hearing about new projects, so feel free to drop me a line.\",\"question\":\"What are the skills of Sagnik in bullets?\",\"randomness\":0.1}";
 
     curl_global_init(CURL_GLOBAL_DEFAULT);
@@ -890,8 +888,7 @@ send a POST Request to the API Endpoint with the Headers and the Request Body, a
 <Callout type="warning" emoji="⚠️">
   You can choose to pass both the `history object` and `training_data` in the same request. In that
   case, the `training_data` will be used to train the AI and the `history object` will be used to
-  generate the response. Please make sure that the entire content payload should not exceed `8,000
-  words`.
+  generate the response.
 </Callout>
 
 ### Response
@@ -904,8 +901,7 @@ send a POST Request to the API Endpoint with the Headers and the Request Body, a
 | String | status | `success` or `error`                   | Status of the API Request                                                                                 |
 | Number | timestamp | `1620120000`                           | Timestamp of the API Request                                                                              |
 | String | content | `<The response of the AI>` | The response from the AI |
-  | Number | processing_count | `58` | The number of times the AI has processed the words to
-  generate a response. |
+| Number | processing_count | `58` | The number of times the AI has processed the words to generate a response. |
 
   #### JSON View
 
