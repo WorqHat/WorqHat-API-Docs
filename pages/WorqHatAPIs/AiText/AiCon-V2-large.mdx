@@ -111,7 +111,7 @@ The Request Body is a JSON Object that contains the following fields:
 }
 ````
 
-````json filename="Request Body for Inline Training (JSON)" copy
+````json filename="Request Body for Answering on Past Datasets (JSON)" copy
 {
     "question": "Write me a brief about google llc",
     "datasetId": "•••••••",
@@ -132,23 +132,30 @@ send a POST Request to the API Endpoint with the Headers and the Request Body, a
   Please note that the **AiCon V2 Model** has a word capacity limit of 100,000 words in a single
   request including maintaining history and adding training data. If you exceed this limit, you
   will get an error. However, if you want to pass more than 100,000 words, you can pass the
-  training data directly to the model as separate datasets.
+  training data directly to the model as separate datasets. You can pass both Training Data and
+  past Datasets in the Same request as well. Read more about this [here]
+  (/WorqHatAPIs/AiText/AiCon-V2-large#to-add-training-data).
 </Callout>
 
 
 <Tabs items={['cURL', 'Client JS', 'NodeJS', 'Python', 'Ruby', 'PHP', 'Java', 'GO', 'C']}>
   <Tab>
     ```` bash filename="cURL" copy
-    curl --location 'https://api.worqhat.com/api/ai/content/v2' \
+    curl --location 'https://api.worqhat.com/api/ai/content/v2-large/answering' \
     --header 'x-api-key: •••••••' \
     --header 'x-org-key: •••••••' \
+    --header 'Content-Type: application/json' \
     --data '{
-    "question" : "Hi, who built you?",
-    "preserve_history" : true,
-    "history_object" : {
-    "Hi, who are you?":"My name is WorqBot, nice to meet you!"
-  },
-    "randomness": 0.1
+    "question": "Hey how are you?",
+    "datasetId": "f5f66562-54a4-49a3-b105-a234cfe46eba",
+    "trainingData": [
+    "Marico Limited is an Indian multinational consumer goods company[5] providing consumer products and services in the areas of health, beauty and wellness. With its headquarters in Mumbai, Marico is present in over 25 countries across Asia and Africa. It owns brands in categories of hair care, skin care, edible oils, health foods, male grooming, and fabric care.As of 2019–2020, the company generated a turnover of 7,315 crores.[8] Marico has 8 factories in India located at Puducherry, Perundurai, Kanjikode, Jalgaon, Paldhi, Dehradun, Baddi and Paonta Sahib. 1974 – Harsh Mariwala envisioned a branded FMCG market for coconut and refined edible oils in small consumer packs and sets up a national distribution network for Parachute. ",
+    "1990 – Marico was established in India. 1991 – Marico launches Hair & Care, a non-sticky hair oil repositioning the market leader through contemporary packaging. Sweekar sunflower oil goes national. 1992 to 94 – Marico goes from being an exporter to international marketer – sets up its first overseas office in Dubai. 1994 – The year marks another innovation, Revive cold water starch makes starching cottons more convenient for the consumer. 1996 – Marico lists on the Indian Stock Exchanges. 1999 – The company expands with its first overseas manufacturing facility in Bangladesh. Marico acquires Mediker in the same year 2003 – Marico Innovation Foundation, responsible for executing the Corporate Social Responsibility of Marico was formed. In the same year Marico sets up copra collection centres to procure directly from farmers increasing their margins. 2006 – Nihar enters the Marico fold. 2006-7 – Marico casts footprint in Africa, acquires Fiancée and Hair Code in Egypt and Caivil, Black Chic and Hercules in South Africa. 2009 – Marico makes a public offering of equity in Bangladesh  a first for one of its overseas subsidiaries. 2010 – The year also marks the launch of Saffola breakfast, Masala Oats in India. 2011 – Parachute Advanced entered the skin-care category with the launch of Parachute Advanced Body Lotion (PABL), another innovation by Marico. The year also marks the launch of Parachute Gold hair cream in the Middle East market targeted to women which today has great equity amongst the consumer. Marico strengthens its presence S.E. Asia through a male grooming, skin care and food portfolio acquired in Vietnam the same year. 2012 – India'\''s Gen Next gets styled by Marico as it launches its male grooming brand, SetWet.[12] 2015 – Marico'\''s Market Cap tops  25,000 crore. 2017– Marico acquires South Africa'\''s leading hair styling business – Isoplus [13] launches Saffola Active[12] Slimming Nutri-shake (marking entry into nutraceuticals category) and makes a strategic investment in Zed Lifestyle (Beardo)[14] 2018 – Marico invests Revolutionary Fitness (Revofit) [15] launches a new brand – True Roots[16] that delays hair greying and launches its first digital exclusive brand – Studio X [17] launched Saffola Fittify.[18] 2019 – Marico announces association with Kaya, to create a skincare sub-brand, Kaya Youth.[19]",
+    "Thermax manufactures boilers to harness the power of steam. The company started with producing small, once-through, baby boilers to cater to the steam requirements at hospitals.[citation needed] It was established in 1966, when A. S. Bhathena collaborated with a Belgian company, Wanson, to commence business operations in Dadar, Mumbai, India as Wanson India Ltd., manufacturing small boilers.[3] On 15 February 1995 it became a public company on the Bombay Stock Exchange. It has, since long, been known simply as Thermax Limited.[citation needed] In 2009, it signed a 51–49 joint venture with US firm SPX Corporation to provide equipment and services for the Indian power sector.[4][5] In 2010, it signed a joint venture agreement with US-based Babcock & Wilcox to manufacture super-critical boilers for the power sector.[6]",
+    "Google LLC is an American multinational technology company focusing on online advertising, search engine technology, cloud computing, computer software, quantum computing, e-commerce, artificial intelligence,[9] and consumer electronics. It has been referred to as the most powerful company in the world[10] and one of the world'\''s most valuable brands due to its market dominance, data collection, and technological advantages in the area of artificial intelligence.[11][12][13] Its parent company Alphabet is considered one of the Big Five American information technology companies, alongside Amazon, Apple, Meta, and Microsoft. Google was founded on September 4, 1998, by computer scientists Larry Page and Sergey Brin while they were PhD students at Stanford University in California. Together they own about 14% of its publicly listed shares and control 56% of its stockholder voting power through super-voting stock. The company went public via an initial public offering (IPO) in 2004. In 2015, Google was reorganized as a wholly owned subsidiary of Alphabet Inc. Google is Alphabet'\''s largest subsidiary and is a holding company for Alphabet'\''s internet properties and interests. Sundar Pichai was appointed CEO of Google on October 24, 2015, replacing Larry Page, who became the CEO of Alphabet. On December 3, 2019, Pichai also became the CEO of Alphabet.[14] The company has since rapidly grown to offer a multitude of products and services beyond Google Search, many of which hold dominant market positions. These products address a wide range of use cases, including email (Gmail), navigation (Waze & Maps), cloud computing (Cloud), web browsing (Chrome), video sharing (YouTube), productivity (Workspace), operating systems (Android), cloud storage (Drive), language translation (Translate), photo storage (Photos), video calling (Meet), smart home (Nest), smartphones (Pixel), wearable technology (Pixel Watch & Fitbit), music streaming (YouTube Music), video on demand (YouTube TV), artificial intelligence (Google Assistant), machine learning APIs (TensorFlow), AI chips (TPU), and more. Discontinued Google products include gaming (Stadia), Glass, Google+, Reader, Play Music, Nexus, Hangouts, and Inbox by Gmail.[15][16] Google'\''s other ventures outside of Internet services and consumer electronics include quantum computing (Sycamore), self-driving cars (Waymo, formerly the Google Self-Driving Car Project), smart cities (Sidewalk Labs), and transformer models (Google Brain).[17] Google and YouTube are the two most visited websites worldwide followed by Facebook and Twitter. Google is also the largest search engine, mapping and navigation application, email provider, office suite, video sharing platform, photo and cloud storage provider, mobile operating system, web browser, ML framework, and AI virtual assistant provider in the world as measured by market share. On the list of most valuable brands, Google is ranked second by Forbes[18] and fourth by Interbrand.[19] It has received significant criticism involving issues such as privacy concerns, tax avoidance, censorship, search neutrality, antitrust and abuse of its monopoly position."
+    ],
+    "self_train": "True",
+    "randomness": 0.4
   }'
     ````
   </Tab>
@@ -157,22 +164,29 @@ send a POST Request to the API Endpoint with the Headers and the Request Body, a
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "•••••••");
     myHeaders.append("x-org-key", "•••••••");
+    myHeaders.append("Content-Type", "application/json");
 
-    var raw = {
-    "question" : "Hi, who built you?",
-    "preserve_history" : true,
-    "history_object" : {"Hi, who are you?":"My name is WorqBot, nice to meet you!"},
-    "randomness": 0.1
-  };
+    var raw = JSON.stringify({
+    "question": "Hey how are you?",
+    "datasetId": "f5f66562-54a4-49a3-b105-a234cfe46eba",
+    "trainingData": [
+    "Marico Limited is an Indian multinational consumer goods company[5] providing consumer products and services in the areas of health, beauty and wellness. With its headquarters in Mumbai, Marico is present in over 25 countries across Asia and Africa. It owns brands in categories of hair care, skin care, edible oils, health foods, male grooming, and fabric care.As of 2019–2020, the company generated a turnover of 7,315 crores.[8] Marico has 8 factories in India located at Puducherry, Perundurai, Kanjikode, Jalgaon, Paldhi, Dehradun, Baddi and Paonta Sahib. 1974 – Harsh Mariwala envisioned a branded FMCG market for coconut and refined edible oils in small consumer packs and sets up a national distribution network for Parachute. ",
+    "1990 – Marico was established in India. 1991 – Marico launches Hair & Care, a non-sticky hair oil repositioning the market leader through contemporary packaging. Sweekar sunflower oil goes national. 1992 to 94 – Marico goes from being an exporter to international marketer – sets up its first overseas office in Dubai. 1994 – The year marks another innovation, Revive cold water starch makes starching cottons more convenient for the consumer. 1996 – Marico lists on the Indian Stock Exchanges. 1999 – The company expands with its first overseas manufacturing facility in Bangladesh. Marico acquires Mediker in the same year 2003 – Marico Innovation Foundation, responsible for executing the Corporate Social Responsibility of Marico was formed. In the same year Marico sets up copra collection centres to procure directly from farmers increasing their margins. 2006 – Nihar enters the Marico fold. 2006-7 – Marico casts footprint in Africa, acquires Fiancée and Hair Code in Egypt and Caivil, Black Chic and Hercules in South Africa. 2009 – Marico makes a public offering of equity in Bangladesh  a first for one of its overseas subsidiaries. 2010 – The year also marks the launch of Saffola breakfast, Masala Oats in India. 2011 – Parachute Advanced entered the skin-care category with the launch of Parachute Advanced Body Lotion (PABL), another innovation by Marico. The year also marks the launch of Parachute Gold hair cream in the Middle East market targeted to women which today has great equity amongst the consumer. Marico strengthens its presence S.E. Asia through a male grooming, skin care and food portfolio acquired in Vietnam the same year. 2012 – India's Gen Next gets styled by Marico as it launches its male grooming brand, SetWet.[12] 2015 – Marico's Market Cap tops  25,000 crore. 2017– Marico acquires South Africa's leading hair styling business – Isoplus [13] launches Saffola Active[12] Slimming Nutri-shake (marking entry into nutraceuticals category) and makes a strategic investment in Zed Lifestyle (Beardo)[14] 2018 – Marico invests Revolutionary Fitness (Revofit) [15] launches a new brand – True Roots[16] that delays hair greying and launches its first digital exclusive brand – Studio X [17] launched Saffola Fittify.[18] 2019 – Marico announces association with Kaya, to create a skincare sub-brand, Kaya Youth.[19]",
+    "Thermax manufactures boilers to harness the power of steam. The company started with producing small, once-through, baby boilers to cater to the steam requirements at hospitals.[citation needed] It was established in 1966, when A. S. Bhathena collaborated with a Belgian company, Wanson, to commence business operations in Dadar, Mumbai, India as Wanson India Ltd., manufacturing small boilers.[3] On 15 February 1995 it became a public company on the Bombay Stock Exchange. It has, since long, been known simply as Thermax Limited.[citation needed] In 2009, it signed a 51–49 joint venture with US firm SPX Corporation to provide equipment and services for the Indian power sector.[4][5] In 2010, it signed a joint venture agreement with US-based Babcock & Wilcox to manufacture super-critical boilers for the power sector.[6]",
+    "Google LLC is an American multinational technology company focusing on online advertising, search engine technology, cloud computing, computer software, quantum computing, e-commerce, artificial intelligence,[9] and consumer electronics. It has been referred to as the most powerful company in the world[10] and one of the world's most valuable brands due to its market dominance, data collection, and technological advantages in the area of artificial intelligence.[11][12][13] Its parent company Alphabet is considered one of the Big Five American information technology companies, alongside Amazon, Apple, Meta, and Microsoft. Google was founded on September 4, 1998, by computer scientists Larry Page and Sergey Brin while they were PhD students at Stanford University in California. Together they own about 14% of its publicly listed shares and control 56% of its stockholder voting power through super-voting stock. The company went public via an initial public offering (IPO) in 2004. In 2015, Google was reorganized as a wholly owned subsidiary of Alphabet Inc. Google is Alphabet's largest subsidiary and is a holding company for Alphabet's internet properties and interests. Sundar Pichai was appointed CEO of Google on October 24, 2015, replacing Larry Page, who became the CEO of Alphabet. On December 3, 2019, Pichai also became the CEO of Alphabet.[14] The company has since rapidly grown to offer a multitude of products and services beyond Google Search, many of which hold dominant market positions. These products address a wide range of use cases, including email (Gmail), navigation (Waze & Maps), cloud computing (Cloud), web browsing (Chrome), video sharing (YouTube), productivity (Workspace), operating systems (Android), cloud storage (Drive), language translation (Translate), photo storage (Photos), video calling (Meet), smart home (Nest), smartphones (Pixel), wearable technology (Pixel Watch & Fitbit), music streaming (YouTube Music), video on demand (YouTube TV), artificial intelligence (Google Assistant), machine learning APIs (TensorFlow), AI chips (TPU), and more. Discontinued Google products include gaming (Stadia), Glass, Google+, Reader, Play Music, Nexus, Hangouts, and Inbox by Gmail.[15][16] Google's other ventures outside of Internet services and consumer electronics include quantum computing (Sycamore), self-driving cars (Waymo, formerly the Google Self-Driving Car Project), smart cities (Sidewalk Labs), and transformer models (Google Brain).[17] Google and YouTube are the two most visited websites worldwide followed by Facebook and Twitter. Google is also the largest search engine, mapping and navigation application, email provider, office suite, video sharing platform, photo and cloud storage provider, mobile operating system, web browser, ML framework, and AI virtual assistant provider in the world as measured by market share. On the list of most valuable brands, Google is ranked second by Forbes[18] and fourth by Interbrand.[19] It has received significant criticism involving issues such as privacy concerns, tax avoidance, censorship, search neutrality, antitrust and abuse of its monopoly position."
+    ],
+    "self_train": "True",
+    "randomness": 0.4
+  });
 
     var requestOptions = {
     method: 'POST',
     headers: myHeaders,
-    body: JSON.stringify(raw),
+    body: raw,
     redirect: 'follow'
   };
 
-    fetch("https://api.worqhat.com/api/ai/content/v2", requestOptions)
+    fetch("https://api.worqhat.com/api/ai/content/v2-large/answering", requestOptions)
     .then(response => response.text())
     .then(result => console.log(result))
     .catch(error => console.log('error', error));
@@ -180,305 +194,287 @@ send a POST Request to the API Endpoint with the Headers and the Request Body, a
     ````
 
     ````js filename="Client JS XHR" copy
-    var xhr = new XMLHttpRequest();
-    var url = "https://api.worqhat.com/api/ai/content/v2";
+    // WARNING: For POST requests, body is set to null by browsers.
+    var data = JSON.stringify({
+    "question": "Hey how are you?",
+    "datasetId": "f5f66562-54a4-49a3-b105-a234cfe46eba",
+    "trainingData": [
+    "Marico Limited is an Indian multinational consumer goods company[5] providing consumer products and services in the areas of health, beauty and wellness. With its headquarters in Mumbai, Marico is present in over 25 countries across Asia and Africa. It owns brands in categories of hair care, skin care, edible oils, health foods, male grooming, and fabric care.As of 2019–2020, the company generated a turnover of 7,315 crores.[8] Marico has 8 factories in India located at Puducherry, Perundurai, Kanjikode, Jalgaon, Paldhi, Dehradun, Baddi and Paonta Sahib. 1974 – Harsh Mariwala envisioned a branded FMCG market for coconut and refined edible oils in small consumer packs and sets up a national distribution network for Parachute. ",
+    "1990 – Marico was established in India. 1991 – Marico launches Hair & Care, a non-sticky hair oil repositioning the market leader through contemporary packaging. Sweekar sunflower oil goes national. 1992 to 94 – Marico goes from being an exporter to international marketer – sets up its first overseas office in Dubai. 1994 – The year marks another innovation, Revive cold water starch makes starching cottons more convenient for the consumer. 1996 – Marico lists on the Indian Stock Exchanges. 1999 – The company expands with its first overseas manufacturing facility in Bangladesh. Marico acquires Mediker in the same year 2003 – Marico Innovation Foundation, responsible for executing the Corporate Social Responsibility of Marico was formed. In the same year Marico sets up copra collection centres to procure directly from farmers increasing their margins. 2006 – Nihar enters the Marico fold. 2006-7 – Marico casts footprint in Africa, acquires Fiancée and Hair Code in Egypt and Caivil, Black Chic and Hercules in South Africa. 2009 – Marico makes a public offering of equity in Bangladesh  a first for one of its overseas subsidiaries. 2010 – The year also marks the launch of Saffola breakfast, Masala Oats in India. 2011 – Parachute Advanced entered the skin-care category with the launch of Parachute Advanced Body Lotion (PABL), another innovation by Marico. The year also marks the launch of Parachute Gold hair cream in the Middle East market targeted to women which today has great equity amongst the consumer. Marico strengthens its presence S.E. Asia through a male grooming, skin care and food portfolio acquired in Vietnam the same year. 2012 – India's Gen Next gets styled by Marico as it launches its male grooming brand, SetWet.[12] 2015 – Marico's Market Cap tops  25,000 crore. 2017– Marico acquires South Africa's leading hair styling business – Isoplus [13] launches Saffola Active[12] Slimming Nutri-shake (marking entry into nutraceuticals category) and makes a strategic investment in Zed Lifestyle (Beardo)[14] 2018 – Marico invests Revolutionary Fitness (Revofit) [15] launches a new brand – True Roots[16] that delays hair greying and launches its first digital exclusive brand – Studio X [17] launched Saffola Fittify.[18] 2019 – Marico announces association with Kaya, to create a skincare sub-brand, Kaya Youth.[19]",
+    "Thermax manufactures boilers to harness the power of steam. The company started with producing small, once-through, baby boilers to cater to the steam requirements at hospitals.[citation needed] It was established in 1966, when A. S. Bhathena collaborated with a Belgian company, Wanson, to commence business operations in Dadar, Mumbai, India as Wanson India Ltd., manufacturing small boilers.[3] On 15 February 1995 it became a public company on the Bombay Stock Exchange. It has, since long, been known simply as Thermax Limited.[citation needed] In 2009, it signed a 51–49 joint venture with US firm SPX Corporation to provide equipment and services for the Indian power sector.[4][5] In 2010, it signed a joint venture agreement with US-based Babcock & Wilcox to manufacture super-critical boilers for the power sector.[6]",
+    "Google LLC is an American multinational technology company focusing on online advertising, search engine technology, cloud computing, computer software, quantum computing, e-commerce, artificial intelligence,[9] and consumer electronics. It has been referred to as the most powerful company in the world[10] and one of the world's most valuable brands due to its market dominance, data collection, and technological advantages in the area of artificial intelligence.[11][12][13] Its parent company Alphabet is considered one of the Big Five American information technology companies, alongside Amazon, Apple, Meta, and Microsoft. Google was founded on September 4, 1998, by computer scientists Larry Page and Sergey Brin while they were PhD students at Stanford University in California. Together they own about 14% of its publicly listed shares and control 56% of its stockholder voting power through super-voting stock. The company went public via an initial public offering (IPO) in 2004. In 2015, Google was reorganized as a wholly owned subsidiary of Alphabet Inc. Google is Alphabet's largest subsidiary and is a holding company for Alphabet's internet properties and interests. Sundar Pichai was appointed CEO of Google on October 24, 2015, replacing Larry Page, who became the CEO of Alphabet. On December 3, 2019, Pichai also became the CEO of Alphabet.[14] The company has since rapidly grown to offer a multitude of products and services beyond Google Search, many of which hold dominant market positions. These products address a wide range of use cases, including email (Gmail), navigation (Waze & Maps), cloud computing (Cloud), web browsing (Chrome), video sharing (YouTube), productivity (Workspace), operating systems (Android), cloud storage (Drive), language translation (Translate), photo storage (Photos), video calling (Meet), smart home (Nest), smartphones (Pixel), wearable technology (Pixel Watch & Fitbit), music streaming (YouTube Music), video on demand (YouTube TV), artificial intelligence (Google Assistant), machine learning APIs (TensorFlow), AI chips (TPU), and more. Discontinued Google products include gaming (Stadia), Glass, Google+, Reader, Play Music, Nexus, Hangouts, and Inbox by Gmail.[15][16] Google's other ventures outside of Internet services and consumer electronics include quantum computing (Sycamore), self-driving cars (Waymo, formerly the Google Self-Driving Car Project), smart cities (Sidewalk Labs), and transformer models (Google Brain).[17] Google and YouTube are the two most visited websites worldwide followed by Facebook and Twitter. Google is also the largest search engine, mapping and navigation application, email provider, office suite, video sharing platform, photo and cloud storage provider, mobile operating system, web browser, ML framework, and AI virtual assistant provider in the world as measured by market share. On the list of most valuable brands, Google is ranked second by Forbes[18] and fourth by Interbrand.[19] It has received significant criticism involving issues such as privacy concerns, tax avoidance, censorship, search neutrality, antitrust and abuse of its monopoly position."
+    ],
+    "self_train": "True",
+    "randomness": 0.4
+  });
 
-    xhr.open("POST", url);
+    var xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
+
+    xhr.addEventListener("readystatechange", function() {
+    if(this.readyState === 4) {
+    console.log(this.responseText);
+  }
+  });
+
+    xhr.open("POST", "https://api.worqhat.com/api/ai/content/v2-large/answering");
     xhr.setRequestHeader("x-api-key", "•••••••");
     xhr.setRequestHeader("x-org-key", "•••••••");
     xhr.setRequestHeader("Content-Type", "application/json");
 
-    xhr.onreadystatechange = function() {
-    if (xhr.readyState === 4 && xhr.status === 200) {
-    console.log(xhr.responseText);
-  }
-  };
-
-    var raw = JSON.stringify({
-    "question": "Hi, who built you?",
-    "preserve_history": true,
-    "history_object": {"Hi, who are you?": "My name is WorqBot, nice to meet you!"},
-    "randomness": 0.1
-  });
-
-    xhr.send(raw);
+    xhr.send(data);
 
     ````
   </Tab>
   <Tab>
     ````js filename="NodeJS" copy
-    const request = require('request');
+    var request = require('request');
+    var options = {
+    'method': 'POST',
+    'url': 'https://api.worqhat.com/api/ai/content/v2-large/answering',
+    'headers': {
+    'x-api-key': '•••••••',
+    'x-org-key': '•••••••',
+    'Content-Type': 'application/json'
+  },
+    body: JSON.stringify({
+    "question": "Hey how are you?",
+    "datasetId": "f5f66562-54a4-49a3-b105-a234cfe46eba",
+    "trainingData": [
+    "Marico Limited is an Indian multinational consumer goods company[5] providing consumer products and services in the areas of health, beauty and wellness. With its headquarters in Mumbai, Marico is present in over 25 countries across Asia and Africa. It owns brands in categories of hair care, skin care, edible oils, health foods, male grooming, and fabric care.As of 2019–2020, the company generated a turnover of 7,315 crores.[8] Marico has 8 factories in India located at Puducherry, Perundurai, Kanjikode, Jalgaon, Paldhi, Dehradun, Baddi and Paonta Sahib. 1974 – Harsh Mariwala envisioned a branded FMCG market for coconut and refined edible oils in small consumer packs and sets up a national distribution network for Parachute. ",
+    "1990 – Marico was established in India. 1991 – Marico launches Hair & Care, a non-sticky hair oil repositioning the market leader through contemporary packaging. Sweekar sunflower oil goes national. 1992 to 94 – Marico goes from being an exporter to international marketer – sets up its first overseas office in Dubai. 1994 – The year marks another innovation, Revive cold water starch makes starching cottons more convenient for the consumer. 1996 – Marico lists on the Indian Stock Exchanges. 1999 – The company expands with its first overseas manufacturing facility in Bangladesh. Marico acquires Mediker in the same year 2003 – Marico Innovation Foundation, responsible for executing the Corporate Social Responsibility of Marico was formed. In the same year Marico sets up copra collection centres to procure directly from farmers increasing their margins. 2006 – Nihar enters the Marico fold. 2006-7 – Marico casts footprint in Africa, acquires Fiancée and Hair Code in Egypt and Caivil, Black Chic and Hercules in South Africa. 2009 – Marico makes a public offering of equity in Bangladesh  a first for one of its overseas subsidiaries. 2010 – The year also marks the launch of Saffola breakfast, Masala Oats in India. 2011 – Parachute Advanced entered the skin-care category with the launch of Parachute Advanced Body Lotion (PABL), another innovation by Marico. The year also marks the launch of Parachute Gold hair cream in the Middle East market targeted to women which today has great equity amongst the consumer. Marico strengthens its presence S.E. Asia through a male grooming, skin care and food portfolio acquired in Vietnam the same year. 2012 – India's Gen Next gets styled by Marico as it launches its male grooming brand, SetWet.[12] 2015 – Marico's Market Cap tops  25,000 crore. 2017– Marico acquires South Africa's leading hair styling business – Isoplus [13] launches Saffola Active[12] Slimming Nutri-shake (marking entry into nutraceuticals category) and makes a strategic investment in Zed Lifestyle (Beardo)[14] 2018 – Marico invests Revolutionary Fitness (Revofit) [15] launches a new brand – True Roots[16] that delays hair greying and launches its first digital exclusive brand – Studio X [17] launched Saffola Fittify.[18] 2019 – Marico announces association with Kaya, to create a skincare sub-brand, Kaya Youth.[19]",
+    "Thermax manufactures boilers to harness the power of steam. The company started with producing small, once-through, baby boilers to cater to the steam requirements at hospitals.[citation needed] It was established in 1966, when A. S. Bhathena collaborated with a Belgian company, Wanson, to commence business operations in Dadar, Mumbai, India as Wanson India Ltd., manufacturing small boilers.[3] On 15 February 1995 it became a public company on the Bombay Stock Exchange. It has, since long, been known simply as Thermax Limited.[citation needed] In 2009, it signed a 51–49 joint venture with US firm SPX Corporation to provide equipment and services for the Indian power sector.[4][5] In 2010, it signed a joint venture agreement with US-based Babcock & Wilcox to manufacture super-critical boilers for the power sector.[6]",
+    "Google LLC is an American multinational technology company focusing on online advertising, search engine technology, cloud computing, computer software, quantum computing, e-commerce, artificial intelligence,[9] and consumer electronics. It has been referred to as the most powerful company in the world[10] and one of the world's most valuable brands due to its market dominance, data collection, and technological advantages in the area of artificial intelligence.[11][12][13] Its parent company Alphabet is considered one of the Big Five American information technology companies, alongside Amazon, Apple, Meta, and Microsoft. Google was founded on September 4, 1998, by computer scientists Larry Page and Sergey Brin while they were PhD students at Stanford University in California. Together they own about 14% of its publicly listed shares and control 56% of its stockholder voting power through super-voting stock. The company went public via an initial public offering (IPO) in 2004. In 2015, Google was reorganized as a wholly owned subsidiary of Alphabet Inc. Google is Alphabet's largest subsidiary and is a holding company for Alphabet's internet properties and interests. Sundar Pichai was appointed CEO of Google on October 24, 2015, replacing Larry Page, who became the CEO of Alphabet. On December 3, 2019, Pichai also became the CEO of Alphabet.[14] The company has since rapidly grown to offer a multitude of products and services beyond Google Search, many of which hold dominant market positions. These products address a wide range of use cases, including email (Gmail), navigation (Waze & Maps), cloud computing (Cloud), web browsing (Chrome), video sharing (YouTube), productivity (Workspace), operating systems (Android), cloud storage (Drive), language translation (Translate), photo storage (Photos), video calling (Meet), smart home (Nest), smartphones (Pixel), wearable technology (Pixel Watch & Fitbit), music streaming (YouTube Music), video on demand (YouTube TV), artificial intelligence (Google Assistant), machine learning APIs (TensorFlow), AI chips (TPU), and more. Discontinued Google products include gaming (Stadia), Glass, Google+, Reader, Play Music, Nexus, Hangouts, and Inbox by Gmail.[15][16] Google's other ventures outside of Internet services and consumer electronics include quantum computing (Sycamore), self-driving cars (Waymo, formerly the Google Self-Driving Car Project), smart cities (Sidewalk Labs), and transformer models (Google Brain).[17] Google and YouTube are the two most visited websites worldwide followed by Facebook and Twitter. Google is also the largest search engine, mapping and navigation application, email provider, office suite, video sharing platform, photo and cloud storage provider, mobile operating system, web browser, ML framework, and AI virtual assistant provider in the world as measured by market share. On the list of most valuable brands, Google is ranked second by Forbes[18] and fourth by Interbrand.[19] It has received significant criticism involving issues such as privacy concerns, tax avoidance, censorship, search neutrality, antitrust and abuse of its monopoly position."
+    ],
+    "self_train": "True",
+    "randomness": 0.4
+  })
 
-    const url = "https://api.worqhat.com/api/ai/content/v2";
-
-    const headers = {
-    "x-api-key": "•••••••",
-    "x-org-key": "•••••••",
-    "Content-Type": "application/json"
   };
-
-    const raw = JSON.stringify({
-    "question": "Hi, who built you?",
-    "preserve_history": true,
-    "history_object": {"Hi, who are you?": "My name is WorqBot, nice to meet you!"},
-    "randomness": 0.1
+    request(options, function (error, response) {
+    if (error) throw new Error(error);
+    console.log(response.body);
   });
 
-    const requestOptions = {
-    url: url,
-    method: 'POST',
-    headers: headers,
-    body: raw
-  };
-
-    request(requestOptions, (error, response, body) => {
-    if (!error && response.statusCode === 200) {
-    console.log(body);
-  } else {
-    console.log('Error:', error);
-  }
-  });
 
     ````
 
     ````js filename="NodeJS Axios" copy
     const axios = require('axios');
+    let data = JSON.stringify({
+    "question": "Hey how are you?",
+    "datasetId": "f5f66562-54a4-49a3-b105-a234cfe46eba",
+    "trainingData": [
+    "Marico Limited is an Indian multinational consumer goods company[5] providing consumer products and services in the areas of health, beauty and wellness. With its headquarters in Mumbai, Marico is present in over 25 countries across Asia and Africa. It owns brands in categories of hair care, skin care, edible oils, health foods, male grooming, and fabric care.As of 2019–2020, the company generated a turnover of 7,315 crores.[8] Marico has 8 factories in India located at Puducherry, Perundurai, Kanjikode, Jalgaon, Paldhi, Dehradun, Baddi and Paonta Sahib. 1974 – Harsh Mariwala envisioned a branded FMCG market for coconut and refined edible oils in small consumer packs and sets up a national distribution network for Parachute. ",
+    "1990 – Marico was established in India. 1991 – Marico launches Hair & Care, a non-sticky hair oil repositioning the market leader through contemporary packaging. Sweekar sunflower oil goes national. 1992 to 94 – Marico goes from being an exporter to international marketer – sets up its first overseas office in Dubai. 1994 – The year marks another innovation, Revive cold water starch makes starching cottons more convenient for the consumer. 1996 – Marico lists on the Indian Stock Exchanges. 1999 – The company expands with its first overseas manufacturing facility in Bangladesh. Marico acquires Mediker in the same year 2003 – Marico Innovation Foundation, responsible for executing the Corporate Social Responsibility of Marico was formed. In the same year Marico sets up copra collection centres to procure directly from farmers increasing their margins. 2006 – Nihar enters the Marico fold. 2006-7 – Marico casts footprint in Africa, acquires Fiancée and Hair Code in Egypt and Caivil, Black Chic and Hercules in South Africa. 2009 – Marico makes a public offering of equity in Bangladesh  a first for one of its overseas subsidiaries. 2010 – The year also marks the launch of Saffola breakfast, Masala Oats in India. 2011 – Parachute Advanced entered the skin-care category with the launch of Parachute Advanced Body Lotion (PABL), another innovation by Marico. The year also marks the launch of Parachute Gold hair cream in the Middle East market targeted to women which today has great equity amongst the consumer. Marico strengthens its presence S.E. Asia through a male grooming, skin care and food portfolio acquired in Vietnam the same year. 2012 – India's Gen Next gets styled by Marico as it launches its male grooming brand, SetWet.[12] 2015 – Marico's Market Cap tops  25,000 crore. 2017– Marico acquires South Africa's leading hair styling business – Isoplus [13] launches Saffola Active[12] Slimming Nutri-shake (marking entry into nutraceuticals category) and makes a strategic investment in Zed Lifestyle (Beardo)[14] 2018 – Marico invests Revolutionary Fitness (Revofit) [15] launches a new brand – True Roots[16] that delays hair greying and launches its first digital exclusive brand – Studio X [17] launched Saffola Fittify.[18] 2019 – Marico announces association with Kaya, to create a skincare sub-brand, Kaya Youth.[19]",
+    "Thermax manufactures boilers to harness the power of steam. The company started with producing small, once-through, baby boilers to cater to the steam requirements at hospitals.[citation needed] It was established in 1966, when A. S. Bhathena collaborated with a Belgian company, Wanson, to commence business operations in Dadar, Mumbai, India as Wanson India Ltd., manufacturing small boilers.[3] On 15 February 1995 it became a public company on the Bombay Stock Exchange. It has, since long, been known simply as Thermax Limited.[citation needed] In 2009, it signed a 51–49 joint venture with US firm SPX Corporation to provide equipment and services for the Indian power sector.[4][5] In 2010, it signed a joint venture agreement with US-based Babcock & Wilcox to manufacture super-critical boilers for the power sector.[6]",
+    "Google LLC is an American multinational technology company focusing on online advertising, search engine technology, cloud computing, computer software, quantum computing, e-commerce, artificial intelligence,[9] and consumer electronics. It has been referred to as the most powerful company in the world[10] and one of the world's most valuable brands due to its market dominance, data collection, and technological advantages in the area of artificial intelligence.[11][12][13] Its parent company Alphabet is considered one of the Big Five American information technology companies, alongside Amazon, Apple, Meta, and Microsoft. Google was founded on September 4, 1998, by computer scientists Larry Page and Sergey Brin while they were PhD students at Stanford University in California. Together they own about 14% of its publicly listed shares and control 56% of its stockholder voting power through super-voting stock. The company went public via an initial public offering (IPO) in 2004. In 2015, Google was reorganized as a wholly owned subsidiary of Alphabet Inc. Google is Alphabet's largest subsidiary and is a holding company for Alphabet's internet properties and interests. Sundar Pichai was appointed CEO of Google on October 24, 2015, replacing Larry Page, who became the CEO of Alphabet. On December 3, 2019, Pichai also became the CEO of Alphabet.[14] The company has since rapidly grown to offer a multitude of products and services beyond Google Search, many of which hold dominant market positions. These products address a wide range of use cases, including email (Gmail), navigation (Waze & Maps), cloud computing (Cloud), web browsing (Chrome), video sharing (YouTube), productivity (Workspace), operating systems (Android), cloud storage (Drive), language translation (Translate), photo storage (Photos), video calling (Meet), smart home (Nest), smartphones (Pixel), wearable technology (Pixel Watch & Fitbit), music streaming (YouTube Music), video on demand (YouTube TV), artificial intelligence (Google Assistant), machine learning APIs (TensorFlow), AI chips (TPU), and more. Discontinued Google products include gaming (Stadia), Glass, Google+, Reader, Play Music, Nexus, Hangouts, and Inbox by Gmail.[15][16] Google's other ventures outside of Internet services and consumer electronics include quantum computing (Sycamore), self-driving cars (Waymo, formerly the Google Self-Driving Car Project), smart cities (Sidewalk Labs), and transformer models (Google Brain).[17] Google and YouTube are the two most visited websites worldwide followed by Facebook and Twitter. Google is also the largest search engine, mapping and navigation application, email provider, office suite, video sharing platform, photo and cloud storage provider, mobile operating system, web browser, ML framework, and AI virtual assistant provider in the world as measured by market share. On the list of most valuable brands, Google is ranked second by Forbes[18] and fourth by Interbrand.[19] It has received significant criticism involving issues such as privacy concerns, tax avoidance, censorship, search neutrality, antitrust and abuse of its monopoly position."
+    ],
+    "self_train": "True",
+    "randomness": 0.4
+  });
 
-    const url = "https://api.worqhat.com/api/ai/content/v2";
-
-    const headers = {
-    "x-api-key": "•••••••",
-    "x-org-key": "•••••••",
-    "Content-Type": "application/json"
+    let config = {
+    method: 'post',
+    maxBodyLength: Infinity,
+    url: 'https://api.worqhat.com/api/ai/content/v2-large/answering',
+    headers: {
+    'x-api-key': '•••••••',
+    'x-org-key': '•••••••',
+    'Content-Type': 'application/json'
+  },
+    data : data
   };
 
-    const raw = JSON.stringify({
-    "question": "Hi, who built you?",
-    "preserve_history": true,
-    "history_object": {"Hi, who are you?": "My name is WorqBot, nice to meet you!"},
-    "randomness": 0.1
+    axios.request(config)
+    .then((response) => {
+    console.log(JSON.stringify(response.data));
+  })
+    .catch((error) => {
+    console.log(error);
   });
 
-    axios.post(url, raw, {headers: headers})
-    .then(response => {
-    console.log(response.data);
-  })
-    .catch(error => {
-    console.log('Error:', error.message);
-  });
 
     ````
   </Tab>
   <Tab>
     ````py filename="Python Requests" copy
     import requests
+    import json
 
-    url = "https://api.worqhat.com/api/ai/content/v2"
+    url = "https://api.worqhat.com/api/ai/content/v2-large/answering"
 
+    payload = json.dumps({
+    "question": "Hey how are you?",
+    "datasetId": "f5f66562-54a4-49a3-b105-a234cfe46eba",
+    "trainingData": [
+    "Marico Limited is an Indian multinational consumer goods company[5] providing consumer products and services in the areas of health, beauty and wellness. With its headquarters in Mumbai, Marico is present in over 25 countries across Asia and Africa. It owns brands in categories of hair care, skin care, edible oils, health foods, male grooming, and fabric care.As of 2019–2020, the company generated a turnover of 7,315 crores.[8] Marico has 8 factories in India located at Puducherry, Perundurai, Kanjikode, Jalgaon, Paldhi, Dehradun, Baddi and Paonta Sahib. 1974 – Harsh Mariwala envisioned a branded FMCG market for coconut and refined edible oils in small consumer packs and sets up a national distribution network for Parachute. ",
+    "1990 – Marico was established in India. 1991 – Marico launches Hair & Care, a non-sticky hair oil repositioning the market leader through contemporary packaging. Sweekar sunflower oil goes national. 1992 to 94 – Marico goes from being an exporter to international marketer – sets up its first overseas office in Dubai. 1994 – The year marks another innovation, Revive cold water starch makes starching cottons more convenient for the consumer. 1996 – Marico lists on the Indian Stock Exchanges. 1999 – The company expands with its first overseas manufacturing facility in Bangladesh. Marico acquires Mediker in the same year 2003 – Marico Innovation Foundation, responsible for executing the Corporate Social Responsibility of Marico was formed. In the same year Marico sets up copra collection centres to procure directly from farmers increasing their margins. 2006 – Nihar enters the Marico fold. 2006-7 – Marico casts footprint in Africa, acquires Fiancée and Hair Code in Egypt and Caivil, Black Chic and Hercules in South Africa. 2009 – Marico makes a public offering of equity in Bangladesh  a first for one of its overseas subsidiaries. 2010 – The year also marks the launch of Saffola breakfast, Masala Oats in India. 2011 – Parachute Advanced entered the skin-care category with the launch of Parachute Advanced Body Lotion (PABL), another innovation by Marico. The year also marks the launch of Parachute Gold hair cream in the Middle East market targeted to women which today has great equity amongst the consumer. Marico strengthens its presence S.E. Asia through a male grooming, skin care and food portfolio acquired in Vietnam the same year. 2012 – India's Gen Next gets styled by Marico as it launches its male grooming brand, SetWet.[12] 2015 – Marico's Market Cap tops  25,000 crore. 2017– Marico acquires South Africa's leading hair styling business – Isoplus [13] launches Saffola Active[12] Slimming Nutri-shake (marking entry into nutraceuticals category) and makes a strategic investment in Zed Lifestyle (Beardo)[14] 2018 – Marico invests Revolutionary Fitness (Revofit) [15] launches a new brand – True Roots[16] that delays hair greying and launches its first digital exclusive brand – Studio X [17] launched Saffola Fittify.[18] 2019 – Marico announces association with Kaya, to create a skincare sub-brand, Kaya Youth.[19]",
+    "Thermax manufactures boilers to harness the power of steam. The company started with producing small, once-through, baby boilers to cater to the steam requirements at hospitals.[citation needed] It was established in 1966, when A. S. Bhathena collaborated with a Belgian company, Wanson, to commence business operations in Dadar, Mumbai, India as Wanson India Ltd., manufacturing small boilers.[3] On 15 February 1995 it became a public company on the Bombay Stock Exchange. It has, since long, been known simply as Thermax Limited.[citation needed] In 2009, it signed a 51–49 joint venture with US firm SPX Corporation to provide equipment and services for the Indian power sector.[4][5] In 2010, it signed a joint venture agreement with US-based Babcock & Wilcox to manufacture super-critical boilers for the power sector.[6]",
+    "Google LLC is an American multinational technology company focusing on online advertising, search engine technology, cloud computing, computer software, quantum computing, e-commerce, artificial intelligence,[9] and consumer electronics. It has been referred to as the most powerful company in the world[10] and one of the world's most valuable brands due to its market dominance, data collection, and technological advantages in the area of artificial intelligence.[11][12][13] Its parent company Alphabet is considered one of the Big Five American information technology companies, alongside Amazon, Apple, Meta, and Microsoft. Google was founded on September 4, 1998, by computer scientists Larry Page and Sergey Brin while they were PhD students at Stanford University in California. Together they own about 14% of its publicly listed shares and control 56% of its stockholder voting power through super-voting stock. The company went public via an initial public offering (IPO) in 2004. In 2015, Google was reorganized as a wholly owned subsidiary of Alphabet Inc. Google is Alphabet's largest subsidiary and is a holding company for Alphabet's internet properties and interests. Sundar Pichai was appointed CEO of Google on October 24, 2015, replacing Larry Page, who became the CEO of Alphabet. On December 3, 2019, Pichai also became the CEO of Alphabet.[14] The company has since rapidly grown to offer a multitude of products and services beyond Google Search, many of which hold dominant market positions. These products address a wide range of use cases, including email (Gmail), navigation (Waze & Maps), cloud computing (Cloud), web browsing (Chrome), video sharing (YouTube), productivity (Workspace), operating systems (Android), cloud storage (Drive), language translation (Translate), photo storage (Photos), video calling (Meet), smart home (Nest), smartphones (Pixel), wearable technology (Pixel Watch & Fitbit), music streaming (YouTube Music), video on demand (YouTube TV), artificial intelligence (Google Assistant), machine learning APIs (TensorFlow), AI chips (TPU), and more. Discontinued Google products include gaming (Stadia), Glass, Google+, Reader, Play Music, Nexus, Hangouts, and Inbox by Gmail.[15][16] Google's other ventures outside of Internet services and consumer electronics include quantum computing (Sycamore), self-driving cars (Waymo, formerly the Google Self-Driving Car Project), smart cities (Sidewalk Labs), and transformer models (Google Brain).[17] Google and YouTube are the two most visited websites worldwide followed by Facebook and Twitter. Google is also the largest search engine, mapping and navigation application, email provider, office suite, video sharing platform, photo and cloud storage provider, mobile operating system, web browser, ML framework, and AI virtual assistant provider in the world as measured by market share. On the list of most valuable brands, Google is ranked second by Forbes[18] and fourth by Interbrand.[19] It has received significant criticism involving issues such as privacy concerns, tax avoidance, censorship, search neutrality, antitrust and abuse of its monopoly position."
+    ],
+    "self_train": "True",
+    "randomness": 0.4
+  })
     headers = {
-    "x-api-key": "•••••••",
-    "x-org-key": "•••••••",
-    "Content-Type": "application/json"
+    'x-api-key': '•••••••',
+    'x-org-key': '•••••••',
+    'Content-Type': 'application/json'
   }
 
-    data = {
-    "question": "Hi, who built you?",
-    "preserve_history": True,
-    "history_object": {"Hi, who are you?": "My name is WorqBot, nice to meet you!"},
-    "randomness": 0.1
-  }
+    response = requests.request("POST", url, headers=headers, data=payload)
 
-    response = requests.post(url, headers=headers, json=data)
+    print(response.text)
 
-    if response.status_code == 200:
-    print(response.json())
-    else:
-    print("Error:", response.text)
 
     ````
   </Tab>
   <Tab>
     ````ruby filename="Ruby" copy
-    require 'httparty'
+    require "uri"
+    require "json"
+    require "net/http"
 
-    url = "https://api.worqhat.com/api/ai/content/v2"
+    url = URI("https://api.worqhat.com/api/ai/content/v2-large/answering")
 
-    headers = {
-    "x-api-key" => "•••••••",
-    "x-org-key" => "•••••••",
-    "Content-Type" => "application/json"
-  }
+    https = Net::HTTP.new(url.host, url.port)
+    https.use_ssl = true
 
-    data = {
-    "question" => "Hi, who built you?",
-    "preserve_history" => true,
-    "history_object" => {"Hi, who are you?" => "My name is WorqBot, nice to meet you!"},
-    "randomness" => 0.1
-  }
+    request = Net::HTTP::Post.new(url)
+    request["x-api-key"] = "•••••••"
+    request["x-org-key"] = "•••••••"
+    request["Content-Type"] = "application/json"
+    request.body = JSON.dump({
+    "question": "Hey how are you?",
+    "datasetId": "f5f66562-54a4-49a3-b105-a234cfe46eba",
+    "trainingData": [
+    "Marico Limited is an Indian multinational consumer goods company[5] providing consumer products and services in the areas of health, beauty and wellness. With its headquarters in Mumbai, Marico is present in over 25 countries across Asia and Africa. It owns brands in categories of hair care, skin care, edible oils, health foods, male grooming, and fabric care.As of 2019–2020, the company generated a turnover of 7,315 crores.[8] Marico has 8 factories in India located at Puducherry, Perundurai, Kanjikode, Jalgaon, Paldhi, Dehradun, Baddi and Paonta Sahib. 1974 – Harsh Mariwala envisioned a branded FMCG market for coconut and refined edible oils in small consumer packs and sets up a national distribution network for Parachute. ",
+    "1990 – Marico was established in India. 1991 – Marico launches Hair & Care, a non-sticky hair oil repositioning the market leader through contemporary packaging. Sweekar sunflower oil goes national. 1992 to 94 – Marico goes from being an exporter to international marketer – sets up its first overseas office in Dubai. 1994 – The year marks another innovation, Revive cold water starch makes starching cottons more convenient for the consumer. 1996 – Marico lists on the Indian Stock Exchanges. 1999 – The company expands with its first overseas manufacturing facility in Bangladesh. Marico acquires Mediker in the same year 2003 – Marico Innovation Foundation, responsible for executing the Corporate Social Responsibility of Marico was formed. In the same year Marico sets up copra collection centres to procure directly from farmers increasing their margins. 2006 – Nihar enters the Marico fold. 2006-7 – Marico casts footprint in Africa, acquires Fiancée and Hair Code in Egypt and Caivil, Black Chic and Hercules in South Africa. 2009 – Marico makes a public offering of equity in Bangladesh  a first for one of its overseas subsidiaries. 2010 – The year also marks the launch of Saffola breakfast, Masala Oats in India. 2011 – Parachute Advanced entered the skin-care category with the launch of Parachute Advanced Body Lotion (PABL), another innovation by Marico. The year also marks the launch of Parachute Gold hair cream in the Middle East market targeted to women which today has great equity amongst the consumer. Marico strengthens its presence S.E. Asia through a male grooming, skin care and food portfolio acquired in Vietnam the same year. 2012 – India's Gen Next gets styled by Marico as it launches its male grooming brand, SetWet.[12] 2015 – Marico's Market Cap tops  25,000 crore. 2017– Marico acquires South Africa's leading hair styling business – Isoplus [13] launches Saffola Active[12] Slimming Nutri-shake (marking entry into nutraceuticals category) and makes a strategic investment in Zed Lifestyle (Beardo)[14] 2018 – Marico invests Revolutionary Fitness (Revofit) [15] launches a new brand – True Roots[16] that delays hair greying and launches its first digital exclusive brand – Studio X [17] launched Saffola Fittify.[18] 2019 – Marico announces association with Kaya, to create a skincare sub-brand, Kaya Youth.[19]",
+    "Thermax manufactures boilers to harness the power of steam. The company started with producing small, once-through, baby boilers to cater to the steam requirements at hospitals.[citation needed] It was established in 1966, when A. S. Bhathena collaborated with a Belgian company, Wanson, to commence business operations in Dadar, Mumbai, India as Wanson India Ltd., manufacturing small boilers.[3] On 15 February 1995 it became a public company on the Bombay Stock Exchange. It has, since long, been known simply as Thermax Limited.[citation needed] In 2009, it signed a 51–49 joint venture with US firm SPX Corporation to provide equipment and services for the Indian power sector.[4][5] In 2010, it signed a joint venture agreement with US-based Babcock & Wilcox to manufacture super-critical boilers for the power sector.[6]",
+    "Google LLC is an American multinational technology company focusing on online advertising, search engine technology, cloud computing, computer software, quantum computing, e-commerce, artificial intelligence,[9] and consumer electronics. It has been referred to as the most powerful company in the world[10] and one of the world's most valuable brands due to its market dominance, data collection, and technological advantages in the area of artificial intelligence.[11][12][13] Its parent company Alphabet is considered one of the Big Five American information technology companies, alongside Amazon, Apple, Meta, and Microsoft. Google was founded on September 4, 1998, by computer scientists Larry Page and Sergey Brin while they were PhD students at Stanford University in California. Together they own about 14% of its publicly listed shares and control 56% of its stockholder voting power through super-voting stock. The company went public via an initial public offering (IPO) in 2004. In 2015, Google was reorganized as a wholly owned subsidiary of Alphabet Inc. Google is Alphabet's largest subsidiary and is a holding company for Alphabet's internet properties and interests. Sundar Pichai was appointed CEO of Google on October 24, 2015, replacing Larry Page, who became the CEO of Alphabet. On December 3, 2019, Pichai also became the CEO of Alphabet.[14] The company has since rapidly grown to offer a multitude of products and services beyond Google Search, many of which hold dominant market positions. These products address a wide range of use cases, including email (Gmail), navigation (Waze & Maps), cloud computing (Cloud), web browsing (Chrome), video sharing (YouTube), productivity (Workspace), operating systems (Android), cloud storage (Drive), language translation (Translate), photo storage (Photos), video calling (Meet), smart home (Nest), smartphones (Pixel), wearable technology (Pixel Watch & Fitbit), music streaming (YouTube Music), video on demand (YouTube TV), artificial intelligence (Google Assistant), machine learning APIs (TensorFlow), AI chips (TPU), and more. Discontinued Google products include gaming (Stadia), Glass, Google+, Reader, Play Music, Nexus, Hangouts, and Inbox by Gmail.[15][16] Google's other ventures outside of Internet services and consumer electronics include quantum computing (Sycamore), self-driving cars (Waymo, formerly the Google Self-Driving Car Project), smart cities (Sidewalk Labs), and transformer models (Google Brain).[17] Google and YouTube are the two most visited websites worldwide followed by Facebook and Twitter. Google is also the largest search engine, mapping and navigation application, email provider, office suite, video sharing platform, photo and cloud storage provider, mobile operating system, web browser, ML framework, and AI virtual assistant provider in the world as measured by market share. On the list of most valuable brands, Google is ranked second by Forbes[18] and fourth by Interbrand.[19] It has received significant criticism involving issues such as privacy concerns, tax avoidance, censorship, search neutrality, antitrust and abuse of its monopoly position."
+    ],
+    "self_train": "True",
+    "randomness": 0.4
+  })
 
-    response = HTTParty.post(url, headers: headers, body: data.to_json)
-
-    if response.code == 200
-    puts response.body
-    else
-    puts "Error: #{response.code}, #{response.body}"
-    end
+    response = https.request(request)
+    puts response.read_body
 
     ````
   </Tab>
   <Tab>
     ````php filename="PHP" copy
-    $url = "https://api.worqhat.com/api/ai/content/v2";
+    <?php
 
-    $headers = array(
-    "x-api-key: •••••••",
-    "x-org-key: •••••••",
-    "Content-Type: application/json"
-    );
+    $curl = curl_init();
 
-    $data = array(
-    "question" => "Hi, who built you?",
-    "preserve_history" => true,
-    "history_object" => array("Hi, who are you?" => "My name is WorqBot, nice to meet you!"),
-    "randomness" => 0.1
-    );
+    curl_setopt_array($curl, array(
+    CURLOPT_URL => 'https://api.worqhat.com/api/ai/content/v2-large/answering',
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_ENCODING => '',
+    CURLOPT_MAXREDIRS => 10,
+    CURLOPT_TIMEOUT => 0,
+    CURLOPT_FOLLOWLOCATION => true,
+    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    CURLOPT_CUSTOMREQUEST => 'POST',
+    CURLOPT_POSTFIELDS =>'{
+    "question": "Hey how are you?",
+    "datasetId": "f5f66562-54a4-49a3-b105-a234cfe46eba",
+    "trainingData": [
+    "Marico Limited is an Indian multinational consumer goods company[5] providing consumer products and services in the areas of health, beauty and wellness. With its headquarters in Mumbai, Marico is present in over 25 countries across Asia and Africa. It owns brands in categories of hair care, skin care, edible oils, health foods, male grooming, and fabric care.As of 2019–2020, the company generated a turnover of 7,315 crores.[8] Marico has 8 factories in India located at Puducherry, Perundurai, Kanjikode, Jalgaon, Paldhi, Dehradun, Baddi and Paonta Sahib. 1974 – Harsh Mariwala envisioned a branded FMCG market for coconut and refined edible oils in small consumer packs and sets up a national distribution network for Parachute. ",
+    "1990 – Marico was established in India. 1991 – Marico launches Hair & Care, a non-sticky hair oil repositioning the market leader through contemporary packaging. Sweekar sunflower oil goes national. 1992 to 94 – Marico goes from being an exporter to international marketer – sets up its first overseas office in Dubai. 1994 – The year marks another innovation, Revive cold water starch makes starching cottons more convenient for the consumer. 1996 – Marico lists on the Indian Stock Exchanges. 1999 – The company expands with its first overseas manufacturing facility in Bangladesh. Marico acquires Mediker in the same year 2003 – Marico Innovation Foundation, responsible for executing the Corporate Social Responsibility of Marico was formed. In the same year Marico sets up copra collection centres to procure directly from farmers increasing their margins. 2006 – Nihar enters the Marico fold. 2006-7 – Marico casts footprint in Africa, acquires Fiancée and Hair Code in Egypt and Caivil, Black Chic and Hercules in South Africa. 2009 – Marico makes a public offering of equity in Bangladesh  a first for one of its overseas subsidiaries. 2010 – The year also marks the launch of Saffola breakfast, Masala Oats in India. 2011 – Parachute Advanced entered the skin-care category with the launch of Parachute Advanced Body Lotion (PABL), another innovation by Marico. The year also marks the launch of Parachute Gold hair cream in the Middle East market targeted to women which today has great equity amongst the consumer. Marico strengthens its presence S.E. Asia through a male grooming, skin care and food portfolio acquired in Vietnam the same year. 2012 – India\'s Gen Next gets styled by Marico as it launches its male grooming brand, SetWet.[12] 2015 – Marico\'s Market Cap tops  25,000 crore. 2017– Marico acquires South Africa\'s leading hair styling business – Isoplus [13] launches Saffola Active[12] Slimming Nutri-shake (marking entry into nutraceuticals category) and makes a strategic investment in Zed Lifestyle (Beardo)[14] 2018 – Marico invests Revolutionary Fitness (Revofit) [15] launches a new brand – True Roots[16] that delays hair greying and launches its first digital exclusive brand – Studio X [17] launched Saffola Fittify.[18] 2019 – Marico announces association with Kaya, to create a skincare sub-brand, Kaya Youth.[19]",
+    "Thermax manufactures boilers to harness the power of steam. The company started with producing small, once-through, baby boilers to cater to the steam requirements at hospitals.[citation needed] It was established in 1966, when A. S. Bhathena collaborated with a Belgian company, Wanson, to commence business operations in Dadar, Mumbai, India as Wanson India Ltd., manufacturing small boilers.[3] On 15 February 1995 it became a public company on the Bombay Stock Exchange. It has, since long, been known simply as Thermax Limited.[citation needed] In 2009, it signed a 51–49 joint venture with US firm SPX Corporation to provide equipment and services for the Indian power sector.[4][5] In 2010, it signed a joint venture agreement with US-based Babcock & Wilcox to manufacture super-critical boilers for the power sector.[6]",
+    "Google LLC is an American multinational technology company focusing on online advertising, search engine technology, cloud computing, computer software, quantum computing, e-commerce, artificial intelligence,[9] and consumer electronics. It has been referred to as the most powerful company in the world[10] and one of the world\'s most valuable brands due to its market dominance, data collection, and technological advantages in the area of artificial intelligence.[11][12][13] Its parent company Alphabet is considered one of the Big Five American information technology companies, alongside Amazon, Apple, Meta, and Microsoft. Google was founded on September 4, 1998, by computer scientists Larry Page and Sergey Brin while they were PhD students at Stanford University in California. Together they own about 14% of its publicly listed shares and control 56% of its stockholder voting power through super-voting stock. The company went public via an initial public offering (IPO) in 2004. In 2015, Google was reorganized as a wholly owned subsidiary of Alphabet Inc. Google is Alphabet\'s largest subsidiary and is a holding company for Alphabet\'s internet properties and interests. Sundar Pichai was appointed CEO of Google on October 24, 2015, replacing Larry Page, who became the CEO of Alphabet. On December 3, 2019, Pichai also became the CEO of Alphabet.[14] The company has since rapidly grown to offer a multitude of products and services beyond Google Search, many of which hold dominant market positions. These products address a wide range of use cases, including email (Gmail), navigation (Waze & Maps), cloud computing (Cloud), web browsing (Chrome), video sharing (YouTube), productivity (Workspace), operating systems (Android), cloud storage (Drive), language translation (Translate), photo storage (Photos), video calling (Meet), smart home (Nest), smartphones (Pixel), wearable technology (Pixel Watch & Fitbit), music streaming (YouTube Music), video on demand (YouTube TV), artificial intelligence (Google Assistant), machine learning APIs (TensorFlow), AI chips (TPU), and more. Discontinued Google products include gaming (Stadia), Glass, Google+, Reader, Play Music, Nexus, Hangouts, and Inbox by Gmail.[15][16] Google\'s other ventures outside of Internet services and consumer electronics include quantum computing (Sycamore), self-driving cars (Waymo, formerly the Google Self-Driving Car Project), smart cities (Sidewalk Labs), and transformer models (Google Brain).[17] Google and YouTube are the two most visited websites worldwide followed by Facebook and Twitter. Google is also the largest search engine, mapping and navigation application, email provider, office suite, video sharing platform, photo and cloud storage provider, mobile operating system, web browser, ML framework, and AI virtual assistant provider in the world as measured by market share. On the list of most valuable brands, Google is ranked second by Forbes[18] and fourth by Interbrand.[19] It has received significant criticism involving issues such as privacy concerns, tax avoidance, censorship, search neutrality, antitrust and abuse of its monopoly position."
+    ],
+    "self_train": "True",
+    "randomness": 0.4
+  }',
+    CURLOPT_HTTPHEADER => array(
+    'x-api-key: •••••••',
+    'x-org-key: •••••••',
+    'Content-Type: application/json'
+    ),
+    ));
 
-    $ch = curl_init($url);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+    $response = curl_exec($curl);
 
-    $response = curl_exec($ch);
-    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
-    if ($httpCode === 200) {
+    curl_close($curl);
     echo $response;
-  } else {
-    echo "Error: " . $httpCode . ", " . $response;
-  }
-
-    curl_close($ch);
 
     ````
   </Tab>
   <Tab>
     ````java filename="Java" copy
-    import java.io.BufferedReader;
-    import java.io.InputStreamReader;
-    import java.io.OutputStream;
-    import java.net.HttpURLConnection;
-    import java.net.URL;
-
-    public class Main {
-    public static void main(String[] args) {
-    String url = "https://api.worqhat.com/api/ai/content/v2";
-    String apiKey = "•••••••";
-    String orgKey = "•••••••";
-
-    try {
-    URL apiUrl = new URL(url);
-    HttpURLConnection connection = (HttpURLConnection) apiUrl.openConnection();
-    connection.setRequestMethod("POST");
-    connection.setRequestProperty("x-api-key", apiKey);
-    connection.setRequestProperty("x-org-key", orgKey);
-    connection.setRequestProperty("Content-Type", "application/json");
-    connection.setDoOutput(true);
-
-    String jsonData = "{\"question\":\"Hi, who built you?\"," +
-    "\"preserve_history\":true," +
-    "\"history_object\":{\"Hi, who are you?\":\"My name is WorqBot, nice to meet you!\"}," +
-    "\"randomness\":0.1}";
-
-    OutputStream outputStream = connection.getOutputStream();
-    outputStream.write(jsonData.getBytes());
-    outputStream.flush();
-
-    int responseCode = connection.getResponseCode();
-    if (responseCode == HttpURLConnection.HTTP_OK) {
-    BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-    String line;
-    StringBuilder response = new StringBuilder();
-    while ((line = reader.readLine()) != null) {
-    response.append(line);
-  }
-    reader.close();
-
-    System.out.println(response.toString());
-  } else {
-    System.out.println("Error: " + responseCode + ", " + connection.getResponseMessage());
-  }
-
-    connection.disconnect();
-  } catch (Exception e) {
-    e.printStackTrace();
-  }
-  }
-  }
+    OkHttpClient client = new OkHttpClient().newBuilder()
+    .build();
+    MediaType mediaType = MediaType.parse("application/json");
+    RequestBody body = RequestBody.create(mediaType,
+    "{\n    \"question\": \"Hey how are you?\",\n    \"datasetId\": \"f5f66562-54a4-49a3-b105-a234cfe46eba\",\n    \"trainingData\": [\n        \"Marico Limited is an Indian multinational consumer goods company[5] providing consumer products and services in the areas of health, beauty and wellness. With its headquarters in Mumbai, Marico is present in over 25 countries across Asia and Africa. It owns brands in categories of hair care, skin care, edible oils, health foods, male grooming, and fabric care.As of 2019–2020, the company generated a turnover of 7,315 crores.[8] Marico has 8 factories in India located at Puducherry, Perundurai, Kanjikode, Jalgaon, Paldhi, Dehradun, Baddi and Paonta Sahib. 1974 – Harsh Mariwala envisioned a branded FMCG market for coconut and refined edible oils in small consumer packs and sets up a national distribution network for Parachute. \",\n        \"1990 – Marico was established in India. 1991 – Marico launches Hair & Care, a non-sticky hair oil repositioning the market leader through contemporary packaging. Sweekar sunflower oil goes national. 1992 to 94 – Marico goes from being an exporter to international marketer – sets up its first overseas office in Dubai. 1994 – The year marks another innovation, Revive cold water starch makes starching cottons more convenient for the consumer. 1996 – Marico lists on the Indian Stock Exchanges. 1999 – The company expands with its first overseas manufacturing facility in Bangladesh. Marico acquires Mediker in the same year 2003 – Marico Innovation Foundation, responsible for executing the Corporate Social Responsibility of Marico was formed. In the same year Marico sets up copra collection centres to procure directly from farmers increasing their margins. 2006 – Nihar enters the Marico fold. 2006-7 – Marico casts footprint in Africa, acquires Fiancée and Hair Code in Egypt and Caivil, Black Chic and Hercules in South Africa. 2009 – Marico makes a public offering of equity in Bangladesh  a first for one of its overseas subsidiaries. 2010 – The year also marks the launch of Saffola breakfast, Masala Oats in India. 2011 – Parachute Advanced entered the skin-care category with the launch of Parachute Advanced Body Lotion (PABL), another innovation by Marico. The year also marks the launch of Parachute Gold hair cream in the Middle East market targeted to women which today has great equity amongst the consumer. Marico strengthens its presence S.E. Asia through a male grooming, skin care and food portfolio acquired in Vietnam the same year. 2012 – India's Gen Next gets styled by Marico as it launches its male grooming brand, SetWet.[12] 2015 – Marico's Market Cap tops  25,000 crore. 2017– Marico acquires South Africa's leading hair styling business – Isoplus [13] launches Saffola Active[12] Slimming Nutri-shake (marking entry into nutraceuticals category) and makes a strategic investment in Zed Lifestyle (Beardo)[14] 2018 – Marico invests Revolutionary Fitness (Revofit) [15] launches a new brand – True Roots[16] that delays hair greying and launches its first digital exclusive brand – Studio X [17] launched Saffola Fittify.[18] 2019 – Marico announces association with Kaya, to create a skincare sub-brand, Kaya Youth.[19]\",\n        \"Thermax manufactures boilers to harness the power of steam. The company started with producing small, once-through, baby boilers to cater to the steam requirements at hospitals.[citation needed] It was established in 1966, when A. S. Bhathena collaborated with a Belgian company, Wanson, to commence business operations in Dadar, Mumbai, India as Wanson India Ltd., manufacturing small boilers.[3] On 15 February 1995 it became a public company on the Bombay Stock Exchange. It has, since long, been known simply as Thermax Limited.[citation needed] In 2009, it signed a 51–49 joint venture with US firm SPX Corporation to provide equipment and services for the Indian power sector.[4][5] In 2010, it signed a joint venture agreement with US-based Babcock & Wilcox to manufacture super-critical boilers for the power sector.[6]\",\n        \"Google LLC is an American multinational technology company focusing on online advertising, search engine technology, cloud computing, computer software, quantum computing, e-commerce, artificial intelligence,[9] and consumer electronics. It has been referred to as the most powerful company in the world[10] and one of the world's most valuable brands due to its market dominance, data collection, and technological advantages in the area of artificial intelligence.[11][12][13] Its parent company Alphabet is considered one of the Big Five American information technology companies, alongside Amazon, Apple, Meta, and Microsoft. Google was founded on September 4, 1998, by computer scientists Larry Page and Sergey Brin while they were PhD students at Stanford University in California. Together they own about 14% of its publicly listed shares and control 56% of its stockholder voting power through super-voting stock. The company went public via an initial public offering (IPO) in 2004. In 2015, Google was reorganized as a wholly owned subsidiary of Alphabet Inc. Google is Alphabet's largest subsidiary and is a holding company for Alphabet's internet properties and interests. Sundar Pichai was appointed CEO of Google on October 24, 2015, replacing Larry Page, who became the CEO of Alphabet. On December 3, 2019, Pichai also became the CEO of Alphabet.[14] The company has since rapidly grown to offer a multitude of products and services beyond Google Search, many of which hold dominant market positions. These products address a wide range of use cases, including email (Gmail), navigation (Waze & Maps), cloud computing (Cloud), web browsing (Chrome), video sharing (YouTube), productivity (Workspace), operating systems (Android), cloud storage (Drive), language translation (Translate), photo storage (Photos), video calling (Meet), smart home (Nest), smartphones (Pixel), wearable technology (Pixel Watch & Fitbit), music streaming (YouTube Music), video on demand (YouTube TV), artificial intelligence (Google Assistant), machine learning APIs (TensorFlow), AI chips (TPU), and more. Discontinued Google products include gaming (Stadia), Glass, Google+, Reader, Play Music, Nexus, Hangouts, and Inbox by Gmail.[15][16] Google's other ventures outside of Internet services and consumer electronics include quantum computing (Sycamore), self-driving cars (Waymo, formerly the Google Self-Driving Car Project), smart cities (Sidewalk Labs), and transformer models (Google Brain).[17] Google and YouTube are the two most visited websites worldwide followed by Facebook and Twitter. Google is also the largest search engine, mapping and navigation application, email provider, office suite, video sharing platform, photo and cloud storage provider, mobile operating system, web browser, ML framework, and AI virtual assistant provider in the world as measured by market share. On the list of most valuable brands, Google is ranked second by Forbes[18] and fourth by Interbrand.[19] It has received significant criticism involving issues such as privacy concerns, tax avoidance, censorship, search neutrality, antitrust and abuse of its monopoly position.\"\n    ],\n    \"self_train\": \"True\",\n    \"randomness\": 0.4\n}");
+    Request request = new Request.Builder()
+    .url("https://api.worqhat.com/api/ai/content/v2-large/answering")
+    .method("POST", body)
+    .addHeader("x-api-key", "•••••••")
+    .addHeader("x-org-key", "•••••••")
+    .addHeader("Content-Type", "application/json")
+    .build();
+    Response response = client.newCall(request).execute();
 
     ````
-  </Tab>
-  <Tab>
+    </Tab>
+    <Tab>
     ````go filename="GO" copy
     package main
 
     import (
-    "bytes"
-    "encoding/json"
     "fmt"
+    "strings"
     "net/http"
+    "io/ioutil"
     )
 
     func main() {
-    url := "https://api.worqhat.com/api/ai/content/v2"
-    apiKey := "•••••••"
-    orgKey := "•••••••"
 
-    data := map[string]interface{}{
-    "question":         "Hi, who built you?",
-    "preserve_history": true,
-    "history_object": map[string]string{
-    "Hi, who are you?": "My name is WorqBot, nice to meet you!",
-  },
-    "randomness": 0.1,
+    url := "https://api.worqhat.com/api/ai/content/v2-large/answering"
+    method := "POST"
+
+    payload := strings.NewReader(`{
+    "question": "Hey how are you?",
+    "datasetId": "f5f66562-54a4-49a3-b105-a234cfe46eba",
+    "trainingData": [
+        "Marico Limited is an Indian multinational consumer goods company[5] providing consumer products and services in the areas of health, beauty and wellness. With its headquarters in Mumbai, Marico is present in over 25 countries across Asia and Africa. It owns brands in categories of hair care, skin care, edible oils, health foods, male grooming, and fabric care.As of 2019–2020, the company generated a turnover of 7,315 crores.[8] Marico has 8 factories in India located at Puducherry, Perundurai, Kanjikode, Jalgaon, Paldhi, Dehradun, Baddi and Paonta Sahib. 1974 – Harsh Mariwala envisioned a branded FMCG market for coconut and refined edible oils in small consumer packs and sets up a national distribution network for Parachute. ",
+        "1990 – Marico was established in India. 1991 – Marico launches Hair & Care, a non-sticky hair oil repositioning the market leader through contemporary packaging. Sweekar sunflower oil goes national. 1992 to 94 – Marico goes from being an exporter to international marketer – sets up its first overseas office in Dubai. 1994 – The year marks another innovation, Revive cold water starch makes starching cottons more convenient for the consumer. 1996 – Marico lists on the Indian Stock Exchanges. 1999 – The company expands with its first overseas manufacturing facility in Bangladesh. Marico acquires Mediker in the same year 2003 – Marico Innovation Foundation, responsible for executing the Corporate Social Responsibility of Marico was formed. In the same year Marico sets up copra collection centres to procure directly from farmers increasing their margins. 2006 – Nihar enters the Marico fold. 2006-7 – Marico casts footprint in Africa, acquires Fiancée and Hair Code in Egypt and Caivil, Black Chic and Hercules in South Africa. 2009 – Marico makes a public offering of equity in Bangladesh  a first for one of its overseas subsidiaries. 2010 – The year also marks the launch of Saffola breakfast, Masala Oats in India. 2011 – Parachute Advanced entered the skin-care category with the launch of Parachute Advanced Body Lotion (PABL), another innovation by Marico. The year also marks the launch of Parachute Gold hair cream in the Middle East market targeted to women which today has great equity amongst the consumer. Marico strengthens its presence S.E. Asia through a male grooming, skin care and food portfolio acquired in Vietnam the same year. 2012 – India's Gen Next gets styled by Marico as it launches its male grooming brand, SetWet.[12] 2015 – Marico's Market Cap tops  25,000 crore. 2017– Marico acquires South Africa's leading hair styling business – Isoplus [13] launches Saffola Active[12] Slimming Nutri-shake (marking entry into nutraceuticals category) and makes a strategic investment in Zed Lifestyle (Beardo)[14] 2018 – Marico invests Revolutionary Fitness (Revofit) [15] launches a new brand – True Roots[16] that delays hair greying and launches its first digital exclusive brand – Studio X [17] launched Saffola Fittify.[18] 2019 – Marico announces association with Kaya, to create a skincare sub-brand, Kaya Youth.[19]",
+        "Thermax manufactures boilers to harness the power of steam. The company started with producing small, once-through, baby boilers to cater to the steam requirements at hospitals.[citation needed] It was established in 1966, when A. S. Bhathena collaborated with a Belgian company, Wanson, to commence business operations in Dadar, Mumbai, India as Wanson India Ltd., manufacturing small boilers.[3] On 15 February 1995 it became a public company on the Bombay Stock Exchange. It has, since long, been known simply as Thermax Limited.[citation needed] In 2009, it signed a 51–49 joint venture with US firm SPX Corporation to provide equipment and services for the Indian power sector.[4][5] In 2010, it signed a joint venture agreement with US-based Babcock & Wilcox to manufacture super-critical boilers for the power sector.[6]",
+        "Google LLC is an American multinational technology company focusing on online advertising, search engine technology, cloud computing, computer software, quantum computing, e-commerce, artificial intelligence,[9] and consumer electronics. It has been referred to as the most powerful company in the world[10] and one of the world's most valuable brands due to its market dominance, data collection, and technological advantages in the area of artificial intelligence.[11][12][13] Its parent company Alphabet is considered one of the Big Five American information technology companies, alongside Amazon, Apple, Meta, and Microsoft. Google was founded on September 4, 1998, by computer scientists Larry Page and Sergey Brin while they were PhD students at Stanford University in California. Together they own about 14% of its publicly listed shares and control 56% of its stockholder voting power through super-voting stock. The company went public via an initial public offering (IPO) in 2004. In 2015, Google was reorganized as a wholly owned subsidiary of Alphabet Inc. Google is Alphabet's largest subsidiary and is a holding company for Alphabet's internet properties and interests. Sundar Pichai was appointed CEO of Google on October 24, 2015, replacing Larry Page, who became the CEO of Alphabet. On December 3, 2019, Pichai also became the CEO of Alphabet.[14] The company has since rapidly grown to offer a multitude of products and services beyond Google Search, many of which hold dominant market positions. These products address a wide range of use cases, including email (Gmail), navigation (Waze & Maps), cloud computing (Cloud), web browsing (Chrome), video sharing (YouTube), productivity (Workspace), operating systems (Android), cloud storage (Drive), language translation (Translate), photo storage (Photos), video calling (Meet), smart home (Nest), smartphones (Pixel), wearable technology (Pixel Watch & Fitbit), music streaming (YouTube Music), video on demand (YouTube TV), artificial intelligence (Google Assistant), machine learning APIs (TensorFlow), AI chips (TPU), and more. Discontinued Google products include gaming (Stadia), Glass, Google+, Reader, Play Music, Nexus, Hangouts, and Inbox by Gmail.[15][16] Google's other ventures outside of Internet services and consumer electronics include quantum computing (Sycamore), self-driving cars (Waymo, formerly the Google Self-Driving Car Project), smart cities (Sidewalk Labs), and transformer models (Google Brain).[17] Google and YouTube are the two most visited websites worldwide followed by Facebook and Twitter. Google is also the largest search engine, mapping and navigation application, email provider, office suite, video sharing platform, photo and cloud storage provider, mobile operating system, web browser, ML framework, and AI virtual assistant provider in the world as measured by market share. On the list of most valuable brands, Google is ranked second by Forbes[18] and fourth by Interbrand.[19] It has received significant criticism involving issues such as privacy concerns, tax avoidance, censorship, search neutrality, antitrust and abuse of its monopoly position."
+    ],
+    "self_train": "True",
+    "randomness": 0.4
+}`)
+
+    client := &http.Client {
   }
+    req, err := http.NewRequest(method, url, payload)
 
-    jsonData, err := json.Marshal(data)
     if err != nil {
-    fmt.Println("Error:", err)
+    fmt.Println(err)
     return
   }
+    req.Header.Add("x-api-key", "•••••••")
+    req.Header.Add("x-org-key", "•••••••")
+    req.Header.Add("Content-Type", "application/json")
 
-    req, err := http.NewRequest("POST", url, bytes.NewBuffer(jsonData))
+    res, err := client.Do(req)
     if err != nil {
-    fmt.Println("Error:", err)
+    fmt.Println(err)
     return
   }
+    defer res.Body.Close()
 
-    req.Header.Set("x-api-key", apiKey)
-    req.Header.Set("x-org-key", orgKey)
-    req.Header.Set("Content-Type", "application/json")
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
+    body, err := ioutil.ReadAll(res.Body)
     if err != nil {
-    fmt.Println("Error:", err)
+    fmt.Println(err)
     return
   }
-
-    defer resp.Body.Close()
-
-    if resp.StatusCode == http.StatusOK {
-    var result map[string]interface{}
-    err = json.NewDecoder(resp.Body).Decode(&result)
-    if err != nil {
-    fmt.Println("Error:", err)
-    return
-  }
-    fmt.Println(result)
-  } else {
-    fmt.Println("Error:", resp.Status)
-  }
+    fmt.Println(string(body))
   }
 
     ````
@@ -486,48 +482,25 @@ send a POST Request to the API Endpoint with the Headers and the Request Body, a
   <Tab>
     ````c filename="C" copy
 
-    #include <stdio.h>
-    #include <curl/curl.h>
-
-    int main(void) {
-    CURL * curl;
+    CURL *curl;
     CURLcode res;
-
-    char url[] = "https://api.worqhat.com/api/ai/content/v2";
-    char apiKey[] = "•••••••";
-    char orgKey[] = "•••••••";
-
+    curl = curl_easy_init();
+    if(curl) {
+    curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, "POST");
+    curl_easy_setopt(curl, CURLOPT_URL, "https://api.worqhat.com/api/ai/content/v2-large/answering");
+    curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
+    curl_easy_setopt(curl, CURLOPT_DEFAULT_PROTOCOL, "https");
     struct curl_slist *headers = NULL;
     headers = curl_slist_append(headers, "x-api-key: •••••••");
     headers = curl_slist_append(headers, "x-org-key: •••••••");
     headers = curl_slist_append(headers, "Content-Type: application/json");
-
-    char data[] = "{\"question\":\"Hi, who built you?\"," \
-    "\"preserve_history\":true," \
-    "\"history_object\":{\"Hi, who are you?\":\"My name is WorqBot, nice to meet you!\"}," \
-    "\"randomness\":0.1}";
-
-    curl_global_init(CURL_GLOBAL_DEFAULT);
-    curl = curl_easy_init();
-
-    if (curl) {
-    curl_easy_setopt(curl, CURLOPT_URL, url);
     curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
+    const char *data = "{\n    \"question\": \"Hey how are you?\",\n    \"datasetId\": \"f5f66562-54a4-49a3-b105-a234cfe46eba\",\n    \"trainingData\": [\n        \"Marico Limited is an Indian multinational consumer goods company[5] providing consumer products and services in the areas of health, beauty and wellness. With its headquarters in Mumbai, Marico is present in over 25 countries across Asia and Africa. It owns brands in categories of hair care, skin care, edible oils, health foods, male grooming, and fabric care.As of 2019–2020, the company generated a turnover of 7,315 crores.[8] Marico has 8 factories in India located at Puducherry, Perundurai, Kanjikode, Jalgaon, Paldhi, Dehradun, Baddi and Paonta Sahib. 1974 – Harsh Mariwala envisioned a branded FMCG market for coconut and refined edible oils in small consumer packs and sets up a national distribution network for Parachute. \",\n        \"1990 – Marico was established in India. 1991 – Marico launches Hair & Care, a non-sticky hair oil repositioning the market leader through contemporary packaging. Sweekar sunflower oil goes national. 1992 to 94 – Marico goes from being an exporter to international marketer – sets up its first overseas office in Dubai. 1994 – The year marks another innovation, Revive cold water starch makes starching cottons more convenient for the consumer. 1996 – Marico lists on the Indian Stock Exchanges. 1999 – The company expands with its first overseas manufacturing facility in Bangladesh. Marico acquires Mediker in the same year 2003 – Marico Innovation Foundation, responsible for executing the Corporate Social Responsibility of Marico was formed. In the same year Marico sets up copra collection centres to procure directly from farmers increasing their margins. 2006 – Nihar enters the Marico fold. 2006-7 – Marico casts footprint in Africa, acquires Fiancée and Hair Code in Egypt and Caivil, Black Chic and Hercules in South Africa. 2009 – Marico makes a public offering of equity in Bangladesh  a first for one of its overseas subsidiaries. 2010 – The year also marks the launch of Saffola breakfast, Masala Oats in India. 2011 – Parachute Advanced entered the skin-care category with the launch of Parachute Advanced Body Lotion (PABL), another innovation by Marico. The year also marks the launch of Parachute Gold hair cream in the Middle East market targeted to women which today has great equity amongst the consumer. Marico strengthens its presence S.E. Asia through a male grooming, skin care and food portfolio acquired in Vietnam the same year. 2012 – India's Gen Next gets styled by Marico as it launches its male grooming brand, SetWet.[12] 2015 – Marico's Market Cap tops  25,000 crore. 2017– Marico acquires South Africa's leading hair styling business – Isoplus [13] launches Saffola Active[12] Slimming Nutri-shake (marking entry into nutraceuticals category) and makes a strategic investment in Zed Lifestyle (Beardo)[14] 2018 – Marico invests Revolutionary Fitness (Revofit) [15] launches a new brand – True Roots[16] that delays hair greying and launches its first digital exclusive brand – Studio X [17] launched Saffola Fittify.[18] 2019 – Marico announces association with Kaya, to create a skincare sub-brand, Kaya Youth.[19]\",\n        \"Thermax manufactures boilers to harness the power of steam. The company started with producing small, once-through, baby boilers to cater to the steam requirements at hospitals.[citation needed] It was established in 1966, when A. S. Bhathena collaborated with a Belgian company, Wanson, to commence business operations in Dadar, Mumbai, India as Wanson India Ltd., manufacturing small boilers.[3] On 15 February 1995 it became a public company on the Bombay Stock Exchange. It has, since long, been known simply as Thermax Limited.[citation needed] In 2009, it signed a 51–49 joint venture with US firm SPX Corporation to provide equipment and services for the Indian power sector.[4][5] In 2010, it signed a joint venture agreement with US-based Babcock & Wilcox to manufacture super-critical boilers for the power sector.[6]\",\n        \"Google LLC is an American multinational technology company focusing on online advertising, search engine technology, cloud computing, computer software, quantum computing, e-commerce, artificial intelligence,[9] and consumer electronics. It has been referred to as the most powerful company in the world[10] and one of the world's most valuable brands due to its market dominance, data collection, and technological advantages in the area of artificial intelligence.[11][12][13] Its parent company Alphabet is considered one of the Big Five American information technology companies, alongside Amazon, Apple, Meta, and Microsoft. Google was founded on September 4, 1998, by computer scientists Larry Page and Sergey Brin while they were PhD students at Stanford University in California. Together they own about 14% of its publicly listed shares and control 56% of its stockholder voting power through super-voting stock. The company went public via an initial public offering (IPO) in 2004. In 2015, Google was reorganized as a wholly owned subsidiary of Alphabet Inc. Google is Alphabet's largest subsidiary and is a holding company for Alphabet's internet properties and interests. Sundar Pichai was appointed CEO of Google on October 24, 2015, replacing Larry Page, who became the CEO of Alphabet. On December 3, 2019, Pichai also became the CEO of Alphabet.[14] The company has since rapidly grown to offer a multitude of products and services beyond Google Search, many of which hold dominant market positions. These products address a wide range of use cases, including email (Gmail), navigation (Waze & Maps), cloud computing (Cloud), web browsing (Chrome), video sharing (YouTube), productivity (Workspace), operating systems (Android), cloud storage (Drive), language translation (Translate), photo storage (Photos), video calling (Meet), smart home (Nest), smartphones (Pixel), wearable technology (Pixel Watch & Fitbit), music streaming (YouTube Music), video on demand (YouTube TV), artificial intelligence (Google Assistant), machine learning APIs (TensorFlow), AI chips (TPU), and more. Discontinued Google products include gaming (Stadia), Glass, Google+, Reader, Play Music, Nexus, Hangouts, and Inbox by Gmail.[15][16] Google's other ventures outside of Internet services and consumer electronics include quantum computing (Sycamore), self-driving cars (Waymo, formerly the Google Self-Driving Car Project), smart cities (Sidewalk Labs), and transformer models (Google Brain).[17] Google and YouTube are the two most visited websites worldwide followed by Facebook and Twitter. Google is also the largest search engine, mapping and navigation application, email provider, office suite, video sharing platform, photo and cloud storage provider, mobile operating system, web browser, ML framework, and AI virtual assistant provider in the world as measured by market share. On the list of most valuable brands, Google is ranked second by Forbes[18] and fourth by Interbrand.[19] It has received significant criticism involving issues such as privacy concerns, tax avoidance, censorship, search neutrality, antitrust and abuse of its monopoly position.\"\n    ],\n    \"self_train\": \"True\",\n    \"randomness\": 0.4\n}";
     curl_easy_setopt(curl, CURLOPT_POSTFIELDS, data);
-
     res = curl_easy_perform(curl);
-
-    if (res != CURLE_OK) {
-    fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
   }
-
     curl_easy_cleanup(curl);
-  }
 
-    curl_global_cleanup();
-
-    return 0;
-  }
 
     ````
   </Tab>
@@ -759,7 +732,7 @@ The Request Body is a Formdata Object. The Formdata Object has the following fie
         method: 'post',
         maxBodyLength: Infinity,
         url: 'https://api.worqhat.com/api/ai/content/v2-large/train-datasets',
-        headers: { 
+    headers: {
           "x-api-key": "•••••••",
           "x-org-key": "•••••••",
           ...data.getHeaders()
