@@ -5,15 +5,17 @@ import { Callout, Tab, Tabs } from "nextra-theme-docs";
 
 AiCon’s impressive conversational abilities are rooted in years of research and development. Like many advanced language models, such as BERT and GPT-3, AiCon is based on the Transformer neural network architecture, which was made publicly available in 2017. This architecture allows for the creation of models that can read multiple words (such as a sentence or paragraph) and understand the relationships between those words, thereby predicting what words will come next.
 
-What sets this model apart from our other existing models is its ability to understand the context of a conversation and generate responses that are more natural and human-like. This is achieved by training the model on a massive dataset of conversations, which allows it to learn the many nuances of language and how they are used in conversation. 
+What sets this model apart from our other existing models is its ability to understand the context of a conversation and generate responses that are more natural and human-like. This is achieved by training the model on a massive dataset of conversations, which allows it to learn the many nuances of language and how they are used in conversation.
 
 With this new model, we are training the Model on the most recent conversations from the internet, which allows it to learn the latest trends in language and how they are used in conversation. This is achieved by training the model on a massive dataset of conversations, which allows it to learn the many nuances of language and how they are used in conversation. The Alpha Channel of AiCon V2 is mostly dependent on the Data upto March 2023 which makes it relatively upto date and more accurate than the previous versions of AiCon.
 
 However, the Alpha Nightly channel is our most recent API Release, and is currently in active development. This channel is not recommended for production use, and is subject to change at any time.
 
 <Callout type="warning" emoji="⚠️">
-  This API is currently in active development and is subject to change at any time. It is suggested to have a fallback plan in place in case of any issues or errors with the API.
-  Like our Previous Versions, this is the Smaller Version of the AiCon V2 API, which has a word limit of 4,000 words per request.
+  This API is currently in active development and is subject to change at any time. It is suggested
+  to have a fallback plan in place in case of any issues or errors with the API.
+  Like our Previous Versions, this is the Smaller Version of the AiCon V2 API, which has a word
+  limit of 20,000 words per request.
 </Callout>
 
 ## How to use it?
@@ -146,28 +148,28 @@ request(options, function (error, response) {
     ````
 
     ````js filename="NodeJS Axios" copy
-const axios = require('axios');
-let data = JSON.stringify({
-  "question": "Why did the SVB Collapse?"
-});
+    const axios = require('axios');
+    let data = JSON.stringify({
+    "question": "Why did the SVB Collapse?"
+  });
 
-let config = {
-  method: 'post',
-  maxBodyLength: Infinity,
-  url: 'https://api.worqhat.com/api/ai/content/v2/new/alpha',
-  headers: { 
-    'x-api-key': '•••••••', 
-    'x-org-key': '•••••••', 
+    let config = {
+    method: 'post',
+    maxBodyLength: Infinity,
+    url: 'https://api.worqhat.com/api/ai/content/v2/new/alpha',
+    headers: {
+    'x-api-key': '•••••••',
+    'x-org-key': '•••••••',
     'Content-Type': 'application/json'
   },
-  data : data
-};
+    data : data
+  };
 
-axios.request(config)
-.then((response) => {
-  console.log(JSON.stringify(response.data));
-})
-.catch((error) => {
+    axios.request(config)
+    .then((response) => {
+    console.log(JSON.stringify(response.data));
+  })
+    .catch((error) => {
   console.log(error);
 });
 
