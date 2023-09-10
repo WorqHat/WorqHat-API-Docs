@@ -33,9 +33,8 @@ solution for your needs.
 
 ### Links
 
-- Homepage: https://www.worqhat.com
-- Documentation: https://docs.worqhat.com
-- API Docs: https://devs.worqhat.com
+- Homepage: https://worqhat.com
+- API Docs: https://docs.worqhat.com
 - Changelogs: https://updates.worqhat.com
 - Community: https://discord.com/invite/KHh9mguKBx
 - Status Page: https://worqhat-status.statuspage.io/
@@ -43,7 +42,7 @@ solution for your needs.
 
 ## License
 
-By contributing to CloudQuery you agree that your contributions will be licensed as defined on the
+By contributing to WorqHat you agree that your contributions will be licensed as defined on the
 LICENSE file.
 
 ## Hiring
